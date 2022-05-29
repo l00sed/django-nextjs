@@ -1,4 +1,17 @@
 /* BEGIN - Table of Contents ==================================== *
 
+   +   Article Meta
+
  * END   - Table of Contents ==================================== */
+
+/* # Article Meta */
+
+.article__meta {
+  margin-bottom: 20px;
+}
+
+.article__meta span {
+  width: 100%;
+  display: block;
+}
 
