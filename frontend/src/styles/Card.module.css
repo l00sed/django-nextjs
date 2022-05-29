@@ -24,7 +24,6 @@
   max-width: 300px;
   position: relative;
   display: inline-block;
-  padding: 0.5em 1.5em;
   transition: all var(--loosed-transition) ease;
   box-shadow: 0 0 1px 1px var(--loosed-black);
 }
@@ -48,6 +47,24 @@
   opacity: 1;
 }
 
+.card:hover .card__thumbnail_wrapper {
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+.card__thumbnail_wrapper {
+  transition: all var(--loosed-transition) ease;
+  position: relative;
+  height: 200px;
+  width: calc( 100% - 6px);
+  left: 3px;
+  top: 3px;
+}
+
+.card__thumbnail {
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
 .card__author {
   width: 100%;
   display: block;
@@ -56,4 +73,26 @@
 .card__date {
   width: 100%;
   display: block;
+}
+
+.card__description {
+  line-height: 1.25em;
+  max-height: 6.75em;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.card__description:before {
+  content: '...';
+  position: absolute;
+  left: 1.25em;
+  bottom: 1em;
+}
+
+.card__head {
+  padding: 0.75em 1.5em 0.5em 1.5em;
+}
+
+.card__body {
+  padding: 0 1.5em 0.75em 1.5em;
 }

@@ -3,19 +3,21 @@ from tinymce import models as tinymce_models
 from django.template.defaultfilters import slugify
 
 
-# Create your models here.
+def get_upload_path(instance, filename):
+    return "uploads/articles/{}/{}".format(instance.slug, filename)
+
+
 class Article(models.Model):
     """Article."""
-
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=200)
     description = tinymce_models.HTMLField()
-
     slug = models.SlugField(max_length=255)
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    featured_image = models.ImageField(
+        upload_to=get_upload_path, height_field=None, width_field=None)
+    image_alt = models.CharField(max_length=200)
     content = tinymce_models.HTMLField()
 
     class Meta:
@@ -25,12 +27,8 @@ class Article(models.Model):
         return str(self.title)
 
     def save(self, *args, **kwargs):
-        assigned_slug = self.slug or slugify(self.title)
-
-        if Article.objects.filter(slug=assigned_slug).exists():
-            assigned_slug = assigned_slug + str(Article.objects.all().count())
-
-        self.slug = assigned_slug
+        if not self.slug:
+            self.slug = slugify(self.title)
 
         super().save(*args, **kwargs)
 

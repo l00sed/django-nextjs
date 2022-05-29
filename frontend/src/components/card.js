@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import Parser from 'html-react-parser'
 import styles from '../styles/Card.module.css'
 import dateformat from 'dateformat'
@@ -9,6 +10,15 @@ export default function Card({ element }) {
     <Link key={ element.id } href={ '/' + element.slug }>
       <a>
         <div className={ styles.card }>
+          <div className={ styles.card__thumbnail_wrapper }>
+            <Image
+              alt={ element.image_alt }
+              src={ element.featured_image }
+              className={ styles.card__thumbnail }
+              objectFit={'cover'}
+              layout={'fill'}
+            />
+          </div>
           <div className={ styles.card__head }>
             <h2 className={ styles.card__title }>{ element.title }</h2>
             <hr/>

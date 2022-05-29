@@ -3,4 +3,6 @@ markdown
 drf-yasg
 django-filter
 django-tinymce
+easy-thumbnails
 Pygments
+Pillow

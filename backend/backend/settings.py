@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    'easy_thumbnails',
     'tinymce',
     'articles',
 ]
@@ -64,6 +66,12 @@ MIDDLEWARE = [
 SITE_ID = 1
 
 ROOT_URLCONF = 'backend.urls'
+
+ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
+
+MEDIA_ROOT = BASE_DIR
+
+MEDIA_URL = os.path.join(ROOT_DIR, 'uploads/')
 
 TEMPLATES = [
     {
