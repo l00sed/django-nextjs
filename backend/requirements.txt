@@ -1,0 +1,6 @@
+djangorestframework
+markdown
+drf-yasg
+django-filter
+django-tinymce
+Pygments
