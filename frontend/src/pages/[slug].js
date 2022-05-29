@@ -2,7 +2,8 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import dateformat from 'dateformat'
 import Parser from 'html-react-parser'
-import styles from '../styles/Home.module.css'
+import page_styles from '../styles/Page.module.css'
+import styles from '../styles/Article.module.css'
 import Title from '../components/title'
 
 export default function Article({ data }) {
@@ -10,20 +11,22 @@ export default function Article({ data }) {
   //console.log( 'router: ' + router );
 
   return(
-    <div className={ styles.article }>
+    <main className={ page_styles.main }>
       <Title/>
-      <div className={ styles.article__head }>
-        <h2 className={ styles.article__title }>{ data.title }</h2>
-        <hr/>
-        <div className={ styles.article__meta }>
-          <span className={ styles.article__author }>{ data.author }</span>
-          <span className={ styles.article__date }>{ dateformat( new Date(data.updated_at), "h:MMtt | mmmm, dS yyyy") }</span>
+      <div className={ page_styles.main_wrapper }>
+        <div className={ styles.article__head }>
+          <h2 className={ styles.article__title }>{ data.title }</h2>
+          <hr/>
+          <div className={ styles.article__meta }>
+            <span className={ styles.article__author }>{ data.author }</span>
+            <span className={ styles.article__date }>{ dateformat( new Date(data.updated_at), "h:MMtt | mmmm, dS yyyy") }</span>
+          </div>
+        </div>
+        <div className={ styles.article__body }>
+          <div className={ styles.article__description }>{ Parser(data.content) }</div>
         </div>
       </div>
-      <div className={ styles.article__body }>
-        <div className={ styles.article__description }>{ Parser(data.content) }</div>
-      </div>
-    </div>
+    </main>
   )
 }
 

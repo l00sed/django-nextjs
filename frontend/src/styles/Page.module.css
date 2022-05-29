@@ -1,10 +1,16 @@
 /* BEGIN - Table of Contents ==================================== *
 
+   +   Main Wrapper
+
  * END   - Table of Contents ==================================== */
 
-.title__wrapper {
-  width: 100%;
-  justify-content: center;
-  display: flex;
-  flex-direction: row;
+/* # Main Wrapper */
+
+.main_wrapper {
+  padding: 0 2em;
 }
+
+.main_wrapper img {
+  width: 100%;
+}
+
