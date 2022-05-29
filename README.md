@@ -42,16 +42,19 @@ That's because I'm using "backend" as the name of my Django project structure:
 
 ```
 /backend
--  /backend
--  |  /backend
--  |  manage.py
+- /articles
+- /backend
+- manage.py
 /frontend
+- /components
+- /styles
 README.md
 ```
 
 So, I have to change this to whatever Django project I'm currently working on, which is annoying.
 - look into `autoenv`
 - use `.env` more effectively
+- Next.js uses `.env.local` and `.env.production`
 
 ## TinyMCE (WYSIWYG)
 
