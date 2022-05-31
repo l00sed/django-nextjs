@@ -1,16 +1,14 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import Title from '../components/title'
 import Card from '../components/card'
 import { useEffect } from 'react'
 import styles from '../styles/Home.module.css'
 
 export default function Home({ data, done }) {
-  console.log( 'data: ', data);
-  console.log( 'done: ', done);
 
   useEffect(() => {
     console.log( 'process.env.NEXT_PUBLIC_BASE_URL: ', process.env.NEXT_PUBLIC_BASE_URL );
+    console.log( 'data: ', data);
+    console.log( 'done: ', done);
   }, [])
 
   return (

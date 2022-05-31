@@ -16,6 +16,7 @@
 .homepage__content {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   padding: 0 2em;
   column-gap: 1.5em;
   justify-content: center;

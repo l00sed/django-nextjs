@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'tinymce',
     'articles',
+    'comments',
 ]
 
 MIDDLEWARE = [

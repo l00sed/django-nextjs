@@ -21,6 +21,7 @@ from django.conf import settings
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 import articles
+import comments
 
 
 schema_view = get_schema_view(
@@ -41,6 +42,7 @@ urlpatterns = [
     path('tinymce/', include('tinymce.urls')),
     path('admin/', admin.site.urls),
     path('api/', include('articles.urls')),
+    path('api/', include('comments.urls')),
 ]
 
 if settings.DEBUG:
