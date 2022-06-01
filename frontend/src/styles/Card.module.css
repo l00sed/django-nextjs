@@ -20,15 +20,14 @@
 }
 
 .card {
-  --border-radius: 10px;
-  border-radius: var(--border-radius);
+  border-radius: var(--card-radius);
   max-width: 300px;
   max-width: 270px;
   margin-bottom: 2em;
   position: relative;
   display: inline-block;
   transition: all var(--loosed-transition) ease;
-  box-shadow: 0 0 1px 1px var(--loosed-black);
+  box-shadow: 0 0 1px 1px var(--card-shadow);
 }
 
 .card::after {
@@ -40,8 +39,8 @@
   position: absolute;
   content: "";
   display: block;
-  border-radius: var(--border-radius);
-  box-shadow: 0 0 4px 1px var(--loosed-black);
+  border-radius: var(--card-radius);
+  box-shadow: 0 0 4px 1px var(--card-shadow);
   transition: all var(--loosed-transition) ease;
   opacity: 0;
 }
@@ -65,7 +64,7 @@
 }
 
 .card__thumbnail {
-  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
 }
 
 .card__author {

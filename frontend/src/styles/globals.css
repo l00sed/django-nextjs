@@ -15,6 +15,9 @@
   /* ## Global */
   --loosed-black: rgba(0,0,0,0.5);
   --loosed-transition: 200ms;
+  /* ## Cards (homepage) */
+  --card-radius: 10px;
+  --card-shadow: rgba(0,0,0,0.15);
   /* ## Comments */
   --comment-radius: 10px;
   --comment-head: rgba(0,0,0,0.04);
