@@ -11,72 +11,84 @@ import Title from '../components/title'
 export default function Article({ article, comments }) {
   const { query: { slug } } = useRouter()
 
-  console.log( article );
+  let articles_exist = false // Set default to 'false'
+  if (comments.length > 0 && comments != 'Not found') {
+    // API setup to returns 'Not found' in python view
+    articles_exist = true
+  }
 
   return(
     <>
-      <main className={ page_styles.main }>
+      <div className={ page_styles.main_wrapper }>
         <Title/>
-        <div className={ page_styles.main_wrapper }>
-          <div className={ styles.article__head }>
-            <h2 className={ styles.article__title }>{ article.title }</h2>
-            <hr/>
-            <div className={ styles.article__meta }>
-              <span className={ styles.article__author }>{ article.author }</span>
-              <span className={ styles.article__date }>{ dateformat( new Date(article.updated_at), "h:MMtt | mmmm, dS yyyy") }</span>
+        <div className={ styles.main_wrapper }>
+          <main className={ styles.main }>
+            <div className={ styles.article_wrapper }>
+              <div className={ styles.article__head }>
+                <h2 className={ styles.article__title }>{ article.title }</h2>
+                <hr/>
+                <div className={ styles.article__meta }>
+                  <span className={ styles.article__author }>{ article.author }</span>
+                  <span className={ styles.article__date }>{ dateformat( new Date(article.updated_at), "h:MMtt | mmmm, dS yyyy") }</span>
+                </div>
+              </div>
+              <div className={ styles.article__body }>
+                <div className={ styles.article__description }>{ Parser(article.content) }</div>
+              </div>
             </div>
-          </div>
-          <div className={ styles.article__body }>
-            <div className={ styles.article__description }>{ Parser(article.content) }</div>
-          </div>
+          </main>
+          <aside>
+            <div className={ comment_styles.comments_section }>
+              {
+                articles_exist ? (
+                comments.map( comment =>
+                  <div key={ comment.cid } className={ comment_styles.main_wrapper }>
+                    <div className={ comment_styles.body_wrapper }>
+                      <div className={ comment_styles.body_row_1 }>
+                        <div className={ comment_styles.body_col_1 }>
+                          <span className={ comment_styles.comment_author }>{ comment.author }</span>
+                          <span className={ comment_styles.comment_date }>{ dateformat( new Date(comment.created_at), "h:MMtt | mmmm, dS yyyy") }</span>
+                        </div>
+                        <div className={ comment_styles.body_col_2 }>
+                          <Link href="/" className={ comment_styles.reply_button }>
+                            <span></span>
+                          </Link>
+                        </div>
+                      </div>
+                      <div className={ comment_styles.body_row_2 }>
+                        <div className={ comment_styles.comment_wrapper }>
+                          <p className={ comment_styles.comment_content }>{ comment.content }</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className={ comment_styles.vote_wrapper }>
+                      <div className={ comment_styles.vote_count }>
+                        <span className={ comment_styles.count_text }>{ comment.upvotes - comment.downvotes }</span>
+                      </div>
+                      <div className={ comment_styles.upvote_button }>
+                        <Link href="/">
+                          <span>🔺</span>
+                        </Link>
+                      </div>
+                      <div className={ comment_styles.downvote_button }>
+                        <Link href="/">
+                          <span>🔻</span>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                )
+                ) : (
+                  <div></div>
+                )
+              }
+            </div>
+          </aside>
         </div>
-      </main>
-      <aside>
-      {
-        comments.map( comment =>
-          <div key={ comment.cid } className={ comment_styles.main_wrapper }>
-            <div className={ comment_styles.body_wrapper }>
-              <div className={ comment_styles.body_row_1 }>
-                <div className={ comment_styles.body_col_1 }>
-                  <span className={ comment_styles.comment_author }>{ comment.author }</span>
-                  <span className={ comment_styles.comment_date }>{ dateformat( new Date(comment.created_at), "h:MMtt | mmmm, dS yyyy") }</span>
-                </div>
-                <div className={ comment_styles.body_col_2 }>
-                  {/*<Link className={ comment_styles.reply_button }></Link>*/}
-                </div>
-              </div>
-              <div className={ comment_styles.body_row_2 }>
-                <div className={ comment_styles.comment_wrapper }>
-                  <p className={ comment_styles.comment_content }></p>
-                </div>
-              </div>
-            </div>
-            <div className={ comment_styles.upvote_wrapper }>
-              <span className={ comment_styles.count_text }>{ /*comments.count */}</span>
-              {/*<Link className={ comment_styles.upvote_button }></Link>*/}
-              {/*<Link className={ comment_styles.downvote_button }></Link>*/}
-            </div>
-          </div>
-        )
-      }
-      </aside>
+      </div>
     </>
   )
 }
-
-                     /*
-export function Comments({ comments }) {
-  const { query: { slug } } = useRouter()
-
-  console.log( comments );
-
-  return(
-    <>
-    </>
-  )
-}
-*/
-
 
 export async function getStaticPaths() {
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/articles`
@@ -103,11 +115,6 @@ export async function getStaticProps({ params }) {
     article_response.json(),
     comments_response.json(),
   ])
-
-  console.log( 'article' );
-  console.log( article );
-  console.log( 'comments' );
-  console.log( comments );
 
   return {
     props: {

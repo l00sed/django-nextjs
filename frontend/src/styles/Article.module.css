@@ -1,8 +1,32 @@
 /* BEGIN - Table of Contents ==================================== *
 
+   +   Main Layout
    +   Article Meta
 
  * END   - Table of Contents ==================================== */
+
+/* # Main Layout */
+.main_wrapper {
+  display: flex;
+  flex-direction: row;
+  column-gap: 2em;
+}
+.main {
+  width: 66%;
+}
+.aside {
+  width: 33%;
+}
+@media screen and (max-width: 959px) {
+  .main_wrapper {
+    flex-direction: column;
+  }
+  .main,
+  .aside {
+    width: 100% !important;
+  }
+}
+
 
 /* # Article Meta */
 

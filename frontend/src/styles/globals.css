@@ -1,8 +1,27 @@
+/* BEGIN - Table of Contents ==================================== *
+
+   +   Variables
+   +   HTML + body tags
+   +   Headings (H1, H2)
+   +   Horizontal Rule
+   +   Paragraph Styles
+   +   Links
+   +   Code
+
+ * END   - Table of Contents ==================================== */
+
+/* # Variables */
 :root {
+  /* ## Global */
   --loosed-black: rgba(0,0,0,0.5);
   --loosed-transition: 200ms;
+  /* ## Comments */
+  --comment-radius: 10px;
+  --comment-head: rgba(0,0,0,0.05);
+  --comment-vote: rgba(0,0,0,0.25);
 }
 
+/* # HTML + body tags */
 html,
 body {
   padding: 0;
@@ -13,27 +32,38 @@ body {
   font-size: 100%;
 }
 
+/* # Headings (H1, H2) */
 h1,
 h2 {
   font-family: 'Shrikhand', cursive;
   margin: 6px auto;
 }
 
+/* # Horizontal Rule */
 hr {
   border: solid var(--loosed-black);
   border-width: 1px 0 0 0;
 }
 
+/* # Paragraph Styles */
 p {
   margin: 6px auto;
   font-size: 1em;
 }
 
+/* # Links */
 a {
   color: inherit;
   text-decoration: none;
 }
 
+/* # Code */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+
+/* # Box-Sizing */
 * {
   box-sizing: border-box;
 }
