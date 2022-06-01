@@ -23,9 +23,9 @@ export default function Article({ article, comments }) {
   const upvotes = 0
   const downvotes = 0
 
-  console.log(pid)
-  console.log(author)
-  console.log(content)
+  //console.log(pid)
+  //console.log(author)
+  //console.log(content)
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
