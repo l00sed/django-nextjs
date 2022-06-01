@@ -17,8 +17,9 @@
   --loosed-transition: 200ms;
   /* ## Comments */
   --comment-radius: 10px;
-  --comment-head: rgba(0,0,0,0.05);
-  --comment-vote: rgba(0,0,0,0.25);
+  --comment-head: rgba(0,0,0,0.04);
+  --comment-content: rgba(0,0,0,0.02);
+  --comment-shadow: rgba(0,0,0,0.15);
 }
 
 /* # HTML + body tags */

@@ -52,3 +52,12 @@ class CommentByIDAPIView(generics.GenericAPIView):
             serializer = CommentSerializer(query_set, many=True)
             return response.Response(serializer.data)
         return response.Response('Not found', status=status.HTTP_404_NOT_FOUND)
+
+
+class CommentSubmitAPIView(generics.CreateAPIView):
+    """CommentSubmitAPIView."""
+
+    serializer_class = CommentSerializer
+
+    def get_queryset(self):
+        return Comment.objects.all()

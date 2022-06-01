@@ -4,27 +4,64 @@
   width: 100%;
 }
 
+.main_wrapper::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  box-shadow: 0 0 2px 0 var(--comment-shadow);
+  border-radius: var(--comment-radius);
+}
 .main_wrapper {
+  position: relative;
   margin: 1em 0;
   display: flex;
   flex-direction: row;
   align-items: stretch;
+  border-radius: var(--comment-radius);
 }
 
 .body_wrapper {
-  background: var(--comment-head);
-  padding: 1em;
   width: 100%;
   border-radius: var(--comment-radius) 0 0 var(--comment-radius);
 }
 
+.body_row_1 {
+  padding: 0.5em 1em;
+  border-radius: var(--comment-radius) 0 0 0;
+  box-shadow: 0 1px 1px 0 var(--comment-shadow);
+}
+.body_row_2 {
+  padding: 0.5em 1em;
+  border-radius: 0 0 0 var(--comment-radius);
+  background-color: var(--comment-content);
+}
+
+.vote_wrapper::before {
+  box-shadow: -1px 0 1px 0 var(--comment-shadow);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  border-radius: 0 var(--comment-radius) var(--comment-radius) 0;
+}
+
 .vote_wrapper {
+  padding: 1em 0;
+  position: relative;
   border-radius: 0 var(--comment-radius) var(--comment-radius) 0;
   display: flex;
   flex-direction: column;
-  background: var(--comment-vote);
   width: 50px;
-  padding: 1em 0;
+}
+
+.comment_author {
+  font-weight: bold;
+  margin-bottom: 5px
 }
 
 .comment_author,
@@ -33,14 +70,22 @@
   display: block;
 }
 
+.comment_date {
+  border-bottom: 1px solid bottom;
+}
+
 .vote_count,
 .upvote_button,
 .downvote_button {
   display: flex;
   align-content: stretch;
   width: 100%;
-  height: 100%;
+  height: 25px;
   margin: 0 auto;
+}
+.upvote_button,
+.downvote_button {
+  cursor: pointer;
 }
 .count_text,
 .upvote_button span,
