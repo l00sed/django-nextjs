@@ -1,7 +1,7 @@
 /* BEGIN - Table of Contents ==================================== *
 
    +   Main Layout
-   +   Article Meta
+     +   Article Meta
 
  * END   - Table of Contents ==================================== */
 
@@ -15,9 +15,11 @@
 .main {
   width: 66%;
   min-width: 66%;
+  max-width: 66%;
 }
 .aside {
   width: 33%;
+  min-width: 33%;
   max-width: 33%;
 }
 @media screen and (max-width: 959px) {
@@ -34,11 +36,12 @@
 /* # Article Meta */
 
 .article__meta {
-  margin-bottom: 20px;
+  margin-bottom: 3em;
 }
 
 .article__meta span {
   width: 100%;
+  font-size: 0.8em;
   display: block;
 }
 

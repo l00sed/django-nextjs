@@ -14,7 +14,7 @@
 :root {
   /* ## Global */
   --loosed-black: rgba(0,0,0,0.5);
-  --loosed-transition: 200ms;
+  --loosed-transition: 50ms;
   /* ## Cards (homepage) */
   --card-radius: 10px;
   --card-shadow: rgba(0,0,0,0.15);
@@ -23,6 +23,7 @@
   --comment-head: rgba(0,0,0,0.04);
   --comment-content: rgba(0,0,0,0.02);
   --comment-shadow: rgba(0,0,0,0.15);
+  --input-outline: rgba(0,0,0,0.5);
 }
 
 /* # HTML + body tags */
@@ -40,7 +41,13 @@ body {
 h1,
 h2 {
   font-family: 'Shrikhand', cursive;
-  margin: 6px auto;
+  margin: 0 auto 5px auto;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 1.5em;
+  line-height: 1.25em;
 }
 
 /* # Horizontal Rule */

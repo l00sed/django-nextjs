@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import dateformat from 'dateformat'
@@ -15,6 +15,41 @@ export default function Article({ article, comments }) {
   if (comments.length > 0 && comments != 'Not found') {
     // API setup to returns 'Not found' in python view
     articles_exist = true
+  }
+
+  const [pid, setPID] = useState('0')
+  const [author, setAuthor] = useState('Anonymous')
+  const [content, setContent] = useState('')
+  const upvotes = 0
+  const downvotes = 0
+
+  console.log(pid)
+  console.log(author)
+  console.log(content)
+
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    const object = {
+      'pid': pid,
+      'author': author,
+      'content': content,
+      'upvotes': upvotes,
+      'downvotes': downvotes,
+      'article': article.id,
+    }
+    const options = {
+      method: "POST",
+      supportHeaderParams: true,
+      header: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(object),
+    }
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/submit`, options)
+      .then(res => res.json())
+      .then(response => console.log( `response`, response ))
+      .catch(error => console.log( error ))
   }
 
   return(
@@ -82,6 +117,18 @@ export default function Article({ article, comments }) {
                   <div></div>
                 )
               }
+
+              <div className={ comment_styles.comment_form_wrapper }>
+                <form className={ comment_styles.comment_form } onSubmit={ handleCommentSubmit }>
+                  <input required hidden type="text" name="pid" value="0" onChange={ (e) => { setPID(e.target.value) } } />
+                  <input type="text" name="author" placeholder="Anonymous" className={ comment_styles.name_input } onChange={ (e) => { setAuthor(e.target.value) } } />
+                  <textarea required type="text" name="content" rows="5" placeholder="Type a reply or comment in this area." className={ comment_styles.comment_input } onChange={ (e) => { setContent(e.target.value) } } />
+                  <div className={ comment_styles.comment_form_button }>
+                    <input type="submit" value="SUBMIT" className={ comment_styles.comment_submit } />
+                  </div>
+                </form>
+              </div>
+
             </div>
           </aside>
         </div>
