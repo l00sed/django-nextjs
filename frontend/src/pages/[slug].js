@@ -40,7 +40,7 @@ export default function Article({ article, comments }) {
     const options = {
       method: "POST",
       supportHeaderParams: true,
-      header: {
+      headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
