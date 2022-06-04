@@ -1,20 +1,32 @@
 /* BEGIN - Table of Contents ==================================== *
 
    +   Variables
+             -     Global
+             -     Transition Speeds
+             -     Cards (homepage)
+             -     Comments
    +   HTML + body tags
    +   Headings (H1, H2)
    +   Horizontal Rule
    +   Paragraph Styles
    +   Links
    +   Code
+   +   Box-Sizing
 
  * END   - Table of Contents ==================================== */
 
 /* # Variables */
 :root {
   /* ## Global */
-  --loosed-black: rgba(0,0,0,0.5);
-  --loosed-transition: 50ms;
+  --loosed-black: rgba(0,0,0,0.85);
+  --loosed-black: #000000;
+  --loosed-white: rgba(255,255,255,0.85);
+  --loosed-white: #ffffff;
+  --loosed-highlight-1: #f85c37;
+  /* ## Transition Speeds */
+  --loosed-transition-fast: 50ms;
+  --loosed-transition-medm: 200ms;
+  --loosed-transition-slow: 500ms;
   /* ## Cards (homepage) */
   --card-radius: 10px;
   --card-shadow: rgba(0,0,0,0.15);

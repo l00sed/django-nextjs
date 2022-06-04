@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import dateformat from 'dateformat'
 import Parser from 'html-react-parser'
 import styles from '../styles/Article.module.css'
 import page_styles from '../styles/Page.module.css'
 import comment_styles from '../styles/Comment.module.css'
 import Title from '../components/title'
+import Comment, { sanitize } from '../components/comments'
 
 export default function Article({ article, comments }) {
   const { query: { slug } } = useRouter()
 
-  let articles_exist = false // Set default to 'false'
+  let comments_exist = false // Set default to 'false'
   if (comments.length > 0 && comments != 'Not found') {
     // API setup to returns 'Not found' in python view
-    articles_exist = true
+    comments_exist = true
   }
 
   const [pid, setPID] = useState('0')
@@ -32,7 +32,7 @@ export default function Article({ article, comments }) {
     const object = {
       'pid': pid,
       'author': author,
-      'content': content,
+      'content': sanitize(content),
       'upvotes': upvotes,
       'downvotes': downvotes,
       'article': article.id,
@@ -75,44 +75,18 @@ export default function Article({ article, comments }) {
           <aside>
             <div className={ comment_styles.comments_section }>
               {
-                articles_exist ? (
-                comments.map( comment =>
-                  <div key={ comment.cid } className={ comment_styles.main_wrapper }>
-                    <div className={ comment_styles.body_wrapper }>
-                      <div className={ comment_styles.body_row_1 }>
-                        <div className={ comment_styles.body_col_1 }>
-                          <span className={ comment_styles.comment_author }>{ comment.author }</span>
-                          <span className={ comment_styles.comment_date }>{ dateformat( new Date(comment.created_at), "h:MMtt | mmmm, dS yyyy") }</span>
-                        </div>
-                        <div className={ comment_styles.body_col_2 }>
-                          <Link href="/" className={ comment_styles.reply_button }>
-                            <span></span>
-                          </Link>
-                        </div>
-                      </div>
-                      <div className={ comment_styles.body_row_2 }>
-                        <div className={ comment_styles.comment_wrapper }>
-                          <p className={ comment_styles.comment_content }>{ comment.content }</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className={ comment_styles.vote_wrapper }>
-                      <div className={ comment_styles.vote_count }>
-                        <span className={ comment_styles.count_text }>{ comment.upvotes - comment.downvotes }</span>
-                      </div>
-                      <div className={ comment_styles.upvote_button }>
-                        <Link href="/">
-                          <span>🔺</span>
-                        </Link>
-                      </div>
-                      <div className={ comment_styles.downvote_button }>
-                        <Link href="/">
-                          <span>🔻</span>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                )
+                comments_exist ? (
+                  comments.map( (comment, index) => {
+                    let reply = false;
+                    let marginLeft = 0;
+
+                    if ( comment.pid == 0 ) {
+                      reply = true;
+                    }
+                    return (
+                      <Comment key={ comment.cid } comment={ comment } reply={ reply } />
+                    )
+                  } )
                 ) : (
                   <div></div>
                 )
