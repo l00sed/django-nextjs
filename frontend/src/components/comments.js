@@ -7,47 +7,47 @@ export default class Comments extends React.Component {
   constructor(props) {
     super(props);
 
-    if (this)
-      this.state = {
-        comments: this.props.comments,
-        pid: 0,
-        author: "Anonymous",
-        upvote_count: 0,
-        downvote_count: 0,
-      }
-      this.setComments = this.setComments.bind(this)
-      this.setPID = this.setPID.bind(this)
-      this.setAuthor = this.setAuthor.bind(this)
-      this.setContent = this.setContent.bind(this)
+    this.setComments = this.setComments.bind(this)
+    this.setPID = this.setPID.bind(this)
+    this.setAuthor = this.setAuthor.bind(this)
+    this.setContent = this.setContent.bind(this)
+
+    this.state = {
+      comments: this.props.comments,
+      pid: 0,
+      author: "Anonymous",
+      upvote_count: 0,
+      downvote_count: 0,
+    }
   }
 
-  setComments = async (val) => {
+  setComments(val) {
     this.setState({
-      comments: val ?? '',
+      comments: val,
     }, () => {
       //console.log(this.state.comments);
     })
   }
 
-  setPID = async (e) => {
+  setPID(e) {
     this.setState({
       [e.target.name]: e.target.value ?? 0,
     })
   }
 
-  setAuthor = async (e) => {
+  setAuthor(e) {
     this.setState({
       [e.target.name]: e.target.value ?? 'Anonymous',
     })
   }
 
-  setContent = async (e) => {
+  setContent(e) {
     this.setState({
       [e.target.name]: e.target.value ?? '',
     })
   }
 
-  handleCommentSubmit = async (e, article_id) => {
+  handleCommentSubmit = async(e, article_id) => {
     e.preventDefault();
 
     let pid = e.target.pid.value
@@ -91,7 +91,7 @@ export default class Comments extends React.Component {
 
   }
 
-  getNewComments = async () => {
+  getNewComments = async() => {
     const options_get = {
       method: "GET",
       supportHeaderParams: true,
@@ -115,13 +115,13 @@ export default class Comments extends React.Component {
     let comments_exist = false // Set default to 'false'
     let processed_comments = []
 
-    if (this.props.comments.length > 0 && this.props.comments != 'Not found') {
+    if (this.state.comments.length > 0 && this.state.comments != 'Not found') {
       // API setup to returns 'Not found' in python view
       comments_exist = true
     }
 
     comments_exist ? (
-      this.props.comments.map((comment, index) => {
+      this.state.comments.map((comment, index) => {
         let reply = false;
         let marginLeft = 0;
         let replyClass = '';
