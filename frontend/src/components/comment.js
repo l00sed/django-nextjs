@@ -19,13 +19,12 @@ export default class Comment extends React.Component {
   constructor(props) {
     super(props);
 
-    if (this)
-      this.state = {
-        comment: this.props.comment,
-        reply: this.props.reply,
-        uvc: this.parseUpvotes( this.props.comment.upvotes - this.props.comment.downvotes ),
-        message: this.props.comment.content ? Parser( this.autoLinkText( sanitize( this.props.comment.content ) ) ) : '',
-      }
+    this.state = {
+      comment: this.props.comment,
+      reply: this.props.reply,
+      uvc: this.parseUpvotes( this.props.comment.upvotes - this.props.comment.downvotes ),
+      message: this.props.comment.content ? Parser( this.autoLinkText( sanitize( this.props.comment.content ) ) ) : '',
+    }
 
     // const approved = comment.approved ?? false;
     if ( this.state.reply == true ) {
