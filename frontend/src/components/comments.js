@@ -1,167 +1,163 @@
-import Link from 'next/link'
-import Parser from 'html-react-parser';
+import React from 'react'
+import sanitize from '../utils/sanitize'
 import comment_styles from '../styles/Comment.module.css'
-import dateformat from 'dateformat'
+import Comment from './comment'
 
-export default function Comment({ comment }, reply) {
-  let marginLeft = null;
-  let replyClass = null;
-  let commentHeader  = null;
+export default class Comments extends React.Component {
+  constructor(props) {
+    super(props);
 
-  // const approved = comment.approved ?? false;
-  if ( reply == true ) {
-    marginLeft = ' style="margin-left:' + comment.margin + 'px"';
-    replyClass = ' commentReply';
-    commentHeader = ' id="cid" value="' + comment.cid + '"';
-  }
-
-  const uvc = parseUpvotes( comment.upvotes - comment.downvotes );
-  const message = comment.content ? Parser( autoLinkText( sanitize( comment.content ) ) ) : '';
-
-  return (
-    <>
-      <div className={ `${ comment_styles.main_wrapper } ${ replyClass }` }>
-        <div className={ comment_styles.body_wrapper }>
-          <div className={ comment_styles.body_row_1 }>
-            <div className={ comment_styles.body_col_1 }>
-              <span className={ comment_styles.comment_author }>{ comment.author }</span>
-              <span className={ comment_styles.comment_date }>{ dateformat( new Date(comment.created_at), "h:MMtt | mmmm, dS yyyy") }</span>
-            </div>
-            <div className={ comment_styles.body_col_2 }>
-              <Link href="/" className={ comment_styles.reply_button_wrapper }>
-                <div className={ comment_styles.reply_button }>⮌</div>
-              </Link>
-            </div>
-          </div>
-          <div className={ comment_styles.body_row_2 }>
-            <div className={ comment_styles.comment_wrapper }>
-              <div className={ comment_styles.comment_content }>{ message }</div>
-            </div>
-          </div>
-        </div>
-        <div className={ comment_styles.vote_wrapper }>
-          <div className={ comment_styles.vote_count }>
-            <span className={ comment_styles.count_text }>{ uvc }</span>
-          </div>
-          <div className={ comment_styles.upvote_button }>
-            <Link href="/">
-              <span>🔺</span>
-            </Link>
-          </div>
-          <div className={ comment_styles.downvote_button }>
-            <Link href="/">
-              <span>🔻</span>
-            </Link>
-          </div>
-        </div>
-      </div>
-      {/* <Comment /> */}
-      </>
-  )
-}
-
-function parseUpvotes(upvote_count) {
-  if ( upvote_count > 999 ) {
-    if ( upvote_count > 99999 ) {
-      upvote_count = 'max';
-    } else {
-      upvote_count = upvote_count.slice(0, -3).toString() + 'k';
-    }
-  } else {
-    if ( upvote_count < -99 ) {
-      upvote_count = '🪠';
-    }
-  }
-  return upvote_count;
-}
-
-function autoLinkText(post, approved=1) {
-  let urls = getUrlsFromString( post );
-  let blur = '';
-  if (approved != 1) {
-    blur = ' class="blur"';
-  }
-  let processed_urls = [];
-  if ( urls != false ) {
-    const imgExt = ['png','gif','jpg','jpeg','webp'];
-    urls.forEach(function( url ) {
-      let extension = getUrlExtension(url) ?? false;
-      if (imgExt.includes(extension)) {
-        processed_urls.push('<div'+blur+'><img src="'+url+'" class="lazyload commentImage" /></div>');
-      } else {
-        const abbreviated_url = abbreviateUrl( url );
-        processed_urls.push(abbreviated_url);
+    if (this)
+      this.state = {
+        comments: this.props.comments,
+        pid: 0,
+        author: "Anonymous",
+        upvote_count: 0,
+        downvote_count: 0,
       }
-    });
-    if ( processed_urls.length == urls.length ) {
-      console.log( post );
-      console.log( processed_urls );
-      return post.replaceArray(urls, processed_urls);
-      console.log( post );
+      this.setComments = this.setComments.bind(this)
+      this.setPID = this.setPID.bind(this)
+      this.setAuthor = this.setAuthor.bind(this)
+      this.setContent = this.setContent.bind(this)
+  }
+
+  setComments = async (val) => {
+    this.setState({
+      comments: val ?? '',
+    }, () => {
+      //console.log(this.state.comments);
+    })
+  }
+
+  setPID = async (e) => {
+    this.setState({
+      [e.target.name]: e.target.value ?? 0,
+    })
+  }
+
+  setAuthor = async (e) => {
+    this.setState({
+      [e.target.name]: e.target.value ?? 'Anonymous',
+    })
+  }
+
+  setContent = async (e) => {
+    this.setState({
+      [e.target.name]: e.target.value ?? '',
+    })
+  }
+
+  handleCommentSubmit = async (e, article_id) => {
+    e.preventDefault();
+
+    let pid = e.target.pid.value
+    let author = e.target.author.value
+    let content = sanitize(e.target.content.value)
+    let upvotes = 0
+    let downvotes = 0
+
+    if ( author == '' ) {
+      author = e.target.author.placeholder;
     }
-  } else {
-    return post;
-  }
-}
 
-String.prototype.replaceArray = function(find, replace) {
-  let replaceString = this;
-  for (let i=0; i < find.length; i++) {
-    replaceString = replaceString.replace(find[i], replace[i]);
-  }
-  return replaceString;
-}
-
-export function sanitize(string) {
-  var tagBody = '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*';
-  var tagOrComment = new RegExp(
-      '<(?:'
-      // Comment body.
-      + '!--(?:(?:-*[^->])*--+|-?)'
-      // Special "raw text" elements whose content should be elided.
-      + '|script\\b' + tagBody + '>[\\s\\S]*?</script\\s*'
-      + '|style\\b' + tagBody + '>[\\s\\S]*?</style\\s*'
-      // Regular name
-      + '|/?[a-z]'
-      + tagBody
-      + ')>',
-    'gi'
-  );
-  var oldHtml;
-  do {
-    oldHtml = string;
-    string = string.replace(tagOrComment, '');
-  } while (string !== oldHtml);
-  return string.replace(/</g, '&lt;');
-}
-
-function abbreviateUrl( url ) {
-  let abbreviated_url = url.replace(/^https?\:\/\//i, '').replace(/^www./, '');
-  let last = abbreviated_url.lastIndexOf('/');
-  if (last > 24) {
-    abbreviated_url = abbreviated_url.slice(0, 24);
-  }
-  if (!/^https?:\/\//i.test(url)) {
-    url = 'http://' + url;
-  }
-  return `<a href=${url} target="_blank" rel="noreferrer">${ abbreviated_url }</a>`;
-}
-
-function getUrlsFromString( post ) {
-  // gruber revised expression - http://rodneyrehm.de/t/url-regex.html
-  let uri_pattern = /\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/ig;
-  return post.match(uri_pattern) ?? false;
-}
-
-function getUrlExtension( url, lowercase=true ) {
-  let extension = url.toString().split(/[#?]/)[0].split('.').pop().trim();
-  // If no extension, return false
-  if (extension == '') {
-    return false;
-  } else {
-    if (lowercase == true) {
-      return extension.toLowerCase();
+    const object = {
+      'pid': pid,
+      'author': author,
+      'content': content,
+      'upvotes': upvotes,
+      'downvotes': downvotes,
+      'article': article_id,
     }
+
+    const options_post = {
+      method: "POST",
+      supportHeaderParams: true,
+      headers: {
+        'Accept': 'application/json;encoding=utf-8',
+        'Content-Type': 'application/json;encoding=utf-8',
+      },
+      body: JSON.stringify(object),
+    }
+
+    const results = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/submit`, options_post)
+      .then(res => res.json())
+      .then(data => {
+        return data;
+      })
+      .catch(error => console.log( error ))
+
+    this.getNewComments();
+    return results;
+
+  }
+
+  getNewComments = async () => {
+    const options_get = {
+      method: "GET",
+      supportHeaderParams: true,
+      headers: {
+        'Accept': 'application/json;encoding=utf-8',
+        'Content-Type': 'application/json;encoding=utf-8',
+      },
+    }
+
+    const results = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${this.props.article.slug}`, options_get)
+      .then(res => res.json())
+      .then(data => {
+        return data;
+      })
+      .catch(error => console.log( error ));
+
+    this.setComments(results);
+  }
+
+  render() {
+    let comments_exist = false // Set default to 'false'
+    let processed_comments = []
+
+    if (this.props.comments.length > 0 && this.props.comments != 'Not found') {
+      // API setup to returns 'Not found' in python view
+      comments_exist = true
+    }
+
+    comments_exist ? (
+      this.props.comments.map((comment, index) => {
+        let reply = false;
+        let marginLeft = 0;
+        let replyClass = '';
+        let commentHeader  = '';
+
+        if ( comment.pid != 0 ) {
+          reply = true;
+        }
+
+        // const approved = comment.approved ?? false;
+        if ( reply == true ) {
+          marginLeft = ' style="margin-left:' + comment.margin + 'px"';
+          replyClass = ' commentReply';
+          commentHeader = ' id="cid" value="' + comment.cid + '"';
+        }
+
+        processed_comments.push(<Comment key={ comment.cid } comment={ comment } reply={ reply } />);
+      })
+    ) : (
+      <div></div>
+    );
+
+    return(
+      <>
+        <>{ processed_comments }</>
+        <div className={ comment_styles.comment_form_wrapper }>
+          <form className={ comment_styles.comment_form } onSubmit={ (e) => { this.handleCommentSubmit(e, this.props.article.id) } }>
+            <input required hidden type="number" name="pid" value="0" onChange={ (e) => { this.setPID(e) } } />
+            <input type="text" name="author" placeholder="Anonymous" className={ comment_styles.name_input } onChange={ (e) => { this.setAuthor(e) } } />
+            <textarea required type="text" name="content" rows="5" placeholder="Type a reply or comment in this area." className={ comment_styles.comment_input } onChange={ (e) => { this.setContent(e) } } />
+            <div className={ comment_styles.comment_form_button }>
+              <input type="submit" value="SUBMIT" className={ comment_styles.comment_submit } />
+            </div>
+          </form>
+        </div>
+      </>
+    )
   }
 }
-
