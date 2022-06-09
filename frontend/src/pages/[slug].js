@@ -7,12 +7,18 @@ import page_styles from '../styles/Page.module.css'
 import comment_styles from '../styles/Comment.module.css'
 import Title from '../components/title'
 import Comments from '../components/comments'
+import MenuOverlay from '../components/menu_overlay'
+import MenuToggle from '../components/menu_toggle'
 
 export default function Article({ article, comments }) {
   const { query: { slug } } = useRouter()
 
+  const [hidden, setHidden] = useState(' hidden');
+
   return(
     <>
+      <MenuOverlay hidden={ hidden } setHidden={ setHidden } />
+      <MenuToggle hidden={ hidden } setHidden={ setHidden } />
       <div className={ page_styles.main_wrapper }>
         <Title/>
         <div className={ styles.main_wrapper }>

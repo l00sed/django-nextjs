@@ -1,9 +1,12 @@
 import Title from '../components/title'
+import MenuOverlay from '../components/menu_overlay'
+import MenuToggle from '../components/menu_toggle'
 import Card from '../components/card'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 
 export default function Home({ data, done }) {
+  const [hidden, setHidden] = useState(' hidden');
 
   useEffect(() => {
     console.log( 'process.env.NEXT_PUBLIC_BASE_URL: ', process.env.NEXT_PUBLIC_BASE_URL );
@@ -13,6 +16,8 @@ export default function Home({ data, done }) {
 
   return (
     <div className={ styles.homepage }>
+      <MenuOverlay hidden={ hidden } setHidden={ setHidden } />
+      <MenuToggle hidden={ hidden } setHidden={ setHidden } />
       <Title/>
       <div className={ styles.homepage__content }>
       {

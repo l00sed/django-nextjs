@@ -1,53 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import sanitize from '../utils/sanitize'
 import comment_styles from '../styles/Comment.module.css'
 import Comment from './comment'
 
-export default class Comments extends React.Component {
-  constructor(props) {
-    super(props);
+export default function Comments(props) {
 
-    this.setComments = this.setComments.bind(this)
-    this.setPID = this.setPID.bind(this)
-    this.setAuthor = this.setAuthor.bind(this)
-    this.setContent = this.setContent.bind(this)
+  const [comments, setComments] = useState(props.comments);
+  const [article, setArticle] = useState(props.article);
+  const [pid, setPID] = useState(0);
+  const [author, setAuthor] = useState('Anonymous');
+  const [upvote_count, setUpvoteCount] = useState(0);
+  const [downvote_count, setDownvoteCount] = useState(0);
+  const [content, setContent] = useState('');
 
-    this.state = {
-      comments: this.props.comments,
-      pid: 0,
-      author: "Anonymous",
-      upvote_count: 0,
-      downvote_count: 0,
-    }
-  }
+  useEffect(() => {
+  })
 
-  setComments(val) {
-    this.setState({
-      comments: val,
-    }, () => {
-      //console.log(this.state.comments);
-    })
-  }
-
-  setPID(e) {
-    this.setState({
-      [e.target.name]: e.target.value ?? 0,
-    })
-  }
-
-  setAuthor(e) {
-    this.setState({
-      [e.target.name]: e.target.value ?? 'Anonymous',
-    })
-  }
-
-  setContent(e) {
-    this.setState({
-      [e.target.name]: e.target.value ?? '',
-    })
-  }
-
-  handleCommentSubmit = async(e, article_id) => {
+  const handleCommentSubmit = async(e, article_id) => {
     e.preventDefault();
 
     let pid = e.target.pid.value
@@ -86,12 +55,11 @@ export default class Comments extends React.Component {
       })
       .catch(error => console.log( error ))
 
-    this.getNewComments();
+    getNewComments();
     return results;
-
   }
 
-  getNewComments = async() => {
+  const getNewComments = async() => {
     const options_get = {
       method: "GET",
       supportHeaderParams: true,
@@ -101,63 +69,41 @@ export default class Comments extends React.Component {
       },
     }
 
-    const results = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${this.props.article.slug}`, options_get)
+    const results = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${props.article.slug}`, options_get)
       .then(res => res.json())
       .then(data => {
         return data;
       })
       .catch(error => console.log( error ));
 
-    this.setComments(results);
+    setComments(results);
   }
 
-  render() {
-    let comments_exist = false // Set default to 'false'
+  const process_comments = (comments) => {
     let processed_comments = []
-
-    if (this.state.comments.length > 0 && this.state.comments != 'Not found') {
+    if (comments.length > 0 && comments != 'Not found') {
       // API setup to returns 'Not found' in python view
-      comments_exist = true
-    }
-
-    comments_exist ? (
-      this.state.comments.map((comment, index) => {
-        let reply = false;
-        let marginLeft = 0;
-        let replyClass = '';
-        let commentHeader  = '';
-
-        if ( comment.pid != 0 ) {
-          reply = true;
-        }
-
-        // const approved = comment.approved ?? false;
-        if ( reply == true ) {
-          marginLeft = ' style="margin-left:' + comment.margin + 'px"';
-          replyClass = ' commentReply';
-          commentHeader = ' id="cid" value="' + comment.cid + '"';
-        }
-
-        processed_comments.push(<Comment key={ comment.cid } comment={ comment } reply={ reply } />);
+      comments.map((comment) => {
+        processed_comments.push(<Comment key={ comment.cid } comment={ comment } />);
       })
-    ) : (
-      <div></div>
-    );
-
-    return(
-      <>
-        <>{ processed_comments }</>
-        <div className={ comment_styles.comment_form_wrapper }>
-          <form className={ comment_styles.comment_form } onSubmit={ (e) => { this.handleCommentSubmit(e, this.props.article.id) } }>
-            <input required hidden type="number" name="pid" value="0" onChange={ (e) => { this.setPID(e) } } />
-            <input type="text" name="author" placeholder="Anonymous" className={ comment_styles.name_input } onChange={ (e) => { this.setAuthor(e) } } />
-            <textarea required type="text" name="content" rows="5" placeholder="Type a reply or comment in this area." className={ comment_styles.comment_input } onChange={ (e) => { this.setContent(e) } } />
-            <div className={ comment_styles.comment_form_button }>
-              <input type="submit" value="SUBMIT" className={ comment_styles.comment_submit } />
-            </div>
-          </form>
-        </div>
-      </>
-    )
+      return processed_comments;
+    }
   }
+
+  return(
+    <>
+      <>{ process_comments(comments) }</>
+      <div className={ comment_styles.comment_form_wrapper }>
+        <form className={ comment_styles.comment_form } onSubmit={ (e) => { handleCommentSubmit(e, article.id) } }>
+          <input required hidden type="number" name="pid" value="0" onChange={ (e) => { setPID(e) } } />
+          <input type="text" name="author" placeholder="Anonymous" className={ comment_styles.name_input } onChange={ (e) => { setAuthor(e) } } />
+          <textarea required type="text" name="content" rows="5" placeholder="Type a reply or comment in this area." className={ comment_styles.comment_input } onChange={ (e) => { setContent(e) } } />
+          <div className={ comment_styles.comment_form_button }>
+            <input type="submit" value="SUBMIT" className={ comment_styles.comment_submit } />
+          </div>
+        </form>
+      </div>
+    </>
+  );
+
 }

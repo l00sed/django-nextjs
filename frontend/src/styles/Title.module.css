@@ -7,4 +7,5 @@
   justify-content: center;
   display: flex;
   flex-direction: row;
+  padding: 2em 0;
 }

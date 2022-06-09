@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React, { useState, setState } from 'react'
+import useConstructor from '../utils/constructor'
 import Parser from 'html-react-parser'
 import sanitize from '../utils/sanitize'
 import comment_styles from '../styles/Comment.module.css'
@@ -15,26 +16,16 @@ String.prototype.replaceArray = function(find, replace) {
   return replaceString;
 }
 
-export default class Comment extends React.Component {
-  constructor(props) {
-    super(props);
+export default function Comment(props) {
 
-    this.state = {
-      comment: this.props.comment,
-      reply: this.props.reply,
-      uvc: this.parseUpvotes( this.props.comment.upvotes - this.props.comment.downvotes ),
-      message: this.props.comment.content ? Parser( this.autoLinkText( sanitize( this.props.comment.content ) ) ) : '',
-    }
+  const [comment, setComment] = useState(props.comment);
+  const [uvc, setUVC] = useState(0);
+  const [message, setMessage] = useState('');
+  const [replyClass, setReplyClass] = useState('');
+  const [marginLeft, setMarginLeft] = useState('');
 
-    // const approved = comment.approved ?? false;
-    if ( this.state.reply == true ) {
-      this.state.marginLeft = ' style="margin-left:' + this.props.comment.margin + 'px"';
-      this.state.replyClass = ' commentReply';
-      this.state.commentHeader = ' id="cid" value="' + this.props.comment.cid + '"';
-    }
-  }
 
-  parseUpvotes(upvote_count) {
+  const parseUpvotes = (upvote_count) => {
     if ( upvote_count > 999 ) {
       if ( upvote_count > 99999 ) {
         upvote_count = 'max';
@@ -49,8 +40,8 @@ export default class Comment extends React.Component {
     return upvote_count;
   }
 
-  autoLinkText(post, approved=1) {
-    let urls = this.getUrlsFromString( post );
+  const autoLinkText = (post, approved=1) => {
+    let urls = getUrlsFromString( post );
     let blur = '';
     if (approved != 1) {
       blur = ' class="blur"';
@@ -58,8 +49,8 @@ export default class Comment extends React.Component {
     let processed_urls = [];
     if ( urls != false ) {
       const imgExt = ['png','gif','jpg','jpeg','webp'];
-      const urlExt = (this_url) => this.getUrlExtension(this_url);
-      const abbvUrl = (this_url) => this.abbreviateUrl(this_url);
+      const urlExt = (this_url) => getUrlExtension(this_url);
+      const abbvUrl = (this_url) => abbreviateUrl(this_url);
       urls.forEach(function( url ) {
         let extension = urlExt(url) ?? false;
         if (imgExt.includes(extension)) {
@@ -77,7 +68,7 @@ export default class Comment extends React.Component {
     }
   }
 
-  abbreviateUrl( url ) {
+  const abbreviateUrl = ( url ) => {
     // Remove 'www'
     let abbreviated_url = url.replace(/^https?\:\/\//i, '').replace(/^www./, '');
     // Abbreviate with ellipses if long
@@ -91,14 +82,14 @@ export default class Comment extends React.Component {
     return `<a href=${url} target="_blank" rel="noreferrer">${ abbreviated_url }</a>`;
   }
 
-  getUrlsFromString( post ) {
+  const getUrlsFromString = ( post ) => {
     // gruber revised expression - http://rodneyrehm.de/t/url-regex.html
     // matches URLs in a string
     let uri_pattern = /\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/ig;
     return post.match(uri_pattern) ?? false;
   }
 
-  getUrlExtension( url, lowercase=true ) {
+  const getUrlExtension = ( url, lowercase=true ) => {
     // Get extension
     let extension = url.toString().split(/[#?]/)[0].split('.').pop().trim();
     // If no extension, return false
@@ -111,47 +102,58 @@ export default class Comment extends React.Component {
     }
   }
 
-  render() {
-    return (
-      <>
-        <div className={ `${ comment_styles.main_wrapper } ${ this.state.replyClass }` }>
-          <div className={ comment_styles.body_wrapper }>
-            <div className={ comment_styles.body_row_1 }>
-              <div className={ comment_styles.body_col_1 }>
-                <span className={ comment_styles.comment_author }>{ this.state.comment.author }</span>
-                <span className={ comment_styles.comment_date }>{ dateformat( new Date(this.state.comment.created_at), "h:MMtt | mmmm, dS yyyy") }</span>
-              </div>
-              <div className={ comment_styles.body_col_2 }>
-                <Link href="/" className={ comment_styles.reply_button_wrapper }>
-                  <div className={ comment_styles.reply_button }>⮌</div>
-                </Link>
-              </div>
+  useConstructor(() => {
+    setUVC(parseUpvotes(props.comment.upvotes - props.comment.downvotes));
+    setMessage(props.comment.content ? Parser( autoLinkText( sanitize( props.comment.content ) ) ) : '');
+
+    // const approved = comment.approved ?? false;
+    if ( comment.pid != 0 ) {
+      setMarginLeft(' style="margin-left:' + props.comment.margin + 'px"');
+      setReplyClass(' commentReply');
+      //this.state.commentHeader = ' id="cid" value="' + props.comment.cid + '"';
+    }
+  });
+
+  return (
+    <>
+      <div id={ comment.cid } className={ `${comment_styles.main_wrapper}${replyClass}` }>
+        <div className={ comment_styles.body_wrapper }>
+          <div className={ comment_styles.body_row_1 }>
+            <div className={ comment_styles.body_col_1 }>
+              <span className={ comment_styles.comment_author }>{ comment.author }</span>
+              <span className={ comment_styles.comment_date }>{ dateformat( new Date(comment.created_at), "h:MMtt | mmmm, dS yyyy") }</span>
             </div>
-            <div className={ comment_styles.body_row_2 }>
-              <div className={ comment_styles.comment_wrapper }>
-                <div className={ comment_styles.comment_content }>{ this.state.message }</div>
-              </div>
+            <div className={ comment_styles.body_col_2 }>
+              <Link href="/" className={ comment_styles.reply_button_wrapper }>
+                <div className={ comment_styles.reply_button }>⮌</div>
+              </Link>
             </div>
           </div>
-          <div className={ comment_styles.vote_wrapper }>
-            <div className={ comment_styles.vote_count }>
-              <span className={ comment_styles.count_text }>{ this.state.uvc }</span>
-            </div>
-            <div className={ comment_styles.upvote_button }>
-              <Link href="/">
-                <span>🔺</span>
-              </Link>
-            </div>
-            <div className={ comment_styles.downvote_button }>
-              <Link href="/">
-                <span>🔻</span>
-              </Link>
+          <div className={ comment_styles.body_row_2 }>
+            <div className={ comment_styles.comment_wrapper }>
+              <div className={ comment_styles.comment_content }>{ message }</div>
             </div>
           </div>
         </div>
-        {/* <Comment /> */}
-      </>
-    )
-  }
+        <div className={ comment_styles.vote_wrapper }>
+          <div className={ comment_styles.vote_count }>
+            <span className={ comment_styles.count_text }>{ uvc }</span>
+          </div>
+          <div className={ comment_styles.upvote_button }>
+            <Link href="/">
+              <span>🔺</span>
+            </Link>
+          </div>
+          <div className={ comment_styles.downvote_button }>
+            <Link href="/">
+              <span>🔻</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+      {/* <Comment /> */}
+    </>
+  );
+
 }
 

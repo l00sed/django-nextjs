@@ -14,6 +14,11 @@
   position: sticky;
   top: 2em;
   width: 100%;
+  padding-bottom: 2em;
+}
+
+.comments_section .main_wrapper:first-child {
+  margin-top: 0;
 }
 
 .comments_section img {
@@ -150,7 +155,7 @@
 .upvote_button,
 .downvote_button {
   display: flex;
-  align-content: stretch;
+  align-items: center;
   width: 100%;
   height: 25px;
   margin: 0 auto;

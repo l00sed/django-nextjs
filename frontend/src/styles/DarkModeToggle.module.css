@@ -1,0 +1,13 @@
+.dark_toggle,
+.light_toggle {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  right: 2em;
+  top: 2em;
+  transform: translateX( -50% );
+  border-radius: 35px;
+  box-shadow: 0 0 1px 0 rgba(0,0,0,0.5);
+  padding: 20px;
+  display: flex;
+}
