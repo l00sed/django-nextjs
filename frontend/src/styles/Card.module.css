@@ -48,6 +48,10 @@
 .card:hover::after {
   opacity: 1;
 }
+.card:active::after {
+  box-shadow: 0 0 8px 1px var(--card-active);
+  opacity: 1;
+}
 
 .card:hover .card__thumbnail_wrapper {
   width: 100%;

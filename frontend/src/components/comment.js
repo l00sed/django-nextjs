@@ -140,12 +140,12 @@ export default function Comment(props) {
           </div>
           <div className={ comment_styles.upvote_button }>
             <Link href="/">
-              <span>🔺</span>
+              <span>⯅</span>
             </Link>
           </div>
           <div className={ comment_styles.downvote_button }>
             <Link href="/">
-              <span>🔻</span>
+              <span>⯆</span>
             </Link>
           </div>
         </div>

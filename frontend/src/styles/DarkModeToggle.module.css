@@ -15,7 +15,7 @@
   cursor: pointer;
   transform: translateX( -50% );
   border-radius: 35px;
-  padding: 12.5px;
+  padding: 5px;
   box-shadow: 0 0 4px 0 rgba(0,0,0,0.5);
 }
 
@@ -29,22 +29,24 @@
   top: 0;
   left: 0;
   opacity: 0;
-  box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
+  box-shadow: inset 1px 1px 1px rgba(255,255,255,0.2), inset -1px -1px 1px rgba(0,0,0,0.2), 0 0 15px 0 var(--toggle-hover-glow);
   transition: all var(--loosed-transition-medm) ease;
 }
 
 .dark_toggle:hover::before,
 .light_toggle:hover::before {
+  background-color: var(--hover-background);
   opacity: 1;
 }
 
-.dark_toggle span,
-.light_toggle span {
-  width: calc(100% - 25px) !important;
-  height: calc(100% - 25px) !important;
+.dark_toggle svg,
+.light_toggle svg {
+  width: 100%;
+  height: 100%;
   top: unset !important;
   right: unset !important;
   bottom: unset !important;
   left: unset !important;
 }
+
 

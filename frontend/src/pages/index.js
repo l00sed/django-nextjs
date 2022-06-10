@@ -1,4 +1,5 @@
 import Title from '../components/title'
+import Donate from '../components/donate'
 import MenuOverlay from '../components/menu_overlay'
 import MenuToggle from '../components/menu_toggle'
 import Card from '../components/card'
@@ -22,7 +23,8 @@ export default function Home({ data, done }) {
       <div className={ styles.homepage }>
         <MenuOverlay hidden={ hidden } setHidden={ setHidden } theme={ theme } setTheme={ setTheme } />
         <MenuToggle hidden={ hidden } setHidden={ setHidden } theme={ theme } setTheme={ setTheme } />
-        <Title/>
+        <Title />
+        <Donate />
         <div id="homepage__content" className={ styles.homepage__content }>
         {
           data.map( element =>

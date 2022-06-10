@@ -40,11 +40,13 @@
    * ------------------ */
   --comment-content: rgba(0,0,0,0.02);
   --comment-shadow: rgba(0,0,0,0.15);
+  --reply-shadow: rgba(0,0,0,0.2);
   --input-outline: rgba(0,0,0,0.5);
 
   /* ### Cards
    * ------------------ */
   --card-shadow: rgba(0,0,0,0.15);
+  --card-active: rgba(0,0,0,0.5);
   --card-radius: 10px;
 
   /* ### Menu Toggle
@@ -59,11 +61,14 @@
   --overlay-background-color: rgba(0,0,0,0.25);
   --menu-background-color: rgba(255,255,255,0.75);
   --menu-box-shadow: rgba(0,0,0,0.25);
+  --button-box-shadow: rgba(0,0,0,0.7);
 
   /* ### Dark Mode Toggle
    * ------------------ */
   --light-display: none;
   --dark-display: flex;
+  --toggle-hover-glow: rgba(0, 30, 80, 80%);
+  --hover-background: rgba(0,155,255,0.2);
 
 
 /* # Variables
@@ -90,10 +95,12 @@
   --loosed-black: #ffffff;
   /* Comments */
   --comment-content: rgba(255,255,255,0.1);
-  --comment-shadow: rgba(255,255,255,0.5);
+  --comment-shadow: rgba(255,255,255,0.2);
+  --reply-shadow: rgba(255,255,255,0.2);
   --input-outline: rgba(255,255,255,0.75);
   /* Cards */
   --card-shadow: rgba(255,255,255,0.15);
+  --card-active: rgba(255,255,255,0.5);
   /* Menu Toggle */
   --menu-toggle-background: rgba(255,255,255,0.2);
   --menu-toggle-box-shadow: rgba(255,255,255,0.4);
@@ -103,9 +110,12 @@
   --overlay-background-color: rgba(255,255,255,0.25);
   --menu-background-color: rgba(0,0,0,0.75);
   --menu-box-shadow: rgba(0,0,0,0.95);
+  --button-box-shadow: rgba(255,255,255,0.3);
   /* Dark Mode Toggle */
   --light-display: flex;
   --dark-display: none;
+  --toggle-hover-glow: rgba(80, 50, 0, 90%);
+  --hover-background: rgba(255,185,0,0.1);
 }
 
 /* # HTML + body tags */

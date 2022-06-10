@@ -6,6 +6,7 @@ import styles from '../styles/Article.module.css'
 import page_styles from '../styles/Page.module.css'
 import comment_styles from '../styles/Comment.module.css'
 import Title from '../components/title'
+import Donate from '../components/donate'
 import Comments from '../components/comments'
 import MenuOverlay from '../components/menu_overlay'
 import MenuToggle from '../components/menu_toggle'
@@ -24,6 +25,7 @@ export default function Article({ article, comments }) {
       <MenuToggle hidden={ hidden } setHidden={ setHidden } />
       <div className={ page_styles.main_wrapper }>
         <Title />
+        <Donate />
         <div className={ styles.main_wrapper }>
           <main className={ styles.main }>
             <div className={ styles.article_wrapper }>
