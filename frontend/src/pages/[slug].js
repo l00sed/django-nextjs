@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, componentDidMount } from 'react'
 import { useRouter } from 'next/router'
 import dateformat from 'dateformat'
 import Parser from 'html-react-parser'
@@ -9,18 +9,21 @@ import Title from '../components/title'
 import Comments from '../components/comments'
 import MenuOverlay from '../components/menu_overlay'
 import MenuToggle from '../components/menu_toggle'
+import { useRecoilState } from 'recoil'
+import { themeState, themeHandler } from '../state/theme_state'
 
 export default function Article({ article, comments }) {
   const { query: { slug } } = useRouter()
 
   const [hidden, setHidden] = useState(' hidden');
+  const [theme, setTheme] = useRecoilState(themeState);
 
-  return(
+  return (
     <>
-      <MenuOverlay hidden={ hidden } setHidden={ setHidden } />
+      <MenuOverlay hidden={ hidden } setHidden={ setHidden } theme={ theme } setTheme={ setTheme } />
       <MenuToggle hidden={ hidden } setHidden={ setHidden } />
       <div className={ page_styles.main_wrapper }>
-        <Title/>
+        <Title />
         <div className={ styles.main_wrapper }>
           <main className={ styles.main }>
             <div className={ styles.article_wrapper }>
@@ -39,7 +42,7 @@ export default function Article({ article, comments }) {
           </main>
           <aside>
             <div className={ comment_styles.comments_section }>
-              <Comments comments={ comments } article={ article } />
+              <Comments theme={ theme } comments={ comments } article={ article } />
             </div>
           </aside>
         </div>

@@ -26,7 +26,7 @@
   margin-bottom: 2em;
   position: relative;
   display: inline-block;
-  transition: all var(--loosed-transition) ease;
+  transition: all var(--loosed-transition-medm) ease;
   box-shadow: 0 0 1px 1px var(--card-shadow);
 }
 
@@ -35,13 +35,13 @@
   height: 100%;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: 0;
   position: absolute;
   content: "";
   display: block;
   border-radius: var(--card-radius);
   box-shadow: 0 0 4px 1px var(--card-shadow);
-  transition: all var(--loosed-transition) ease;
+  transition: all var(--loosed-transition-medm) ease;
   opacity: 0;
 }
 
@@ -55,7 +55,7 @@
   top: 0;
 }
 .card__thumbnail_wrapper {
-  transition: all var(--loosed-transition) ease;
+  transition: all var(--loosed-transition-medm) ease;
   position: relative;
   height: 200px;
   width: calc( 100% - 6px);
@@ -64,7 +64,7 @@
 }
 
 .card__thumbnail {
-  border-radius: var(--card-radius) var(--card-radius) 0 0;
+  border-radius: calc(var(--card-radius) - 2px) calc(var(--card-radius) - 2px) 0 0;
 }
 
 .card__author,

@@ -9,3 +9,10 @@
   flex-direction: row;
   padding: 2em 0;
 }
+
+.title__word_logo path {
+  fill: var(--loosed-black);
+}
+.title__word_logo:hover path {
+  fill: var(--loosed-highlight-1);
+}

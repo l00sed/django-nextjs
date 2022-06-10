@@ -24,7 +24,6 @@ export default function Comment(props) {
   const [replyClass, setReplyClass] = useState('');
   const [marginLeft, setMarginLeft] = useState('');
 
-
   const parseUpvotes = (upvote_count) => {
     if ( upvote_count > 999 ) {
       if ( upvote_count > 99999 ) {

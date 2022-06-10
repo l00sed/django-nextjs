@@ -1,7 +1,4 @@
 .menu_overlay {
-  --overlay-background-color: rgba(0,0,0,0.25);
-  --menu-background-color: rgba(255,255,255,0.75);
-  --menu-box-shadow: rgba(0,0,0,0.25);
   --menu-border-radius: 10px;
   --menu-item-hover-background: var(--loosed-black);
   --menu-item-hover-color: var(--loosed-white);
@@ -21,16 +18,17 @@
   flex-direction: column;
   justify-content: center;
   background-color: var(--menu-background-color);
-  padding: 2em;
+  padding: 1.5em;
   top: 50%;
   position: relative;
   transform: translateY(-50%);
-  max-height: 280px;
+  max-height: 220px;
   border-radius: var(--menu-border-radius);
   box-shadow: inset 1px 1px 2px 0px var(--loosed-white), 0 5px 20px 2px var(--menu-box-shadow);
 }
 
 .menu_text p {
+  color: var(--loosed-black);
   display: flex;
   text-align: left;
   border-radius: 3px;
