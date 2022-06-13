@@ -10,8 +10,10 @@ import Donate from '../components/donate'
 import Comments from '../components/comments'
 import MenuOverlay from '../components/menu_overlay'
 import MenuToggle from '../components/menu_toggle'
+import Footer from '../components/footer'
 import { useRecoilState } from 'recoil'
 import { themeState, themeHandler } from '../state/theme_state'
+
 
 export default function Article({ article, comments }) {
   const { query: { slug } } = useRouter()
@@ -49,6 +51,7 @@ export default function Article({ article, comments }) {
           </aside>
         </div>
       </div>
+      <Footer />
     </>
   )
 }

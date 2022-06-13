@@ -1,0 +1,95 @@
+/* # Scroll To Top ----------------------- */
+.scrollTop {
+  transition: all var(--loosed-transition-fast) ease;
+  border-bottom: 1px solid var(--loosed-highlight-1);
+  border-top: 1px solid var(--loosed-highlight-1);
+  cursor: pointer;
+  height: 90px;
+  margin-top: 100px;
+  padding: 20px 0 30px 0;
+  text-align: center;
+  z-index: 10;
+  background-color: var(--light50);
+}
+.scrollTop:hover {
+  background-color: var(--scroll-top-hover);
+}
+.scrollTop:active {
+  background-color: var(--scroll-top-active);
+}
+.scroll_top_label {
+  color: var(--loosed-highlight-1) !important;
+  font-weight: 800;
+}
+.scrollTop svg {
+  fill: var(--loosed-highlight-1);
+  height: 20px;
+  width: 20px;
+}
+
+.footer .hr {
+  height: 1px !important;
+}
+
+.footer p {
+  word-wrap: normal;
+  line-height: 30px;
+  margin: auto;
+  text-align: center;
+  word-break: keep-all;
+  color: var(--dark100);
+}
+.footer a:hover {
+  color: var(--loosed-highlight-1);
+}
+.link_row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 1em 2em;
+  max-width: 960px;
+  margin: auto;
+  text-align: center;
+  justify-content: space-between;
+}
+.footer {
+  background: transparent;
+  margin-top: 50px;
+}
+.webrings_row {
+  display: flex;
+  flex-direction: row;
+  padding: 1em 2em;
+}
+.webring {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.webrings_row {
+  border-top: 1px solid var(--webring-top-border) !important;
+  background-color: var(--webring-background);
+}
+.geekring_row {
+  max-width: 500px;
+  text-align: center;
+}
+.icon:hover path {
+  stroke: var(--loosed-highlight-1);
+}
+.icon path {
+  stroke: var(--loosed-black);
+}
+
+@media screen and (max-width: 480px) {
+  .link,
+  .webring {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 480px) {
+  .webring:last-child {
+    border-left: 1px solid var(--webring-center-border);
+  }
+}

@@ -22,6 +22,8 @@
 
  * END   - Table of Contents ==================================== */
 
+@import './code_themes/tomorrow-night-eighties.css';
+
 :root {
 /* # Themes
  * ============================== */
@@ -70,6 +72,14 @@
   --toggle-hover-glow: rgba(0, 30, 80, 80%);
   --hover-background: rgba(0,155,255,0.2);
 
+  /* ### Scroll To Top
+   * ------------------ */
+  --webring-background: rgba(0,0,0,0.05);
+  --webring-top-border: rgba(0,0,0,0.4);
+  --webring-center-border: rgba(0,0,0,0.2);
+  --scroll-top-hover: rgba(0,0,0,0.1);
+  --scroll-top-active: rgba(0,0,0,0.2);
+
 
 /* # Variables
  * =================================== */
@@ -116,7 +126,14 @@
   --dark-display: none;
   --toggle-hover-glow: rgba(80, 50, 0, 90%);
   --hover-background: rgba(255,185,0,0.1);
+  /* Scroll To Top */
+  --webring-top-border: rgba(255,255,255,0.5);
+  --webring-center-border: rgba(255,255,255,0.2);
+  --webring-background: rgba(255,255,255,0.05);
+  --scroll-top-hover: rgba(255,255,255,0.1);
+  --scroll-top-active: rgba(0,0,0,0.2);
 }
+
 
 /* # HTML + body tags */
 html,

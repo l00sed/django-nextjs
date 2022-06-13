@@ -2,6 +2,7 @@ import Title from '../components/title'
 import Donate from '../components/donate'
 import MenuOverlay from '../components/menu_overlay'
 import MenuToggle from '../components/menu_toggle'
+import Footer from '../components/footer'
 import Card from '../components/card'
 import React, { useEffect, useState, componentDidMount } from 'react'
 import styles from '../styles/Home.module.css'
@@ -32,6 +33,7 @@ export default function Home({ data, done }) {
           )
         }
         </div>
+        <Footer />
       </div>
     </>
   )

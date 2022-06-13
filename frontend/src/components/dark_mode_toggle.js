@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import dark_mode_toggle_styles from '../styles/DarkModeToggle.module.css'
 import { themeHandler } from '../state/theme_state'
 
