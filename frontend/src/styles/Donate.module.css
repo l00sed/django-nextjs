@@ -5,8 +5,7 @@
 .menu_text {
   max-width: 280px;
   align-self: center;
-  background-color: var(--menu-background-color);
-  box-shadow: 0 4px 12px var(--menu-box-shadow);
+  background-color: var(--donate-menu-background-color);
   padding: 2em 1.5em;
   border-radius: 10px;
 }
@@ -47,16 +46,25 @@
   padding: 0.5em 2em;
   border-radius: var(--button-border-radius);
   margin-bottom: 10px;
+  text-transform: uppercase;
 }
 
-.venmo {
+.venmo:hover {
   background-color: #3d95ce !important;
 }
-.paypal {
+.paypal:hover {
   background-color: #253B80 !important;
 }
-.btc {
+.btc:hover {
   background-color: #f2a900 !important;
+}
+.eth:hover {
+  background-color: #555555 !important;
+}
+
+.paypal:hover,
+.eth:hover {
+  color: #fff;
 }
 
 
@@ -69,7 +77,7 @@
   position: absolute;
   border-radius: var(--button-border-radius);
   transition: all var(--loosed-transition-medm) ease;
-  box-shadow: 0 0 5px 0 var(--button-box-shadow);
+  box-shadow: 0 0 8px 0 var(--donate-button-box-shadow);
   opacity: 0;
 }
 

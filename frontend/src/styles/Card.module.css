@@ -20,6 +20,7 @@
 }
 
 .card {
+  --card-radius: 10px;
   border-radius: var(--card-radius);
   max-width: 300px;
   max-width: 270px;

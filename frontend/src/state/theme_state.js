@@ -8,11 +8,12 @@ const themeState = atom({
 const themeHandler = (state) => {
   switch (state) {
     case 'default':
-      document.getElementById('__next').removeAttribute('class');
-      document.getElementById('__next').classList.add('dark');
+      document.getElementById('__next').firstChild.removeAttribute('class');
+      document.getElementById('__next').firstChild.classList.add('dark');
       break;
     case 'dark':
-      document.getElementById('__next').removeAttribute('class');
+      document.getElementById('__next').firstChild.removeAttribute('class');
+      document.getElementById('__next').firstChild.classList.add('default');
       break;
   }
 }

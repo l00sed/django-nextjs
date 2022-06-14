@@ -1,4 +1,4 @@
-import React, { useState, useEffect, componentDidMount } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import dateformat from 'dateformat'
 import Parser from 'html-react-parser'
@@ -21,9 +21,35 @@ export default function Article({ article, comments }) {
   const [hidden, setHidden] = useState(' hidden');
   const [theme, setTheme] = useRecoilState(themeState);
 
+  useEffect(() => {
+    const hljs = require('highlight.js');
+    window.hljs = hljs;
+    require('highlightjs-line-numbers.js');
+
+    const checkForCodeAndStyle = () => {      // Code syntax highlighting
+      // Initialize
+      document.querySelectorAll( 'pre code' ).forEach(( block ) => {
+        hljs.highlightBlock( block );
+      });
+      // Add line numbers
+      document.querySelectorAll( 'code.hljs' ).forEach(( block ) => {
+        hljs.lineNumbersBlock( block );
+      });
+    }
+
+    /* Trying to setup dark mode using preferred colorscheme
+		const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+		if (isDarkMode) {
+      setTheme('dark');
+      console.log('dark');
+		}
+    */
+    checkForCodeAndStyle();
+  });
+
   return (
-    <>
-      <MenuOverlay hidden={ hidden } setHidden={ setHidden } theme={ theme } setTheme={ setTheme } />
+    <div className={ `${page_styles.next_wrapper} ${theme}` }>
+      <MenuOverlay hidden={ hidden } setHidden={ setHidden } />
       <MenuToggle hidden={ hidden } setHidden={ setHidden } />
       <div className={ page_styles.main_wrapper }>
         <Title />
@@ -46,13 +72,13 @@ export default function Article({ article, comments }) {
           </main>
           <aside>
             <div className={ comment_styles.comments_section }>
-              <Comments theme={ theme } comments={ comments } article={ article } />
+              <Comments comments={ comments } article={ article } />
             </div>
           </aside>
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   )
 }
 

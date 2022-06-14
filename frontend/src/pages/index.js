@@ -1,13 +1,14 @@
 import Title from '../components/title'
 import Donate from '../components/donate'
+import page_styles from '../styles/Page.module.css'
 import MenuOverlay from '../components/menu_overlay'
 import MenuToggle from '../components/menu_toggle'
 import Footer from '../components/footer'
 import Card from '../components/card'
-import React, { useEffect, useState, componentDidMount } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import { useRecoilState } from 'recoil'
-import { themeState, themeHandler } from '../state/theme_state'
+import { themeState } from '../state/theme_state'
 
 export default function Home({ data, done }) {
   const [hidden, setHidden] = useState(' hidden');
@@ -20,22 +21,22 @@ export default function Home({ data, done }) {
   }, [])
 
   return (
-    <>
+    <div className={ `${page_styles.next_wrapper} ${theme}` }>
       <div className={ styles.homepage }>
-        <MenuOverlay hidden={ hidden } setHidden={ setHidden } theme={ theme } setTheme={ setTheme } />
-        <MenuToggle hidden={ hidden } setHidden={ setHidden } theme={ theme } setTheme={ setTheme } />
+        <MenuOverlay hidden={ hidden } setHidden={ setHidden } />
+        <MenuToggle hidden={ hidden } setHidden={ setHidden } />
         <Title />
         <Donate />
         <div id="homepage__content" className={ styles.homepage__content }>
-        {
-          data.map( element =>
-            <Card key={ element.id } element={ element }/>
-          )
-        }
+          {
+            data.map( element =>
+              <Card key={ element.id } element={ element }/>
+            )
+          }
         </div>
         <Footer />
       </div>
-    </>
+    </div>
   )
 }
 

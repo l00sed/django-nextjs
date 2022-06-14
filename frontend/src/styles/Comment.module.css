@@ -168,6 +168,7 @@
 
 .upvote_button,
 .downvote_button {
+  transition: all var(--loosed-transition-fast) ease;
   cursor: pointer;
   color: var(--loosed-highlight-1);
 }

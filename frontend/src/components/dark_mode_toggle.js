@@ -1,7 +1,14 @@
 import dark_mode_toggle_styles from '../styles/DarkModeToggle.module.css'
-import { themeHandler } from '../state/theme_state'
+import { useRecoilState } from 'recoil'
+import { useEffect } from 'react'
+import { themeState, themeHandler } from '../state/theme_state'
 
-export default function DarkModeToggle({ theme, setTheme }) {
+export default function DarkModeToggle() {
+
+	const [theme, setTheme] = useRecoilState(themeState);
+
+	useEffect(() => {
+	})
 
   let hidden = false;
   const handleThemeToggle = () => {

@@ -1,7 +1,7 @@
 import footer_styles from '../styles/Footer.module.css'
-import Image from 'next/image'
 
 export default function Footer() {
+
   const scrollToTop = () => {
     // Scroll to top button
     window.scrollTo({
