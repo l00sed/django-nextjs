@@ -23,12 +23,14 @@ import Title from '../components/title'
 import Donate from '../components/donate'
 import Article from '../components/article'
 import Footer from '../components/footer'
+import OneColumn from '../components/one_column'
+import TwoColumn from '../components/two_column'
 
 
 export default function ArticlePage({ meta, content, comments }) {
   const [theme, setTheme] = useRecoilState(themeState);
   const [hidden, setHidden] = useState(' hidden');
-  const components = { Image, Link, Pre }
+  const components = { Image, Link, Pre, OneColumn, TwoColumn }
 
   return (
     <>

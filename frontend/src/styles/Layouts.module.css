@@ -1,0 +1,22 @@
+/* # One Column */
+.one_column {
+  margin: 32px auto;
+  text-align: center;
+}
+
+/* # Two Column */
+.two_column {
+  margin: 32px auto;
+  column-gap: 1em;
+  row-gap: 1em;
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 959px) {
+  .two_column {
+    flex-direction: column;
+  }
+}

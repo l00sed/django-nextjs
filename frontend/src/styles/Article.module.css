@@ -23,6 +23,7 @@
   min-width: 33%;
   max-width: 33%;
 }
+
 @media screen and (max-width: 959px) {
   .main_wrapper {
     flex-direction: column;
@@ -45,5 +46,12 @@
   width: 100%;
   font-size: 0.8em;
   display: block;
+  margin-bottom: 4px;
+}
+
+/* # Images */
+
+.main img {
+  border-radius: 5px;
 }
 

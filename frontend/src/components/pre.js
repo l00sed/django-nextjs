@@ -14,7 +14,7 @@ const Pre = (props) => {
   }
   const onCopy = () => {
     setCopied(true)
-    navigator.clipboard.writeText(textInput.current.textContent)
+    navigator.clipboard.writeText(textInput.current.getElementsByClassName('code-highlight')[0].textContent)
     setTimeout(() => {
       setCopied(false)
     }, 2000)
@@ -22,14 +22,15 @@ const Pre = (props) => {
 
   return (
     <div ref={textInput} onMouseEnter={onEnter} onMouseLeave={onExit} className="relative">
-      {hovered && (
+      {/*hovered && (*/
+        (
         <button
           aria-label="Copy code"
           type="button"
-          className={`absolute right-2 top-2 h-8 w-8 rounded border-2 bg-gray-700 p-1 dark:bg-gray-800 ${
+          className={`code-copy-button ${
             copied
-              ? 'border-green-400 focus:border-green-400 focus:outline-none'
-              : 'border-gray-300'
+              ? 'code-copied'
+              : 'code-uncopied'
           }`}
           onClick={onCopy}
         >
@@ -63,7 +64,7 @@ const Pre = (props) => {
         </button>
       )}
 
-      <pre>{props.children}</pre>
+      {props.children}
     </div>
   )
 }
