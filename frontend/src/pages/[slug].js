@@ -1,16 +1,24 @@
 import React, { useState } from 'react'
+/* Recoil */
+import { useRecoilState } from 'recoil'
+/* MDX / Remark / Rehype */
 import { MDXRemote } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
-import { useRecoilState } from 'recoil'
+import remarkCodeTitles from '../utils/code_titles'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrism from 'rehype-prism-plus'
+/* Page-level styles */
 import page_styles from '../styles/Page.module.css'
+/* Theme state handler */
 import { themeState } from '../state/theme_state'
-import MenuOverlay from '../components/menu_overlay'
-import MenuToggle from '../components/menu_toggle'
+/* Next Components */
 import Image from 'next/image'
 import Link from 'next/link'
+/* My Components */
+import MenuOverlay from '../components/menu_overlay'
+import MenuToggle from '../components/menu_toggle'
+import Pre from '../components/pre'
 import Title from '../components/title'
 import Donate from '../components/donate'
 import Article from '../components/article'
@@ -20,7 +28,7 @@ import Footer from '../components/footer'
 export default function ArticlePage({ meta, content, comments }) {
   const [theme, setTheme] = useRecoilState(themeState);
   const [hidden, setHidden] = useState(' hidden');
-  const components = { Image, Link }
+  const components = { Image, Link, Pre }
 
   return (
     <>
@@ -76,6 +84,9 @@ export async function getStaticProps({ params }) {
 
   const content = await serialize(article.content, {
     mdxOptions: {
+      remarkPlugins: [
+        remarkCodeTitles,
+      ],
       rehypePlugins: [
         rehypeSlug,
         [rehypeAutolinkHeadings, { behavior: "wrap" }],

@@ -34,7 +34,7 @@
  * END   - Table of Contents ==================================== */
 
 /* Import <code> tag theme for hljs */
-@import './code_themes/prism-duotone-space.css';
+@import './code_themes/prism-base16-brewer.dark.css';
 @import './code_themes/prism-line-numbers-and-line-highlighting.css';
 
 :root {
