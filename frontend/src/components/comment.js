@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { useState, setState } from 'react'
 import useConstructor from '../utils/constructor'
-import Parser from 'html-react-parser'
+import Parse from '../utils/parser.js'
 import sanitize from '../utils/sanitize'
 import comment_styles from '../styles/Comment.module.css'
 import dateformat from 'dateformat'
@@ -103,7 +103,7 @@ export default function Comment(props) {
 
   useConstructor(() => {
     setUVC(parseUpvotes(props.comment.upvotes - props.comment.downvotes));
-    setMessage(props.comment.content ? Parser( autoLinkText( sanitize( props.comment.content ) ) ) : '');
+    setMessage(props.comment.content ? Parse( autoLinkText( sanitize( props.comment.content ) ) ) : '');
 
     // const approved = comment.approved ?? false;
     if ( comment.pid != 0 ) {

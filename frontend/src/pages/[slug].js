@@ -1,84 +1,42 @@
-import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
-import dateformat from 'dateformat'
-import Parser from 'html-react-parser'
-import styles from '../styles/Article.module.css'
+import React, { useState } from 'react'
+import { MDXRemote } from 'next-mdx-remote'
+import { serialize } from 'next-mdx-remote/serialize'
+import { useRecoilState } from 'recoil'
+import rehypeSlug from 'rehype-slug'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypePrism from 'rehype-prism-plus'
 import page_styles from '../styles/Page.module.css'
-import comment_styles from '../styles/Comment.module.css'
-import Title from '../components/title'
-import Donate from '../components/donate'
-import Comments from '../components/comments'
+import { themeState } from '../state/theme_state'
 import MenuOverlay from '../components/menu_overlay'
 import MenuToggle from '../components/menu_toggle'
+import Image from 'next/image'
+import Link from 'next/link'
+import Title from '../components/title'
+import Donate from '../components/donate'
+import Article from '../components/article'
 import Footer from '../components/footer'
-import { useRecoilState } from 'recoil'
-import { themeState, themeHandler } from '../state/theme_state'
 
 
-export default function Article({ article, comments }) {
-  const { query: { slug } } = useRouter()
-
-  const [hidden, setHidden] = useState(' hidden');
+export default function ArticlePage({ meta, content, comments }) {
   const [theme, setTheme] = useRecoilState(themeState);
-
-  useEffect(() => {
-    const hljs = require('highlight.js');
-    window.hljs = hljs;
-    require('highlightjs-line-numbers.js');
-
-    const checkForCodeAndStyle = () => {      // Code syntax highlighting
-      // Initialize
-      document.querySelectorAll( 'pre code' ).forEach(( block ) => {
-        hljs.highlightBlock( block );
-      });
-      // Add line numbers
-      document.querySelectorAll( 'code.hljs' ).forEach(( block ) => {
-        hljs.lineNumbersBlock( block );
-      });
-    }
-
-    /* Trying to setup dark mode using preferred colorscheme
-		const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-		if (isDarkMode) {
-      setTheme('dark');
-      console.log('dark');
-		}
-    */
-    checkForCodeAndStyle();
-  });
+  const [hidden, setHidden] = useState(' hidden');
+  const components = { Image, Link }
 
   return (
-    <div className={ `${page_styles.next_wrapper} ${theme}` }>
-      <MenuOverlay hidden={ hidden } setHidden={ setHidden } />
-      <MenuToggle hidden={ hidden } setHidden={ setHidden } />
-      <div className={ page_styles.main_wrapper }>
-        <Title />
-        <Donate />
-        <div className={ styles.main_wrapper }>
-          <main className={ styles.main }>
-            <div className={ styles.article_wrapper }>
-              <div className={ styles.article__head }>
-                <h2 className={ styles.article__title }>{ article.title }</h2>
-                <hr/>
-                <div className={ styles.article__meta }>
-                  <span className={ styles.article__author }>{ article.author }</span>
-                  <span className={ styles.article__date }>{ dateformat( new Date(article.updated_at), "h:MMtt | mmmm, dS yyyy") }</span>
-                </div>
-              </div>
-              <div className={ styles.article__body }>
-                <div className={ styles.article__description }>{ Parser(article.content) }</div>
-              </div>
-            </div>
-          </main>
-          <aside>
-            <div className={ comment_styles.comments_section }>
-              <Comments comments={ comments } article={ article } />
-            </div>
-          </aside>
+    <>
+      <div className={ `${page_styles.next_wrapper} ${theme}` }>
+        <MenuOverlay hidden={ hidden } setHidden={ setHidden } />
+        <MenuToggle hidden={ hidden } setHidden={ setHidden } />
+        <div className={ page_styles.main_wrapper }>
+          <Title />
+          <Donate />
+          <Article meta={ meta } comments={ comments }>
+            <MDXRemote { ...content } components={ components }/>
+          </Article>
         </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   )
 }
 
@@ -108,9 +66,33 @@ export async function getStaticProps({ params }) {
     comments_response.json(),
   ])
 
+  const meta = {
+    id: article.id,
+    slug: article.slug,
+    title: article.title,
+    author: article.author,
+    updated_at: article.updated_at,
+  }
+
+  const content = await serialize(article.content, {
+    mdxOptions: {
+      rehypePlugins: [
+        rehypeSlug,
+        [rehypeAutolinkHeadings, { behavior: "wrap" }],
+        [rehypePrism, { showLineNumbers: true }],
+      ],
+      format: 'mdx'
+    },
+    parseFrontmatter: false,
+  });
+
+  console.log( 'Content' );
+  console.log( content );
+
   return {
     props: {
-      article,
+      meta,
+      content,
       comments,
     }
   }

@@ -22,8 +22,7 @@
 .card {
   --card-radius: 10px;
   border-radius: var(--card-radius);
-  max-width: 300px;
-  max-width: 270px;
+  width: min(300px, 100vw);
   margin-bottom: 2em;
   position: relative;
   display: inline-block;
@@ -89,7 +88,7 @@
 
 .card__description {
   line-height: 1.25em;
-  max-height: 6.75em;
+  max-height: 6.25em;
   margin-bottom: 20px;
   overflow: hidden;
 }

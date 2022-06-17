@@ -6,7 +6,7 @@ import Comment from './comment'
 export default function Comments(props) {
 
   const [comments, setComments] = useState(props.comments);
-  const [article, setArticle] = useState(props.article);
+  const [meta, setMeta] = useState(props.meta);
   const [pid, setPID] = useState(0);
   const [author, setAuthor] = useState('Anonymous');
   const [upvote_count, setUpvoteCount] = useState(0);
@@ -69,7 +69,7 @@ export default function Comments(props) {
       },
     }
 
-    const results = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${props.article.slug}`, options_get)
+    const results = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${props.meta.slug}`, options_get)
       .then(res => res.json())
       .then(data => {
         return data;
@@ -94,7 +94,7 @@ export default function Comments(props) {
     <>
       <>{ process_comments(comments) }</>
       <div className={ comment_styles.comment_form_wrapper }>
-        <form className={ comment_styles.comment_form } onSubmit={ (e) => { handleCommentSubmit(e, article.id) } }>
+        <form className={ comment_styles.comment_form } onSubmit={ (e) => { handleCommentSubmit(e, meta.id) } }>
           <input required hidden type="number" name="pid" value="0" onChange={ (e) => { setPID(e) } } />
           <input type="text" name="author" placeholder="Anonymous" className={ comment_styles.name_input } onChange={ (e) => { setAuthor(e) } } />
           <textarea required type="text" name="content" rows="5" placeholder="Type a reply or comment in this area." className={ comment_styles.comment_input } onChange={ (e) => { setContent(e) } } />

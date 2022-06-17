@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import Parser from 'html-react-parser'
+import Parse from '../utils/parser'
 import styles from '../styles/Card.module.css'
 import dateformat from 'dateformat'
 
@@ -28,7 +28,7 @@ export default function Card({ element }) {
             </div>
           </div>
           <div className={ styles.card__body }>
-            <div className={ styles.card__description }>{ Parser(element.description) }</div>
+            <div className={ styles.card__description }>{ Parse(element.description) }</div>
           </div>
         </div>
       </a>

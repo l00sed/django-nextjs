@@ -34,7 +34,8 @@
  * END   - Table of Contents ==================================== */
 
 /* Import <code> tag theme for hljs */
-@import './code_themes/tomorrow-night-eighties.css';
+@import './code_themes/prism-duotone-space.css';
+@import './code_themes/prism-line-numbers-and-line-highlighting.css';
 
 :root {
 /* # Themes
@@ -122,7 +123,7 @@
 
   /* ## menu_toggle.js */
   --menu-toggle-background: rgba(255,255,255,0.2);
-  --menu-toggle-box-shadow: rgba(255,255,255,0.4);
+  --menu-toggle-box-shadow: rgba(200,30,40,0.5);
   --menu-border: rgba(255,255,255,0.7);
   --menu-hover-border: rgba(255,255,255,0.8);
 
@@ -156,7 +157,6 @@ body,
 #__next {
   padding: 0;
   margin: 0;
-  overflow-x: hidden;
   font-size: 100%;
   min-height: 100vh;
   font-family: 'JetBrains Mono', monospace;
@@ -183,7 +183,7 @@ hr {
 
 /* # Paragraph Styles */
 p {
-  margin: 6px auto;
+  margin: 0 auto 0.75em auto;
   font-size: 1em;
 }
 
@@ -197,7 +197,6 @@ a {
 /* # Code */
 pre {
   max-width: 100%;
-  overflow-x: scroll;
 }
 
 input,

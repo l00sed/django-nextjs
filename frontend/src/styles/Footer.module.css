@@ -34,7 +34,6 @@
 .footer p {
   word-wrap: normal;
   line-height: 30px;
-  margin: auto;
   text-align: center;
   word-break: keep-all;
   color: var(--dark100);
@@ -51,6 +50,9 @@
   margin: auto;
   text-align: center;
   justify-content: space-between;
+}
+.link_row p {
+  margin-bottom: 0;
 }
 .footer {
   background: transparent;
@@ -82,13 +84,26 @@
   stroke: var(--loosed-black);
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 767px) {
   .link,
   .webring {
     width: 100%;
   }
+  .link_row,
+  .webrings_row {
+    flex-direction: column;
+  }
+  .geekring_row {
+    width: 100%;
+  }
+  .webring:last-child {
+    margin: 2em auto;
+    padding: 2em 0 0 0;
+    max-width: 100px;
+    border-top: 1px solid var(--webring-center-border);
+  }
 }
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 768px) {
   .webring:last-child {
     border-left: 1px solid var(--webring-center-border);
   }
