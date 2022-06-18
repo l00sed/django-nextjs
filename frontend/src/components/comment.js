@@ -78,7 +78,7 @@ export default function Comment(props) {
     if (!/^https?:\/\//i.test(url)) {
       url = 'http://' + url;
     }
-    return `<a href=${url} target="_blank" rel="noreferrer">${ abbreviated_url }</a>`;
+    return `<p><a href=${url} target="_blank" rel="noreferrer">${ abbreviated_url }</a></p>`;
   }
 
   const getUrlsFromString = ( post ) => {
@@ -113,6 +113,31 @@ export default function Comment(props) {
     }
   });
 
+  const timeSince = (date) => {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    let interval = seconds / 31536000;
+    if (interval > 1) {
+      return Math.floor(interval).toString() + " years ago";
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+      return Math.floor(interval).toString() + " months ago";
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+      return Math.floor(interval).toString() + " days ago";
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+      return Math.floor(interval).toString() + " hours ago";
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+      return Math.floor(interval).toString() + " minutes ago";
+    }
+    return Math.floor(seconds).toString() + " seconds ago";
+  }
+
   return (
     <>
       <div id={ comment.cid } className={ `${comment_styles.main_wrapper}${replyClass}` }>
@@ -120,7 +145,7 @@ export default function Comment(props) {
           <div className={ comment_styles.body_row_1 }>
             <div className={ comment_styles.body_col_1 }>
               <span className={ comment_styles.comment_author }>{ comment.author }</span>
-              <span className={ comment_styles.comment_date }>{ dateformat( new Date(comment.created_at), "h:MMtt | mmmm, dS yyyy") }</span>
+              <span className={ comment_styles.comment_date }>{ timeSince( new Date(comment.created_at) ) }</span>
             </div>
             <div className={ comment_styles.body_col_2 }>
               <Link href="/" className={ comment_styles.reply_button_wrapper }>

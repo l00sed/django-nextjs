@@ -28,6 +28,7 @@
   display: inline-block;
   transition: all var(--loosed-transition-medm) ease;
   box-shadow: 0 0 1px 1px var(--card-shadow);
+  color: var(--loosed-black);
 }
 
 .card::after {

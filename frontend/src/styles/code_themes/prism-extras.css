@@ -84,13 +84,14 @@ pre {
   justify-content: center;
   border-radius: 5px;
   border: none;
-  background-color: var(--loosed-white);
+  background-color: var(--copy-button-background);
+  backdrop-filter: blur(3px);
   transition: all var(--loosed-transition-medm) ease;
   padding: 5px;
   box-shadow: 0 0 2px rgba(0,0,0,0.5);
 }
 .code-copy-button svg {
-  color: var(--loosed-black);
+  color: var(--copy-button-svg);
 }
 .code-copy-button + .remark-code-title{
   top: 20px !important;
@@ -98,6 +99,9 @@ pre {
 .code-copy-button:hover {
   background-color: var(--copy-button-hover);
   box-shadow: 0 0 2px rgba(0,0,0,0.5), inset 1px 1px 1px rgba(255,255,255,0.2), inset -1px -1px 1px rgba(0,0,0,0.05);
+}
+.code-copy-button:hover svg {
+  color: var(--copy-button-hover-color);
 }
 .code-copied {
   background-color: black;

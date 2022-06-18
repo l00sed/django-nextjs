@@ -7,6 +7,9 @@ import { serialize } from 'next-mdx-remote/serialize'
 import remarkCodeTitles from '../utils/code_titles'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeExternalLinks from 'rehype-external-links'
+import rehypeToc from '@jsdevtools/rehype-toc'
+import rehypeInferReadingTimeMeta from 'rehype-infer-reading-time-meta'
 import rehypePrism from 'rehype-prism-plus'
 /* Page-level styles */
 import page_styles from '../styles/Page.module.css'
@@ -91,8 +94,27 @@ export async function getStaticProps({ params }) {
       ],
       rehypePlugins: [
         rehypeSlug,
-        [rehypeAutolinkHeadings, { behavior: "wrap" }],
-        [rehypePrism, { showLineNumbers: true }],
+        [rehypeAutolinkHeadings, {
+          behavior: "wrap"
+        }],
+        [rehypeExternalLinks, {
+          target: '_blank',
+          rel: ['nofollow']
+        }],
+        [rehypeInferReadingTimeMeta, {
+          age: [14, 45],
+          mainSelector: 'main',
+        }],
+        [rehypeToc, {
+          headings: ["h3"],
+          cssClasse: {
+            toc: "article-outline",
+            link: "article-sub-heading",
+          }
+        }],
+        [rehypePrism, {
+          showLineNumbers: true
+        }],
       ],
       format: 'mdx'
     },

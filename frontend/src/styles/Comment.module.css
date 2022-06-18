@@ -90,8 +90,9 @@
   line-height: 20px;
   font-size: 18px;
   padding: 4px 0 6px 0;
+  text-shadow: 0 0 1px var(--loosed-black);
   border-radius: 5px;
-  box-shadow: 0 0 1px 1px var(--reply-shadow);
+  box-shadow: 0 0 0 1px var(--reply-shadow);
 }
 
 .reply_button::before {
@@ -104,7 +105,7 @@
   left: 0;
   border-radius: 5px;
   opacity: 0;
-  box-shadow: 0 0 2px 1px var(--reply-shadow);
+  box-shadow: inset 1px 1px 2px rgba(255,255,255,0.2), inset -1px -1px 2px rgba(0,0,0,0.2), 0 0 0 1px var(--reply-shadow);
   transition: all var(--loosed-transition-medm) ease;
 }
 

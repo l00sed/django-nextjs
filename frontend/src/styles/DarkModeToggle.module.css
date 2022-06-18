@@ -10,13 +10,14 @@
   position: absolute;
   width: 50px;
   height: 50px;
-  right: 2em;
-  top: 2em;
+  right: 0;
+  top: calc(1.5em + 2px);
   cursor: pointer;
   transform: translateX( -50% );
   border-radius: 35px;
   padding: 5px;
   box-shadow: 0 0 4px 0 rgba(0,0,0,0.5);
+  background-color: var(--normal-background);
 }
 
 .dark_toggle::before,

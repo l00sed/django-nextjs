@@ -23,8 +23,8 @@ export default function Card({ element }) {
             <h2 className={ styles.card__title }>{ element.title }</h2>
             <hr/>
             <div className={ styles.card__meta }>
-              <span className={ styles.card__author }>{ element.author }</span>
               <span className={ styles.card__date }>{ dateformat( new Date(element.updated_at), "h:MMTT | mmmm, dS yyyy") }</span>
+              <span className={ styles.card__author }>{ element.author }</span>
             </div>
           </div>
           <div className={ styles.card__body }>

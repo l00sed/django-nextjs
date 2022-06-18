@@ -37,14 +37,19 @@
 @import './code_themes/prism-base16-brewer.dark.css';
 @import './code_themes/prism-extras.css';
 
+/* Used for paragraph link underline offset */
+@property --offset {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 5px;
+}
+
 :root {
   /* # Themes
    * -------------------------------- */
   /* ## Global Color Palette */
   --loosed-black: #000000;
-  --loosed-black: rgba(0,0,0,0.85);
   --loosed-white: #ffffff;
-  --loosed-white: rgba(255,255,255,0.85);
   --loosed-highlight-1: #f93e17;
   --loosed-highlight-1: rgba(235,41,2,0.95);
 
@@ -54,6 +59,7 @@
   --loosed-transition-fast: 50ms;
   --loosed-transition-medm: 200ms;
   --loosed-transition-slow: 500ms;
+  --loosed-transition-slower: 800ms;
   /* ## Fonts */
   --small: 0.8em;
   --normal: 1em;
@@ -63,6 +69,7 @@
   --x-large: 2.5em;
 }
 
+/* # Scrollbar */
 ::-webkit-scrollbar,
 ::-webkit-scrollbar-track {
   background-color: rgba(0,0,0,0.1);
@@ -74,9 +81,12 @@
 }
 
 
+/* # Default Theme
+ * -------------------------------- */
 .default {
-  /* # Default Theme
-   * -------------------------------- */
+  /* ## article.js */
+  --link-underline: rgba(0,0,0,0.5);
+
   /* ## comment.js */
   --comment-content: rgba(0,0,0,0.02);
   --comment-shadow: rgba(0,0,0,0.15);
@@ -94,15 +104,16 @@
   --menu-hover-border: rgba(0,0,0,0.8);
 
   /* ## menu_overlay.js */
-  --overlay-background-color: rgba(0,0,0,0.25);
-  --menu-background-color: rgba(255,255,255,0.75);
+  --overlay-background-color: rgba(255,255,255,0.4);
+  --menu-background-color: rgba(255,255,255,0.85);
   --button-box-shadow: rgba(0,0,0,0.7);
 
   /* ## dark_mode_toggle.js */
   --light-display: none;
   --dark-display: flex;
   --toggle-hover-glow: rgba(0, 30, 80, 80%);
-  --hover-background: rgba(0,155,255,0.2);
+  --normal-background: rgba(0,155,255,0.2);
+  --hover-background: rgba(0,155,255,0.4);
 
   /* ## footer.js */
   --webring-background: rgba(0,0,0,0.05);
@@ -117,15 +128,21 @@
 
   /* ## pre.js */
   --code-filter: invert(1);
-  --copy-button-hover: rgba(0,0,0,0.01);
+  --copy-button-svg: rgba(0,0,0,0.2);
+  --copy-button-background: rgba(0,0,0,0.01);
+  --copy-button-hover: rgba(0,0,0,0.05);
+  --copy-button-hover-color: rgba(0,0,0,0.6);
 }
 
+/* # Dark Theme
+ * ---------------------------------- */
 .dark {
-  /* # Dark Theme
-   * ---------------------------------- */
   /* ## Global Color Palette */
   --loosed-white: #000000;
   --loosed-black: #ffffff;
+
+  /* ## article.js */
+  --link-underline: rgba(255,255,255,0.35);
 
   /* ## comments.js */
   --comment-content: rgba(255,255,255,0.1);
@@ -144,15 +161,16 @@
   --menu-hover-border: rgba(255,255,255,0.8);
 
   /* ## menu_overlay.js */
-  --overlay-background-color: rgba(255,255,255,0.25);
-  --menu-background-color: rgba(0,0,0,0.75);
+  --overlay-background-color: rgba(0,0,0,0.5);
+  --menu-background-color: rgba(0,0,0,0.85);
   --button-box-shadow: rgba(255,255,255,0.3);
 
   /* ## dark_mode_toggle */
   --light-display: flex;
   --dark-display: none;
   --toggle-hover-glow: rgba(80, 50, 0, 90%);
-  --hover-background: rgba(255,185,0,0.1);
+  --normal-background: rgba(255,185,0,0.1);
+  --hover-background: rgba(255,185,0,0.2);
 
   /* ## footer.js */
   --webring-top-border: rgba(255,255,255,0.5);
@@ -167,7 +185,10 @@
 
   /* # pre.js */
 	--code-filter: none;
-  --copy-button-hover: rgba(255,255,255,0.1);
+  --copy-button-svg: rgba(255,255,255,0.2);
+  --copy-button-background: rgba(255,255,255,0.05);
+  --copy-button-hover: rgba(255,255,255,0.06);
+  --copy-button-hover-color: rgba(255,255,255,0.4);
 }
 
 
@@ -189,7 +210,7 @@ body,
 /* # Headings (H1, H2) */
 h1,
 h2 {
-  font-family: 'Shrikhand', cursive;
+  font-family: 'Shrikhand', 'Arial', sans-serif;
   margin: 0 auto 5px auto;
   font-weight: 400;
 }
@@ -207,14 +228,14 @@ hr {
 
 /* # Paragraph Styles */
 p {
-  margin: 0 auto 0.75em auto;
+  margin: 0 auto 1.25em auto;
   font-size: 1em;
 }
 
 
 /* # Links */
 a {
-  color: inherit;
+  color: var(--loosed-highlight-1);
   text-decoration: none;
 }
 
