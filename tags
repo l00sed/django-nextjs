@@ -44,6 +44,7 @@ Migration	backend/articles/migrations/0004_article_content.py	/^class Migration(
 Migration	backend/articles/migrations/0005_article_featured_image.py	/^class Migration(migrations.Migration):$/;"	c
 Migration	backend/articles/migrations/0006_article_image_alt.py	/^class Migration(migrations.Migration):$/;"	c
 Migration	backend/articles/migrations/0007_alter_article_content_alter_article_description.py	/^class Migration(migrations.Migration):$/;"	c
+Migration	backend/articles/migrations/0008_article_likes.py	/^class Migration(migrations.Migration):$/;"	c
 Migration	backend/comments/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	c
 Migration	backend/comments/migrations/0002_remove_comment_id_alter_comment_cid_and_more.py	/^class Migration(migrations.Migration):$/;"	c
 Migration	backend/comments/migrations/0003_remove_comment_page_comment_article.py	/^class Migration(migrations.Migration):$/;"	c
@@ -95,6 +96,7 @@ dependencies	backend/articles/migrations/0004_article_content.py	/^    dependenc
 dependencies	backend/articles/migrations/0005_article_featured_image.py	/^    dependencies = [$/;"	v	class:Migration
 dependencies	backend/articles/migrations/0006_article_image_alt.py	/^    dependencies = [$/;"	v	class:Migration
 dependencies	backend/articles/migrations/0007_alter_article_content_alter_article_description.py	/^    dependencies = [$/;"	v	class:Migration
+dependencies	backend/articles/migrations/0008_article_likes.py	/^    dependencies = [$/;"	v	class:Migration
 dependencies	backend/comments/migrations/0001_initial.py	/^    dependencies = [$/;"	v	class:Migration
 dependencies	backend/comments/migrations/0002_remove_comment_id_alter_comment_cid_and_more.py	/^    dependencies = [$/;"	v	class:Migration
 dependencies	backend/comments/migrations/0003_remove_comment_page_comment_article.py	/^    dependencies = [$/;"	v	class:Migration
@@ -114,6 +116,7 @@ field	backend/articles/migrations/0005_article_featured_image.py	/^            f
 field	backend/articles/migrations/0006_article_image_alt.py	/^            field=models.CharField(default='', max_length=200),$/;"	v	class:Migration
 field	backend/articles/migrations/0007_alter_article_content_alter_article_description.py	/^            field=models.CharField(max_length=1024),$/;"	v	class:Migration
 field	backend/articles/migrations/0007_alter_article_content_alter_article_description.py	/^            field=models.TextField(),$/;"	v	class:Migration
+field	backend/articles/migrations/0008_article_likes.py	/^            field=models.IntegerField(default=0),$/;"	v	class:Migration
 field	backend/comments/migrations/0002_remove_comment_id_alter_comment_cid_and_more.py	/^            field=models.AutoField(primary_key=True, serialize=False),$/;"	v	class:Migration
 field	backend/comments/migrations/0002_remove_comment_id_alter_comment_cid_and_more.py	/^            field=models.IntegerField(),$/;"	v	class:Migration
 field	backend/comments/migrations/0003_remove_comment_page_comment_article.py	/^            field=models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to='articles.article'),$/;"	v	class:Migration
@@ -139,6 +142,7 @@ images	frontend/next.config.js	/^  images: {$/;"	p	class:const
 initial	backend/articles/migrations/0001_initial.py	/^    initial = True$/;"	v	class:Migration
 initial	backend/comments/migrations/0001_initial.py	/^    initial = True$/;"	v	class:Migration
 license	backend/backend/urls.py	/^        license=openapi.License(name="BSD License"),$/;"	v
+likes	backend/articles/models.py	/^    likes = models.IntegerField(default=0)$/;"	v	class:Article
 list_display	backend/articles/admin.py	/^    list_display = ('email', 'article', 'created_at')$/;"	v	class:SubscriberModelAdmin
 list_display	backend/articles/admin.py	/^    list_display = ('id', 'title', 'created_at', 'updated_at')$/;"	v	class:ArticleModelAdmin
 list_display	backend/comments/admin.py	/^    list_display = ('cid', 'pid', 'article', 'author', 'created_at', 'content')$/;"	v	class:CommentModelAdmin
@@ -157,6 +161,7 @@ model_name	backend/articles/migrations/0004_article_content.py	/^            mod
 model_name	backend/articles/migrations/0005_article_featured_image.py	/^            model_name='article',$/;"	v	class:Migration
 model_name	backend/articles/migrations/0006_article_image_alt.py	/^            model_name='article',$/;"	v	class:Migration
 model_name	backend/articles/migrations/0007_alter_article_content_alter_article_description.py	/^            model_name='article',$/;"	v	class:Migration
+model_name	backend/articles/migrations/0008_article_likes.py	/^            model_name='article',$/;"	v	class:Migration
 model_name	backend/comments/migrations/0002_remove_comment_id_alter_comment_cid_and_more.py	/^            model_name='comment',$/;"	v	class:Migration
 model_name	backend/comments/migrations/0003_remove_comment_page_comment_article.py	/^            model_name='comment',$/;"	v	class:Migration
 model_name	backend/comments/migrations/0004_alter_comment_pid.py	/^            model_name='comment',$/;"	v	class:Migration
@@ -171,6 +176,7 @@ name	backend/articles/migrations/0005_article_featured_image.py	/^            na
 name	backend/articles/migrations/0006_article_image_alt.py	/^            name='image_alt',$/;"	v	class:Migration
 name	backend/articles/migrations/0007_alter_article_content_alter_article_description.py	/^            name='content',$/;"	v	class:Migration
 name	backend/articles/migrations/0007_alter_article_content_alter_article_description.py	/^            name='description',$/;"	v	class:Migration
+name	backend/articles/migrations/0008_article_likes.py	/^            name='likes',$/;"	v	class:Migration
 name	backend/comments/apps.py	/^    name = 'comments'$/;"	v	class:CommentsConfig
 name	backend/comments/migrations/0001_initial.py	/^            name='Comment',$/;"	v	class:Migration
 name	backend/comments/migrations/0002_remove_comment_id_alter_comment_cid_and_more.py	/^            name='cid',$/;"	v	class:Migration
@@ -189,6 +195,7 @@ operations	backend/articles/migrations/0004_article_content.py	/^    operations 
 operations	backend/articles/migrations/0005_article_featured_image.py	/^    operations = [$/;"	v	class:Migration
 operations	backend/articles/migrations/0006_article_image_alt.py	/^    operations = [$/;"	v	class:Migration
 operations	backend/articles/migrations/0007_alter_article_content_alter_article_description.py	/^    operations = [$/;"	v	class:Migration
+operations	backend/articles/migrations/0008_article_likes.py	/^    operations = [$/;"	v	class:Migration
 operations	backend/comments/migrations/0001_initial.py	/^    operations = [$/;"	v	class:Migration
 operations	backend/comments/migrations/0002_remove_comment_id_alter_comment_cid_and_more.py	/^    operations = [$/;"	v	class:Migration
 operations	backend/comments/migrations/0003_remove_comment_page_comment_article.py	/^    operations = [$/;"	v	class:Migration

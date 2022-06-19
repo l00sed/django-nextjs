@@ -8,6 +8,7 @@
   background-color: var(--donate-menu-background-color);
   padding: 2em 1.5em;
   border-radius: 10px;
+  box-shadow: 0 0 0 1px var(--menu-box-shadow);
 }
 
 .donate_overlay {

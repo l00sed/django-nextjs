@@ -85,6 +85,7 @@ export async function getStaticProps({ params }) {
     title: article.title,
     author: article.author,
     updated_at: article.updated_at,
+    likes: article.likes,
   }
 
   const content = await serialize(article.content, {
@@ -107,9 +108,9 @@ export async function getStaticProps({ params }) {
         }],
         [rehypeToc, {
           headings: ["h3"],
-          cssClasse: {
-            toc: "article-outline",
-            link: "article-sub-heading",
+          cssClasses: {
+            toc: page_styles.article_outline,
+            link: page_styles.article_sub_heading,
           }
         }],
         [rehypePrism, {

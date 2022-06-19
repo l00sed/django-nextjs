@@ -1,15 +1,19 @@
 /* # Scroll To Top ----------------------- */
 .scrollTop {
   transition: all var(--loosed-transition-fast) ease;
-  border-bottom: 1px solid var(--loosed-highlight-1);
-  border-top: 1px solid var(--loosed-highlight-1);
   cursor: pointer;
-  height: 90px;
-  margin-top: 100px;
-  padding: 20px 0 30px 0;
+  height: 65px;
+  width: 65px;
+  right: 0;
+  bottom: 1em;
+  position: fixed;
+  padding: 12px 0;
   text-align: center;
   z-index: 10;
-  background-color: var(--light50);
+  background-color: var(--scroll-top-button);
+  color: var(--loosed-black);
+  backdrop-filter: blur(3px);
+  border-radius: 5px 0 0 5px;
 }
 .scrollTop:hover {
   background-color: var(--scroll-top-hover);
@@ -18,11 +22,10 @@
   background-color: var(--scroll-top-active);
 }
 .scroll_top_label {
-  color: var(--loosed-highlight-1) !important;
   font-weight: 800;
 }
 .scrollTop svg {
-  fill: var(--loosed-highlight-1);
+  fill: var(--loosed-black);
   height: 20px;
   width: 20px;
 }
@@ -33,10 +36,8 @@
 
 .footer p {
   word-wrap: normal;
-  line-height: 30px;
   text-align: center;
   word-break: keep-all;
-  color: var(--dark100);
 }
 .footer a:hover {
   color: var(--loosed-highlight-1);
@@ -50,6 +51,7 @@
   margin: auto;
   text-align: center;
   justify-content: space-between;
+  line-height: 200%;
 }
 .link_row p {
   margin-bottom: 0;
@@ -61,7 +63,9 @@
 .webrings_row {
   display: flex;
   flex-direction: row;
-  padding: 1em 2em;
+  padding: 2em;
+  border-top: 1px solid var(--webring-top-border) !important;
+  background-color: var(--webring-background);
 }
 .webring {
   width: 50%;
@@ -70,16 +74,13 @@
   justify-content: center;
   align-items: center;
 }
-.webrings_row {
-  border-top: 1px solid var(--webring-top-border) !important;
-  background-color: var(--webring-background);
-}
 .geekring {
   padding: 1em 2em;
 }
 .geekring_row {
-  max-width: 500px;
+  max-width: 350px;
   text-align: center;
+  font-size: var(--small);
 }
 .icon:hover path {
   stroke: var(--loosed-highlight-1);

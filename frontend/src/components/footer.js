@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import footer_styles from '../styles/Footer.module.css'
 
 export default function Footer() {
@@ -10,10 +11,28 @@ export default function Footer() {
     });
   }
 
+  useEffect(() => {
+    const handleScroll = e => {
+      if ( window.scrollY && ( window.scrollY > 500 ) ) {
+        if ( document.getElementById('scrollTop').classList.contains('hidden') ) {
+          document.getElementById('scrollTop').classList.remove('hidden');
+        }
+      } else {
+        if ( ! document.getElementById('scrollTop').classList.contains('hidden') ) {
+          document.getElementById('scrollTop').classList.add('hidden');
+        }
+      }
+    }
+    window.addEventListener( 'scroll', handleScroll );
+    return () => {
+      window.removeEventListener( 'scroll', handleScroll );
+    }
+  }, []);
+
   return (
     <div className={ footer_styles.footer }>
       <div className={ footer_styles.row }>
-        <div id="scrollTop" title="Click to jump to the top of the page." className={ footer_styles.scrollTop } onClick={ scrollToTop }>
+        <div id="scrollTop" title="Click to jump to the top of the page." className={ `${footer_styles.scrollTop} hidden` } onClick={ scrollToTop }>
           <svg width="54" height="83" viewBox="0 0 54 83" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M49.5355 27.4645L42.4645 34.5355L32 24.0711V79H22V24.0711L11.5355 34.5355L4.46447 27.4645L27 4.92893L49.5355 27.4645Z" />
           </svg>

@@ -25,7 +25,7 @@
   position: relative;
   width: 200px;
   border-radius: 0 var(--menu-border-radius) var(--menu-border-radius) 0;
-  box-shadow: 0 3px 10px 0 var(--menu-box-shadow);
+  box-shadow: 0 0 0 1px var(--menu-box-shadow);
   opacity: 1;
 }
 .hidden .menu_text {

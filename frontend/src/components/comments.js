@@ -92,7 +92,8 @@ export default function Comments(props) {
 
   return(
     <>
-      <>{ process_comments(comments) }</>
+      <h4 className={ comment_styles.comments_header }>Discussion</h4>
+      { process_comments(comments) }
       <div className={ comment_styles.comment_form_wrapper }>
         <form className={ comment_styles.comment_form } onSubmit={ (e) => { handleCommentSubmit(e, meta.id) } }>
           <input required hidden type="number" name="pid" value="0" onChange={ (e) => { setPID(e) } } />

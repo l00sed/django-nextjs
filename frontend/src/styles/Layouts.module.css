@@ -1,12 +1,10 @@
 /* # One Column */
 .one_column {
-  margin: 32px auto;
   text-align: center;
 }
 
 /* # Two Column */
 .two_column {
-  margin: 32px auto;
   column-gap: 1em;
   row-gap: 1em;
   box-sizing: content-box;
@@ -19,4 +17,10 @@
   .two_column {
     flex-direction: column;
   }
+}
+
+/* # One + Two Column */
+.one_column,
+.two_column {
+  margin: 3em auto;
 }

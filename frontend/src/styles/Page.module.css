@@ -12,7 +12,7 @@
   padding: 0;
   margin: 0;
   background-color: var(--loosed-white);
-  color: var(--loosed-black);
+  color: var(--main-text-color);
 }
 
 /* # Main Wrapper */
@@ -29,3 +29,35 @@
   margin: 2em auto;
   display: flex;
 }
+
+/* # Table of Contents */
+.article_outline {
+  padding: 0.5em 1.25em 1em 1.25em;
+  background-color: var(--toc-background);
+  border: dashed 1px var(--toc-shadow);
+  border-radius: 10px;
+  min-width: max(300px, 100%);
+  max-width: max(200px, 50%);
+  margin-bottom: 3em;
+}
+.article_sub_heading {
+  color: var(--main-text-color);
+}
+.article_outline::before {
+  display: block;
+  text-align: center;
+  content: "Table of Contents";
+  font-size: var(--normal);
+  font-weight: bold;
+  border-bottom: 1px solid var(--loosed-black);
+  padding-bottom: 0.25em;
+  width: 100%;
+  height: 100%;
+}
+.article_outline ol {
+  font-size: var(--small);
+  line-height: 180%;
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+

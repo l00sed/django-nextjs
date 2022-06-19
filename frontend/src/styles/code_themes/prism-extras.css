@@ -2,16 +2,19 @@ pre {
   overflow-x: auto;
   border-radius: 7.5px;
   padding: 1em 2em !important;
-  margin: 0.5em 0;
+}
+.relative {
+  margin: 3em 0;
 }
 .remark-code-title + pre {
   border-radius: 0 0 7.5px 7.5px;
   margin-top: 0 !important;
 }
 .remark-code-title {
-  text-align: center;
+  text-align: left;
   border-radius: 7.5px 7.5px 0 0;
-  padding: 0.65em 1em 0.65em 1em;
+  padding: 10px 1em 10px 1em;
+  line-height: 30px;
 }
 .remark-code-title,
 pre {
@@ -29,13 +32,13 @@ pre {
 
 .code-line {
   line-height: 150% !important;
-  display: block;
+  display: inherit;
   padding-left: 2em;
   padding-right: 2em;
   margin-left: -2em;
   margin-right: -2em;
-  border-left-width: 4px;
-  border-left-color: rgba(31, 41, 55, 0); /* Set code block color */
+  border-left: 4px solid transparent; /* Set code block color */
+  border-right: 4px solid transparent; /* Set code block color */
 }
 
 .code-line.inserted {
@@ -74,8 +77,8 @@ pre {
   z-index: 1;
   cursor: pointer;
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: 9px;
+  right: 12px;
   margin-bottom: 0;
   width: 30px;
   height: 30px;
