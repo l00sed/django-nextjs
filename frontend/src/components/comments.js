@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import sanitize from '../utils/sanitize'
+import { renderComments, processComments } from '../utils/comment_helpers'
 import comment_styles from '../styles/Comment.module.css'
-import Comment from './comment'
 
 export default function Comments(props) {
-
   const [comments, setComments] = useState(props.comments);
   const [meta, setMeta] = useState(props.meta);
   const [pid, setPID] = useState(0);
@@ -13,10 +12,7 @@ export default function Comments(props) {
   const [downvote_count, setDownvoteCount] = useState(0);
   const [content, setContent] = useState('');
 
-  useEffect(() => {
-  })
-
-  const handleCommentSubmit = async(e, article_id) => {
+  async function handleCommentSubmit(e, article_id) {
     e.preventDefault();
 
     let pid = e.target.pid.value
@@ -51,7 +47,9 @@ export default function Comments(props) {
     const results = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/submit`, options_post)
       .then(res => res.json())
       .then(data => {
-        return data;
+        if (data) {
+          return data;
+        }
       })
       .catch(error => console.log( error ))
 
@@ -59,41 +57,30 @@ export default function Comments(props) {
     return results;
   }
 
-  const getNewComments = async() => {
-    const options_get = {
-      method: "GET",
-      supportHeaderParams: true,
-      headers: {
-        'Accept': 'application/json;encoding=utf-8',
-        'Content-Type': 'application/json;encoding=utf-8',
-      },
-    }
-
-    const results = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${props.meta.slug}`, options_get)
-      .then(res => res.json())
-      .then(data => {
-        return data;
-      })
-      .catch(error => console.log( error ));
-
-    setComments(results);
+  const options_get = {
+    method: "GET",
+    supportHeaderParams: true,
+    headers: {
+      'Accept': 'application/json;encoding=utf-8',
+      'Content-Type': 'application/json;encoding=utf-8',
+    },
   }
 
-  const process_comments = (comments) => {
-    let processed_comments = []
-    if (comments.length > 0 && comments != 'Not found') {
-      // API setup to returns 'Not found' in python view
-      comments.map((comment) => {
-        processed_comments.push(<Comment key={ comment.cid } comment={ comment } />);
+  async function getNewComments() {
+    const results = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${props.meta.slug}/parents`, options_get)
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          return data;
+        }
       })
-      return processed_comments;
-    }
+      .catch(error => console.log( error ));
+    setComments(processComments(results));
   }
 
   return(
     <>
       <h4 className={ comment_styles.comments_header }>Discussion</h4>
-      { process_comments(comments) }
       <div className={ comment_styles.comment_form_wrapper }>
         <form className={ comment_styles.comment_form } onSubmit={ (e) => { handleCommentSubmit(e, meta.id) } }>
           <input required hidden type="number" name="pid" value="0" onChange={ (e) => { setPID(e) } } />
@@ -104,6 +91,7 @@ export default function Comments(props) {
           </div>
         </form>
       </div>
+      { renderComments(comments) }
     </>
   );
 

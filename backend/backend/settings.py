@@ -68,15 +68,22 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://0.0.0.0:3000',
+    'http://0.0.0.0:3001',
     'http://localhost:3000',
+    'http://localhost:3001',
     'http://127.0.0.1:3000',
+    'http://127.0.0.1:3001',
 ]
 
 CORS_ORIGIN_WHITELIST = [
     'http://0.0.0.0:3000',
+    'http://0.0.0.0:3001',
     'http://localhost:3000',
+    'http://localhost:3001',
     'http://127.0.0.1:3000',
+    'http://127.0.0.1:3001',
     'http://192.168.0.104:3000',
+    'http://192.168.0.104:3001',
 ]
 
 SITE_ID = 1

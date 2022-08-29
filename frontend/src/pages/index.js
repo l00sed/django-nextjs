@@ -15,9 +15,9 @@ export default function Home({ data, done }) {
   const [theme, setTheme] = useRecoilState(themeState);
 
   useEffect(() => {
-    console.log( 'process.env.NEXT_PUBLIC_BASE_URL: ', process.env.NEXT_PUBLIC_BASE_URL );
-    console.log( 'data: ', data);
-    console.log( 'done: ', done);
+    //console.log( 'process.env.NEXT_PUBLIC_BASE_URL: ', process.env.NEXT_PUBLIC_BASE_URL );
+    //console.log( 'data: ', data);
+    //console.log( 'done: ', done);
   }, [])
 
   return (

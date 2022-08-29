@@ -13,7 +13,7 @@ export default function MenuToggle({ hidden, setHidden }) {
   useEffect(() => {
     const handleScroll = e => {
       if ( window.scrollY > 100 ) {
-        console.log(window.scrollY);
+        //console.log(window.scrollY);
         if ( document.getElementById('menu_toggle').classList.contains(menu_toggle_styles.parked_top) ) {
           document.getElementById('menu_toggle').classList.remove(menu_toggle_styles.parked_top);
         }

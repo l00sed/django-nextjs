@@ -1,22 +1,35 @@
 /* # Scroll To Top ----------------------- */
 .scrollTop {
-  transition: all var(--loosed-transition-fast) ease;
+  transition: all var(--loosed-transition-slow) ease;
   cursor: pointer;
-  height: 65px;
-  width: 65px;
+  height: 80px;
+  width: 25px;
   right: 0;
-  bottom: 1em;
+  bottom: 5px;
   position: fixed;
   padding: 12px 0;
   text-align: center;
   z-index: 10;
   background-color: var(--scroll-top-button);
-  color: var(--loosed-black);
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(5px);
+  transform: rotate(0);
   border-radius: 5px 0 0 5px;
 }
-.scrollTop:hover {
-  background-color: var(--scroll-top-hover);
+.scrollTop p {
+  width: 70px;
+  position: relative;
+  right: 22px;
+  bottom: -10px;
+  transition: transform var(--loosed-transition-medm) ease-in;
+  white-space: nowrap;
+  transition-delay: 0;
+  transform: rotate(-90deg);
+  font-weight: black;
+  padding-bottom: 1px;
+  color: var(--loosed-black);
+}
+.scrollTop:hover p {
+  color: var(--loosed-highlight-1);
 }
 .scrollTop:active {
   background-color: var(--scroll-top-active);
@@ -25,11 +38,20 @@
   font-weight: 800;
 }
 .scrollTop svg {
+  -webkit-animation: bounce 1s linear;
+  -moz-animation: bounce 1s linear;
+  animation: bounce 1s linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
   fill: var(--loosed-black);
-  height: 20px;
-  width: 20px;
+  height: 17px;
+  width: 17px;
+  transform: translateY(0);
+  margin-top: -10px;
 }
-
+.scrollTop:hover svg {
+  fill: var(--loosed-highlight-1);
+}
 .footer .hr {
   height: 1px !important;
 }
@@ -58,7 +80,8 @@
 }
 .footer {
   background: transparent;
-  margin-top: 50px;
+  margin-top: auto;
+  padding-top: 2em;
 }
 .webrings_row {
   display: flex;
@@ -111,5 +134,24 @@
 @media screen and (min-width: 768px) {
   .webring:last-child {
     border-left: 1px solid var(--webring-center-border);
+  }
+}
+
+@-moz-keyframes bounce {
+  0% { -moz-transform: translateY(0); }
+  100% { -moz-transform: translateY(5px); }
+}
+@-webkit-keyframes bounce {
+  0% { -webkit-transform: translateY(0); }
+  100% { -webkit-transform: translateY(5px); }
+}
+@keyframes bounce {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(5px);
+    transform: translateY(5px);
   }
 }

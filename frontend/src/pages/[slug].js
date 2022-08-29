@@ -15,6 +15,7 @@ import rehypePrism from 'rehype-prism-plus'
 import page_styles from '../styles/Page.module.css'
 /* Theme state handler */
 import { themeState } from '../state/theme_state'
+import { processComments } from '../utils/comment_helpers'
 /* Next Components */
 import Image from 'next/image'
 import Link from 'next/link'
@@ -29,7 +30,7 @@ import Footer from '../components/footer'
 import OneColumn from '../components/one_column'
 import TwoColumn from '../components/two_column'
 
-
+/* Default top-level page is an "Article" page */
 export default function ArticlePage({ meta, content, comments }) {
   const [theme, setTheme] = useRecoilState(themeState);
   const [hidden, setHidden] = useState(' hidden');
@@ -53,6 +54,8 @@ export default function ArticlePage({ meta, content, comments }) {
   )
 }
 
+/* getStaticPaths
+ * Get list of slugs to generate static pages in the top-level */
 export async function getStaticPaths() {
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/articles`
   const response = await fetch(url)
@@ -67,18 +70,38 @@ export async function getStaticPaths() {
   }
 }
 
+/* getStaticProps
+ * Setup content for static site generation (SSG) */
 export async function getStaticProps({ params }) {
-  const article_endpoint_url = `${process.env.NEXT_PUBLIC_BASE_URL}/articles/${params.slug}`
-  const article_response = await fetch(article_endpoint_url)
+  const options_get = {
+    method: "GET",
+    supportHeaderParams: true,
+    headers: {
+      'Accept': 'application/json;encoding=utf-8',
+      'Content-Type': 'application/json;encoding=utf-8',
+    },
+  }
 
-  const comments_endpoint_url = `${process.env.NEXT_PUBLIC_BASE_URL}/comments/${params.slug}`
-  const comments_response = await fetch(comments_endpoint_url)
+  const article = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/articles/${params.slug}`, options_get)
+    .then(res => res.json())
+    .then(data => {
+      return data;
+    })
+    .catch(error => console.log( error ));
 
-  const [article, comments] = await Promise.all([
-    article_response.json(),
-    comments_response.json(),
-  ])
+  const parent_comments = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${params.slug}/parents`, options_get)
+    .then(res => res.json())
+    .then(data => {
+      return data;
+    })
+    .catch(error => console.log( error ));
 
+  const comments = processComments(parent_comments);
+
+  console.log('Comments initial:');
+  console.log(comments);
+
+  // Organize meta info into a separate object
   const meta = {
     id: article.id,
     slug: article.slug,
@@ -88,10 +111,11 @@ export async function getStaticProps({ params }) {
     likes: article.likes,
   }
 
+  // Process blog content (parse and add features)
   const content = await serialize(article.content, {
     mdxOptions: {
       remarkPlugins: [
-        remarkCodeTitles,
+        remarkCodeTitles, // Give code blocks a title
       ],
       rehypePlugins: [
         rehypeSlug,
@@ -99,33 +123,39 @@ export async function getStaticProps({ params }) {
           behavior: "wrap"
         }],
         [rehypeExternalLinks, {
+          // Set external links to open in a new window
           target: '_blank',
           rel: ['nofollow']
         }],
         [rehypeInferReadingTimeMeta, {
-          age: [14, 45],
+          age: [14, 45], // Meta data to associate appropriate age range
           mainSelector: 'main',
         }],
         [rehypeToc, {
           headings: ["h3"],
           cssClasses: {
+            // Automatically generate ToC
             toc: page_styles.article_outline,
+            // Build links to h3 headings only
             link: page_styles.article_sub_heading,
           }
         }],
         [rehypePrism, {
-          showLineNumbers: true
+          showLineNumbers: true // Show line numbers in syntax-highlighted code blocks
         }],
       ],
-      format: 'mdx'
+      format: 'mdx' // MarkdownX
     },
     parseFrontmatter: false,
   });
 
-  console.log( 'Content' );
-  console.log( content );
+  //console.log( 'Content' );
+  //console.log( content );
 
   return {
+    // Set the timeout for generating to 1 second
+    // Timeout could be longer depending on how often data changes
+    revalidate: 1,
     props: {
       meta,
       content,
@@ -133,3 +163,4 @@ export async function getStaticProps({ params }) {
     }
   }
 }
+

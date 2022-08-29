@@ -8,6 +8,7 @@
 /* # Next.js Wrapper */
 .next_wrapper {
   width: 100%;
+  min-height: 100vh;
   height: 100%;
   padding: 0;
   margin: 0;
@@ -32,13 +33,11 @@
 
 /* # Table of Contents */
 .article_outline {
-  padding: 0.5em 1.25em 1em 1.25em;
-  background-color: var(--toc-background);
-  border: dashed 1px var(--toc-shadow);
-  border-radius: 10px;
-  min-width: max(300px, 100%);
-  max-width: max(200px, 50%);
-  margin-bottom: 3em;
+  background-color: var(--loosed-white);
+  background-image: var(--toc-border);
+  border-radius: 7.5px;
+  max-width: max(200px, 40%);
+  margin: 0 auto 3em auto;
 }
 .article_sub_heading {
   color: var(--main-text-color);
@@ -49,9 +48,9 @@
   content: "Table of Contents";
   font-size: var(--normal);
   font-weight: bold;
-  border-bottom: 1px solid var(--loosed-black);
-  padding-bottom: 0.25em;
-  width: 100%;
+  padding: 0.5em 0 0.25em 0;
+  background-color: var(--toc-background);
+  border-radius: 7.5px 7.5px 0 0;
   height: 100%;
 }
 .article_outline ol {
@@ -59,5 +58,6 @@
   line-height: 180%;
   margin-top: 1em;
   margin-bottom: 0;
+  padding: 0 1.25em 0.75em 3.25em;
 }
 

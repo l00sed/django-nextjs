@@ -1,10 +1,9 @@
 import Link from 'next/link'
-import React, { useState, setState } from 'react'
+import React, { useState } from 'react'
 import useConstructor from '../utils/constructor'
 import Parse from '../utils/parser.js'
 import sanitize from '../utils/sanitize'
 import comment_styles from '../styles/Comment.module.css'
-import dateformat from 'dateformat'
 
 String.prototype.replaceArray = function(find, replace) {
   let replaceString = this;
@@ -22,7 +21,6 @@ export default function Comment(props) {
   const [uvc, setUVC] = useState(0);
   const [message, setMessage] = useState('');
   const [replyClass, setReplyClass] = useState('');
-  const [marginLeft, setMarginLeft] = useState('');
 
   const parseUpvotes = (upvote_count) => {
     if ( upvote_count > 999 ) {
@@ -105,11 +103,13 @@ export default function Comment(props) {
     setUVC(parseUpvotes(props.comment.upvotes - props.comment.downvotes));
     setMessage(props.comment.content ? Parse( autoLinkText( sanitize( props.comment.content ) ) ) : '');
 
+    //console.log(replyClass);
     // const approved = comment.approved ?? false;
-    if ( comment.pid != 0 ) {
-      setMarginLeft(' style="margin-left:' + props.comment.margin + 'px"');
-      setReplyClass(' commentReply');
-      //this.state.commentHeader = ' id="cid" value="' + props.comment.cid + '"';
+    if ( props.reply_level > 0 ) {
+      setReplyClass(` ${comment_styles.commentReply} indent_${props.reply_level}`);
+      //console.log(replyClass);
+    } else {
+      setReplyClass('');
     }
   });
 
@@ -175,7 +175,6 @@ export default function Comment(props) {
           </div>
         </div>
       </div>
-      {/* <Comment /> */}
     </>
   );
 
