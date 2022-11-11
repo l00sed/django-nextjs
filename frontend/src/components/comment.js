@@ -138,45 +138,43 @@ export default function Comment(props) {
     return Math.floor(seconds).toString() + " seconds ago";
   }
 
-  return (
-    <>
-      <div id={ comment.cid } className={ `${comment_styles.main_wrapper}${replyClass}` }>
-        <div className={ comment_styles.body_wrapper }>
-          <div className={ comment_styles.body_row_1 }>
-            <div className={ comment_styles.body_col_1 }>
-              <span className={ comment_styles.comment_author }>{ comment.author }</span>
-              <span className={ comment_styles.comment_date }>{ timeSince( new Date(comment.created_at) ) }</span>
-            </div>
-            <div className={ comment_styles.body_col_2 }>
-              <Link href="/" className={ comment_styles.reply_button_wrapper }>
-                <div className={ comment_styles.reply_button }>⮌</div>
-              </Link>
-            </div>
+  return <>
+    <div id={ comment.cid } className={ `${comment_styles.main_wrapper}${replyClass}` }>
+      <div className={ comment_styles.body_wrapper }>
+        <div className={ comment_styles.body_row_1 }>
+          <div className={ comment_styles.body_col_1 }>
+            <span className={ comment_styles.comment_author }>{ comment.author }</span>
+            <span className={ comment_styles.comment_date }>{ timeSince( new Date(comment.created_at) ) }</span>
           </div>
-          <div className={ comment_styles.body_row_2 }>
-            <div className={ comment_styles.comment_wrapper }>
-              <div className={ comment_styles.comment_content }>{ message }</div>
-            </div>
+          <div className={ comment_styles.body_col_2 }>
+            <Link href="/" className={ comment_styles.reply_button_wrapper } legacyBehavior>
+              <div className={ comment_styles.reply_button }>⮌</div>
+            </Link>
           </div>
         </div>
-        <div className={ comment_styles.vote_wrapper }>
-          <div className={ comment_styles.vote_count }>
-            <span className={ comment_styles.count_text }>{ uvc }</span>
-          </div>
-          <div className={ comment_styles.upvote_button }>
-            <Link href="/">
-              <span>⯅</span>
-            </Link>
-          </div>
-          <div className={ comment_styles.downvote_button }>
-            <Link href="/">
-              <span>⯆</span>
-            </Link>
+        <div className={ comment_styles.body_row_2 }>
+          <div className={ comment_styles.comment_wrapper }>
+            <div className={ comment_styles.comment_content }>{ message }</div>
           </div>
         </div>
       </div>
-    </>
-  );
+      <div className={ comment_styles.vote_wrapper }>
+        <div className={ comment_styles.vote_count }>
+          <span className={ comment_styles.count_text }>{ uvc }</span>
+        </div>
+        <div className={ comment_styles.upvote_button }>
+          <Link href="/" legacyBehavior>
+            <span>⯅</span>
+          </Link>
+        </div>
+        <div className={ comment_styles.downvote_button }>
+          <Link href="/" legacyBehavior>
+            <span>⯆</span>
+          </Link>
+        </div>
+      </div>
+    </div>
+  </>;
 
 }
 
