@@ -86,7 +86,7 @@ export default function Comment(props) {
     return post.match(uri_pattern) ?? false;
   }
 
-  const getUrlExtension = ( url, lowercase=true ) => {
+  const getUrlExtension = (url, lowercase=true) => {
     // Get extension
     let extension = url.toString().split(/[#?]/)[0].split('.').pop().trim();
     // If no extension, return false
@@ -101,11 +101,11 @@ export default function Comment(props) {
 
   useConstructor(() => {
     setUVC(parseUpvotes(props.comment.upvotes - props.comment.downvotes));
-    setMessage(props.comment.content ? Parse( autoLinkText( sanitize( props.comment.content ) ) ) : '');
+    setMessage(props.comment.content ? Parse(autoLinkText(sanitize(props.comment.content))) : '');
 
     //console.log(replyClass);
     // const approved = comment.approved ?? false;
-    if ( props.reply_level > 0 ) {
+    if (props.reply_level > 0) {
       setReplyClass(` ${comment_styles.commentReply} indent_${props.reply_level}`);
       //console.log(replyClass);
     } else {
