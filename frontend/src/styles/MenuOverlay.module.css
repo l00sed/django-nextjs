@@ -1,3 +1,7 @@
+.menu_overlay:not(.open) {
+  display: none !important;
+}
+
 .menu_overlay {
   --menu-border-radius: 10px;
   --menu-item-hover-background: var(--loosed-black);

@@ -1,10 +1,16 @@
+'use client';
+
+/* React */
 import React, { useState } from 'react'
-import sanitize from '../utils/sanitize'
+/* Local Utilities */
 import { renderComments, processComments } from '../utils/comment_helpers'
+import sanitize from '../utils/sanitize'
+/* Styles */
 import comment_styles from '../styles/Comment.module.css'
 
-export default function Comments(props) {
-  const [comments, setComments] = useState(props.comments);
+export default async function Comments( props ) {
+  const [comments, setComments] = useState([]);
+  const comments_promise = await getComments()
   const [meta, setMeta] = useState(props.meta);
   const [pid, setPID] = useState(0);
   const [author, setAuthor] = useState('Anonymous');
@@ -21,7 +27,7 @@ export default function Comments(props) {
     let upvotes = 0
     let downvotes = 0
 
-    if ( author == '' ) {
+    if ( author === '' ) {
       author = e.target.author.placeholder;
     }
 
@@ -45,16 +51,11 @@ export default function Comments(props) {
     }
 
     const results = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/submit`, options_post)
-      .then(res => res.json())
-      .then(data => {
-        if (data) {
-          return data;
-        }
-      })
       .catch(error => console.log( error ))
+    const json = results.json()
 
     getNewComments();
-    return results;
+    return json;
   }
 
   const options_get = {
@@ -68,14 +69,9 @@ export default function Comments(props) {
 
   async function getNewComments() {
     const results = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${props.meta.slug}/parents`, options_get)
-      .then(res => res.json())
-      .then(data => {
-        if (data) {
-          return data;
-        }
-      })
       .catch(error => console.log( error ));
-    setComments(processComments(results));
+    const json = await results.json()
+    setComments(processComments(json));
   }
 
   return(
@@ -94,5 +90,33 @@ export default function Comments(props) {
       { renderComments(comments) }
     </>
   );
+}
 
+
+async function getComments({ params }) {
+  const options_get = {
+    method: "GET",
+    supportHeaderParams: true,
+    headers: {
+      'Accept': 'application/json;encoding=utf-8',
+      'Content-Type': 'application/json;encoding=utf-8',
+    },
+  }
+
+  const parent_comments_promise = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${params.slug}/parents`, options_get);
+
+  let parent_comments_json = {};
+
+  if (parent_comments_promise.ok) {
+    parent_comments_json = parent_comments_promise.json();
+  } else {
+    console.error( 'Could not fetch parent comments.' );
+  }
+
+  const comments = await processComments(parent_comments_json);
+
+  console.log('Comments initial:');
+  console.log(comments);
+
+  return comments;
 }

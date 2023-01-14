@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from 'react'
 import footer_styles from '../styles/Footer.module.css'
 

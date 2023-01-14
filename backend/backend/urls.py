@@ -28,7 +28,8 @@ schema_view = get_schema_view(
     openapi.Info(
         title="Article Management API",
         default_version='v1',
-        description="This API enables the Django backend to connect to the Next.js frontend.",
+        description="This API enables the Django backend \
+            to connect to the Next.js frontend.",
         terms_of_service="https://www.google.com/policies/terms",
         contact=openapi.Contact(email="contact@snippets.local"),
         license=openapi.License(name="BSD License"),

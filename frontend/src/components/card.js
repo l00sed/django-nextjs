@@ -5,18 +5,39 @@ import Parse from '../utils/parser'
 import styles from '../styles/Card.module.css'
 import dateformat from 'dateformat'
 
-export default function Card({ element }) {
-  return (
-    (<Link key={ element.id } href={ '/' + element.slug }>
+export default function Card({ element, index }) {
+  const above_the_fold = 3;
 
+  const loading = (index) => {
+    if (index > above_the_fold) {
+      return "lazy";
+    } else {
+      return undefined;
+    }
+  }
+
+  const priority = (index) => {
+    if (index < above_the_fold) {
+      return true;
+    }
+    return false;
+  }
+
+  return (
+    (<Link key={ element.id } href={ `/${element.slug}` }>
       <div className={ styles.card }>
         <div className={ styles.card__thumbnail_wrapper }>
           <Image
             alt={ element.image_alt }
             src={ element.featured_image }
             className={ styles.card__thumbnail }
-            objectFit={'cover'}
-            layout={'fill'}
+            loading={ loading(index) }
+            priority={ priority(index) }
+            fill
+            sizes="(max-width: 576px)  100vw,
+                   (max-width: 768px)  50vw,
+                   (max-width: 1200px) 33vw,
+                   15vw"
           />
         </div>
         <div className={ styles.card__head }>
@@ -30,7 +51,6 @@ export default function Card({ element }) {
           <div className={ styles.card__description }>{ Parse(element.description) }</div>
         </div>
       </div>
-
     </Link>)
   );
 }

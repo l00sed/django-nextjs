@@ -1,14 +1,15 @@
+'use client';
+
 import donate_styles from '../styles/Donate.module.css'
 
 export default function Donate() {
-
   const toggleOverlay = () => {
-    document.getElementById("donate-overlay").classList.toggle(donate_styles.open);
+    document.getElementById('donate-overlay').classList.toggle(donate_styles.open);
   }
 
   const copyETH = () => {
-    let dummy = document.createElement('input'),
-      link = "0xfa9e8496c28317b1774eF53DDC1C96c06F364DaD";
+    let dummy = document.createElement('input');
+    let link = "0xfa9e8496c28317b1774eF53DDC1C96c06F364DaD";
     document.body.appendChild(dummy);
     dummy.value = link;
     dummy.select();
@@ -20,8 +21,8 @@ export default function Donate() {
   }
 
   const copyBTC = () => {
-    let dummy = document.createElement('input'),
-      link = "1FemHzDD6cDoc19gg99cscyx5eDSe1vBdS";
+    let dummy = document.createElement('input');
+    let link = "1FemHzDD6cDoc19gg99cscyx5eDSe1vBdS";
     document.body.appendChild(dummy);
     dummy.value = link;
     dummy.select();
@@ -60,5 +61,4 @@ export default function Donate() {
       </div>
     </>
   )
-
 }
