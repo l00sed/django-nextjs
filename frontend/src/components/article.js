@@ -9,7 +9,6 @@ import article_styles from '../styles/Article.module.css';
 import comment_styles from '../styles/Comment.module.css';
 
 /* MDX / Remark / Rehype */
-import { MDXRemote }              from 'next-mdx-remote';
 import { serialize }              from 'next-mdx-remote/serialize';
 import rehypeToc                  from '@jsdevtools/rehype-toc';
 import rehypeSlug                 from 'rehype-slug';
@@ -20,26 +19,19 @@ import rehypePrism                from 'rehype-prism-plus';
 /* Local Utils */
 import remarkCodeTitles           from '../utils/code_titles';
 
-/* Next Components */
-import Image from 'next/image';
-import Link  from 'next/link';
-
-/* Local Components */
-import Pre       from '../components/pre';
-import OneColumn from '../components/one_column';
-import TwoColumn from '../components/two_column';
+import Mdx from './mdx';
 //import Comments from '../components/comments';
 
 
-export default async function Article(props) {
-  /* Grab components for MDX */
-  const components = { Image, Link, Pre, OneColumn, TwoColumn }
-
+export default async function Article ( props ) {
   /* Get article content and its meta */
-  const data = await getData(props.slug);
-  /* Content + Meta */
-  const content = data.props.content ?? [];
-  const meta    = data.props.meta    ?? [];
+  const { meta, content } = await getData( props.slug );
+
+  console.log('meta');
+  console.log(meta);
+
+  console.log('article content');
+  console.log(content);
 
   return (
     <>
@@ -55,7 +47,7 @@ export default async function Article(props) {
             </div>
             <div className={ article_styles.article__body }>
               <div className={ article_styles.article__description }>
-                <MDXRemote { ...content } components={ components }/>
+                <Mdx content={ content } />
               </div>
             </div>
           </div>
@@ -81,7 +73,9 @@ async function getData( slug ) {
   }
 
   const data_promise = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/articles/${slug}`, options_get);
+
   let data_json = {};
+
   if ( data_promise.ok ) {
     data_json = await data_promise.json();
   } else {
@@ -131,15 +125,20 @@ async function getData( slug ) {
           showLineNumbers: true // Show line numbers in syntax-highlighted code blocks
         }]
       ],
-      format: 'mdx' // MarkdownX
+      format: 'mdx', // MarkdownX
+      development: process.env.NODE_ENV !== 'production'
     },
     parseFrontmatter: false
   });
 
+  console.log('meta');
+  console.log(meta);
+
+  console.log('content');
+  console.log(content);
+
   return {
-    props: {
-      meta,
-      content
-    }
+    meta,
+    content
   }
 }

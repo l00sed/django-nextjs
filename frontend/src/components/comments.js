@@ -9,8 +9,9 @@ import sanitize from '../utils/sanitize'
 import comment_styles from '../styles/Comment.module.css'
 
 export default async function Comments( props ) {
-  const [comments, setComments] = useState([]);
   const comments_promise = await getComments()
+
+  const [comments, setComments] = useState([]);
   const [meta, setMeta] = useState(props.meta);
   const [pid, setPID] = useState(0);
   const [author, setAuthor] = useState('Anonymous');
