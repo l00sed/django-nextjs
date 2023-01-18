@@ -21,15 +21,21 @@ export default function MenuToggle() {
       }
     }
 
-    window.addEventListener( 'scroll', handleScroll );
+    if (typeof window !== 'undefined') {
+      window.addEventListener( 'scroll', handleScroll );
+      document.getElementById('menu-toggle').addEventListener('click', toggleMenuVisibility);
+      document.getElementById('menu-toggle').addEventListener('keydown', toggleMenuVisibility);
+    }
 
     return () => {
       window.removeEventListener( 'scroll', handleScroll );
+      document.getElementById('menu-toggle').removeEventListener('click', toggleMenuVisibility);
+      document.getElementById('menu-toggle').removeEventListener('keydown', toggleMenuVisibility);
     }
   }, []);
 
   return (
-    <div id="menu-toggle" className={ `${menu_toggle_styles.header_logo} ${menu_toggle_styles.parked_top}` } title="Click the logo to open navigation and settings." onClick={ toggleMenuVisibility }>
+    <div id="menu-toggle" className={ `${menu_toggle_styles.header_logo} ${menu_toggle_styles.parked_top}` } title="Click the logo to open navigation and settings.">
       <svg className={ menu_toggle_styles.logo } width="120" height="120" viewBox="0 0 120 120" stroke="none" xmlns="http://www.w3.org/2000/svg">
         <path className={ menu_toggle_styles.logo_handle3 } d="M55.3439 77.4371C55.4322 77.4245 55.5206 77.4371 55.6216 77.4371L65.3784 77.4371C65.6435 77.4498 65.7444 77.551 65.7318 77.8168C65.7192 78.0825 65.6813 78.3356 65.6561 78.6014C65.391 80.9171 65.1386 83.2202 64.8735 85.5359C64.6337 87.6113 64.4065 89.6739 64.1414 91.7493C63.8764 93.9385 63.5861 96.1277 63.2958 98.3042C63.22 98.8737 63.0938 99.4431 63.0055 100.013C62.955 100.405 62.7278 100.62 62.387 100.759C61.8947 100.949 61.3772 101.038 60.8471 101.05C60.1781 101.063 59.5218 100.987 58.8654 100.81C58.7139 100.772 58.5499 100.709 58.411 100.633C58.0702 100.455 57.8304 100.202 57.7925 99.7721C57.6032 98.0891 57.3887 96.3934 57.1741 94.7104C56.9469 92.8502 56.7071 91.0026 56.4672 89.1424C56.24 87.2822 56.0128 85.4221 55.773 83.5745C55.5458 81.7143 55.306 79.8668 55.0662 78.0066C55.0536 77.9307 55.0409 77.8421 55.0536 77.7662C55.0536 77.5764 55.1545 77.4625 55.3439 77.4371Z" stroke="none"/>
         <path className={ menu_toggle_styles.logo_handle2 } d="M50.2193 71.2365H50.4591C53.8522 71.2492 57.2327 71.2492 60.6005 71.2492H60.6073H70.97C71.2729 71.2618 71.3612 71.3504 71.3612 71.6541L71.3613 76.235C71.3613 76.5513 71.2603 76.6399 70.9447 76.6526L50.4465 76.6526C49.8785 76.6526 49.8533 76.6273 49.8533 76.0452V75.0075C49.8533 74.7038 49.929 74.6405 50.2319 74.6279H59.1052C59.4334 74.6152 59.5344 74.514 59.5344 74.185C59.5344 74.0078 59.547 73.8433 59.5344 73.6662C59.5218 73.4384 59.4208 73.3371 59.1936 73.3245L50.4086 73.3245C49.8785 73.3245 49.8406 73.2992 49.8406 72.755V71.6288C49.8406 71.3377 49.929 71.2492 50.2193 71.2365Z" stroke="none"/>

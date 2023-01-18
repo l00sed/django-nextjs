@@ -49,19 +49,19 @@ export default function Footer() {
           <a href="https://linkedin.com/in/dwtompkins" target="_blank" rel="noreferrer"><p>LinkedIn</p></a>
         </div>
         <div className={ footer_styles.link }>
-          <a href="/rss/rss.xml" target="_blank"><p>RSS</p></a>
+          <a href="/rss/rss.xml" target="_blank" rel="noreferrer"><p>RSS</p></a>
         </div>
         <div className={ footer_styles.link }>
           <a href="https://keybase.io/l00sed" target="_blank" rel="noreferrer"><p>Keybase</p></a>
         </div>
         <div className={ footer_styles.link }>
-          <a href="/kb" target="_blank"><p>Knowledge Base</p></a>
+          <a href="/kb" target="_blank" rel="noreferrer"><p>Knowledge Base</p></a>
         </div>
         <div className={ footer_styles.link }>
-          <a href="/about" target="_blank"><p>About</p></a>
+          <a href="/about" target="_blank" rel="noreferrer"><p>About</p></a>
         </div>
       </div>
-      <div className={ footer_styles.hr }></div>
+      <div className={ footer_styles.hr } />
       <div id="webrings" className={ footer_styles.webrings_row }>
         <div className={ footer_styles.webring }>
           <div id="geekring" className={ footer_styles.geekring }>

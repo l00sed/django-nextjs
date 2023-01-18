@@ -1,12 +1,21 @@
 'use client';
 
+import React, { useEffect } from 'react';
 import dark_mode_toggle_styles from '../styles/DarkModeToggle.module.css'
 import { setTheme } from '../lib/theme';
 
 
 export default function DarkModeToggle() {
+  useEffect(() => {
+    document.getElementById('dark-mode-toggle').addEventListener('click', setTheme);
+
+    return () => {
+      document.getElementById('dark-mode-toggle').removeEventListener('click', setTheme);
+    }
+  }, []);
+
   return (
-    <div id="dark-mode-toggle" title="Toggle dark/light mode." onClick={ setTheme }>
+    <div id="dark-mode-toggle" title="Toggle dark/light mode.">
       <div className={ dark_mode_toggle_styles.dark_toggle }>
         <svg
           className={ dark_mode_toggle_styles.dark_toggle_moon }

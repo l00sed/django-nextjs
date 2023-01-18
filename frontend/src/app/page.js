@@ -9,7 +9,7 @@ import MenuToggle from '../components/menu_toggle';
 import Footer from '../components/footer';
 import Card from '../components/card';
 /* Lib */
-import { articles } from '../lib/articles';
+import articles from '../lib/articles';
 import { theme } from '../lib/theme';
 
 export default async function Home() {

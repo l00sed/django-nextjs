@@ -1,5 +1,3 @@
-'use client';
-
 /* Date utils */
 import dateformat     from 'dateformat';
 
@@ -16,6 +14,7 @@ import rehypeAutolinkHeadings     from 'rehype-autolink-headings';
 import rehypeExternalLinks        from 'rehype-external-links';
 import rehypeInferReadingTimeMeta from 'rehype-infer-reading-time-meta';
 import rehypePrism                from 'rehype-prism-plus';
+
 /* Local Utils */
 import remarkCodeTitles           from '../utils/code_titles';
 

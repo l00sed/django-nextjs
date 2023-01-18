@@ -1,4 +1,4 @@
-export async function articles() {
+export default async function articles() {
   const options_get = {
     method: "GET",
     supportHeaderParams: true,
@@ -12,10 +12,15 @@ export async function articles() {
     }
   }
 
-  const articles = await fetch( `${process.env.NEXT_PUBLIC_BASE_URL}/articles`, options_get )
-    .then(response => response.json())
-    .then(data => data)
-    .catch(error => console.warn(error));
+  const articles_promise = await fetch( `${process.env.NEXT_PUBLIC_BASE_URL}/articles`, options_get );
 
-  return articles;
+  let articles_json = {};
+
+  if (articles_promise.ok) {
+    articles_json = await articles_promise.json();
+  } else {
+    console.log( 'Could not retrieve articles data from API.' );
+  }
+
+  return articles_json;
 }

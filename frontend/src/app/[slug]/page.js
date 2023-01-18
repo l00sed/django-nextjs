@@ -16,7 +16,7 @@ import Footer from '../../components/footer'
 import { theme } from '../../lib/theme';
 
 /* Default /[slug] page is a "Blog" page */
-export default async function BlogPage({ params }) {
+export default function BlogPage({ params }) {
   return (
     <>
       <div className={ `${page_styles.next_wrapper} ${theme}` }>

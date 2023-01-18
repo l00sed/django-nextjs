@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react'
 
-const Pre = (props) => {
+export default function Pre (props) {
   const textInput = useRef(null)
   const [hovered, setHovered] = useState(false)
   const [copied, setCopied] = useState(false)
@@ -66,9 +66,7 @@ const Pre = (props) => {
         </button>
       )}
 
-      {props.children}
+      { props.children }
     </div>
   )
 }
-
-export default Pre

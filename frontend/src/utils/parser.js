@@ -1,6 +1,6 @@
-import Parser from 'html-react-parser'
+import parse from 'html-react-parser'
 
 export default function Parse(input) {      // Code syntax highlighting
-  const result = Parser( input );
+  const result = parse( input );
   return result;
 }
