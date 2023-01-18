@@ -107,10 +107,12 @@ async function getData( slug ) {
           target: '_blank',
           rel: ['nofollow']
         }],
+        /*
         [rehypeInferReadingTimeMeta, {
           age: [14, 45], // Meta data to associate appropriate age range
           mainSelector: 'main'
         }],
+        */
         [rehypeToc, {
           headings: ["h3"],
           cssClasses: {
