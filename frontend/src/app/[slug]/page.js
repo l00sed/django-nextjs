@@ -19,7 +19,7 @@ import { theme } from '../../lib/theme';
 export default function BlogPage({ params }) {
   return (
     <>
-      <div className={ `${page_styles.next_wrapper} ${theme()}` }>
+      <div className={ page_styles.next_wrapper }>
         <MenuOverlay />
         <MenuToggle />
         <div className={ page_styles.main_wrapper }>
@@ -32,3 +32,4 @@ export default function BlogPage({ params }) {
     </>
   )
 }
+

@@ -17,8 +17,5 @@ export default function Mdx ({ content }) {
   /* Grab components for MDX */
   const components = { Image, Link, Pre, OneColumn, TwoColumn }
 
-  console.log('mdx content');
-  console.log(content);
-
   return <MDXRemote { ...content } components={ components } />
 }

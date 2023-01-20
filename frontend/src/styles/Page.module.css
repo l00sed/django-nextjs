@@ -31,33 +31,3 @@
   display: flex;
 }
 
-/* # Table of Contents */
-.article_outline {
-  background-color: var(--loosed-white);
-  background-image: var(--toc-border);
-  border-radius: 7.5px;
-  max-width: max(200px, 40%);
-  margin: 0 auto 3em auto;
-}
-.article_sub_heading {
-  color: var(--main-text-color);
-}
-.article_outline::before {
-  display: block;
-  text-align: center;
-  content: "Table of Contents";
-  font-size: var(--normal);
-  font-weight: bold;
-  padding: 0.5em 0 0.25em 0;
-  background-color: var(--toc-background);
-  border-radius: 7.5px 7.5px 0 0;
-  height: 100%;
-}
-.article_outline ol {
-  font-size: var(--small);
-  line-height: 180%;
-  margin-top: 1em;
-  margin-bottom: 0;
-  padding: 0 1.25em 0.75em 3.25em;
-}
-

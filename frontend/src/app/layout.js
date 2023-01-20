@@ -1,15 +1,19 @@
-import React from 'react'
+import React from 'react';
 /* Local Styles */
-import '../styles/globals.css'
+import '../styles/globals.css';
 /* Head Component */
-import Head from './head'
+import Head from './head';
+/* Theme */
+import { theme } from '../lib/theme';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <Head />
       <body>
-        { children }
+        <div id="theme-root" className={ theme() }>
+          { children }
+        </div>
       </body>
     </html>
   )

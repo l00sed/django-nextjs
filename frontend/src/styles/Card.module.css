@@ -42,7 +42,7 @@
   display: block;
   border-radius: var(--card-radius);
   background-color: var(--card-hover-background);
-  box-shadow: 0 0 4px 1px var(--card-shadow);
+  box-shadow: 0 0 8px 1px var(--card-shadow);
   transition: all var(--loosed-transition-medm) ease;
   opacity: 0;
 }

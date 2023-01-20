@@ -112,6 +112,25 @@
   stroke: var(--loosed-black);
 }
 
+.link {
+  height: 24px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.link p,
+.link svg {
+  line-height: 24px;
+  display: inline-flex;
+  vertical-align: middle;
+}
+.link svg {
+  padding: 0.25em;
+  fill: var(--footer-icon);
+  margin-left: 0.5em;
+}
+
+
 @media screen and (max-width: 767px) {
   .link,
   .webring {

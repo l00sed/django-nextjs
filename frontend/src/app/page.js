@@ -14,10 +14,9 @@ import { theme } from '../lib/theme';
 
 export default async function Home() {
   const data = await articles();
-  const currentTheme = theme();
 
   return (
-    <div id='theme-root' className={ `${page_styles.next_wrapper} ${styles.homepage} ${currentTheme}` }>
+    <div className={ `${page_styles.next_wrapper} ${styles.homepage}` }>
       <MenuOverlay />
       <MenuToggle />
       <Title />

@@ -3,6 +3,7 @@ import dateformat     from 'dateformat';
 
 /* Styles */
 import page_styles    from '../styles/Page.module.css';
+import toc_styles     from '../styles/Toc.module.css';
 import article_styles from '../styles/Article.module.css';
 import comment_styles from '../styles/Comment.module.css';
 
@@ -26,12 +27,6 @@ export default async function Article ( props ) {
   /* Get article content and its meta */
   const { meta, content } = await getData( props.slug );
 
-  console.log('meta');
-  console.log(meta);
-
-  console.log('article content');
-  console.log(content);
-
   return (
     <>
       <div className={ article_styles.main_wrapper }>
@@ -46,6 +41,13 @@ export default async function Article ( props ) {
             </div>
             <div className={ article_styles.article__body }>
               <div className={ article_styles.article__description }>
+                <input type="checkbox" id="toc" className={ toc_styles.toc__hidden } />
+                <label for="toc" className={ toc_styles.toc__header }>
+                  <h4 className={ toc_styles.toc__label }>Table of Contents</h4>
+                  <svg className={ toc_styles.toc__caret } width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 4L13 10L7 16" stroke-width="3" stroke-linecap="round"/>
+                  </svg>
+                </label>
                 <Mdx content={ content } />
               </div>
             </div>
@@ -117,9 +119,9 @@ async function getData( slug ) {
           headings: ["h3"],
           cssClasses: {
             // Automatically generate ToC
-            toc: page_styles.article_outline,
+            toc: toc_styles.toc__block,
             // Build links to h3 headings only
-            link: page_styles.article_sub_heading
+            link: toc_styles.toc__sub_heading
           }
         }],
         [rehypePrism, {
@@ -131,12 +133,6 @@ async function getData( slug ) {
     },
     parseFrontmatter: false
   });
-
-  console.log('meta');
-  console.log(meta);
-
-  console.log('content');
-  console.log(content);
 
   return {
     meta,

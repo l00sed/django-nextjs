@@ -43,14 +43,10 @@ export default async function ArticlePage({ params }) {
   const staticData = await getStatic({ params });
   /* Separate out static data */
   const meta = staticData.props.meta;
-  console.log('Meta:');
-  console.log(meta);
   const content = staticData.props.content;
-  console.log('Content:');
-  console.log(content);
   /* Get Comments */
   const comments = await hydrateComments({ params });
-
+  /* Setup components to pass to MDXRemote */
   const components = { Image, Link, Pre, OneColumn, TwoColumn }
 
   return (
@@ -88,7 +84,6 @@ export async function getStatic({ params }) {
   let json = {}
   if (article.ok) {
     json = await article.json();
-    console.log(json);
   } else {
     console.error('Failed to load article data from the backend API.');
   }
@@ -140,9 +135,6 @@ export async function getStatic({ params }) {
     },
     parseFrontmatter: false,
   });
-
-  console.log( 'Content' );
-  console.log( content );
 
   return {
     props: {

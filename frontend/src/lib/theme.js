@@ -7,13 +7,11 @@ const cookies = new Cookies();
 export const theme = () => {
   let defaultTheme = 'default';
   let currentTheme = cookies.get('theme');
-  if (currentTheme == null) {
+  if (currentTheme === undefined) {
     currentTheme = defaultTheme;
     cookies.set('theme', currentTheme, { path: '/' });
-    return currentTheme;
-  } else {
-    return currentTheme;
   }
+  return currentTheme;
 }
 
 /* Set the theme */

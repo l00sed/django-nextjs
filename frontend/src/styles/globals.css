@@ -68,7 +68,7 @@
   --loosed-transition-slow: 500ms;
   --loosed-transition-slower: 800ms;
 /* ## Fonts */
-  --small: 0.8em;
+  --small: 0.9em;
   --normal: 1em;
   --medium: 1.25em;
   --medium-large: 1.5em;
@@ -81,9 +81,8 @@
  * -------------------------------- */
 .default {
 /* ## Table of Contents */
-  --toc-background: rgba(0,0,0,0.05);
+  --toc-bg: rgba(0,0,0,0.05);
   --toc-shadow: rgba(0,0,0,0.5);
-  --toc-border: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='8' ry='8' stroke='%23000' stroke-width='1' stroke-dasharray='3%2c5' stroke-dashoffset='40' stroke-linecap='round'/%3e%3c/svg%3e");
 
 /* ## article.js */
   --link-underline: rgba(0,0,0,0.5);
@@ -95,9 +94,9 @@
   --input-outline: rgba(0,0,0,0.5);
 
 /* ## card.js */
-  --card-shadow: rgba(0,0,0,0.15);
+  --card-shadow: rgba(0,0,0,0.25);
   --card-hover-background: rgba(0,0,0,0.05);
-  --card-active: rgba(0,0,0,0.5);
+  --card-active: rgba(0,0,0,0.35);
 
 /* ## menu_toggle.js */
   --menu-toggle-background: rgba(0,0,0,0.2);
@@ -125,6 +124,7 @@
   --scroll-top-button: rgba(255,255,255,0.4);
   --scroll-top-hover: rgba(0,0,0,0.8);
   --scroll-top-active: rgba(255,255,255,0.3);
+  --footer-icon: var(--loosed-highlight-1);
 
 /* ## donate.js */
   --donate-menu-background-color: rgba(255,255,255,0.9);
@@ -142,12 +142,11 @@
  * ---------------------------------- */
 .dark {
 /* ## Table of Contents */
-  --toc-background: rgba(255,255,255,0.05);
+  --toc-bg: rgba(255,255,255,0.04);
   --toc-shadow: rgba(255,255,255,0.5);
-  --toc-border: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='8' ry='8' stroke='%23eee' stroke-width='1' stroke-dasharray='3%2c5' stroke-dashoffset='40' stroke-linecap='round'/%3e%3c/svg%3e");
 
 /* ## Global Color Palette */
-  --loosed-white: #1b1b1b;
+  --loosed-white: #191919;
   --loosed-black: #f3f3f3;
   --main-text-color: #e0e0e0;
 
@@ -161,9 +160,9 @@
   --input-outline: rgba(255,255,255,0.75);
 
 /* ## card.js */
-  --card-shadow: rgba(255,255,255,0.15);
-  --card-hover-background: rgba(255,255,255,0.1);
-  --card-active: rgba(255,255,255,0.5);
+  --card-shadow: rgba(0,0,0,0.45);
+  --card-hover-background: rgba(255,255,255,0.05);
+  --card-active: rgba(0,0,0,1);
 
 /* ## menu_toggle.js */
   --menu-toggle-background: rgba(255,255,255,0.2);
@@ -188,9 +187,10 @@
   --webring-top-border: rgba(255,255,255,0.5);
   --webring-center-border: rgba(255,255,255,0.2);
   --webring-background: rgba(255,255,255,0.05);
-  --scroll-top-button: rgba(0,0,0,0.35);
+  --scroll-top-button: rgba(0,0,0,0.15);
   --scroll-top-hover: rgba(255,255,255,0.7);
   --scroll-top-active: rgba(0,0,0,0.8);
+  --footer-icon: rgba(210,210,210,1);
 
 /* ## donate.js */
   --donate-menu-background-color: rgba(0,0,0,0.85);
