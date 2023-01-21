@@ -1,0 +1,26 @@
+.image__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.caption {
+  color: var(--loosed-highlight-1);
+  font-size: 85%;
+  text-indent: 15px;
+  margin: 0 auto 2em auto;
+  line-height: 1.5;
+}
+
+.caption::before {
+  border: 2px var(--loosed-highlight-1);
+  border-style: none none solid solid;
+  border-width: 0 0 1px 2px;
+  content: "";
+  height: 8px;
+  top: -5px;
+  left: -13px;
+  display: inline-block;
+  padding: 0 15px 0 35px;
+  position: relative;
+  border-image: linear-gradient(to right, var(--loosed-black), var(--loosed-highlight-1)) 1;
+}

@@ -13,10 +13,13 @@ class Article(models.Model):
     description = models.CharField(max_length=1024)
     slug = models.SlugField(max_length=255)
     likes = models.IntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=False)
+    updated_at = models.DateTimeField(auto_now=False)
     featured_image = models.ImageField(
-        upload_to=get_upload_path, height_field=None, width_field=None)
+        upload_to=get_upload_path,
+        height_field=None,
+        width_field=None
+    )
     image_alt = models.CharField(max_length=200)
     content = models.TextField()
 

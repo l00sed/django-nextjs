@@ -2,7 +2,6 @@
 import dateformat     from 'dateformat';
 
 /* Styles */
-import page_styles    from '../styles/Page.module.css';
 import toc_styles     from '../styles/Toc.module.css';
 import article_styles from '../styles/Article.module.css';
 import comment_styles from '../styles/Comment.module.css';
@@ -13,7 +12,7 @@ import rehypeToc                  from '@jsdevtools/rehype-toc';
 import rehypeSlug                 from 'rehype-slug';
 import rehypeAutolinkHeadings     from 'rehype-autolink-headings';
 import rehypeExternalLinks        from 'rehype-external-links';
-import rehypeInferReadingTimeMeta from 'rehype-infer-reading-time-meta';
+//import rehypeInferReadingTimeMeta from 'rehype-infer-reading-time-meta';
 import rehypePrism                from 'rehype-prism-plus';
 
 /* Local Utils */
@@ -45,7 +44,7 @@ export default async function Article ( props ) {
                 <label for="toc" className={ toc_styles.toc__header }>
                   <h4 className={ toc_styles.toc__label }>Table of Contents</h4>
                   <svg className={ toc_styles.toc__caret } width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 4L13 10L7 16" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M7 4L13 10L7 16" strokeWidth="3" strokeLinecap="round"/>
                   </svg>
                 </label>
                 <Mdx content={ content } />
