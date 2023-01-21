@@ -44,14 +44,15 @@
   background-color: var(--card-hover-background);
   box-shadow: 0 0 8px 1px var(--card-shadow);
   transition: all var(--loosed-transition-medm) ease;
-  opacity: 0;
+  opacity: 0.25;
 }
 
 .card:hover::after {
   opacity: 1;
+  box-shadow: 0 0 15px 1px var(--card-shadow);
 }
 .card:active::after {
-  box-shadow: 0 0 8px 1px var(--card-active);
+  box-shadow: 0 0 20px 1px var(--card-active);
   opacity: 1;
 }
 
@@ -71,6 +72,12 @@
 
 .card__thumbnail {
   border-radius: calc(var(--card-radius) - 2px) calc(var(--card-radius) - 2px) 0 0;
+  height: auto;
+  object-fit: cover;
+  filter: saturate(0.5);
+}
+.card:hover .card__thumbnail {
+  filter: saturate(1);
 }
 
 .card__author,

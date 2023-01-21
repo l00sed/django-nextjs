@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
-const intercept = require("intercept-stdout")
+const intercept = require('intercept-stdout')
+const path = require('path');
 
 // safely ignore recoil stdout warning messages
 // https://github.com/facebookexperimental/Recoil/issues/733#issuecomment-925072943
@@ -18,6 +19,9 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     appDir: true,
+  },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
     domains: [

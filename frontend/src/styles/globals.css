@@ -81,8 +81,9 @@
  * -------------------------------- */
 .default {
 /* ## Table of Contents */
-  --toc-bg: rgba(0,0,0,0.05);
+  --toc-bg: rgba(0,0,0,0.025);
   --toc-shadow: rgba(0,0,0,0.5);
+  --toc-hr: rgba(0,0,0,0.075);
 
 /* ## article.js */
   --link-underline: rgba(0,0,0,0.5);
@@ -113,7 +114,7 @@
 /* ## dark_mode_toggle.js */
   --light-display: none;
   --dark-display: flex;
-  --toggle-hover-glow: rgba(0, 30, 80, 80%);
+  --toggle-hover-glow: rgba(50, 50, 150, 80%);
   --normal-background: rgba(0,155,255,0.2);
   --hover-background: rgba(0,155,255,0.4);
 
@@ -144,6 +145,7 @@
 /* ## Table of Contents */
   --toc-bg: rgba(255,255,255,0.04);
   --toc-shadow: rgba(255,255,255,0.5);
+  --toc-hr: rgba(255,255,255,0.05);
 
 /* ## Global Color Palette */
   --loosed-white: #191919;
@@ -160,13 +162,13 @@
   --input-outline: rgba(255,255,255,0.75);
 
 /* ## card.js */
-  --card-shadow: rgba(0,0,0,0.45);
+  --card-shadow: rgba(0,0,0,0.75);
   --card-hover-background: rgba(255,255,255,0.05);
   --card-active: rgba(0,0,0,1);
 
 /* ## menu_toggle.js */
   --menu-toggle-background: rgba(255,255,255,0.2);
-  --menu-toggle-box-shadow: rgba(200,30,40,0.5);
+  --menu-toggle-box-shadow: rgba(200,30,40,0.35);
   --menu-border: rgba(255,255,255,0.7);
   --menu-hover-border: rgba(255,255,255,0.8);
 
