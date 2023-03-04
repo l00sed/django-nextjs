@@ -2,7 +2,6 @@ import Comment from '../components/comment'
 
 let index = 0;
 let reply_level = 0;
-let processed_comments = [];
 
 const options_get = {
   method: "GET",
@@ -13,9 +12,10 @@ const options_get = {
   },
 }
 
-export function renderComments(comments) {
-  //console.log( 'renderedComments input:' );
-  //console.log( comments );
+export async function renderComments(comments) {
+  console.log( 'renderedComments input:' );
+  console.log( comments );
+
   let rendered_comments = [];
   if (comments && comments !== 'Not found') {
     comments.forEach((processed_comment) => {
@@ -25,49 +25,47 @@ export function renderComments(comments) {
       rendered_comments.push(ready_comment);
     })
   }
-  //console.log( 'rendered_comments' );
-  //console.log( rendered_comments );
+  console.log( 'rendered_comments' );
+  console.log( rendered_comments );
   return rendered_comments;
 }
 
-export async function processComments(comments) { // Accepts array of comment objects
+export async function processComments( parent_comments ) { // Accepts array of comment objects
+  let processed_comments = [];
   // API is set up to returns 'Not found' in python view
-  if (comments && comments !== 'Not found') {
-    console.log('Comments');
-    console.log(comments);
-    for (const comment of comments) {
-      // Append rendered comment component to processed comments array
+  if (parent_comments && parent_comments !== 'Not found') {
+    console.log('Process Comments');
+    console.log(parent_comments);
+    for (let comment of parent_comments) {
+      // Append rendered comment component to processed parent_comments array
       reply_level = 0;
       comment.reply_level = reply_level;
-      console.log('processed_comments');
-      console.log(processed_comments);
-      let already_processed = false;
-      processed_comments.forEach((c) => {
-        if (comment.cid === c.cid) {
-          already_processed = true;
-        }
-      });
-      if (! already_processed) {
+      const replies = await getReplies(comment);
+      console.log('Replies');
+      console.log(replies);
+      if (replies) {
         processed_comments.push(comment);
-        // Get replies to the current comment
-        await getReplies(comment);
+        processed_comments.push(replies);
+      } else {
+        processed_comments.push(comment);
       }
     }
-    //console.log('processed_comments: ');
-    //console.log(processed_comments);
+
+    console.log('processed_comments: ');
+    console.log(processed_comments);
     return processed_comments;
   }
 }
 
 export async function getReplies(comment) {
-  console.log('Current comment');
+  console.log('Current comment being processed for replies:');
   console.log(comment);
   if (comment.pid !== 0) {
     const comments = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/pid/${comment.cid}`, options_get);
     let json = {}
     if (comments.ok) {
-      json = comments.json();
-      console.log('getReplies:');
+      json = await comments.json();
+      console.log('Replies for the currently processed comment:');
       console.log(json);
       if (json !== 'Not found') {
         index++;
@@ -81,7 +79,6 @@ export async function getReplies(comment) {
     index++;
     return;
   }
-
 }
 
 export async function processReplies(data) {

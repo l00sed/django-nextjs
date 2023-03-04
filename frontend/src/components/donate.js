@@ -49,14 +49,22 @@ export default function Donate() {
     }
 
     return () => {
-      document.getElementById('donate').removeEventListener('click', toggleOverlay);
-      document.getElementById('donate').removeEventListener('keydown', toggleOverlay);
-      document.getElementById('donate-overlay').removeEventListener('click', toggleOverlay);
-      document.getElementById('donate-overlay').removeEventListener('keydown', toggleOverlay);
-      document.getElementById('ETH').removeEventListener('click', copyETH);
-      document.getElementById('ETH').removeEventListener('keydown', copyETH);
-      document.getElementById('BTC').removeEventListener('click', copyBTC);
-      document.getElementById('BTC').removeEventListener('keydown', copyBTC);
+      if (document.getElementById('donate')) {
+        document.getElementById('donate').removeEventListener('click', toggleOverlay);
+        document.getElementById('donate').removeEventListener('keydown', toggleOverlay);
+      }
+      if (document.getElementById('donate-overlay')) {
+        document.getElementById('donate-overlay').removeEventListener('click', toggleOverlay);
+        document.getElementById('donate-overlay').removeEventListener('keydown', toggleOverlay);
+      }
+      if (document.getElementById('ETH')) {
+        document.getElementById('ETH').removeEventListener('click', copyETH);
+        document.getElementById('ETH').removeEventListener('keydown', copyETH);
+      }
+      if (document.getElementById('BTC')) {
+        document.getElementById('BTC').removeEventListener('click', copyBTC);
+        document.getElementById('BTC').removeEventListener('keydown', copyBTC);
+      }
     }
   }, []);
 

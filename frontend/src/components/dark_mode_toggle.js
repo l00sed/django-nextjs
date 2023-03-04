@@ -10,7 +10,9 @@ export default function DarkModeToggle() {
     document.getElementById('dark-mode-toggle').addEventListener('click', setTheme);
 
     return () => {
-      document.getElementById('dark-mode-toggle').removeEventListener('click', setTheme);
+      if (document.getElementById('dark-mode-toggle')) {
+        document.getElementById('dark-mode-toggle').removeEventListener('click', setTheme);
+      }
     }
   }, []);
 

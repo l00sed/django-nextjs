@@ -1,10 +1,14 @@
 'use client'
 
-import Link from 'next/link'
+/* React */
 import React, { useState } from 'react'
+/* Next */
+import Link from 'next/link'
+/* Local utils */
 import useConstructor from '../utils/constructor'
 import Parse from '../utils/parser.js'
 import sanitize from '../utils/sanitize'
+/* Styles */
 import comment_styles from '../styles/Comment.module.css'
 
 String.prototype.replaceArray = function(find, replace) {
@@ -42,7 +46,7 @@ export default function Comment(props) {
     let urls = getUrlsFromString( post );
     let blur = '';
     if (approved !== 1) {
-      blur = ' class="blur"';
+      blur = ' className="blur"';
     }
     let processed_urls = [];
     if ( urls !== false ) {
@@ -52,7 +56,7 @@ export default function Comment(props) {
       urls.forEach(function( url ) {
         let extension = urlExt(url) ?? false;
         if (imgExt.includes(extension)) {
-          processed_urls.push(`<div${blur}><img src="${url}" class="lazyload commentImage" /></div>`);
+          processed_urls.push(`<div${blur}><img src="${url}" className="lazyload commentImage" /></div>`);
         } else {
           const abbreviated_url = abbvUrl( url );
           processed_urls.push(abbreviated_url);

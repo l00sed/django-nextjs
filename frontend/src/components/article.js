@@ -18,8 +18,8 @@ import rehypePrism                from 'rehype-prism-plus';
 /* Local Utils */
 import remarkCodeTitles           from '../utils/code_titles';
 
-import Mdx from './mdx';
-//import Comments from '../components/comments';
+import Mdx      from './mdx';
+//import Comments from './comments';
 
 
 export default async function Article ( props ) {
@@ -41,7 +41,7 @@ export default async function Article ( props ) {
             <div className={ article_styles.article__body }>
               <div className={ article_styles.article__description }>
                 <input type="checkbox" id="toc" className={ toc_styles.toc__hidden } />
-                <label for="toc" className={ toc_styles.toc__header }>
+                <label htmlFor="toc" className={ toc_styles.toc__header }>
                   <h4 className={ toc_styles.toc__label }>Table of Contents</h4>
                   <svg className={ toc_styles.toc__caret } width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7 4L13 10L7 16" strokeWidth="3" strokeLinecap="round"/>
@@ -54,7 +54,7 @@ export default async function Article ( props ) {
         </main>
         <aside>
           <div className={ comment_styles.comments_section }>
-            {/* <Comments meta={ meta } /> */}
+            {/* <Comments slug={ props.slug } meta={ meta } /> */}
           </div>
         </aside>
       </div>
