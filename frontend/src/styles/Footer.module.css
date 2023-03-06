@@ -117,7 +117,9 @@
   margin-bottom: 15px;
   display: block;
 }
-
+.link p {
+  color: var(--footer-icon);
+}
 .link p,
 .link svg {
   line-height: 24px;
@@ -127,8 +129,11 @@
 .link svg {
   padding: 0.25em;
   fill: var(--footer-icon);
-  margin-left: 0.5em;
-  margin-bottom: 2px;
+  margin-right: 0.5em;
+}
+
+.link:hover svg {
+  fill: var(--loosed-highlight-1);
 }
 
 

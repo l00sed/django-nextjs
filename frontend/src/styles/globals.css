@@ -95,8 +95,8 @@
   --input-outline: rgba(0,0,0,0.5);
 
 /* ## card.js */
-  --card-shadow: rgba(0,0,0,0.25);
-  --card-hover-background: rgba(0,0,0,0.05);
+  --card-shadow: rgba(0,0,0,0.5);
+  --card-hover-background: rgba(0,0,0,0.15);
   --card-active: rgba(0,0,0,0.35);
 
 /* ## menu_toggle.js */
@@ -125,7 +125,7 @@
   --scroll-top-button: rgba(255,255,255,0.4);
   --scroll-top-hover: rgba(0,0,0,0.8);
   --scroll-top-active: rgba(255,255,255,0.3);
-  --footer-icon: var(--loosed-highlight-1);
+  --footer-icon: var(--loosed-black);
 
 /* ## donate.js */
   --donate-menu-background-color: rgba(255,255,255,0.9);
@@ -163,7 +163,7 @@
 
 /* ## card.js */
   --card-shadow: rgba(0,0,0,0.75);
-  --card-hover-background: rgba(255,255,255,0.05);
+  --card-hover-background: rgba(255,255,255,0.15);
   --card-active: rgba(0,0,0,1);
 
 /* ## menu_toggle.js */
@@ -192,7 +192,7 @@
   --scroll-top-button: rgba(0,0,0,0.15);
   --scroll-top-hover: rgba(255,255,255,0.7);
   --scroll-top-active: rgba(0,0,0,0.8);
-  --footer-icon: rgba(210,210,210,1);
+  --footer-icon: var(--loosed-black);
 
 /* ## donate.js */
   --donate-menu-background-color: rgba(0,0,0,0.85);

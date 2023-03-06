@@ -1,12 +1,7 @@
-.menu_overlay:not(.open) {
-  display: none !important;
-}
-
 .menu_overlay {
   --menu-border-radius: 10px;
   --menu-item-hover-background: var(--loosed-black);
   --menu-item-hover-color: var(--loosed-white);
-
   display: flex;
   position: fixed;
   width: 100vw;
@@ -17,6 +12,13 @@
   backdrop-filter: blur(7px);
   transition: all var(--loosed-transition-slow) ease;
   opacity: 1;
+}
+
+.menu_checkbox:checked ~ .menu_overlay {
+  display: flex;
+}
+.menu_checkbox:not(:checked) + .menu_overlay {
+  display: none;
 }
 
 .menu_text {

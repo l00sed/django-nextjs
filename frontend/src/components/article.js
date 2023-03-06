@@ -12,15 +12,22 @@ import rehypeToc                  from '@jsdevtools/rehype-toc';
 import rehypeSlug                 from 'rehype-slug';
 import rehypeAutolinkHeadings     from 'rehype-autolink-headings';
 import rehypeExternalLinks        from 'rehype-external-links';
-//import rehypeInferReadingTimeMeta from 'rehype-infer-reading-time-meta';
 import rehypePrism                from 'rehype-prism-plus';
 
 /* Local Utils */
 import remarkCodeTitles           from '../utils/code_titles';
 
-import Mdx      from './mdx';
+import Mdx from './mdx';
 //import Comments from './comments';
 
+
+const datePublished = (meta) => {
+  let date = "";
+  if (meta.updated_at) {
+    date = dateformat( new Date(meta.updated_at), "h:MMtt | mmmm, dS yyyy").toString();
+  }
+  return date;
+}
 
 export default async function Article ( props ) {
   /* Get article content and its meta */
@@ -34,19 +41,12 @@ export default async function Article ( props ) {
             <div className={ article_styles.article__head }>
               <h2 className={ article_styles.article__title }>{ meta.title }</h2>
               <div className={ article_styles.article__meta }>
-                <span className={ article_styles.article__date }>{ dateformat( new Date(meta.updated_at), "h:MMtt | mmmm, dS yyyy") }</span>
+                <span className={ article_styles.article__date }>{ datePublished(meta) }</span>
                 <span className={ article_styles.article__author }>{ meta.author }</span>
               </div>
             </div>
             <div className={ article_styles.article__body }>
               <div className={ article_styles.article__description }>
-                <input type="checkbox" id="toc" className={ toc_styles.toc__hidden } />
-                <label htmlFor="toc" className={ toc_styles.toc__header }>
-                  <h4 className={ toc_styles.toc__label }>Table of Contents</h4>
-                  <svg className={ toc_styles.toc__caret } width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 4L13 10L7 16" strokeWidth="3" strokeLinecap="round"/>
-                  </svg>
-                </label>
                 <Mdx content={ content } />
               </div>
             </div>
@@ -108,12 +108,6 @@ async function getData( slug ) {
           target: '_blank',
           rel: ['nofollow']
         }],
-        /*
-        [rehypeInferReadingTimeMeta, {
-          age: [14, 45], // Meta data to associate appropriate age range
-          mainSelector: 'main'
-        }],
-        */
         [rehypeToc, {
           headings: ["h3"],
           cssClasses: {
@@ -121,7 +115,76 @@ async function getData( slug ) {
             toc: toc_styles.toc__block,
             // Build links to h3 headings only
             link: toc_styles.toc__sub_heading
-          }
+          },
+          customizeTOC: (toc) => {
+            try {
+              const childrenOfChildren = toc?.children[0]?.children;
+              if (!childrenOfChildren?.length) return null;
+            } catch (e) {}
+
+            return {
+              type: "element",
+              tagName: "div",
+              children: [
+                {
+                  type: "element",
+                  tagName: "input",
+                  properties: {
+                    id: "toc",
+                    type: "checkbox",
+                    className: toc_styles.toc__hidden,
+                  },
+                },
+                {
+                  type: "element",
+                  tagName: "label",
+                  properties: {
+                    htmlFor: "toc",
+                    className: toc_styles.toc__header,
+                  },
+                  children: [
+                    {
+                      type: "element",
+                      tagName: "h4",
+                      properties: {
+                        className: toc_styles.toc__label,
+                      },
+                      children: [
+                        {
+                          type: "text",
+                          value: "Table of Contents",
+                        },
+                      ],
+                    },
+                    {
+                      type: "element",
+                      tagName: "svg",
+                      properties: {
+                        className: toc_styles.toc__caret,
+                        width: "20",
+                        height: "20",
+                        viewBox: "0 0 20 20",
+                        fill: "none",
+                        xmlns: "http://www.w3.org/2000/svg",
+                      },
+                      children: [
+                        {
+                          type: "element",
+                          tagName: "path",
+                          properties: {
+                            d: "M7 4L13 10L7 16",
+                            strokeWidth: "3",
+                            strokeLinecap: "round",
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                },
+                toc,
+              ],
+            }
+          },
         }],
         [rehypePrism, {
           showLineNumbers: true // Show line numbers in syntax-highlighted code blocks

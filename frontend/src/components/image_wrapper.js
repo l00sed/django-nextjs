@@ -21,7 +21,7 @@ export function Caption({ alt, width, caption }) {
   if (caption && alt !== undefined) {
     return (
       <>
-        <span className={ image_styles.caption } style={{ maxWidth: width + 'px' }}>{ alt }</span>
+        <span className={ image_styles.caption } style={{ width: `${width}px`, maxWidth: `min(${width}px, 100%)` }}>{ alt }</span>
       </>
     )
   } else {

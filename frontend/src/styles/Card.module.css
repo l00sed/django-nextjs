@@ -48,8 +48,8 @@
 }
 
 .card:hover::after {
-  opacity: 1;
-  box-shadow: 0 0 15px 1px var(--card-shadow);
+  opacity: 0.5;
+  box-shadow: 0 0 10px 1px var(--card-shadow);
 }
 .card:active::after {
   box-shadow: 0 0 20px 1px var(--card-active);

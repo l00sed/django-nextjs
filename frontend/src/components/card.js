@@ -1,9 +1,9 @@
-import React from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-import Parse from '../utils/parser'
-import styles from '../styles/Card.module.css'
-import dateformat from 'dateformat'
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import Parse from '../utils/parser';
+import styles from '../styles/Card.module.css';
+import dateformat from 'dateformat';
 
 export default function Card({ element, index }) {
   const above_the_fold = 3;
