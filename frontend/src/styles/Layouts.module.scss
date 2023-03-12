@@ -12,6 +12,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  flex-flow: wrap;
 }
 @media screen and (max-width: 959px) {
   .two_column {

@@ -3,6 +3,18 @@
   flex-direction: column;
 }
 
+.image__wrapper img {
+  border-radius: 5px;
+}
+
+.image__wrapper img,
+.image__wrapper iframe {
+  max-width: 100%;
+  height: auto;
+  margin: 2em auto 0.5em auto;
+  display: flex;
+}
+
 .caption {
   color: var(--loosed-highlight-1);
   font-size: 85%;

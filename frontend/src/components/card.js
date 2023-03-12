@@ -23,8 +23,45 @@ export default function Card({ element, index }) {
     return false;
   }
 
+  const parsed_url = (slug) => {
+    const re = new RegExp("^https?://");
+    const found = re.exec(slug);
+    if (found) {
+      return slug;
+    } else {
+      return `/${slug}`;
+    }
+  }
+
+  const new_window = (slug) => {
+    const re = new RegExp("^https?://");
+    const found = re.exec(slug);
+    if (found) {
+      return "_blank";
+    } else {
+      return "";
+    }
+  }
+
+  const parsed_date = (date) => {
+    let d = new Date(date);
+    if (Object.prototype.toString.call(d) === "[object Date]") {
+      if (isNaN(d)) { // d.getTime() or d.valueOf() will also work
+        return date;
+      } else {
+        if (dateformat(d, "h:MMTT") === "12:00AM") {
+          return dateformat(d, "mmmm yyyy");
+        } else {
+          return dateformat(d, "mmmm, dS yyyy | h:MMTT");
+        }
+      }
+    } else {
+      return date;
+    }
+  }
+
   return (
-    (<Link key={ element.id } href={ `/${element.slug}` }>
+    (<Link key={ element.id } href={ parsed_url(element.slug) } target={ new_window(element.slug) }>
       <div className={ styles.card }>
         <div className={ styles.card__thumbnail_wrapper }>
           <Image
@@ -43,7 +80,7 @@ export default function Card({ element, index }) {
         <div className={ styles.card__head }>
           <h2 className={ styles.card__title }>{ element.title }</h2>
           <div className={ styles.card__meta }>
-            <span className={ styles.card__date }>{ dateformat( new Date(element.updated_at), "h:MMTT | mmmm, dS yyyy") }</span>
+            <span className={ styles.card__date }>{ parsed_date(element.updated_at) }</span>
             <span className={ styles.card__author }>{ element.author }</span>
           </div>
         </div>

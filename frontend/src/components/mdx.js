@@ -11,11 +11,12 @@ import Pre          from './pre';
 import OneColumn    from './one_column';
 import TwoColumn    from './two_column';
 import ImageWrapper from './image_wrapper';
+import Card         from './card';
 
 
 export default function Mdx ({ content }) {
   /* Grab components for MDX */
-  const components = { ImageWrapper, Link, Pre, OneColumn, TwoColumn }
+  const components = { Card, ImageWrapper, Link, Pre, OneColumn, TwoColumn }
 
   return <MDXRemote { ...content } components={ components } />
 }
