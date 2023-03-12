@@ -2,9 +2,9 @@
 import dateformat     from 'dateformat';
 
 /* Styles */
-import toc_styles     from '../styles/Toc.module.css';
-import article_styles from '../styles/Article.module.css';
-import comment_styles from '../styles/Comment.module.css';
+import toc_styles     from '../styles/Toc.module.scss';
+import article_styles from '../styles/Article.module.scss';
+import comment_styles from '../styles/Comment.module.scss';
 
 /* MDX / Remark / Rehype */
 import { serialize }              from 'next-mdx-remote/serialize';

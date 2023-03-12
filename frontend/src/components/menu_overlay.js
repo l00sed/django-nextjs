@@ -3,7 +3,7 @@
 /* Next Link */
 import Link from 'next/link'
 /* Styles */
-import menu_overlay_styles from '../styles/MenuOverlay.module.css'
+import menu_overlay_styles from '../styles/MenuOverlay.module.scss'
 /* Dark Mode */
 import DarkModeToggle from './dark_mode_toggle'
 
@@ -24,6 +24,7 @@ export default function MenuOverlay() {
           <Link href="https://dato.work" target="_blank" legacyBehavior><p>Portfolio</p></Link>
           <Link href="mailto:dan@l-o-o-s-e-d.net" target="_blank" legacyBehavior><p>Contact</p></Link>
         </div>
+        <label htmlFor="menu-overlay-input" className={ menu_overlay_styles.close_area } />
       </div>
     </>
   );

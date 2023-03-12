@@ -1,6 +1,6 @@
 /* Styles */
-import styles from '../styles/Home.module.css';
-import page_styles from '../styles/Page.module.css';
+import styles from '../styles/Home.module.scss';
+import page_styles from '../styles/Page.module.scss';
 /* Components */
 import Title from '../components/title';
 import Donate from '../components/donate';

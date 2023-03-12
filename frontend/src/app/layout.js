@@ -1,6 +1,6 @@
 import React from 'react';
 /* Local Styles */
-import '../styles/globals.css';
+import '../styles/globals.scss';
 /* Head Component */
 import Head from './head';
 /* Theme */

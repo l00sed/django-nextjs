@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import donate_styles from '../styles/Donate.module.css';
+import donate_styles from '../styles/Donate.module.scss';
 
 export default function Donate() {
   useEffect(() => {

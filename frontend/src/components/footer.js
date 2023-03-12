@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from 'react'
-import footer_styles from '../styles/Footer.module.css'
+import footer_styles from '../styles/Footer.module.scss'
 
 export default function Footer() {
   const scrollToTop = () => {

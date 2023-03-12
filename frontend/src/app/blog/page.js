@@ -12,7 +12,7 @@ import rehypeToc from '@jsdevtools/rehype-toc'
 import rehypeInferReadingTimeMeta from 'rehype-infer-reading-time-meta'
 import rehypePrism from 'rehype-prism-plus'
 /* Page-level styles */
-import page_styles from '../../styles/Page.module.css'
+import page_styles from '../../styles/Page.module.scss'
 import { processComments } from '../../utils/comment_helpers'
 /* Next Components */
 import Image from 'next/image'

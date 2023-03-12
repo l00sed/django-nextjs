@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import image_styles from '../styles/ImageWrapper.module.css';
+import image_styles from '../styles/ImageWrapper.module.scss';
 
 export default function ImageWrapper({ src, alt, width, height, caption=true }) {
   return (

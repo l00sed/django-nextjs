@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import menu_toggle_styles from '../styles/MenuToggle.module.css';
+import menu_toggle_styles from '../styles/MenuToggle.module.scss';
 
 export default function MenuToggle() {
   useEffect(() => {

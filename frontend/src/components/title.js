@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react'
 import Link from 'next/link'
-import styles from '../styles/Title.module.css'
+import styles from '../styles/Title.module.scss'
 
 export default function Title() {
   useEffect(() => {

@@ -1,4 +1,4 @@
-import styles from '../styles/Layouts.module.css'
+import styles from '../styles/Layouts.module.scss'
 
 export default function TwoColumn( props ) {
   return (

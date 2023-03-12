@@ -2,7 +2,7 @@
 import React from 'react'
 
 /* Styles */
-import page_styles from '../../styles/Page.module.css'
+import page_styles from '../../styles/Page.module.scss'
 
 /* Local Components */
 import MenuOverlay from '../../components/menu_overlay'

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import dark_mode_toggle_styles from '../styles/DarkModeToggle.module.css'
+import dark_mode_toggle_styles from '../styles/DarkModeToggle.module.scss'
 import { setTheme } from '../lib/theme';
 
 
@@ -17,7 +17,7 @@ export default function DarkModeToggle() {
   }, []);
 
   return (
-    <div id="dark-mode-toggle" title="Toggle dark/light mode.">
+    <div id="dark-mode-toggle" title="Toggle dark/light mode." className={ dark_mode_toggle_styles.toggle_wrapper }>
       <div className={ dark_mode_toggle_styles.dark_toggle }>
         <svg
           className={ dark_mode_toggle_styles.dark_toggle_moon }
@@ -116,5 +116,4 @@ export default function DarkModeToggle() {
       </div>
     </div>
   )
-
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Parse from '../utils/parser';
-import styles from '../styles/Card.module.css';
+import styles from '../styles/Card.module.scss';
 import dateformat from 'dateformat';
 
 export default function Card({ element, index }) {
