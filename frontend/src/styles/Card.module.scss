@@ -23,7 +23,6 @@
   --card-radius: 10px;
   border-radius: var(--card-radius);
   width: min(300px, 100vw);
-  margin-bottom: 2em;
   position: relative;
   display: inline-block;
   transition: all var(--loosed-transition-medm) ease;
@@ -80,6 +79,10 @@
   filter: saturate(1);
 }
 
+.card__meta {
+  line-height: 1.5;
+}
+
 .card__author,
 .card__date {
   font-size: var(--small);
@@ -109,10 +112,21 @@
   bottom: 1em;
 }
 
+.card__cropped {
+  max-height: none;
+  margin-bottom: 5px;
+}
+
+.card__cropped:before {
+  display: none;
+}
+
 .card__head {
   padding: 1em;
 }
 .card__head h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
   border-bottom: 1px solid var(--loosed-black);
   padding-bottom: 0.25em;
 }

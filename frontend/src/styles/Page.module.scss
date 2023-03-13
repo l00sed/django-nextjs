@@ -19,6 +19,6 @@
 /* # Main Wrapper */
 .main_wrapper {
   padding: 0 2em;
-  max-width: 1400px;
+  max-width: var(--page-max-width);
   margin: 0 auto;
 }

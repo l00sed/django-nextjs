@@ -1,0 +1,16 @@
+/* # Scrollbar ----------------------------- */
+.code_wrapper {
+  position: relative;
+  margin-bottom: 1em;
+
+  pre::-webkit-scrollbar,
+  pre::-webkit-scrollbar-track {
+    background-color: var(--scroll-background);
+    border-radius: 0 0 7.5px 7.5px;
+    height: 5px;
+  }
+  pre::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-handle);
+    border-radius: 7.5px;
+  }
+}

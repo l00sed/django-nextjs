@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react'
+import styles from '../styles/Pre.module.scss';
 
 export default function Pre (props) {
   const textInput = useRef(null)
@@ -23,7 +24,7 @@ export default function Pre (props) {
   }
 
   return (
-    <div ref={textInput} onMouseEnter={onEnter} onMouseLeave={onExit} className="relative">
+    <div ref={textInput} onMouseEnter={onEnter} onMouseLeave={onExit} className={ styles.code_wrapper }>
       {/*hovered && (*/
         (
         <button

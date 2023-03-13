@@ -1,0 +1,36 @@
+.horizontal_scroller {
+  display: inline-flex;
+  justify-content: center;
+  border-width: 0 2px;
+  border-color: var(--scroll-area-border);
+  border-style: solid;
+  width: 100%;
+  margin: 1em auto 2em auto;
+
+  .scroller_container {
+    display: inline-flex;
+    overflow-x: auto;
+    padding: 2em;
+    column-gap: 1.5em;
+  }
+
+  & ::-webkit-scrollbar,
+  & ::-webkit-scrollbar-track,
+  & ::-webkit-scrollbar-thumb {
+    border-radius: 0;
+  }
+
+  & ::-webkit-scrollbar-track {
+    background: transparent;
+    padding: 1em;
+  }
+
+  & ::-webkit-scrollbar {
+    background: rgba(0,0,0,0.15);
+    height: 10px;
+  }
+
+  & ::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.45);
+  }
+}

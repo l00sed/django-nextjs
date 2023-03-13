@@ -37,7 +37,7 @@ export default function DarkModeToggle() {
 						<filter id="filter1_f_2_2" x="29.4999" y="15.5002" width="76.0001" height="91.9996" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
 							<feFlood floodOpacity="0" result="BackgroundImageFix"/>
 							<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-							<feGaussianBlur stdDeviation="2" result="effect1_foregroundBlur_2_2"/>
+							<feGaussianBlur stdDeviation="1" result="effect1_foregroundBlur_2_2"/>
 						</filter>
 					</defs>
 				</svg>

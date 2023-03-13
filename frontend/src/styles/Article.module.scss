@@ -14,9 +14,6 @@
   /*column-gap: 2em;*/
 }
 .main {
-  width: 66%;
-  min-width: 66%;
-  max-width: 66%;
   margin-bottom: 3em;
   overflow-x: hidden;
   line-height: 160%;
@@ -42,8 +39,8 @@
 .main_wrapper p a:hover,
 .main_wrapper p a:focus {
   font-weight: bold;
-  --offset: 1px;
-  text-decoration-color: var(--link-underline);
+  --offset: 2px;
+  text-decoration-color: var(--loosed-highlight-1);
 }
 
 .main_wrapper a[rel="nofollow"]::after,
@@ -60,8 +57,7 @@
 .main h3 {
   font-size: var(--large);
   line-height: 1.2em;
-  margin-top: 2em;
-  margin-bottom: 1.75em;
+  margin: 1.5em 0;
   position: relative;
 }
 .main h3::after {
@@ -115,5 +111,11 @@
 .article__meta span {
   width: 100%;
   display: block;
-  line-height: 1.25;
+  line-height: 1.5;
+}
+@media (min-width: 768px) {
+  .article__head {
+    width: 66%;
+    margin: 0 auto;
+  }
 }

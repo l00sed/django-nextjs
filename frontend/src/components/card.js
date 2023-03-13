@@ -60,6 +60,16 @@ export default function Card({ element, index }) {
     }
   }
 
+  const parsed_description = (element) => {
+    var classes = styles.card__description;
+    if (element.unbound) {
+      classes += ` ${styles.card__cropped}`;
+    }
+    return (
+      <div className={ classes }>{ Parse(element.description) }</div>
+    )
+  }
+
   return (
     (<Link key={ element.id } href={ parsed_url(element.slug) } target={ new_window(element.slug) }>
       <div className={ styles.card }>
@@ -85,7 +95,7 @@ export default function Card({ element, index }) {
           </div>
         </div>
         <div className={ styles.card__body }>
-          <div className={ styles.card__description }>{ Parse(element.description) }</div>
+          { parsed_description(element) }
         </div>
       </div>
     </Link>)

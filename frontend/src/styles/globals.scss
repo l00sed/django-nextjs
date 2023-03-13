@@ -62,6 +62,8 @@
   --loosed-highlight-1: rgba(235,41,2,0.95);
 
 /* # Other Variables ----------------------- */
+/* ## Page max width */
+  --page-max-width: 1920px;
 /* ## Transition Speeds */
   --loosed-transition-fast: 50ms;
   --loosed-transition-medm: 200ms;
@@ -80,45 +82,42 @@
 /* # Default Theme
  * -------------------------------- */
 .default {
-/* ## Table of Contents */
+  /* ## Table of Contents */
   --toc-bg: rgba(0,0,0,0.025);
   --toc-shadow: rgba(0,0,0,0.5);
   --toc-hr: rgba(0,0,0,0.075);
 
-/* ## article.js */
-  --link-underline: rgba(0,0,0,0.5);
-
-/* ## comment.js */
+  /* ## comment.js */
   --comment-content: rgba(0,0,0,0.02);
   --comment-shadow: rgba(0,0,0,0.15);
   --reply-shadow: rgba(0,0,0,0.1);
   --input-outline: rgba(0,0,0,0.5);
 
-/* ## card.js */
+  /* ## card.js */
   --card-shadow: rgba(0,0,0,0.5);
   --card-hover-background: rgba(0,0,0,0.15);
   --card-active: rgba(0,0,0,0.35);
 
-/* ## menu_toggle.js */
+  /* ## menu_toggle.js */
   --menu-toggle-background: rgba(0,0,0,0.2);
   --menu-toggle-box-shadow: rgba(0,0,0,0.4);
   --menu-border: rgba(0,0,0,0.7);
   --menu-hover-border: rgba(0,0,0,0.8);
 
-/* ## menu_overlay.js */
+  /* ## menu_overlay.js */
   --overlay-background-color: rgba(255,255,255,0.4);
   --menu-box-shadow: rgba(0,0,0,0.1);
   --menu-background-color: rgba(255,255,255,0.85);
   --button-box-shadow: rgba(0,0,0,0.7);
 
-/* ## dark_mode_toggle.js */
+  /* ## dark_mode_toggle.js */
   --light-display: none;
   --dark-display: flex;
   --toggle-hover-glow: rgba(50, 50, 150, 80%);
   --normal-background: rgba(0,155,255,0.2);
   --hover-background: rgba(0,155,255,0.4);
 
-/* ## footer.js */
+  /* ## footer.js */
   --webring-background: rgba(0,0,0,0.05);
   --webring-top-border: rgba(0,0,0,0.4);
   --webring-center-border: rgba(0,0,0,0.2);
@@ -127,65 +126,69 @@
   --scroll-top-active: rgba(255,255,255,0.3);
   --footer-icon: var(--loosed-black);
 
-/* ## donate.js */
+  /* ## donate.js */
   --donate-menu-background-color: rgba(255,255,255,0.9);
   --donate-button-box-shadow: rgba(255,255,255,0.8);
 
-/* ## pre.js */
+  /* ## pre.js */
   --code-filter: invert(0.95);
   --copy-button-svg: rgba(0,0,0,0.2);
   --copy-button-background: rgba(0,0,0,0.01);
   --copy-button-hover: rgba(0,0,0,0.05);
   --copy-button-hover-color: rgba(0,0,0,0.6);
+
+  /* ## scrollbar */
+  --scroll-handle: rgba(255,255,255,0.25);
+  --scroll-background: rgba(0,0,0,0);
+
+  /* ## horizontal_scroller.js */
+  --scroll-area-border: rgba(0,0,0,0.1);
 }
 
 /* # Dark Theme
  * ---------------------------------- */
 .dark {
-/* ## Table of Contents */
+  /* ## Table of Contents */
   --toc-bg: rgba(255,255,255,0.04);
   --toc-shadow: rgba(255,255,255,0.5);
   --toc-hr: rgba(255,255,255,0.05);
 
-/* ## Global Color Palette */
+  /* ## Global Color Palette */
   --loosed-white: #191919;
   --loosed-black: #f3f3f3;
   --main-text-color: #e0e0e0;
 
-/* ## article.js */
-  --link-underline: rgba(255,255,255,0.35);
-
-/* ## comments.js */
+  /* ## comments.js */
   --comment-content: rgba(255,255,255,0.05);
   --comment-shadow: rgba(255,255,255,0.2);
   --reply-shadow: rgba(255,255,255,0.2);
   --input-outline: rgba(255,255,255,0.75);
 
-/* ## card.js */
+  /* ## card.js */
   --card-shadow: rgba(0,0,0,0.75);
   --card-hover-background: rgba(255,255,255,0.15);
   --card-active: rgba(0,0,0,1);
 
-/* ## menu_toggle.js */
+  /* ## menu_toggle.js */
   --menu-toggle-background: rgba(255,255,255,0.2);
   --menu-toggle-box-shadow: rgba(200,30,40,0.35);
   --menu-border: rgba(255,255,255,0.7);
   --menu-hover-border: rgba(255,255,255,0.8);
 
-/* ## menu_overlay.js */
+  /* ## menu_overlay.js */
   --overlay-background-color: rgba(0,0,0,0.5);
   --menu-background-color: rgba(0,0,0,0.85);
   --menu-box-shadow: rgba(255,255,255,0.1);
   --button-box-shadow: rgba(255,255,255,0.3);
 
-/* ## dark_mode_toggle */
+  /* ## dark_mode_toggle */
   --light-display: flex;
   --dark-display: none;
   --toggle-hover-glow: rgba(80, 50, 0, 90%);
   --normal-background: rgba(255,185,0,0.1);
   --hover-background: rgba(255,185,0,0.2);
 
-/* ## footer.js */
+  /* ## footer.js */
   --webring-top-border: rgba(255,255,255,0.5);
   --webring-center-border: rgba(255,255,255,0.2);
   --webring-background: rgba(255,255,255,0.05);
@@ -194,16 +197,25 @@
   --scroll-top-active: rgba(0,0,0,0.8);
   --footer-icon: var(--loosed-black);
 
-/* ## donate.js */
+  /* ## donate.js */
   --donate-menu-background-color: rgba(0,0,0,0.85);
   --donate-button-box-shadow: rgba(0,0,0,1);
 
-/* ## pre.js */
+  /* ## pre.js */
 	--code-filter: none;
   --copy-button-svg: rgba(255,255,255,0.2);
   --copy-button-background: rgba(255,255,255,0.05);
   --copy-button-hover: rgba(255,255,255,0.06);
   --copy-button-hover-color: rgba(255,255,255,0.4);
+
+  /* ## scrollbar */
+  --scroll-handle: rgba(255,255,255,0.2);
+  --scroll-background: rgba(255,255,255,0);
+
+  /* ## horizontal_scroller.js */
+  --scroll-area-scrollbar: rgba(255,255,255,0.25);
+  --scroll-area-thumb: rgba(255,255,255,0.25);
+  --scroll-area-border: rgba(255,255,255,0.25);
 }
 
 
@@ -233,14 +245,15 @@ h6 {
 }
 h1,
 h2 {
-  font-family: 'Shrikhand', 'Arial', sans-serif;
-  margin: 0 auto 5px auto;
+  font-family: 'Shrikhand', 'Helvetica', 'Arial', sans-serif;
+  margin: 0 auto 0.25em auto;
   font-weight: 400;
+  letter-spacing: 0.5px;
 }
 
 h2 {
   font-size: 1.5em;
-  line-height: 1.25em;
+  line-height: 1em;
 }
 
 /* # Horizontal Rule */
@@ -304,17 +317,5 @@ textarea {
 /* # Box-Sizing */
 * {
   box-sizing: border-box;
-}
-
-/* # Scrollbar ----------------------------- */
-pre::-webkit-scrollbar,
-pre::-webkit-scrollbar-track {
-  background-color: transparent;
-  border-radius: 0 0 7.5px 7.5px;
-  height: 5px;
-}
-pre::-webkit-scrollbar-thumb {
-  background-color: rgba(255,255,255,0.2);
-  border-radius: 7.5px;
 }
 
