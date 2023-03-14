@@ -125,6 +125,9 @@ async function getData( slug ) {
             return {
               type: "element",
               tagName: "div",
+              properties: {
+                className: toc_styles.toc__wrapper,
+              },
               children: [
                 {
                   type: "element",

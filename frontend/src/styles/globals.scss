@@ -137,11 +137,9 @@
   --copy-button-hover: rgba(0,0,0,0.05);
   --copy-button-hover-color: rgba(0,0,0,0.6);
 
-  /* ## scrollbar */
-  --scroll-handle: rgba(255,255,255,0.25);
-  --scroll-background: rgba(0,0,0,0);
-
   /* ## horizontal_scroller.js */
+  --scrollbar-color: rgba(0,0,0,0.05);
+  --scrollbar-thumb: rgba(0,0,0,0.3);
   --scroll-area-border: rgba(0,0,0,0.1);
 }
 
@@ -213,9 +211,9 @@
   --scroll-background: rgba(255,255,255,0);
 
   /* ## horizontal_scroller.js */
-  --scroll-area-scrollbar: rgba(255,255,255,0.25);
-  --scroll-area-thumb: rgba(255,255,255,0.25);
-  --scroll-area-border: rgba(255,255,255,0.25);
+  --scrollbar-color: rgba(255,255,255,0.15);
+  --scrollbar-thumb: rgba(255,255,255,0.35);
+  --scroll-area-border: rgba(255,255,255,0.15);
 }
 
 
