@@ -1,4 +1,10 @@
 /* #* Table of Contents */
+@media (min-width: 768px) {
+  .toc__wrapper {
+    width: 66%;
+    margin: 0 auto;
+  }
+}
 .toc__wrapper {
   padding: 0 2em;
 }

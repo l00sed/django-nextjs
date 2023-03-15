@@ -17,24 +17,24 @@
 }
 
 .caption {
-  color: var(--loosed-highlight-1);
+  color: var(--caption-leader);
   font-size: 85%;
   text-indent: 15px;
   text-align: left;
-  margin: 0 auto 2em auto;
+  margin: 0.5em auto 0 auto;
   line-height: 1.5;
 }
 
 .caption::before {
-  border: 2px var(--loosed-highlight-1);
+  border: 2px var(--caption-leader);
   border-style: none none solid solid;
-  border-width: 0 0 1px 3px;
+  border-width: 0 0 1px 2px;
   content: "";
-  height: 8px;
-  top: -3.5px;
+  height: 5px;
+  top: -4px;
   left: -13px;
   display: inline-block;
-  padding: 0 15px 0 35px;
+  padding: 0 0 0 50px;
   position: relative;
-  border-image: linear-gradient(to right, var(--loosed-black), var(--loosed-highlight-1)) 1;
+  border-image: linear-gradient(90deg, var(--loosed-highlight-1), var(--caption-leader)) 1;
 }

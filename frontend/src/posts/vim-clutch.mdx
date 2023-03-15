@@ -7,14 +7,14 @@ It was this mass of tangled brains in my own dome that compelled me to purchase 
 
 <TwoColumn>
     <ImageWrapper
+      alt="Picture of pedal assembly on it's face with the bottom up. Getting ready to unscrew the clamshell housing with a screwdriver."
       src="/assets/img/articles/vim-clutch/screwdriver-thumbnail.jpg"
-      alt="Picture of pedal assembly on it's face with a screwdriver in a screw-hole."
       width={ 500 }
       height={ 889 }
     />
     <ImageWrapper
+      alt='The foot pedal has a wide, center pedal (with an embossed "PLAY"). Two, thinner pedals on either side read "REW" and "FWD", respectively. All 3 switches are really clicky.'
       src="/assets/img/articles/vim-clutch/pedal_clicks.gif"
-      alt="Animated picture of pedal right-side up, clicking in and out with my finger."
       width={ 300 }
       height={ 334 }
     />
@@ -196,6 +196,7 @@ You'd engage the center pedal for normal playback, step on the left pedal to rew
 
 <OneColumn>
   <ImageWrapper
+    alt='This Dictaphone model was one of several other models that were indistinguishable from the one I snagged at Goodwill. It was a range of about $30-$90, and some of the pedals terminated in a USB connector rather than a telephone jack.'
     src='/assets/img/articles/vim-clutch/amazon_dictaphone.jpg'
     width={ 860 }
     height={ 405 }
@@ -208,6 +209,7 @@ There were two metal weights affixed to the bottom-half of the clamshell. They k
 
 <OneColumn>
   <ImageWrapper
+    alt="I wasn't really sure how I would convert switch presses to keypresses... but this was a good look at the pedal guts. There's a slightly thicker red wire that loops the current into all three switches. Each independent switch completes or closes it's own isolated loop through another wire (going out to the telephone jack). This was good news to me. It meant that each switch can be tracked separately, and the pedal could probably do combination presses."
     src='/assets/img/articles/vim-clutch/pedal_guts-thumbnail.jpg'
     width={ 500 }
     height={ 281 }
@@ -228,7 +230,8 @@ Bottomline, the Pi 0 gives you a lot of flexibility in an exceptionally tiny for
 
 <OneColumn>
   <ImageWrapper
-    src='/assets/img/articles/vim-clutch/rpi0_schematic-thumbnail.jpg'
+    alt="The Raspberry Pi 3 measures about the same as the model 4, on a 85 x 56mm PCB. The Pi 0 (and Zero W, wireless, model), has a 65 x 30mm footprint. I haven't gotten my hands on the smallest Raspberry Pi, the Pico— which measures only 51 x 20mm and is supposed to cost $4."
+    src='/assets/img/articles/vim-clutch/rpi0_schematic.jpg'
     width={ 616 }
     height={ 346 }
   />
@@ -250,6 +253,81 @@ sudo apt-get install rpi-imager
 ```
 </Pre>
 
+The RPi Imager has become incredibly easy to use and gives you a nice pre-populated catalog of compatible OS's. I was able to quickly flash "Raspberry Pi OS Lite" after selecting it from a menu of recommended options. I used an 8GB micro-SD card (probably overkill for this project).
+
+<OneColumn>
+  <ImageWrapper
+    alt='The Raspberry Pi Imager has releases for multiple platforms. The interface is really simple. Just click "Raspberry Pi OS" and select the "Lite" image. Then select your SD card and write the image to the card.'
+    src='/assets/img/articles/vim-clutch/RaspberryPiImager.jpg'
+    width={ 741 }
+    height={ 478 }
+  />
+</OneColumn>
+
+After flashing the SD card, it'll prompt you to eject it. I just pop it out and back in. You'll probably see two things: `rootfs` and `boot`. The next step is to open boot, then edit `config.txt`.
+
+At the bottom of `config.txt`, add a new line:
+
+<Pre>
+```bash:config.txt
+dtoverlay=dwc2
+```
+</Pre>
+
+Next, you have to edit the `cmdline.txt` file. As Andrew pointed out in his [gist](https://gist.github.com/gbaman/975e2db164b3ca2b51ae11e45e8fd40a#file-howtootgfast-md), each parameter is separated by a single space (no new lines). In here, you will insert the following after "rootwait":
+
+<Pre>
+```bash:cmdline.txt
+modules-load=dwc2,g_ether
+```
+</Pre>
+
+After this, you should be able to plug in the Raspberry Pi 0 with a micro-USB cable (making sure to use the port that isn't the power port) and SSH into `pi@raspberrypi.local` as a USB Ethernet gadget. I managed to get this "working" in a hacky sort of way (helped along by this [blog post](https://shallowsky.com/blog/linux/raspberry-pi-ethernet-gadget.html)), but ultimately removed the "g_ether" option and configured the Pi to SSH over my local WiFi instead.
+
+Maybe one day I'll get it to work on the first try. [Configuring the Pi to connect to the Wi-Fi network](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md) is a perfectly acceptable alternative solution. On a running Pi, you would use `sudo raspi-config` to configure Wi-Fi and other important options— like language and locale.
+
+Alternatively, you can create a file on the micro SD card called `wpa_supplicant.conf`:
+
+<Pre>
+```bash
+sudo vim /etc/wpa_supplicant/wpa_supplicant.conf
+```
+</Pre>
+
+In this file, include the 2-letter ISO code for your country as well as the SSID and password of your network.
+
+<Pre>
+```bash:wp_supplicant.conf
+country=US
+network={
+   ssid="Chance the Router"
+   psk="CocoabutterKisses"
+}
+```
+</Pre>
+
+If you have other Raspberry Pi computers on the network, I recommend you turn them off or disconnect them temporarily (unless they have a different host name). I had a Pi 4 that was already broadcasting as `raspberrypi.local` and it was another stick in the spokes. I've since set the newly-connected Pi's hostname as `vimclutch.local`.
+
+One last recommendation (just to make your life easier)— don't go crazy with the password. I had a whacky password with a double-quote or something stupid, and I'm still convinced it was the culprit after going down yet another debugging rabbit-hole.
+
+### Software
+
+One last excuse to use the Pi (rather than an Arduino, for example) was that it gave me a chance to try out some of the GPIO Python libraries. The one I ended up importing is [gpiozero](https://gpiozero.readthedocs.io/en/stable/).
+
+This library provides a ton of convenient features around the "Button" object. A gpiozero "Button" is instantiated with the GPIO pin number— for example, `pedal = Button(2)`. It accepts a few other parameters that will dictate the Button's attributes and behavior.
+
+You can then use methods like: `pedal.is_pressed`, `pedal.is_held`, `pedal.when_released`, and much more. Have a look at the [Button-specific documentation](https://gpiozero.readthedocs.io/en/stable/api_input.html?highlight=Button#gpiozero.Button) for a full list of capabilities.
+
+<OneColumn>
+  <ImageWrapper
+    alt='After setting up a breadboard, I wired up a basic circuit with another switch I had on-hand. Messed around with the gpiozero Python library for a bit (it is awesome). Finally managed to get everything setup so that a button press would print "Hello World".'
+    src='/assets/img/articles/vim-clutch/hello_world_scrot.jpg'
+    width={ 927 }
+    height={ 521 }
+  />
+</OneColumn>
+
+Setting a `Button()` lets the script detect that the 5V boolean "high" signal "is_pressed", or "is_released". Now we have to turn that "high" or "low" into keypresses. The script below opens the Pi as a _human interface device_ (HID) that sends emulated keypresses (as structs) to the computer the Pi is plugged into.
 
 <Pre>
 ```py:keypress.py
@@ -262,6 +340,14 @@ def press(char):
     sleep(0.005)
 ```
 </Pre>
+
+The _struct_ library interprets Python bytes as packed binary data. The weird "BBBBL" pattern is just dictating 4 unsigned chars (BBBB) followed by one unsigned long (L) integer. The code is bummed a little further than some other examples I've found (mostly using Python's `write_report` function. I ripped it from a rather cool presentation, [One Device to PWN Them All](/assets/files/articles/vim-clutch/upenn_philpolstra_1d2PWNta.pdf).
+
+The gist of the function above is that we're able to build the unreadable keypress signals (one long string of bytes) by referencing the readable character (i.e., the letter "o" or "i") in a lookup table. The lookup table packs the bytes for that key and its modifier (i.e., "Shift" or "Ctrl") into the longer struct. If there's someone smart reading this article, they can please explain this better.
+
+As far as how those binary bits are actually interpretted as keypresses, I'm not sure how that works…
+
+Before this script will work, we need the Pi to say, "hello, I am a keyboard", whenever it's plugged into another computer via USB. I put a link to the blog post with the relevant script (as well as a few other useful links) in the footer to this project's [GitHub README](https://github.com/l00sed/vim-clutch.git). Here it is below as well:
 
 <Pre>
 ```bash:/usr/bin/vimclutch_usb
@@ -289,4 +375,49 @@ ln -s functions/hid.usb0 configs/c.1/# End functions
 ls /sys/class/udc > UDC
 ```
 </Pre>
+
+Save this script to `/usr/bin/vimclutch_usb` on the Raspberry Pi Zero (or give it another name). It also needs to be made executable:
+
+<Pre>
+```bash
+chmod +x /usr/bin/vimclutch_usb
+```
+</Pre>
+
+Then put a line in `/etc/rc.local` (before the `exit 0` line) that will allow the script to be automatically run, setting up the Pi as a USB keyboard:
+
+<Pre>
+```bash:/etc/rc.local
+/usr/bin/vimclutch_usb
+```
+</Pre>
+
+### Soldering
+
+The fettuccine cable running out the back of the pedal was removed. I severed the leads from the switches, and soldered them directly to the GPIO pins (2, 3, and 26) of the Pi. I also soldered the thicker red wire to the Pi's 5V out, and closed the other end of the loop to ground. Depressing any of the three switches now closes the circuit with its specific GPIO pin.
+
+<OneColumn>
+  <ImageWrapper
+    alt="Soldered the connections directly to the Pi Zero's GPIO pins— plus two more wires, one to 5V and one to ground. Not very pretty, but I got the job done."
+    src='/assets/img/articles/vim-clutch/pi_in_a_pedal-thumbnail.jpg'
+    width={ 600 }
+    height={ 338 }
+  />
+</OneColumn>
+
+To keep the Pi firmly in place, I drilled some holes through the base of the pedal and mounted the corners of the board to two standoffs. The single USB cable connects to the side of the Pi and exits out the same hole in the back— protected by a rubber grommet.
+
+I've been using the pedal to code for about a month now, and it really is a lot of fun. It took some getting used to at first, but after a couple days practice it's easy to build up the muscle memory. It also incentivized me to learn about the different ways to enter INSERT mode— I had no idea about _SHIFT+a_ until I looked it up for this project!
+
+Unfortunately (after a couple weeks of usage) the main center pedal's switch started to get a bit funky… might just be a bad solder joint; but hopefully the switch isn't faulty. Luckily I could just SSH into the pedal and swap out the keys. I still have the right and left working swimmingly.
+
+<OneColumn>
+    <iframe width="498" height="315" src="https://www.youtube.com/embed/9JegZhkDhrw" title="Vim Clutch Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</OneColumn>
+
+### Conclusion
+
+This has been an enlightening project. I think it's given me a lot of useful knowledge that I will carry forward in my future projects. Excited to be doing more with electronics and linking physical interactions with digital events and vice versa.
+
+Until then, thank you so much for taking a minute to share my excitement over this project. Like I said earlier, if you've made a Vim Clutch, or another bonkers HID, please share a link in the comments! Happy coding.
 </ProseWrapper>

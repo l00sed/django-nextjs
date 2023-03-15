@@ -1,6 +1,7 @@
 .horizontal_scroller {
   display: inline-flex;
   justify-content: center;
+  background-color: var(--scroll-area-background);
   border-width: 0 1px;
   border-color: var(--scroll-area-border);
   border-style: solid;
