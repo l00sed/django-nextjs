@@ -125,10 +125,11 @@
   padding: 1em;
 }
 .card__head h2 {
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 800;
-  border-bottom: 1px solid var(--loosed-black);
+  margin: 0 0 0.25em 0 !important;
   padding-bottom: 0.25em;
+}
+.card__head h2::after {
+  top: 0.25em !important;
 }
 
 .card__body {

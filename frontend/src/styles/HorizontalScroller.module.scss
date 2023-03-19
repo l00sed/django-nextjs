@@ -19,7 +19,6 @@
 
   & ::-webkit-scrollbar-track {
     background: transparent;
-    margin: 2em;
   }
 
   & ::-webkit-scrollbar {
@@ -29,6 +28,5 @@
 
   & ::-webkit-scrollbar-thumb {
     background: var(--scrollbar-thumb);
-    border-radius: 10px;
   }
 }

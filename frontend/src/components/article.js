@@ -40,7 +40,7 @@ export default async function Article ( props ) {
         <main className={ article_styles.main }>
           <div className={ article_styles.article_wrapper }>
             <div className={ article_styles.article__head }>
-              <h2 className={ article_styles.article__title }>{ meta.title }</h2>
+              <h1 className={ article_styles.article__title }>{ meta.title }</h1>
               <div className={ article_styles.article__meta }>
                 <span className={ article_styles.article__date }>{ datePublished(meta) }</span>
                 <span className={ article_styles.article__author }>{ meta.author }</span>
@@ -111,7 +111,7 @@ async function getData( slug ) {
           rel: ['nofollow']
         }],
         [rehypeToc, {
-          headings: ["h3"],
+          headings: ["h2", "h3"],
           cssClasses: {
             // Automatically generate ToC
             toc: toc_styles.toc__block,

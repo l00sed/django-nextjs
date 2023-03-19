@@ -54,33 +54,29 @@
   top: -4px;
 }
 
-.main h3 {
+.main h2 {
   font-size: var(--large);
   line-height: 1.2em;
   margin: 1.5em 0;
   position: relative;
 }
-.main h3::after {
-  position: absolute;
-  content: "";
-  bottom: -0.75em;
-  left: 0;
-  width: 100px;
-  height: 3px;
-  background-color: var(--loosed-highlight-1);
+
+.main h2:hover a::before {
+  opacity: 1
 }
-.main h3 a {
+.main h2 a {
   color: var(--loosed-black) !important;
 }
-.main h3 a::after {
-  position: relative;
-  content: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 54 54' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19.6355 19.6355L33.4439 33.4439M21.4766 26.0794L26.0794 21.4766C28.6215 18.9346 28.6215 14.8131 26.0794 12.271L18.715 4.90654C16.1729 2.36449 12.0514 2.36449 9.50935 4.90654L4.90654 9.50935C2.36449 12.0514 2.36449 16.1729 4.90654 18.715L12.271 26.0794C14.8131 28.6215 18.9346 28.6215 21.4766 26.0794ZM44.4907 49.0935L49.0935 44.4907C51.6355 41.9486 51.6355 37.8271 49.0935 35.285L41.729 27.9206C39.1869 25.3785 35.0654 25.3785 32.5234 27.9206L27.9206 32.5234C25.3785 35.0654 25.3785 39.1869 27.9206 41.729L35.285 49.0935C37.8271 51.6355 41.9486 51.6355 44.4907 49.0935Z' stroke='%23f85c27' stroke-opacity='0.5' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E%0A");
-  width: 100%;
-  height: 100%;
-  margin-left: 10px;
+.main h2 a::before {
+  position: absolute;
+  opacity: 0.5;
+  content: url("data:image/svg+xml,%3Csvg width='15' height='15' viewBox='0 0 54 54' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19.6355 19.6355L33.4439 33.4439M21.4766 26.0794L26.0794 21.4766C28.6215 18.9346 28.6215 14.8131 26.0794 12.271L18.715 4.90654C16.1729 2.36449 12.0514 2.36449 9.50935 4.90654L4.90654 9.50935C2.36449 12.0514 2.36449 16.1729 4.90654 18.715L12.271 26.0794C14.8131 28.6215 18.9346 28.6215 21.4766 26.0794ZM44.4907 49.0935L49.0935 44.4907C51.6355 41.9486 51.6355 37.8271 49.0935 35.285L41.729 27.9206C39.1869 25.3785 35.0654 25.3785 32.5234 27.9206L27.9206 32.5234C25.3785 35.0654 25.3785 39.1869 27.9206 41.729L35.285 49.0935C37.8271 51.6355 41.9486 51.6355 44.4907 49.0935Z' stroke='%23f85c27' stroke-opacity='1' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E%0A");
+  width: 15px;
+  height: 40px;
   top: -5px;
+  left: -20px;
 }
-.main nav + h3 {
+.main nav + h2 {
   margin-top: 0 !important;
 }
 .aside {

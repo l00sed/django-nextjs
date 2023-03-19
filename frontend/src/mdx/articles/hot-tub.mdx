@@ -1,5 +1,5 @@
 <ProseWrapper>
-### The Splashening
+## The Splashening
 
 You shouldn't be allowed to have nice things when you forget your phone in your swimsuit pocket&mdash; not once, but _twice!_ The first time was a Motorola Razr. I was swimming at my grandma's condo and came out of the pool with a dripping flip phone.
 
@@ -12,7 +12,7 @@ You shouldn't be allowed to have nice things when you forget your phone in your 
   />
 </OneColumn>
 
-### Cell Phones Nostalgia
+## Cell Phones Nostalgia
 
 A couple of my friends' parents worked at Motorola, so somehow I got my hands on a lot of unique devices at an early age. One of my all-time favorites was the Motorola "MOTOROI" XT720, which featured Android 2.0 and a 720MHz mobile processor.
 
@@ -48,7 +48,7 @@ When I first put the SD card into my PC, I was met with a disappointing message 
   />
 </OneColumn>
 
-### Adapter Desperation...
+## Adapter Desperation...
 
 Most people are aware of the fact that formatting removes all the device's data. So, obviously this is _not_ what I was hoping for, but... Thank Poseidon! I tried another MicroSD adapter, and I was able to access files on the card.
 
@@ -56,7 +56,7 @@ I didn't really care about my apps, but I hadn't backed up my photos or videos f
 
 Even though I could see all my photos, almost all of them were corrupt! Reading the files directly from the card revealed horizontal strips and chunks of the image over a pixelated (green?) color. I tried to copy the images to my PC, but everything was trapped on the card.
 
-### Recovery Research
+## Recovery Research
 
 A quick Google search led me to [ddrescue](https://www.gnu.org/software/ddrescue/). While this seems like an incredible recovery tool, it was unable to build a usable image from the SD card... 🤔️
 
@@ -66,7 +66,7 @@ In the past, I'd used [ffmpeg](https://www.ffmpeg.org/) to convert individual st
 
 A post on [StackOverflow](https://stackoverflow.com/questions/45983605/ffmpeg-jpg-frame-capture-how-to-discard-corrupted-frames) gave me what I needed. The user had the "-err_detect aggressive" flag on an rtsp stream in an attempt to clean the incoming live footage.
 
-### FFMpeg Saves the Day!
+## FFMpeg Saves the Day!
 
 Eureka! A simple ffmpeg command using the same error detection flag within the image directory managed to recover every photo into a video file!
 

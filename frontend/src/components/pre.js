@@ -4,9 +4,13 @@ import { useState, useRef } from 'react'
 import styles from '../styles/Pre.module.scss';
 
 export default function Pre (props) {
-  const textInput = useRef(null)
-  const [hovered, setHovered] = useState(false)
-  const [copied, setCopied] = useState(false)
+  const textInput = useRef(null);
+  const [hovered, setHovered] = useState(false);
+  const [copied, setCopied] = useState(false);
+  let copyButton = true;
+  if (props.copyButton === false) {
+    copyButton = false;
+  }
 
   const onEnter = () => {
     setHovered(true)
@@ -31,9 +35,9 @@ export default function Pre (props) {
           aria-label="Copy code"
           type="button"
           className={`code-copy-button ${
-            copied
-              ? 'code-copied'
-              : 'code-uncopied'
+            copied ? 'code-copied' : 'code-uncopied'
+          }${
+            copyButton ? '' : ' hidden'
           }`}
           onClick={onCopy}
         >

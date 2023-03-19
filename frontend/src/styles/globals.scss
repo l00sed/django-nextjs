@@ -132,7 +132,12 @@
 
   /* ## pre.js */
   --code-filter: invert(0.95);
-  --code-highlight: var(--loosed-highlight-1);
+  --code-highlight: rgba(225,155,35,1);
+  --code-highlight-bg: rgba(225,155,35,0.25);
+  --code-inserted: rgba(248,52,155,1);
+  --code-inserted-bg: rgba(248,52,155,0.25);
+  --code-deleted: rgba(92,248,245,1);
+  --code-deleted-bg: rgba(92,248,245,0.35);
   --copy-button-svg: rgba(0,0,0,0.2);
   --copy-button-background: rgba(0,0,0,0.01);
   --copy-button-hover: rgba(0,0,0,0.05);
@@ -144,6 +149,8 @@
   /* ## horizontal_scroller.js */
   --scrollbar-color: rgba(0,0,0,0.05);
   --scrollbar-thumb: rgba(0,0,0,0.3);
+  --scrollbar-pre-color: rgba(255,255,255,0.05);
+  --scrollbar-pre-thumb: rgba(255,255,255,0.35);
   --scroll-area-border: rgba(0,0,0,0.1);
   --scroll-area-background: rgba(255,255,255,0.65);
 
@@ -209,7 +216,12 @@
 
   /* ## pre.js */
 	--code-filter: none;
-  --code-highlight: rgba(7,163,200,1);
+  --code-highlight: rgba(30,100,220,1);
+  --code-highlight-bg: rgba(30,100,220,0.25);
+  --code-inserted: rgba(7,203,100,1);
+  --code-inserted-bg: rgba(7,203,100,0.25);
+  --code-deleted: rgba(163,7,10,1);
+  --code-deleted-bg: rgba(163,7,10,0.35);
   --copy-button-svg: rgba(255,255,255,0.2);
   --copy-button-background: rgba(255,255,255,0.05);
   --copy-button-hover: rgba(255,255,255,0.06);
@@ -221,6 +233,8 @@
   /* ## horizontal_scroller.js */
   --scrollbar-color: rgba(255,255,255,0.05);
   --scrollbar-thumb: rgba(255,255,255,0.35);
+  --scrollbar-pre-color: rgba(255,255,255,0.05);
+  --scrollbar-pre-thumb: rgba(255,255,255,0.35);
   --scroll-area-border: rgba(255,255,255,0.15);
   --scroll-area-background: rgba(0,0,0,0.25);
 
@@ -253,17 +267,28 @@ h5,
 h6 {
   color: var(--loosed-black);
 }
-h1,
-h2 {
+
+h1 {
   font-family: 'Shrikhand', 'Helvetica', 'Arial', sans-serif;
   margin: 0 auto 0.25em auto;
   font-weight: 400;
   letter-spacing: 0.5px;
 }
 
-h2 {
+h1 {
   font-size: 1.5em;
   line-height: 1em;
+}
+
+h2::after {
+  position: relative;
+  display: block;
+  content: "";
+  top: 0.5em;
+  left: 0;
+  width: 100px;
+  height: 3px;
+  background-color: var(--loosed-highlight-1);
 }
 
 /* # Horizontal Rule */
@@ -294,11 +319,24 @@ ul {
 a {
   color: var(--loosed-highlight-1);
   text-decoration: none;
+  overflow-wrap: break-word;
 }
 
 /* # Code */
 pre {
   max-width: 100%;
+}
+.code-line.highlight-line {
+  border-left-color: var(--code-highlight);
+  background-color: var(--code-highlight-bg);
+}
+.code-line.inserted {
+  border-left: 4px solid var(--code-inserted);
+  background-color: var(--code-inserted-bg);
+}
+.code-line.deleted {
+  border-left: 4px solid var(--code-deleted);
+  background-color: var(--code-deleted-bg);
 }
 
 input,
@@ -320,6 +358,18 @@ table {
     border-top: 1px solid var(--table-separator);
   }
 }
+
+
+sup, sub {
+  vertical-align: baseline;
+  position: relative;
+  top: -0.4em;
+}
+
+sub {
+  top: 0.4em;
+}
+
 /* # Toggle Class */
 .hidden {
   display: none !important;
@@ -336,6 +386,16 @@ table {
   margin-left: 60px !important;
 }
 
+/* # Footnotes */
+@media (min-width: 768px) {
+  .footnotes {
+    width: 66%;
+    margin: 0 auto;
+  }
+}
+.footnotes {
+  padding: 0 2em;
+}
 
 /* # Box-Sizing */
 * {

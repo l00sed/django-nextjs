@@ -1,6 +1,12 @@
 /* # One Column */
 .one_column {
   text-align: center;
+
+  iframe,
+  img,
+  video {
+    max-width: 100%;
+  }
 }
 
 /* # Two Column */
@@ -14,6 +20,7 @@
   align-items: center;
   flex-flow: wrap;
 }
+
 @media screen and (max-width: 959px) {
   .two_column {
     flex-direction: column;

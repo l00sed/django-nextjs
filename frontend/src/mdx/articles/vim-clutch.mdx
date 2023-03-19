@@ -1,5 +1,5 @@
 <ProseWrapper>
-### Goodwill Strikes Again
+## Goodwill Strikes Again
 
 A symptom of heavy [Vim](https://www.vim.org) usage is that your brain begins to re-partition old memories for keyboard shortcuts— trashing old brain files for small boosts in finger dexterity.
 
@@ -27,7 +27,7 @@ Traditionally, I've coded with my fingers, and my feet remain flat on the floor.
 
 The serendipity of discovering the pedal among the other assortment of donated goods gave the idea shape.🦆
 
-### What the heck is a Vim Clutch?
+## What the heck is a Vim Clutch?
 
 Sometimes it feels like we're living in the future. A sci-fi fantasy where you can buy electric cars with digital coins and speculate on blockchains founded on memes.
 
@@ -188,7 +188,7 @@ Instead of settling into a cubicle'd menagerie of isolated and burnt-out develop
 
 So that's the "what" and the "why", but before I give you the "how"— If you've made a dope Vim Clutch, and you're not in the list— what gives?? Leave a comment, paste in some links or images. I'll put it in with the others.
 
-### Vim-Clutch Hardware
+## Vim-Clutch Hardware
 
 The Goodwill pedal had about 4-feet of flat, fettuccine-looking cable coming out the back. It terminated in a telephone jack. After a quick Google search, it seemed like the pedal would have been used to control playback on a transcribing machine.
 
@@ -218,7 +218,7 @@ There were two metal weights affixed to the bottom-half of the clamshell. They k
 
 The springs are were also an exciting find. They could probably be swapped out, giving some control over the quality of the pedal's action. After playing with it, I feel like it'd be more comfortable to have a stiffer press. Right now, the weight of my foot is enough to create an accidental key-click.
 
-### A Controller: RPi Zero
+## A Controller: RPi Zero
 
 We'll have to add $10 to our budget. I decided to use the Raspberry Pi 0 for the keypress controller— the thing that'll turn our pedal presses into "i" and "Esc". That's $13 total… still worth it. I had a couple of the Pi 0 [SBCs](https://en.wikipedia.org/wiki/Single-board_computer) lying around from projects past, so it was a convenient option.
 
@@ -243,7 +243,7 @@ The first Pi Zero I bought as a kit with all the silly dongles and adapters to p
 
 A useful, succinct tutorial by [Andrew Mulholland](https://gist.github.com/gbaman/975e2db164b3ca2b51ae11e45e8fd40a#file-howtootgfast-md) provides the basic documentation for setting it up. There's also a good one from [Adafruit](https://learn.adafruit.com/turning-your-raspberry-pi-zero-into-a-usb-gadget/ethernet-gadget) that provides more context for Mac and Windows users. Most people seem to get it working by following those directions, but it always gets a little sticky for me.
 
-### Raspberry Pi OS Config
+## Raspberry Pi OS Config
 
 On Linux (Ubuntu 20.04), I would install the [Raspberry Pi Imager](https://www.raspberrypi.org/software/) with aptitude:
 
@@ -310,7 +310,7 @@ If you have other Raspberry Pi computers on the network, I recommend you turn th
 
 One last recommendation (just to make your life easier)— don't go crazy with the password. I had a whacky password with a double-quote or something stupid, and I'm still convinced it was the culprit after going down yet another debugging rabbit-hole.
 
-### Software
+## Software
 
 One last excuse to use the Pi (rather than an Arduino, for example) was that it gave me a chance to try out some of the GPIO Python libraries. The one I ended up importing is [gpiozero](https://gpiozero.readthedocs.io/en/stable/).
 
@@ -387,15 +387,15 @@ chmod +x /usr/bin/vimclutch_usb
 Then put a line in `/etc/rc.local` (before the `exit 0` line) that will allow the script to be automatically run, setting up the Pi as a USB keyboard:
 
 <Pre>
-```bash:/etc/rc.local {3}
+```diff:/etc/rc.local
 ...
 
-/usr/bin/vimclutch_usb
++ /usr/bin/vimclutch_usb
 exit 0
 ```
 </Pre>
 
-### Soldering
+## Soldering
 
 The fettuccine cable running out the back of the pedal was removed. I severed the leads from the switches, and soldered them directly to the GPIO pins (2, 3, and 26) of the Pi. I also soldered the thicker red wire to the Pi's 5V out, and closed the other end of the loop to ground. Depressing any of the three switches now closes the circuit with its specific GPIO pin.
 
@@ -415,10 +415,10 @@ I've been using the pedal to code for about a month now, and it really is a lot 
 Unfortunately (after a couple weeks of usage) the main center pedal's switch started to get a bit funky… might just be a bad solder joint; but hopefully the switch isn't faulty. Luckily I could just SSH into the pedal and swap out the keys. I still have the right and left working swimmingly.
 
 <OneColumn>
-    <iframe width="498" height="315" src="https://www.youtube.com/embed/9JegZhkDhrw" title="Vim Clutch Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe width="498" height="315" src="https://www.youtube.com/embed/9JegZhkDhrw" title="Vim Clutch Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </OneColumn>
 
-### Conclusion
+## Conclusion
 
 This has been an enlightening project. I think it's given me a lot of useful knowledge that I will carry forward in my future projects. Excited to be doing more with electronics and linking physical interactions with digital events and vice versa.
 
