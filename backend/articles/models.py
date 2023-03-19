@@ -29,6 +29,9 @@ class Article(models.Model):
     def __str__(self):
         return str(self.title)
 
+    def get_absolute_url(self):
+        return f"/{self.slug}"
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import Link from 'next/link';
 import donate_styles from '../styles/Donate.module.scss';
 
 export default function Donate() {
@@ -89,10 +90,10 @@ export default function Donate() {
             <br/>
           </div>
           <div className={ donate_styles.donate_buttons }>
-            <a href="#"><div className={ `${donate_styles.donate_button} ${donate_styles.eth}` } id="ETH">ETH</div></a>
-            <a href="#"><div className={ `${donate_styles.donate_button} ${donate_styles.btc}` } id="BTC">BTC</div></a>
-            <a target="_blank" href="https://venmo.com/dwtompkins" rel="noreferrer"><div className={ `${donate_styles.donate_button} ${donate_styles.venmo}` } id="venmo">Venmo</div></a>
-            <a target="_blank" href="https://paypal.me/danielwtompkins" rel="noreferrer"><div className={ `${donate_styles.donate_button} ${donate_styles.paypal}` } id="paypal">Paypal</div></a>
+            <Link href="#"><div className={ `${donate_styles.donate_button} ${donate_styles.eth}` } id="ETH">ETH</div></Link>
+            <Link href="#"><div className={ `${donate_styles.donate_button} ${donate_styles.btc}` } id="BTC">BTC</div></Link>
+            <Link target="_blank" href="https://venmo.com/dwtompkins" rel="noreferrer"><div className={ `${donate_styles.donate_button} ${donate_styles.venmo}` } id="venmo">Venmo</div></Link>
+            <Link target="_blank" href="https://paypal.me/danielwtompkins" rel="noreferrer"><div className={ `${donate_styles.donate_button} ${donate_styles.paypal}` } id="paypal">Paypal</div></Link>
           </div>
         </div>
       </div>

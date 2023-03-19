@@ -1,3 +1,6 @@
+.wrapper {
+  margin: 3em auto;
+}
 .horizontal_scroller {
   display: inline-flex;
   justify-content: center;
@@ -6,7 +9,6 @@
   border-color: var(--scroll-area-border);
   border-style: solid;
   width: 100%;
-  margin: 1em auto 2em auto;
 
   .scroller_container {
     display: inline-flex;

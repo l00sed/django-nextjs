@@ -11,17 +11,25 @@ export default function ImageWrapper({ src, alt, width, height, caption=true }) 
           width={ width }
           height={ height }
         />
-        <Caption alt={ alt } width={ width } caption={ caption } />
+        <Caption text={ alt } width={ width } visible={ caption } />
       </div>
     </>
   )
 }
 
-export function Caption({ alt, width, caption }) {
-  if (caption && alt !== undefined) {
+export function Caption({ text, width="100%", visible=true }) {
+  if (visible && text !== undefined) {
+    if (/^\d+$/.test(width)) { // Width contains only numbers
+      width += 'px';
+    }
+    let styles = {
+      width: width,
+      maxWidth: `min(${width}, 100%)`,
+    }
+
     return (
       <>
-        <span className={ image_styles.caption } style={{ width: `${width}px`, maxWidth: `min(${width}px, 100%)` }}>{ alt }</span>
+        <span className={ image_styles.caption } style={ styles }>{ text }</span>
       </>
     )
   } else {

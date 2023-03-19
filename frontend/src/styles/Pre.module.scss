@@ -13,4 +13,14 @@
     background-color: var(--scroll-handle);
     border-radius: 7.5px;
   }
+
+  code[class*=language-],
+  pre[class*=language-] {
+    display: block;
+    width: 100%;
+  }
+
+  div[class=highlight-line] {
+    border-left-color: var(--code-highlight);
+  }
 }

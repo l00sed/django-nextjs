@@ -13,6 +13,7 @@ import rehypeSlug                 from 'rehype-slug';
 import rehypeAutolinkHeadings     from 'rehype-autolink-headings';
 import rehypeExternalLinks        from 'rehype-external-links';
 import rehypePrism                from 'rehype-prism-plus';
+import remarkGfm                  from 'remark-gfm';
 
 /* Local Utils */
 import remarkCodeTitles           from '../utils/code_titles';
@@ -96,7 +97,8 @@ async function getData( slug ) {
   const content = await serialize(data_json.content, {
     mdxOptions: {
       remarkPlugins: [
-        remarkCodeTitles // Give code blocks a title
+        remarkCodeTitles, // Give code blocks a title
+        remarkGfm
       ],
       rehypePlugins: [
         rehypeSlug,
@@ -190,7 +192,13 @@ async function getData( slug ) {
           },
         }],
         [rehypePrism, {
-          showLineNumbers: true // Show line numbers in syntax-highlighted code blocks
+          /* Show line numbers in
+           * syntax-highlighted code blocks
+           * with "showLineNumbers" */
+          showLineNumbers: false,
+          ignoreMissing: true,
+          // ```bash:filename.txt {1,4-5} showLineNumbers
+          // ```
         }]
       ],
       format: 'mdx', // MarkdownX

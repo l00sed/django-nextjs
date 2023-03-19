@@ -330,7 +330,7 @@ You can then use methods like: `pedal.is_pressed`, `pedal.is_held`, `pedal.when_
 Setting a `Button()` lets the script detect that the 5V boolean "high" signal "is_pressed", or "is_released". Now we have to turn that "high" or "low" into keypresses. The script below opens the Pi as a _human interface device_ (HID) that sends emulated keypresses (as structs) to the computer the Pi is plugged into.
 
 <Pre>
-```py:keypress.py
+```py:keypress.py showLineNumbers
 def press(char):
   mod,key=hid_codes[char]
   raw=struct.pack("BBBBL", mod, 0x00, key, 0x00, 0x00000000)
@@ -350,7 +350,7 @@ As far as how those binary bits are actually interpretted as keypresses, I'm not
 Before this script will work, we need the Pi to say, "hello, I am a keyboard", whenever it's plugged into another computer via USB. I put a link to the blog post with the relevant script (as well as a few other useful links) in the footer to this project's [GitHub README](https://github.com/l00sed/vim-clutch.git). Here it is below as well:
 
 <Pre>
-```bash:/usr/bin/vimclutch_usb
+```bash:/usr/bin/vimclutch_usb showLineNumbers
 #!/bin/bash
 cd /sys/kernel/config/usb_gadget/
 mkdir -p vimclutch
@@ -387,8 +387,11 @@ chmod +x /usr/bin/vimclutch_usb
 Then put a line in `/etc/rc.local` (before the `exit 0` line) that will allow the script to be automatically run, setting up the Pi as a USB keyboard:
 
 <Pre>
-```bash:/etc/rc.local
+```bash:/etc/rc.local {3}
+...
+
 /usr/bin/vimclutch_usb
+exit 0
 ```
 </Pre>
 

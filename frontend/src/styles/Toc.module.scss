@@ -59,14 +59,14 @@ svg.toc__caret {
   width: 20px;
   position: relative;
   text-align: right;
-  transform: rotate(90deg);
+  transform: rotate(0deg);
   display: inline-block;
   transition: transform ease 250ms;
   stroke: var(--loosed-black);
 }
 
 input.toc__hidden:checked + label.toc__header svg.toc__caret {
-  transform: rotate(270deg);
+  transform: rotate(90deg);
 }
 
 nav.toc__block {

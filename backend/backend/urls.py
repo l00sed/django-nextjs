@@ -14,14 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
-from rest_framework import permissions
 from django.conf.urls.static import static
 from django.conf import settings
+
+from rest_framework import permissions
+
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-import articles
-import comments
+
+from .sitemap import sitemaps
+# import articles
+# import comments
 
 
 schema_view = get_schema_view(
@@ -44,6 +49,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('articles.urls')),
     path('api/', include('comments.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap')
 ]
 
 if settings.DEBUG:
