@@ -5,7 +5,16 @@ from .models import Article, Subscriber
 
 
 class ArticleModelAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'created_at', 'updated_at')
+    list_display = (
+        'id',
+        'title',
+        'slug',
+        'description',
+        'created_at',
+        'updated_at',
+        'content_type'
+    )
+    list_filter = ['content_type']
     search_fields = ('id', 'title', 'description')
     list_per_page = 20
 

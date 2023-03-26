@@ -1,9 +1,27 @@
 @media (min-width: 768px) {
-  .prose__wrapper {
+  .prose__wrapper > *:not([class*=full__width]) {
     width: 66%;
-    margin: 0 auto;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .prose__wrapper > hr:not([class*=full__width]) {
+    width: calc(66% - 4em);
   }
 }
 .prose__wrapper {
-  padding: 0 2em;
+  & > *:not([class*=full__width]) {
+    padding: 0 2em;
+  }
+  & > h2:not([class*=full__width]) {
+    padding: 0 1em;
+  }
+  & > h3:not([class*=full__width]) {
+    padding: 0 1em;
+  }
+  & > blockquote:not([class*=full__width]) {
+    padding: 0 6em;
+  }
+  & > ul:not([class*=full__width]) {
+    padding: 0 2em 0 3em;
+  }
 }

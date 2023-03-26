@@ -10,6 +10,8 @@
   width: 100%;
   min-height: 100vh;
   height: 100%;
+  display: flex;
+  flex-direction: column;
   padding: 0;
   margin: 0;
   background-color: var(--loosed-white);
@@ -19,6 +21,6 @@
 /* # Main Wrapper */
 .main_wrapper {
   padding: 0;
-  max-width: var(--page-max-width);
+  max-width: min(var(--page-max-width), 100%);
   margin: 0 auto;
 }

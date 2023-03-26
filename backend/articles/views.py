@@ -11,7 +11,7 @@ class ArticleListAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         """get_queryset."""
-        return Article.objects.all()
+        return Article.objects.filter(content_type='blog')
 
 
 class ArticleDetailAPIView(generics.GenericAPIView):

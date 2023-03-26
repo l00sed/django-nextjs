@@ -8,6 +8,10 @@ def get_upload_path(instance, filename):
 
 class Article(models.Model):
     """Article."""
+    CONTENT_TYPES = (
+        ('blog', 'Blog Post'),
+        ('page', 'Page'),
+    )
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=200)
     description = models.CharField(max_length=1024)
@@ -22,6 +26,11 @@ class Article(models.Model):
     )
     image_alt = models.CharField(max_length=200)
     content = models.TextField()
+    content_type = models.CharField(
+        max_length=12,
+        choices=CONTENT_TYPES,
+        default='blog'
+    )
 
     class Meta:
         ordering = ('-created_at', )

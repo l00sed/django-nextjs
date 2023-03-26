@@ -6,18 +6,18 @@ A symptom of heavy [Vim](https://www.vim.org) usage is that your brain begins to
 It was this mass of tangled brains in my own dome that compelled me to purchase a weighty foot-pedal at Goodwill. The model I got is actually a combination of three, springy switches. Sold for the reasonable price of $3.
 
 <TwoColumn>
-    <ImageWrapper
-      alt="Picture of pedal assembly on it's face with the bottom up. Getting ready to unscrew the clamshell housing with a screwdriver."
-      src="/assets/img/articles/vim-clutch/screwdriver-thumbnail.jpg"
-      width={ 500 }
-      height={ 889 }
-    />
-    <ImageWrapper
-      alt='The foot pedal has a wide, center pedal (with an embossed "PLAY"). Two, thinner pedals on either side read "REW" and "FWD", respectively. All 3 switches are really clicky.'
-      src="/assets/img/articles/vim-clutch/pedal_clicks.gif"
-      width={ 300 }
-      height={ 334 }
-    />
+  <ImageWrapper
+    alt="Picture of pedal assembly on it's face with the bottom up. Getting ready to unscrew the clamshell housing with a screwdriver."
+    src="/assets/img/articles/vim-clutch/screwdriver-thumbnail.jpg"
+    width={ 500 }
+    height={ 889 }
+  />
+  <ImageWrapper
+    alt='The foot pedal has a wide, center pedal (with an embossed "PLAY"). Two, thinner pedals on either side read "REW" and "FWD", respectively. All 3 switches are really clicky.'
+    src="/assets/img/articles/vim-clutch/pedal_clicks.gif"
+    width={ 300 }
+    height={ 334 }
+  />
 </TwoColumn>
 
 
@@ -33,151 +33,133 @@ Sometimes it feels like we're living in the future. A sci-fi fantasy where you c
 
 Unsurprisingly, I'm not the only one under the _Vimperious_ curse... (yes, that was a Vim + Harry Potter pun) In fact, there have been a good many other model Vim Clutches:
 
-</ProseWrapper>
-<HorizontalScroller>
+<HorizontalScroller className="full__width">
   <Card
-    element={
-      {
-        id: "0",
-        slug: "https://github.com/alevchuk/vim-clutch",
-        image_alt: "The O.G. Vim Clutch by Aleksandr Levchuk, hooked up to a desktop.",
-        featured_image: "/assets/img/articles/vim-clutch/og_pedal-thumbnail.jpg",
-        title: "The O.G.?",
-        updated_at: "April 2011",
-        auto_update_at: "false",
-        author: "Aleksandr Levchuk",
-        description: "As far as I can tell, this is the O.G. Vim Clutch. First committed by Aleksandr Levchuk in 2011. Aleksandr uses <i>two</i> USB foot switches&mdash; costing $20. Not exactly thrift prices, but not at all bad. These pedals use an infrared sensor that gets interrupted by a <i>toothpick</i> when the pedal is depressed.<br><br>Aleksandr used one pedal for the \"i\" key, and the other for \"Esc\". So, I can imagine some real <i>Fast and Furious</i> vibes in Aleksandr's home office. The GitHub write-up that Aleksandr did is really excellent too&mdash; well-documented, and well worth a read.",
-        unbound: "true"
-      }
-    }
+    element={{
+      id: "0",
+      slug: "https://github.com/alevchuk/vim-clutch",
+      image_alt: "The O.G. Vim Clutch by Aleksandr Levchuk, hooked up to a desktop.",
+      featured_image: "/assets/img/articles/vim-clutch/og_pedal-thumbnail.jpg",
+      title: "The O.G.?",
+      updated_at: "April 2011",
+      auto_update_at: "false",
+      author: "Aleksandr Levchuk",
+      description: "As far as I can tell, this is the O.G. Vim Clutch. First committed by Aleksandr Levchuk in 2011. Aleksandr uses <i>two</i> USB foot switches&mdash; costing $20. Not exactly thrift prices, but not at all bad. These pedals use an infrared sensor that gets interrupted by a <i>toothpick</i> when the pedal is depressed.<br><br>Aleksandr used one pedal for the \"i\" key, and the other for \"Esc\". So, I can imagine some real <i>Fast and Furious</i> vibes in Aleksandr's home office. The GitHub write-up that Aleksandr did is really excellent too&mdash; well-documented, and well worth a read.",
+      unbound: "true"
+    }}
   />
   <Card
-    element={
-      {
-        id: "1",
-        slug: "https://github.com/foxweb/vim-pedal",
-        image_alt: "clutch",
-        featured_image:"/assets/img/articles/vim-clutch/aleksey_two-thumbnail.jpg",
-        title:"Aleksey #2",
-        updated_at:"July 2014",
-        auto_update_at:"false",
-        author:"Aleksey Kurepin",
-        description:"There's another great GitHub write-up (<i>Digression:</i> isn't it nice when people use GitHub READMEs like a blog post?) on a pedal by Aleksey Kurepin.Alek #2 called out Alek #1 (Levchuck) as the inspiration for this Vim Clutch project. Aleksey's pedal also uses an optical sensor to detect pedal presses. Aleksey, however, introduces an <i>Arduino Leonardo</i> microboard clone to send \"i\" on press <i>and</i> send \"Esc\" on release using the same pedal. Neat.",
-        unbound: "true"
-      }
-    }
+    element={{
+      id: "1",
+      slug: "https://github.com/foxweb/vim-pedal",
+      image_alt: "clutch",
+      featured_image:"/assets/img/articles/vim-clutch/aleksey_two-thumbnail.jpg",
+      title:"Aleksey #2",
+      updated_at:"July 2014",
+      auto_update_at:"false",
+      author:"Aleksey Kurepin",
+      description:"There's another great GitHub write-up (<i>Digression:</i> isn't it nice when people use GitHub READMEs like a blog post?) on a pedal by Aleksey Kurepin.Alek #2 called out Alek #1 (Levchuck) as the inspiration for this Vim Clutch project. Aleksey's pedal also uses an optical sensor to detect pedal presses. Aleksey, however, introduces an <i>Arduino Leonardo</i> microboard clone to send \"i\" on press <i>and</i> send \"Esc\" on release using the same pedal. Neat.",
+      unbound: "true"
+    }}
   />
   <Card
-    element={
-      {
-        id: "2",
-        slug: "https://spin.atomicobject.com/2017/04/07/vim-clutch/",
-        image_alt: "A shoe about to press down on a unique-looking Vim clutch.",
-        featured_image: "/assets/img/articles/vim-clutch/vim_clutch_shoe-thumbnail.jpg",
-        title: "Fancy-Shoe Joe",
-        updated_at: "April 2017",
-        auto_update_at: "false",
-        author: "Joe Chrysler",
-        description: "Another super cool person, Joe Chrysler, wanted to ride the <i>Vim</i>bus 2000. This is a fun piece because Joe talks a little more about the other unique interfaces that he's seen and that have inspired him&mdash; curved, split, mechanical keyboards, giant trackpads, and Echo Dots to name a few.<br><br>Joe paid $25 bucks on Amazon for his \"sturdy, if somewhat sketchy\" pedal. I like these descriptions Joe, keep 'em coming.",
-        unbound: "true"
-      }
-    }
+    element={{
+      id: "2",
+      slug: "https://spin.atomicobject.com/2017/04/07/vim-clutch/",
+      image_alt: "A shoe about to press down on a unique-looking Vim clutch.",
+      featured_image: "/assets/img/articles/vim-clutch/vim_clutch_shoe-thumbnail.jpg",
+      title: "Fancy-Shoe Joe",
+      updated_at: "April 2017",
+      auto_update_at: "false",
+      author: "Joe Chrysler",
+      description: "Another super cool person, Joe Chrysler, wanted to ride the <i>Vim</i>bus 2000. This is a fun piece because Joe talks a little more about the other unique interfaces that he's seen and that have inspired him&mdash; curved, split, mechanical keyboards, giant trackpads, and Echo Dots to name a few.<br><br>Joe paid $25 bucks on Amazon for his \"sturdy, if somewhat sketchy\" pedal. I like these descriptions Joe, keep 'em coming.",
+      unbound: "true"
+    }}
   />
   <Card
-    element={
-      {
-        id: "3",
-        slug: "https://twitter.com/peterssonjesper/status/934957115709333505",
-        image_alt: "Seemingly an electric piano pedal, but actually... a Vim clutch.",
-        featured_image: "/assets/img/articles/vim-clutch/piano_pedal-thumbnail.jpg",
-        title: "Piano Player",
-        updated_at: "November 2017",
-        auto_update_at: "false",
-        author: "Jesper Petersson",
-        description: "Pay special attention to the socks in this one, that's the true source of this programmer's text-editing prowess...<br><br>Jesper didn't seem to have a write-up on his pedal (correct me if I'm wrong, Jesper), just this short Twitter demo. I liked the allegory of the piano pedal, so I put it in the list.",
-        unbound: "true"
-      }
-    }
+    element={{
+      id: "3",
+      slug: "https://twitter.com/peterssonjesper/status/934957115709333505",
+      image_alt: "Seemingly an electric piano pedal, but actually... a Vim clutch.",
+      featured_image: "/assets/img/articles/vim-clutch/piano_pedal-thumbnail.jpg",
+      title: "Piano Player",
+      updated_at: "November 2017",
+      auto_update_at: "false",
+      author: "Jesper Petersson",
+      description: "Pay special attention to the socks in this one, that's the true source of this programmer's text-editing prowess...<br><br>Jesper didn't seem to have a write-up on his pedal (correct me if I'm wrong, Jesper), just this short Twitter demo. I liked the allegory of the piano pedal, so I put it in the list.",
+      unbound: "true"
+    }}
   />
   <Card
-    element={
-      {
-        id: "4",
-        slug: "https://www.reddit.com/r/vimporn/comments/gus5ri/vim_clutch_vc1_pedal_by_boss/?utm_source=share&utm_medium=web2x&context=3",
-        image_alt: "A modified BOSS guitar pedal. In convincing BOSS-style lettering, it says \"Vim Clutch\".",
-        featured_image: "/assets/img/articles/vim-clutch/boss_pedal-thumbnail.jpg",
-        title: "Boss Pedal, VC-1",
-        updated_at: "June 2020",
-        auto_update_at: "false",
-        author: "u/sjachim",
-        description: "This pedal is hardcore, rock-n-roll. I found it on Reddit, via <i>u/sjachim</i>. This project also has a recent timestamp (which means it's still a super cool, hip thing to do).<br><br>The <i>VC-1</i> model is a converted <i>BOSS</i> guitar pedal. It's one of the most legit-looking custom clutches that I've come across&mdash; especially with the vinyl-sticker lettering. The red pilot light also adds to the badass-ery. I might have to add some LEDs to mine...",
-        unbound: "true"
-      }
-    }
+    element={{
+      id: "4",
+      slug: "https://www.reddit.com/r/vimporn/comments/gus5ri/vim_clutch_vc1_pedal_by_boss/?utm_source=share&utm_medium=web2x&context=3",
+      image_alt: "A modified BOSS guitar pedal. In convincing BOSS-style lettering, it says \"Vim Clutch\".",
+      featured_image: "/assets/img/articles/vim-clutch/boss_pedal-thumbnail.jpg",
+      title: "Boss Pedal, VC-1",
+      updated_at: "June 2020",
+      auto_update_at: "false",
+      author: "u/sjachim",
+      description: "This pedal is hardcore, rock-n-roll. I found it on Reddit, via <i>u/sjachim</i>. This project also has a recent timestamp (which means it's still a super cool, hip thing to do).<br><br>The <i>VC-1</i> model is a converted <i>BOSS</i> guitar pedal. It's one of the most legit-looking custom clutches that I've come across&mdash; especially with the vinyl-sticker lettering. The red pilot light also adds to the badass-ery. I might have to add some LEDs to mine...",
+      unbound: "true"
+    }}
   />
   <Card
-    element={
-      {
-        id: "5",
-        slug: "https://yeah.nah.nz/electronics/vim-clutch-2/",
-        image_alt: "Close-up of this Vim clutch's wiring showing an Arduino and switch.",
-        featured_image: "/assets/img/articles/vim-clutch/vim_clutch_micro-thumbnail.jpg",
-        title: "Yeah, nah, aye",
-        updated_at: "September 2020",
-        auto_update_at: "false",
-        author: "David Phillips",
-        description: "David Phillips, a.k.a. <i>Yeah, nah, aye</i>, is another contemporary pedal hacker. Perhaps the flood of Vim clutches in 2020 is because all the developers were going crazy WFH. I don't know.<br><br>David's \"improved\" pedal (that's a Vim pun folks) uses an ATMega32u4 Arduino-compatible board. David also calls out Alek #1 as the O.G. Vim clutch hacker&mdash; and <i>does</i> indeed make some unique improvements upon the original project.<br><br>Definitely worth a read.",
-        unbound: "true"
-      }
-    }
+    element={{
+      id: "5",
+      slug: "https://yeah.nah.nz/electronics/vim-clutch-2/",
+      image_alt: "Close-up of this Vim clutch's wiring showing an Arduino and switch.",
+      featured_image: "/assets/img/articles/vim-clutch/vim_clutch_micro-thumbnail.jpg",
+      title: "Yeah, nah, aye",
+      updated_at: "September 2020",
+      auto_update_at: "false",
+      author: "David Phillips",
+      description: "David Phillips, a.k.a. <i>Yeah, nah, aye</i>, is another contemporary pedal hacker. Perhaps the flood of Vim clutches in 2020 is because all the developers were going crazy WFH. I don't know.<br><br>David's \"improved\" pedal (that's a Vim pun folks) uses an ATMega32u4 Arduino-compatible board. David also calls out Alek #1 as the O.G. Vim clutch hacker&mdash; and <i>does</i> indeed make some unique improvements upon the original project.<br><br>Definitely worth a read.",
+      unbound: "true"
+    }}
   />
   <Card
-    element={
-      {
-        id: "6",
-        slug: "https://github.com/moretea/kludge",
-        image_alt: "Looking into the messy electronic innards of the \"Kludge\", another unique Vim clutch",
-        featured_image: "/assets/img/articles/vim-clutch/kludge-thumbnail.jpg",
-        title: "The Kludge",
-        updated_at: "March 2021",
-        auto_update_at: "false",
-        author: "Maarten Hoogendoorn",
-        description: "Hoogendoorn shared his pedal in the comments on <i>Hacker News</i>. The \"kludge\" pedal is also a misused piano pedal, similar in shape to one of the previous clutches. Maarten's, however, triples the fun with three switches.<br><br>My favorite part about Maarten's hack is that he also configured it to work as a push-to-talk pedal for calls! Wicked. Another excellent GitHub writeup and a unique way of coding it together.",
-        unbound: "true"
-      }
-    }
+    element={{
+      id: "6",
+      slug: "https://github.com/moretea/kludge",
+      image_alt: "Looking into the messy electronic innards of the \"Kludge\", another unique Vim clutch",
+      featured_image: "/assets/img/articles/vim-clutch/kludge-thumbnail.jpg",
+      title: "The Kludge",
+      updated_at: "March 2021",
+      auto_update_at: "false",
+      author: "Maarten Hoogendoorn",
+      description: "Hoogendoorn shared his pedal in the comments on <i>Hacker News</i>. The \"kludge\" pedal is also a misused piano pedal, similar in shape to one of the previous clutches. Maarten's, however, triples the fun with three switches.<br><br>My favorite part about Maarten's hack is that he also configured it to work as a push-to-talk pedal for calls! Wicked. Another excellent GitHub writeup and a unique way of coding it together.",
+      unbound: "true"
+    }}
   />
   <Card
-    element={
-      {
-        id: "7",
-        slug: "https://github.com/tenderlove/initial-v",
-        image_alt: "A Vim clutch made from a salvaged BMW shifter and a 3D-printed enclosure.",
-        featured_image: "/assets/img/articles/vim-clutch/clutch-thumbnail.jpg",
-        title: "Initial V",
-        updated_at: "March 2023",
-        auto_update_at: "false",
-        author: "Aaron Patterson",
-        description: "Patterson (a.k.a. <i>tenderlove</i>) broke the mold when designing the <i>Initial V</i> Vim clutch. It's made from an actual BMW shifter and features a 3D-printed enclosure and custom PCB. It certainly feels antithetical to the Vim ethos of keeping our fingers planted firmly on the home-row; but, no one can deny this is a remarkable invention in the Vim clutch hall of fame.",
-        unbound: "true"
-      }
-    }
+    element={{
+      id: "7",
+      slug: "https://github.com/tenderlove/initial-v",
+      image_alt: "A Vim clutch made from a salvaged BMW shifter and a 3D-printed enclosure.",
+      featured_image: "/assets/img/articles/vim-clutch/clutch-thumbnail.jpg",
+      title: "Initial V",
+      updated_at: "March 2023",
+      auto_update_at: "false",
+      author: "Aaron Patterson",
+      description: "Patterson (a.k.a. <i>tenderlove</i>) broke the mold when designing the <i>Initial V</i> Vim clutch. It's made from an actual BMW shifter and features a 3D-printed enclosure and custom PCB. It certainly feels antithetical to the Vim ethos of keeping our fingers planted firmly on the home-row; but, no one can deny this is a remarkable invention in the Vim clutch hall of fame.",
+      unbound: "true"
+    }}
   />
 </HorizontalScroller>
-<ProseWrapper>
 
 Looking at these examples, it's clear that a Vim Clutch can assume many forms. At its core, a Vim Clutch is a pedal that engages or disengages the _INSERT_ mode in the Vim editor. In Vim (Visual-editor IMproved) you can type `i`,`I`,`a`,`A`, or a few other keys to enter _INSERT_ mode, pinning the cursor to specific starting locations.
 
 _INSERT_ mode lets you type normally— like you would in a Google doc or in Notepad. Pressing the `Esc` button brings you back to _NORMAL_ mode...
 
 <OneColumn>
-    <ImageWrapper
-      src="/assets/img/articles/vim-clutch/vim.svg"
-      alt="Vim logo"
-      width={ 100 }
-      height={ 100 }
-      caption={ false }
-    />
+  <ImageWrapper
+    src="/assets/img/articles/vim-clutch/vim.svg"
+    alt="Vim logo"
+    width={ 100 }
+    height={ 100 }
+    caption={ false }
+  />
 </OneColumn>
 
 If you've used Vim, then you know _NORMAL_ mode is anything but "normal". You can jump to matched characters, do clever search and replace maneuvers, build macros on-the-fly and much much more from within _NORMAL_ mode.
@@ -365,13 +347,17 @@ echo "l00sed" > strings/0x409/manufacturer
 echo "VimClutch USB Device" > strings/0x409/product
 mkdir -p configs/c.1/strings/0x409
 echo "Config 1: ECM network" > configs/c.1/strings/0x409/configuration
-echo 250 > configs/c.1/MaxPower # Add functions here
+echo 250 > configs/c.1/MaxPower
+
+# Add functions here
 mkdir -p functions/hid.usb0
 echo 1 > functions/hid.usb0/protocol
 echo 1 > functions/hid.usb0/subclass
 echo 8 > functions/hid.usb0/report_length
 echo -ne \\x05\\x01\\x09\\x06\\xa1\\x01\\x05\\x07\\x19\\xe0\\x29\\xe7\\x15\\x00\\x25\\x01\\x75\\x01\\x95\\x08\\x81\\x02\\x95\\x01\\x75\\x08\\x81\\x03\\x95\\x05\\x75\\x01\\x05\\x08\\x19\\x01\\x29\\x05\\x91\\x02\\x95\\x01\\x75\\x03\\x91\\x03\\x95\\x06\\x75\\x08\\x15\\x00\\x25\\x65\\x05\\x07\\x19\\x00\\x29\\x65\\x81\\x00\\xc0 > functions/hid.usb0/report_desc
-ln -s functions/hid.usb0 configs/c.1/# End functions
+ln -s functions/hid.usb0 configs/c.1/
+# End functions
+
 ls /sys/class/udc > UDC
 ```
 </Pre>
@@ -386,7 +372,7 @@ chmod +x /usr/bin/vimclutch_usb
 
 Then put a line in `/etc/rc.local` (before the `exit 0` line) that will allow the script to be automatically run, setting up the Pi as a USB keyboard:
 
-<Pre>
+<Pre  copyButton={ false }>
 ```diff:/etc/rc.local
 ...
 
@@ -415,7 +401,7 @@ I've been using the pedal to code for about a month now, and it really is a lot 
 Unfortunately (after a couple weeks of usage) the main center pedal's switch started to get a bit funky… might just be a bad solder joint; but hopefully the switch isn't faulty. Luckily I could just SSH into the pedal and swap out the keys. I still have the right and left working swimmingly.
 
 <OneColumn>
-  <iframe width="498" height="315" src="https://www.youtube.com/embed/9JegZhkDhrw" title="Vim Clutch Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe width="498" height="315" src="https://www.youtube.com/embed/9JegZhkDhrw" title="Vim Clutch Demo" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
 </OneColumn>
 
 ## Conclusion

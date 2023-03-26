@@ -35,31 +35,29 @@ export default async function Article ( props ) {
   const { meta, content } = await getData( props.slug );
 
   return (
-    <>
-      <div className={ article_styles.main_wrapper }>
-        <main className={ article_styles.main }>
-          <div className={ article_styles.article_wrapper }>
-            <div className={ article_styles.article__head }>
-              <h1 className={ article_styles.article__title }>{ meta.title }</h1>
-              <div className={ article_styles.article__meta }>
-                <span className={ article_styles.article__date }>{ datePublished(meta) }</span>
-                <span className={ article_styles.article__author }>{ meta.author }</span>
-              </div>
-            </div>
-            <div className={ article_styles.article__body }>
-              <div className={ article_styles.article__description }>
-                <Mdx content={ content } />
-              </div>
+    (<div className={ article_styles.main_wrapper }>
+      <main className={ article_styles.main }>
+        <div className={ article_styles.article_wrapper }>
+          <div className={ article_styles.article__head }>
+            <h1 className={ article_styles.article__title }>{ meta.title }</h1>
+            <div className={ article_styles.article__meta }>
+              <span className={ article_styles.article__date }>{ datePublished(meta) }</span>
+              <span className={ article_styles.article__author }>{ meta.author }</span>
             </div>
           </div>
-        </main>
-        <aside>
-          <div className={ comment_styles.comments_section }>
-            {/* <Comments slug={ props.slug } meta={ meta } /> */}
+          <div className={ article_styles.article__body }>
+            <div className={ article_styles.article__description }>
+              <Mdx content={ content } />
+            </div>
           </div>
-        </aside>
-      </div>
-    </>
+        </div>
+      </main>
+      <aside>
+        <div className={ comment_styles.comments_section }>
+          {/* <Comments slug={ props.slug } meta={ meta } /> */}
+        </div>
+      </aside>
+    </div>)
   )
 }
 

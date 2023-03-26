@@ -32,13 +32,17 @@ pre {
 
 .code-line {
   line-height: 150% !important;
-  display: inherit;
-  padding-left: 2em;
-  padding-right: 2em;
+  display: unset;
+  padding-left: 1em;
+  padding-right: 4em;
   margin-left: -2em;
   margin-right: -2em;
   border-left: 4px solid transparent; /* Set code block color */
   border-right: 4px solid transparent; /* Set code block color */
+}
+
+.code-line.line-number {
+  padding-left: 2em;
 }
 
 .code-line.inserted {
@@ -78,7 +82,7 @@ pre {
   cursor: pointer;
   position: absolute;
   top: 9px;
-  right: 12px;
+  right: 3em;
   margin-bottom: 0;
   width: 30px;
   height: 30px;
