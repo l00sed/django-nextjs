@@ -62,7 +62,9 @@
 }
 
 .main h2:hover a::before,
-.main h3:hover a::before {
+.main h2 a:focus::before,
+.main h3:hover a::before,
+.main h3 a:focus::before {
   opacity: 1
 }
 .main h2 a,

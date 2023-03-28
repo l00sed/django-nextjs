@@ -1,38 +1,36 @@
 /* # Scroll To Top ----------------------- */
 .scrollTop {
-  transition: all var(--loosed-transition-slow) ease;
+  border: 1px solid transparent;
   cursor: pointer;
-  height: 80px;
-  width: 25px;
-  right: 0;
-  bottom: 5px;
+  height: 50px;
+  right: 10px;
+  bottom: 10px;
   position: fixed;
-  padding: 12px 0;
+  padding: 0.95em 1em 1em 1em;
   text-align: center;
   z-index: 10;
-  background-color: var(--scroll-top-button);
+  background-color: var(--scroll-top-bg);
   backdrop-filter: blur(5px);
   transform: rotate(0);
-  border-radius: 5px 0 0 5px;
+  font-size: 100%;
+  border-radius: 5px;
 }
-.scrollTop p {
-  width: 70px;
-  position: relative;
-  right: 22px;
-  bottom: -10px;
-  transition: transform var(--loosed-transition-medm) ease-in;
-  white-space: nowrap;
-  transition-delay: 0;
-  transform: rotate(-90deg);
-  font-weight: black;
-  padding-bottom: 1px;
-  color: var(--loosed-black);
+
+.scrollTop:hover,
+.scrollTop:focus {
+  background-color: var(--scroll-top-hover);
 }
-.scrollTop:hover p {
-  color: var(--loosed-highlight-1);
+.scrollTop:focus {
+  border-color: var(--loosed-highlight-1);
 }
+
 .scrollTop:active {
-  background-color: var(--scroll-top-active);
+  & svg {
+    fill: var(--loosed-highlight-1);
+  }
+  & span {
+    color: var(--loosed-highlight-1);
+  }
 }
 .scroll_top_label {
   font-weight: 800;
@@ -47,10 +45,8 @@
   height: 17px;
   width: 17px;
   transform: translateY(0);
-  margin-top: -10px;
-}
-.scrollTop:hover svg {
-  fill: var(--loosed-highlight-1);
+  padding-left: 5px;
+  margin-top: -2px;
 }
 .footer .hr {
   height: 1px !important;
@@ -61,8 +57,18 @@
   text-align: center;
   word-break: keep-all;
 }
-.footer a:hover {
+.footer a {
+  text-decoration: underline 2px;
+  transition: all var(--loosed-transition-slow) ease;
+  text-decoration-color: transparent;
+  text-underline-offset: var(--offset, 0);
+}
+.footer a:hover,
+.footer a:focus {
+  --offset: 2px;
+  font-weight: bold;
   color: var(--loosed-highlight-1);
+  text-decoration-color: var(--loosed-highlight-1);
 }
 .link_row {
   display: flex;
@@ -105,7 +111,8 @@
   text-align: center;
   font-size: var(--small);
 }
-.icon:hover path {
+.icon:hover path,
+a:focus .icon path {
   stroke: var(--loosed-highlight-1);
 }
 .icon path {
@@ -133,7 +140,8 @@
   margin-bottom: 1.5px;
 }
 
-.link:hover svg {
+.link a:hover svg,
+.link a:focus svg {
   fill: var(--loosed-highlight-1);
 }
 

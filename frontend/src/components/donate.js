@@ -71,9 +71,9 @@ export default function Donate() {
 
   return (
     <>
-      <p id="donate" className={ donate_styles.donate } title="Click to copy my Ethereum wallet address!">
-        <em>DONATE</em>
-      </p>
+      <button id="donate" type="button" className={ donate_styles.donate } title="Click to copy my Ethereum wallet address!">
+        DONATE
+      </button>
       <div id="donate-overlay" className={ donate_styles.donate_overlay }>
         <div className={ donate_styles.menu_text }>
           <svg className={ donate_styles.ethereum } width="226" height="328" viewBox="0 0 226 328" fill="none" xmlns="http://www.w3.org/2000/svg">

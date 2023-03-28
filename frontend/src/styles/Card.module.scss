@@ -46,7 +46,8 @@
   opacity: 0.25;
 }
 
-.card:hover::after {
+.card:hover::after,
+a:focus-visible .card::after {
   opacity: 0.5;
   box-shadow: 0 0 10px 1px var(--card-shadow);
 }
@@ -55,7 +56,8 @@
   opacity: 1;
 }
 
-.card:hover .card__thumbnail_wrapper {
+.card:hover .card__thumbnail_wrapper,
+a:focus-visible .card .card__thumbnail_wrapper {
   width: 100%;
   left: 0;
   top: 0;
@@ -75,7 +77,8 @@
   object-fit: cover;
   filter: saturate(0.5);
 }
-.card:hover .card__thumbnail {
+.card:hover .card__thumbnail,
+a:focus-visible .card .card__thumbnail {
   filter: saturate(1);
 }
 

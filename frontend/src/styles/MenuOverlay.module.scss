@@ -47,7 +47,8 @@
   padding: 0 5px;
   font-size: var(--x-large);
 }
-.close_menu:hover {
+.close_menu:hover,
+.close_menu:focus {
   color: var(--loosed-highlight-1);
 }
 
@@ -62,7 +63,8 @@
   cursor: pointer;
 }
 
-.menu_text p:hover {
+.menu_text p:hover,
+.menu_text p:focus {
   background-color: var(--menu-item-hover-background);
   color: var(--menu-item-hover-color);
 }

@@ -35,7 +35,9 @@
 }
 
 .dark_toggle:hover::before,
-.light_toggle:hover::before {
+.dark_toggle:focus::before,
+.light_toggle:hover::before,
+.light_toggle:focus::before {
   background-color: var(--hover-background);
   opacity: 1;
 }
