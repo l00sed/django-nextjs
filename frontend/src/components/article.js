@@ -37,20 +37,20 @@ export default async function Article ( props ) {
   return (
     (<div className={ article_styles.main_wrapper }>
       <main className={ article_styles.main }>
-        <div className={ article_styles.article_wrapper }>
-          <div className={ article_styles.article__head }>
+        <article className={ article_styles.article_wrapper }>
+          <header className={ article_styles.article__head }>
             <h1 className={ article_styles.article__title }>{ meta.title }</h1>
             <div className={ article_styles.article__meta }>
               <span className={ article_styles.article__date }>{ datePublished(meta) }</span>
               <span className={ article_styles.article__author }>{ meta.author }</span>
             </div>
-          </div>
+          </header>
           <div className={ article_styles.article__body }>
             <div className={ article_styles.article__description }>
               <Mdx content={ content } />
             </div>
           </div>
-        </div>
+        </article>
       </main>
       <aside>
         <div className={ comment_styles.comments_section }>
@@ -124,7 +124,7 @@ async function getData( slug ) {
 
             return {
               type: "element",
-              tagName: "div",
+              tagName: "section",
               properties: {
                 className: toc_styles.toc__wrapper,
               },

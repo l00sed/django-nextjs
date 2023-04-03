@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'corsheaders',
     'easy_thumbnails',
+    'webmention',
     'tinymce',
     'articles',
     'comments',
@@ -66,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'webmention.middleware.webmention_middleware',
 ]
 
 CORS_ALLOWED_ORIGINS = [

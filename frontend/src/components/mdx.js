@@ -14,6 +14,7 @@ import ProseWrapper              from './prose_wrapper';
 import TableWrapper              from './table_wrapper';
 import HorizontalScroller        from './horizontal_scroller';
 import Card                      from './card';
+import Note                      from './note';
 
 
 export default function Mdx ({ content }) {
@@ -29,6 +30,7 @@ export default function Mdx ({ content }) {
     HorizontalScroller,
     Caption,
     Card,
+    Note,
   }
 
   return <MDXRemote { ...content } components={ components } />

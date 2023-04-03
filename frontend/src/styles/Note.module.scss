@@ -1,0 +1,30 @@
+.note__base {
+  padding: 1em;
+  margin-bottom: 2em;
+  border-radius: 10px;
+
+  h4 {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+  }
+
+  p {
+    line-height: 150%;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+.note__default {
+  background-color: var(--note-default);
+  border-left: 4px solid var(--note-default-border);
+}
+.note__success {
+  background-color: var(--note-success);
+  border-left: 4px solid var(--note-success-border);
+}
+.note__error {
+  background-color: var(--note-error);
+  border-left: 4px solid var(--note-error-border);
+}

@@ -32,12 +32,11 @@ export default function Footer() {
   }, []);
 
   return (
-    <div className={ footer_styles.footer }>
+    <footer className={ footer_styles.footer }>
       <div className={ footer_styles.row }>
         <button id="scrollTop" type="button" title="Click to jump to the top of the page." className={ `${footer_styles.scrollTop} hidden` } onClick={ scrollToTop }>
-          <span className={ footer_styles.scroll_top_label }>TOP</span>
-          <svg width="54" height="83" viewBox="0 0 54 83" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M49.5355 27.4645L42.4645 34.5355L32 24.0711V79H22V24.0711L11.5355 34.5355L4.46447 27.4645L27 4.92893L49.5355 27.4645Z" />
+          <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M37.2165 21.0436C36.263 21.867 34.8137 21.7717 33.9794 20.8306L30.7392 17.1759C29.8093 16.127 28.0588 16.7762 28.0588 18.1699V41.9811C28.0588 43.6484 26.6893 45 25 45C23.3107 45 21.9412 43.6484 21.9412 41.9811V18.1699C21.9412 16.7762 20.1907 16.127 19.2608 17.1759L16.0206 20.8306C15.1863 21.7717 13.737 21.867 12.7835 21.0436C11.8299 20.2202 11.7333 18.7898 12.5676 17.8487L23.2486 5.80137C23.2894 5.75387 23.3325 5.7077 23.3779 5.66302C23.5674 5.47557 23.7833 5.3273 24.0145 5.21893C24.327 5.07207 24.6647 4.99967 25.0014 5C25.3371 5.00006 25.6738 5.07247 25.9855 5.21893C26.2167 5.32732 26.4326 5.47563 26.6222 5.66313C26.6675 5.70774 26.7106 5.75383 26.7513 5.80125L37.4323 17.8487C38.2667 18.7898 38.1701 20.2202 37.2165 21.0436Z" />
           </svg>
         </button>
       </div>
@@ -138,6 +137,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   )
 }

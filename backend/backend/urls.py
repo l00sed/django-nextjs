@@ -49,6 +49,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('articles.urls')),
     path('api/', include('comments.urls')),
+    path('webmention/', include('webmention.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap')
 ]
