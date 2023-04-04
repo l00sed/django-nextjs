@@ -40,7 +40,9 @@ export default function MenuOverlay() {
           <div className={ menu_overlay_styles.menu_controls }>
             <button className={ menu_overlay_styles.close_menu }>
               <label htmlFor="menu-overlay-input">
-                <span>ᳵ</span>
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M23 23L76.033 76.033M76.033 23L23 76.033" stroke-width="6" stroke-linecap="round"/>
+                </svg>
               </label>
             </button>
             <DarkModeToggle/>

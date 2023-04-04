@@ -66,18 +66,23 @@
 }
 
 .close_menu {
-  cursor: pointer;
   border: none;
   background: transparent;
-  margin-bottom: 1em;
+  margin: 0.5em 0 1em 0;
   display: flex;
   flex-direction: row;
-  padding: 0 5px;
-  font-size: var(--x-large);
+  padding: 0;
 }
-.close_menu:hover,
-.close_menu:focus {
-  color: var(--loosed-highlight-1);
+.close_menu svg {
+  height: 40px;
+  width: 40px;
+  stroke: var(--loosed-black);
+}
+
+button.close_menu:hover svg,
+button.close_menu:focus svg {
+  cursor: pointer;
+  stroke: var(--loosed-highlight-1);
 }
 
 .menu_text a p {
