@@ -17,18 +17,20 @@ export default async function Home() {
 
   return (
     <div className={ `${page_styles.next_wrapper} ${styles.homepage}` }>
-      <MenuOverlay />
       <MenuToggle />
-      <Title />
-      <Donate />
-      <div id="homepage__content" className={ styles.homepage__content }>
-        {
-          data.map((element, index) => {
-            return <Card key={ element.id } element={ element } index={ index } />
-          })
-        }
+      <MenuOverlay />
+      <div className={ page_styles.main_wrapper }>
+        <Title />
+        <Donate />
+        <div id="homepage__content" className={ styles.homepage__content }>
+          {
+            data.map((element, index) => {
+              return <Card key={ element.id } element={ element } index={ index } />
+            })
+          }
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   )
 }
