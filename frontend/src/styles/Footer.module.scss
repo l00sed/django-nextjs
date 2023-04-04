@@ -1,12 +1,12 @@
 /* # Scroll To Top ----------------------- */
 .scrollTop {
   border: none;
-  box-shadow: 0 0 1px 1px var(--scroll-top-outline), inset 0 0 1px 0 var(--scroll-top-outline);
+  box-shadow: 5px 5px 55px 5px var(--scroll-top-outline);
   cursor: pointer;
   height: 50px;
   width: 50px;
-  right: 2px;
-  bottom: 2px;
+  right: 10px;
+  bottom: 10px;
   position: fixed;
   text-align: center;
   z-index: 10;
@@ -14,14 +14,14 @@
   backdrop-filter: blur(5px);
   transform: rotate(0);
   font-size: 100%;
-  border-radius: 100% 100% 0 100%;
+  border-radius: 100%;
 }
 
 .scrollTop:hover {
   background-color: var(--scroll-top-hover);
 }
 .scrollTop:active {
-  box-shadow: 0 0 1px 1px var(--loosed-highlight-1), 0 0 1px 0 var(--loosed-highlight-1);
+  box-shadow: 0 0 1px 2px var(--loosed-highlight-1), 0 0 1px 2px var(--loosed-highlight-1);
 
   & svg {
     fill: var(--loosed-highlight-1);

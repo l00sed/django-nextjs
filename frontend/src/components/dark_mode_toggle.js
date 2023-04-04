@@ -18,7 +18,7 @@ export default function DarkModeToggle() {
 
   return (
     <div id="dark-mode-toggle" title="Toggle dark/light mode." className={ dark_mode_toggle_styles.toggle_wrapper }>
-      <div className={ dark_mode_toggle_styles.dark_toggle }>
+      <button className={ dark_mode_toggle_styles.dark_toggle }>
         <svg
           className={ dark_mode_toggle_styles.dark_toggle_moon }
           alt="Dark toggle"
@@ -41,8 +41,8 @@ export default function DarkModeToggle() {
 						</filter>
 					</defs>
 				</svg>
-      </div>
-      <div className={ dark_mode_toggle_styles.light_toggle }>
+      </button>
+      <button className={ dark_mode_toggle_styles.light_toggle }>
         <svg
           className={ dark_mode_toggle_styles.light_toggle_sun }
           alt="Light toggle"
@@ -113,7 +113,7 @@ export default function DarkModeToggle() {
 						</filter>
 					</defs>
 				</svg>
-      </div>
+      </button>
     </div>
   )
 }

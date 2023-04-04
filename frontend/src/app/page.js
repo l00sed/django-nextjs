@@ -17,9 +17,9 @@ export default async function Home() {
 
   return (
     <div className={ `${page_styles.next_wrapper} ${styles.homepage}` }>
-      <MenuToggle />
       <MenuOverlay />
-      <div className={ page_styles.main_wrapper }>
+      <MenuToggle />
+      <div id="main_wrapper" className={ page_styles.main_wrapper }>
         <Title />
         <Donate />
         <div id="homepage__content" className={ styles.homepage__content }>

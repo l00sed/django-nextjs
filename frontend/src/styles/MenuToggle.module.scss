@@ -49,13 +49,17 @@
 }
 
 .header_logo:hover svg,
-.header_logo:focus svg {
+.header_logo:focus svg,
+.label_wrapper:focus .header_logo svg,
+.header_logo svg:focus,
+.header_logo svg:hover {
   background-color: var(--loosed-highlight-1);
   box-shadow: inset 0 0 0 2px var(--menu-border), 0 2px 2px 0 var(--menu-toggle-box-shadow);
   backdrop-filter: blur(2px);
 }
 .header_logo:hover::before,
-.header_logo:focus::before {
+.header_logo:focus::before,
+.label_wrapper:focus .header_logo::before {
   opacity: 1;
 }
 

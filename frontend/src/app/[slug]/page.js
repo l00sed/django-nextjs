@@ -22,12 +22,12 @@ export default function BlogPage({ params }) {
       <div className={ page_styles.next_wrapper }>
         <MenuOverlay />
         <MenuToggle />
-        <div className={ page_styles.main_wrapper }>
+        <div id="main_wrapper" className={ page_styles.main_wrapper }>
           <Title />
           <Donate />
           <Article slug={ `${params.slug}` } />
+          <Footer />
         </div>
-        <Footer />
       </div>
     </>
   )
