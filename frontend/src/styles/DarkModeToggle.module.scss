@@ -32,7 +32,6 @@
   left: 0;
   opacity: 0;
   box-shadow: inset 1px 1px 1px rgba(255,255,255,0.2), inset -1px -1px 1px rgba(0,0,0,0.2), 0 2px 10px 0 var(--toggle-hover-glow);
-  transition: all var(--loosed-transition-medm) ease;
 }
 
 .dark_toggle:hover::before,

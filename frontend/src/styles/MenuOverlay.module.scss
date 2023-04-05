@@ -6,7 +6,7 @@
   height: 100%;
   z-index: 999;
   justify-content: left;
-  transition: all var(--loosed-transition-slow) ease;
+  transition: width var(--loosed-transition-medm) ease, opacity var(--loosed-transition-medm) ease, min-width var(--loosed-transition-medm) ease;
   overflow: hidden;
 }
 
@@ -34,7 +34,7 @@
   width: 0;
   cursor: pointer;
   opacity: 0;
-  transition: opacity var(--loosed-transition-slow) ease;
+  transition: opacity var(--loosed-transition-medm) ease;
   display: block;
   position: fixed;
   height: 100%;
@@ -57,7 +57,7 @@
   width: 250px;
   height: 100%;
   backdrop-filter: blur(7px);
-  transition: all var(--loosed-transition-slow) ease;
+  transition: width var(--loosed-transition-medm) ease, opacity var(--loosed-transition-medm) ease, min-width var(--loosed-transition-medm) ease;
   background-color: var(--menu-background-color);
   box-shadow: 0 0 0 1px var(--menu-box-shadow);
 }

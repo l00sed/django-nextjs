@@ -94,7 +94,8 @@
  * -------------------------------- */
 .default {
   /* ## Table of Contents */
-  --toc-bg: rgba(0,0,0,0.025);
+  --toc-header-bg: #e3e3e3;
+  --toc-nav-bg: #e9e9e9;
   --toc-shadow: rgba(0,0,0,0.5);
   --toc-hr: rgba(0,0,0,0.075);
 
@@ -133,7 +134,7 @@
   --webring-top-border: rgba(0,0,0,0.4);
   --webring-center-border: rgba(0,0,0,0.2);
   --scroll-top-bg: rgba(255,255,255,0.4);
-  --scroll-top-outline: rgba(0,0,0,0.25);
+  --scroll-top-outline: rgba(0,0,0,0.1);
   --scroll-top-svg: rgba(0,0,0,0.5);
   --scroll-top-hover: rgba(255,255,255,0.9);
   --footer-icon: var(--loosed-black);
@@ -176,7 +177,8 @@
  * ---------------------------------- */
 .dark {
   /* ## Table of Contents */
-  --toc-bg: rgba(255,255,255,0.04);
+  --toc-header-bg: #222;
+  --toc-nav-bg: #252525;
   --toc-shadow: rgba(255,255,255,0.5);
   --toc-hr: rgba(255,255,255,0.05);
 
@@ -220,7 +222,7 @@
   --webring-center-border: rgba(255,255,255,0.2);
   --webring-background: rgba(255,255,255,0.05);
   --scroll-top-bg: rgba(0,0,0,0.05);
-  --scroll-top-outline: rgba(255,255,255,0.25);
+  --scroll-top-outline: rgba(255,255,255,0.1);
   --scroll-top-svg: rgba(255,255,255,0.7);
   --scroll-top-hover: rgba(0,0,0,0.9);
   --footer-icon: var(--loosed-black);
