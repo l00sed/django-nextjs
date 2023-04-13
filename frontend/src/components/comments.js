@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 import { renderComments, processComments } from '../utils/comment_helpers'
 import sanitize from '../utils/sanitize'
 /* Styles */
-import comment_styles from '../styles/Comment.module.css'
+import comment_styles from '../styles/Comment.module.scss'
 
 export default async function Comments({ meta }) {
   const [pid, setPID] = useState(0);
@@ -18,6 +18,9 @@ export default async function Comments({ meta }) {
   const parentComments        = await getParentComments(meta.slug);
   const commentsAndRepliesRaw = await processComments(parentComments);
   const comments              = await renderComments(commentsAndRepliesRaw);
+
+  console.log('Final Comments: ')
+  console.log(comments);
 
   async function handleCommentSubmit(e, meta) {
     e.preventDefault();

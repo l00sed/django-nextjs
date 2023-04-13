@@ -19,7 +19,7 @@ import remarkGfm                  from 'remark-gfm';
 import remarkCodeTitles           from '../utils/code_titles';
 
 import Mdx from './mdx';
-//import Comments from './comments';
+import Comments from './comments';
 
 
 const datePublished = (meta) => {
@@ -54,7 +54,7 @@ export default async function Article ( props ) {
       </main>
       <aside>
         <div className={ comment_styles.comments_section }>
-          {/* <Comments slug={ props.slug } meta={ meta } /> */}
+          <Comments slug={ props.slug } meta={ meta } />
         </div>
       </aside>
     </div>)

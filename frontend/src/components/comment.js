@@ -9,7 +9,7 @@ import useConstructor from '../utils/constructor'
 import Parse from '../utils/parser.js'
 import sanitize from '../utils/sanitize'
 /* Styles */
-import comment_styles from '../styles/Comment.module.css'
+import comment_styles from '../styles/Comment.module.scss'
 
 String.prototype.replaceArray = function(find, replace) {
   let replaceString = this;

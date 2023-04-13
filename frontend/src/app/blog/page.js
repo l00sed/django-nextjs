@@ -33,7 +33,7 @@ import { menuVisibility, toggleMenuVisibility } from '../../lib/menu_visibility'
 
 /* Default top-level page is an "Article" page */
 export default async function ArticlePage({ params }) {
- /* @TODO
+ /* TODO:
   * ----------------------------------------------
   * params has not loaded from the Next/Link component
   * that got us to this page. Need to figure out how
