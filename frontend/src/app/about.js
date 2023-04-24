@@ -12,24 +12,19 @@ import Donate from '../../components/donate'
 import Article from '../../components/article'
 import Footer from '../../components/footer'
 
-/* lib */
-import { theme } from '../../lib/theme';
 
 /* Default /[slug] page is a "Blog" page */
 export default function AboutPage({ params }) {
   return (
-    <>
-      <div className={ page_styles.next_wrapper }>
-        <MenuOverlay />
-        <MenuToggle />
-        <div className={ page_styles.main_wrapper }>
-          <Title />
-          <Donate />
-          <Article slug={ `${params.slug}` } />
-        </div>
-        <Footer />
+    <div className={ page_styles.next_wrapper }>
+      <MenuOverlay />
+      <MenuToggle />
+      <div className={ page_styles.main_wrapper }>
+        <Title />
+        <Donate />
+        <Article slug={ `${params.slug}` } />
       </div>
-    </>
+      <Footer />
+    </div>
   )
 }
-

@@ -1,24 +1,5 @@
-@media (min-width: 768px) {
-  .prose__wrapper > *:not([class*=full__width]) {
-    width: 66%;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
+@media (min-width: 1200px) {
   .prose__wrapper > hr:not([class*=full__width]) {
-    width: calc(66% - 4em);
-  }
-}
-.prose__wrapper {
-  & > *:not([class*=full__width]) {
-    padding: 0 2em;
-  }
-  & > h2:not([class*=full__width]) {
-    padding: 0 1em;
-  }
-  & > h3:not([class*=full__width]) {
-    padding: 0 1em;
-  }
-  & > ul:not([class*=full__width]) {
-    padding: 0 2em 0 3em;
+    width: calc(100% - 4em);
   }
 }

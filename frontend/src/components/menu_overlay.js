@@ -2,11 +2,11 @@
 
 import React, { useEffect } from 'react';
 /* Next Link */
-import Link from 'next/link'
+import Link from 'next/link';
 /* Styles */
-import menu_overlay_styles from '../styles/MenuOverlay.module.scss'
+import menu_overlay_styles from '../styles/MenuOverlay.module.scss';
 /* Dark Mode */
-import DarkModeToggle from './dark_mode_toggle'
+import DarkModeToggle from './dark_mode_toggle';
 
 export default function MenuOverlay() {
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function MenuOverlay() {
     }
 
     return () => {
-      if (document.getElementsByClassName(menu_overlay_styles.close_menu)) {
+      if (document.getElementsByClassName(menu_overlay_styles.close_menu).length) {
         document.getElementsByClassName(menu_overlay_styles.close_menu)[0].removeEventListener('keydown', toggleMenu);
       }
       if (document.getElementById('menu-toggle')) {

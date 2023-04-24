@@ -1,118 +1,77 @@
-'use client';
-
-/* React */
-import React, { useState } from 'react'
 /* Local Utilities */
-import { renderComments, processComments } from '../utils/comment_helpers'
-import sanitize from '../utils/sanitize'
+//import { renderComments, processComments } from '../utils/comment_helpers'
+import sanitize from '../utils/sanitize';
+import Comment from './comment';
+import CommentForm from './comment_form';
+
 /* Styles */
-import comment_styles from '../styles/Comment.module.scss'
+import comment_styles from '../styles/Comment.module.scss';
 
-export default async function Comments({ meta }) {
-  const [pid, setPID] = useState(0);
-  const [author, setAuthor] = useState('Anonymous');
-  const [upvote_count, setUpvoteCount] = useState(0);
-  const [downvote_count, setDownvoteCount] = useState(0);
-  const [content, setContent] = useState('');
 
-  const parentComments        = await getParentComments(meta.slug);
-  const commentsAndRepliesRaw = await processComments(parentComments);
-  const comments              = await renderComments(commentsAndRepliesRaw);
-
-  console.log('Final Comments: ')
-  console.log(comments);
-
-  async function handleCommentSubmit(e, meta) {
-    e.preventDefault();
-
-    let pid = e.target.pid.value
-    let author = e.target.author.value
-    let content = sanitize(e.target.content.value)
-    let upvotes = 0
-    let downvotes = 0
-
-    if ( author === '' ) {
-      author = e.target.author.placeholder;
-    }
-
-    const object = {
-      'pid': pid,
-      'author': author,
-      'content': content,
-      'upvotes': upvotes,
-      'downvotes': downvotes,
-      'article': meta.id,
-    }
-
-    const options_post = {
-      method: "POST",
-      supportHeaderParams: true,
-      headers: {
-        'Accept': 'application/json;encoding=utf-8',
-        'Content-Type': 'application/json;encoding=utf-8',
-      },
-      body: JSON.stringify(object),
-    }
-
-    const results = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/submit`, options_post)
-      .catch(error => console.log( error ))
-    const json = results.json()
-
-    getNewComments(meta);
-    return json;
-  }
-
+const getData = async (slug) => {
   const options_get = {
     method: "GET",
     supportHeaderParams: true,
     headers: {
       'Accept': 'application/json;encoding=utf-8',
       'Content-Type': 'application/json;encoding=utf-8',
+    },
+    next: {
+      // Re-hydrate every 4 minutes
+      revalidate: 480000,
     }
   }
 
-  async function getNewComments({ meta }) {
-    const results = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${meta.slug}/parents`, options_get)
-      .catch(error => console.log( error ));
-    const json = await results.json()
-    //setComments(processComments(json));
-  }
+  const comments_promise = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${slug}`, options_get);
 
-  return(
-    <>
-      <h4 className={ comment_styles.comments_header }>Discussion</h4>
-      <div className={ comment_styles.comment_form_wrapper }>
-        <form className={ comment_styles.comment_form } onSubmit={ (e) => { handleCommentSubmit(e, meta) } }>
-          <input required hidden type="number" name="pid" value="0" onChange={ (e) => { setPID(e) } } />
-          <input type="text" name="author" placeholder="Anonymous" className={ comment_styles.name_input } onChange={ (e) => { setAuthor(e) } } />
-          <textarea required type="text" name="content" rows="5" placeholder="Type a reply or comment in this area." className={ comment_styles.comment_input } onChange={ (e) => { setContent(e) } } />
-          <div className={ comment_styles.comment_form_button }>
-            <input type="submit" value="SUBMIT" className={ comment_styles.comment_submit } />
-          </div>
-        </form>
-      </div>
-      { comments }
-    </>
-  );
-}
-
-async function getParentComments( slug ) {
-  const options_get = {
-    method: "GET",
-    supportHeaderParams: true,
-    headers: {
-      'Accept': 'application/json;encoding=utf-8',
-      'Content-Type': 'application/json;encoding=utf-8',
-    }
-  }
-  const parent_comments_promise = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${slug}/parents`, options_get);
-
-  if (parent_comments_promise.ok) {
-    const parentComments = await parent_comments_promise.json();
-    console.log('Parent comments');
-    console.log(parentComments);
-    return parentComments;
+  let comments_array = [];
+  if (comments_promise.ok) {
+    comments_array = await comments_promise.json();
   } else {
     console.error( 'Could not fetch parent comments.' );
   }
+
+  let comments = [];
+
+  if (comments_array instanceof Array && comments_array.length > 0) {
+    comments_array.forEach(comment_json => {
+      let comment = {
+        cid: comment_json.cid,
+        pid: comment_json.pid,
+        author: comment_json.author,
+        created_at: comment_json.created_at,
+        content: comment_json.content,
+        upvotes: comment_json.upvotes,
+        downvotes: comment_json.downvotes,
+        article: comment_json.article
+      }
+      comments.push(comment);
+    });
+  } else {
+    console.error('Value is not an array, or is empty.');
+  }
+
+  return {
+    comments
+  }
+}
+
+export default async function Comments (props) {
+  const { comments } = await getData(props.slug);
+
+  return(
+    <div className={ comment_styles.comments_section }>
+      <h4 className={ comment_styles.comments_header }>Discussion</h4>
+      <div className={ comment_styles.comment_form_wrapper }>
+        <CommentForm />
+      </div>
+      <div>
+        {
+          comments.map((comment, index) => {
+            return <Comment key={ comment.cid } comment={ comment } index={ index } />
+          })
+        }
+      </div>
+    </div>
+  )
 }

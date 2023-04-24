@@ -21,12 +21,14 @@ class ArticleDetailAPIView(generics.GenericAPIView):
 
     def get(self, request, slug):
         """get.
-
         :param slug:
         """
+
         query_set = Article.objects.filter(slug=slug).first()
+
         if query_set:
             return response.Response(self.serializer_class(query_set).data)
+
         return response.Response('Not found', status=status.HTTP_404_NOT_FOUND)
 
 

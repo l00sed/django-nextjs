@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import donate_styles from '../styles/Donate.module.scss';
+import page_styles from '../styles/Page.module.scss';
 
 export default function Donate() {
   useEffect(() => {
@@ -74,7 +75,7 @@ export default function Donate() {
       <button id="donate" type="button" className={ donate_styles.donate } title="Click to copy my Ethereum wallet address!">
         DONATE
       </button>
-      <div id="donate-overlay" className={ donate_styles.donate_overlay }>
+      <div id="donate-overlay" className={ `${donate_styles.donate_overlay} ${page_styles.full__width}` }>
         <div className={ donate_styles.menu_text }>
           <svg className={ donate_styles.ethereum } width="226" height="328" viewBox="0 0 226 328" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path className={ donate_styles.eth_1 } d="M33 169L113.5 200L193 168.5L113.5 140L33 169Z" fillOpacity="0.25"/>

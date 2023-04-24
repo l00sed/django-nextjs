@@ -9,10 +9,10 @@ const options_get = {
   headers: {
     'Accept': 'application/json;encoding=utf-8',
     'Content-Type': 'application/json;encoding=utf-8',
-  },
+  }
 }
 
-export async function renderComments(comments) {
+export function renderComments(comments) {
   console.log( 'renderedComments input:' );
   console.log( comments );
 
@@ -30,17 +30,17 @@ export async function renderComments(comments) {
   return rendered_comments;
 }
 
-export async function processComments( parent_comments ) { // Accepts array of comment objects
+export function processComments( parent_comments ) { // Accepts array of comment objects
   let processed_comments = [];
   // API is set up to returns 'Not found' in python view
-  if (parent_comments && parent_comments !== 'Not found') {
+  if (parent_comments.length && parent_comments !== 'Not found') {
     console.log('Process Comments');
     console.log(parent_comments);
     for (let comment of parent_comments) {
       // Append rendered comment component to processed parent_comments array
       reply_level = 0;
       comment.reply_level = reply_level;
-      const replies = await getReplies(comment);
+      const replies = getReplies(comment);
       console.log('Replies');
       console.log(replies);
       if (replies) {
@@ -57,19 +57,19 @@ export async function processComments( parent_comments ) { // Accepts array of c
   }
 }
 
-export async function getReplies(comment) {
+export function getReplies(comment) {
   console.log('Current comment being processed for replies:');
   console.log(comment);
   if (comment.pid !== 0) {
-    const comments = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/pid/${comment.cid}`, options_get);
+    const comments = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/pid/${comment.cid}`, options_get);
     let json = {}
     if (comments.ok) {
-      json = await comments.json();
+      json = comments.json();
       console.log('Replies for the currently processed comment:');
       console.log(json);
       if (json !== 'Not found') {
         index++;
-        await processReplies(json)
+        processReplies(json)
       }
     } else {
       console.error('Could not get comments for parent id.');
@@ -81,14 +81,14 @@ export async function getReplies(comment) {
   }
 }
 
-export async function processReplies(data) {
+export function processReplies(data) {
   reply_level++;
   for (const reply of data) {
     // Append rendered reply component to processed comments
     reply.reply_level = reply_level;
     processed_comments.push(reply);
     if (reply_level < 6) { // Continue looping deeper until depth = 6
-      await getReplies( reply );
+      getReplies( reply );
     }
   }
 }

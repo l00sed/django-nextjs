@@ -4,7 +4,6 @@ import dateformat     from 'dateformat';
 /* Styles */
 import toc_styles     from '../styles/Toc.module.scss';
 import article_styles from '../styles/Article.module.scss';
-import comment_styles from '../styles/Comment.module.scss';
 
 /* MDX / Remark / Rehype */
 import { serialize }              from 'next-mdx-remote/serialize';
@@ -25,43 +24,12 @@ import Comments from './comments';
 const datePublished = (meta) => {
   let date = "";
   if (meta.updated_at) {
-    date = dateformat( new Date(meta.updated_at), "h:MMtt | mmmm, dS yyyy").toString();
+    date = dateformat(new Date(meta.updated_at), "h:MMtt | mmmm, dS yyyy").toString();
   }
   return date;
 }
 
-export default async function Article ( props ) {
-  /* Get article content and its meta */
-  const { meta, content } = await getData( props.slug );
-
-  return (
-    (<div className={ article_styles.main_wrapper }>
-      <main className={ article_styles.main }>
-        <article className={ article_styles.article_wrapper }>
-          <header className={ article_styles.article__head }>
-            <h1 className={ article_styles.article__title }>{ meta.title }</h1>
-            <div className={ article_styles.article__meta }>
-              <span className={ article_styles.article__date }>{ datePublished(meta) }</span>
-              <span className={ article_styles.article__author }>{ meta.author }</span>
-            </div>
-          </header>
-          <div className={ article_styles.article__body }>
-            <div className={ article_styles.article__description }>
-              <Mdx content={ content } />
-            </div>
-          </div>
-        </article>
-      </main>
-      <aside>
-        <div className={ comment_styles.comments_section }>
-          <Comments slug={ props.slug } meta={ meta } />
-        </div>
-      </aside>
-    </div>)
-  )
-}
-
-async function getData( slug ) {
+const getData = async (slug) => {
   const options_get = {
     method: "GET",
     supportHeaderParams: true,
@@ -75,7 +43,7 @@ async function getData( slug ) {
 
   let data_json = {};
 
-  if ( data_promise.ok ) {
+  if (data_promise.ok) {
     data_json = await data_promise.json();
   } else {
     console.error( 'Could not fetch article content.' );
@@ -210,3 +178,33 @@ async function getData( slug ) {
     content
   }
 }
+
+export default async function Article (props) {
+  /* Get article content and its meta */
+  const { meta, content } = await getData(props.slug);
+
+  return (
+    <div className={ article_styles.main_wrapper }>
+      <main className={ article_styles.main }>
+        <article className={ article_styles.article_wrapper }>
+          <header className={ article_styles.article__head }>
+            <h1 className={ article_styles.article__title }>{ meta.title }</h1>
+            <div className={ article_styles.article__meta }>
+              <span className={ article_styles.article__date }>{ datePublished(meta) }</span>
+              <span className={ article_styles.article__author }>{ meta.author }</span>
+            </div>
+          </header>
+          <div className={ article_styles.article__body }>
+            <div className={ article_styles.article__description }>
+              <Mdx content={ content } />
+            </div>
+          </div>
+        </article>
+      </main>
+      <aside className={ article_styles.aside }>
+        <Comments slug={ props.slug } />
+      </aside>
+    </div>
+  )
+}
+
