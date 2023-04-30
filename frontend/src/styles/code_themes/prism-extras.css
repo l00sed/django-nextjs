@@ -45,19 +45,6 @@ pre {
   padding-left: 2em;
 }
 
-.code-line.inserted {
-  background-color: rgba(16, 185, 129, 0.2); /* Set inserted line (+) color */
-}
-
-.code-line.deleted {
-  background-color: rgba(239, 68, 68, 0.2); /* Set deleted line (-) color */
-}
-
-.highlight-line {
-  background-color: rgba(55, 65, 81, 0.5); /* Set highlight bg color */
-  border-left: 4px solid rgb(59, 130, 246); /* Set highlight accent border color */
-}
-
 .relative {
   position: relative;
 }
@@ -82,7 +69,7 @@ pre {
   cursor: pointer;
   position: absolute;
   top: 9px;
-  right: 3em;
+  right: 10px;
   margin-bottom: 0;
   width: 30px;
   height: 30px;
@@ -133,4 +120,21 @@ pre {
 }
 .remark-code-title + .code-copy-button {
   top: 30px;
+}
+.code-line.highlight-line,
+.code-line.inserted,
+.code-line.deleted {
+  display: block;
+}
+.code-line.highlight-line {
+  border-left-color: var(--code-highlight);
+  background-color: var(--code-highlight-bg);
+}
+.code-line.inserted {
+  border-left: 4px solid var(--code-inserted);
+  background-color: var(--code-inserted-bg);
+}
+.code-line.deleted {
+  border-left: 4px solid var(--code-deleted);
+  background-color: var(--code-deleted-bg);
 }

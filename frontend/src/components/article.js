@@ -202,7 +202,11 @@ export default async function Article (props) {
         </article>
       </main>
       <aside className={ article_styles.aside }>
-        <Comments slug={ props.slug } />
+        <div className={ article_styles.sticky }>
+          <div className={ article_styles.scroll__y }>
+            <Comments slug={ props.slug } />
+          </div>
+        </div>
       </aside>
     </div>
   )

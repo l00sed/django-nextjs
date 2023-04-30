@@ -1,7 +1,8 @@
 /* #* Table of Contents */
 .toc__wrapper {
-  --toc-width: 300px;
+  --toc-width: 400px;
   overflow: hidden;
+  margin-bottom: 2.5em;
 }
 /* Hidden input checkbox */
 input.toc__hidden {
@@ -28,13 +29,14 @@ label.toc__header {
   display: flex;
   cursor: pointer;
   border-radius: 7.5px;
-  width: var(--toc-width);
+  width: 100%;
+  max-width: var(--toc-width) !important;
   height: 100%;
-  margin: 0 auto 0 0;
+  margin: 2px 2em;
   justify-content: space-between;
   padding: 0.5em 0.75em 0.5em 1em;
   background-color: var(--toc-header-bg);
-  backdrop-filter: brightness(0.975);
+  box-shadow: 0 0 1px 1px var(--toc-header-shadow);
 }
 
 h4.toc__label {
@@ -63,15 +65,16 @@ input.toc__hidden:checked + label.toc__header svg.toc__caret {
 
 nav.toc__block {
   border-radius: 0 0 7.5px 7.5px;
-  border-top: 1px solid var(--toc-hr);
+  box-shadow: 0 1px 1px 1px var(--toc-header-shadow);
   max-height: 0;
   opacity: 0;
-  width: var(--toc-width);
+  width: 100%;
+  max-width: var(--toc-width) !important;
   z-index: 9;
   position: relative;
   overflow: hidden;
   background-color: var(--toc-nav-bg);
-  margin: 0 auto 0 0;
+  margin: 0 2em 2px 2em;
   transition: opacity var(--loosed-transition-medm) ease, max-height var(--loosed-transition-slow) ease;
   background-color: var(--toc-nav-bg);
 }
@@ -82,7 +85,7 @@ nav.toc__block > ol {
   line-height: 125%;
   margin-top: 1em;
   margin-bottom: 0;
-  padding: 0.25em 1.5em 1.25em 3em;
+  padding: 0.25em 1.5em 1.5em 2em;
 }
 
 nav.toc__block li ol {

@@ -1,0 +1,11 @@
+Django
+Pillow
+Pygments
+django-cors-headers
+django-filter
+django-tinymce
+django-webmention
+djangorestframework
+drf-yasg
+easy-thumbnails
+markdown
