@@ -1,7 +1,9 @@
 from django.db import models
+from tree_queries.models import TreeNode
+from tree_queries.query import TreeQuerySet
 
 
-class Comment(models.Model):
+class Comment(TreeNode):
     """Comment."""
     cid = models.AutoField(primary_key=True)
     parent = models.ForeignKey(
@@ -19,8 +21,10 @@ class Comment(models.Model):
     downvotes = models.IntegerField(default=0)
     reply_level = models.IntegerField(default=0)
 
+    objects = TreeQuerySet.as_manager(with_tree_fields=True)
+
     class Meta:
-        ordering = ['cid', '-created_at']
+        ordering = ['cid']
 
     def __str__(self):
         return str(self.cid)

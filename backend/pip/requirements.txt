@@ -4,6 +4,7 @@ Pygments
 django-cors-headers
 django-filter
 django-tinymce
+django-tree-queries
 django-webmention
 djangorestframework
 drf-yasg

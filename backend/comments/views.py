@@ -28,7 +28,7 @@ class CommentsByArticleAPIView(generics.GenericAPIView):
         article = Article.objects.filter(slug=slug).first()
 
         if article:
-            query_set = Comment.objects.filter(article=article.id)
+            query_set = (Comment.objects.filter(article=article.id))
 
             if query_set:
                 serializer = CommentSerializer(query_set, many=True)

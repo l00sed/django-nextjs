@@ -37,13 +37,14 @@ const getData = async (slug) => {
     comments_array.forEach(comment_json => {
       let comment = {
         cid: comment_json.cid,
-        pid: comment_json.pid,
+        parent: comment_json.parent,
         author: comment_json.author,
         created_at: comment_json.created_at,
         content: comment_json.content,
         upvotes: comment_json.upvotes,
         downvotes: comment_json.downvotes,
-        article: comment_json.article
+        article: comment_json.article,
+        reply_level: comment_json.reply_level,
       }
       comments.push(comment);
     });

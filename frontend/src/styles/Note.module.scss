@@ -1,11 +1,13 @@
+.note__wrapper {
+  margin: 2em 2em 2em 2em;
+}
 .note__base {
-  padding: 1em;
-  margin-bottom: 2em;
-  border-radius: 10px;
+  padding: 1.5em 1.5em 2em 1.5em;
+  border-radius: 4px;
 
   h4 {
     margin-top: 0;
-    margin-bottom: 0.25em;
+    margin-bottom: 0.5em;
   }
 
   p {
@@ -18,13 +20,16 @@
 }
 .note__default {
   background-color: var(--note-default);
-  border-left: 4px solid var(--note-default-border);
+  box-shadow: 5px 5px 0 0 var(--note-default-border);
+  border: 1px solid var(--note-default-border);
 }
 .note__success {
   background-color: var(--note-success);
-  border-left: 4px solid var(--note-success-border);
+  box-shadow: 5px 5px 0 0 var(--note-success-border);
+  border: 1px solid var(--note-success-border);
 }
 .note__error {
   background-color: var(--note-error);
-  border-left: 4px solid var(--note-error-border);
+  box-shadow: 5px 5px 0 0 var(--note-error-border);
+  border: 1px solid var(--note-error-border);
 }
