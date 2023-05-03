@@ -62,8 +62,8 @@ export default async function Comments (props) {
 
   return(
     <div className={ comment_styles.comments_section }>
-      <h4 className={ comment_styles.comments_header }>Discussion</h4>
       <div className={ comment_styles.comment_form_wrapper }>
+        <h3 className={ comment_styles.comments_header }>Discussion</h3>
         <CommentForm />
       </div>
       <div>

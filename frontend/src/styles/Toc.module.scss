@@ -32,7 +32,7 @@ label.toc__header {
   width: 100%;
   max-width: var(--toc-width) !important;
   height: 100%;
-  margin: 2px 2em;
+  margin: 2px 3em;
   justify-content: space-between;
   padding: 0.5em 0.75em 0.5em 1em;
   background-color: var(--toc-header-bg);
@@ -74,7 +74,7 @@ nav.toc__block {
   position: relative;
   overflow: hidden;
   background-color: var(--toc-nav-bg);
-  margin: 0 2em 2px 2em;
+  margin: 0 auto 2px 3em;
   transition: opacity var(--loosed-transition-medm) ease, max-height var(--loosed-transition-slow) ease;
   background-color: var(--toc-nav-bg);
 }
@@ -85,7 +85,7 @@ nav.toc__block > ol {
   line-height: 125%;
   margin-top: 1em;
   margin-bottom: 0;
-  padding: 0.25em 1.5em 1.5em 2em;
+  padding: 0.25em 1.5em 1.5em 2.5em;
 }
 
 nav.toc__block li ol {

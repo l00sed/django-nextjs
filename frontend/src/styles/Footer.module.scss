@@ -29,9 +29,10 @@
 }
 .link_row {
   display: flex;
+  gap: 2em;
   flex-direction: row;
   max-width: 1200px;
-  padding: 3em 2em 3em 2em;
+  padding: 3em 3em;
   margin: auto;
   line-height: 200%;
 
@@ -49,7 +50,6 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin-bottom: 2em;
   }
 }
 
