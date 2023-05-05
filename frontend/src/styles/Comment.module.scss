@@ -59,16 +59,16 @@
 
 .main_wrapper {
   margin: 0.5em 0;
+  display: flex;
+  position: relative;
   flex-direction: row;
+  align-items: stretch;
 }
 
 .comment_form_wrapper,
 .main_wrapper {
   font-size: 0.8em;
-  position: relative;
-  display: flex;
   width: 100%;
-  align-items: stretch;
   border-radius: var(--comment-radius);
 }
 
@@ -79,7 +79,8 @@
 .comment_form_wrapper {
   background-color: var(--comment-heading);
   border: 1px solid var(--comment-shadow);
-  flex-direction: column;
+  display: block;
+  margin-top: 0;
   margin-bottom: 0.5em;
 
   h3 {

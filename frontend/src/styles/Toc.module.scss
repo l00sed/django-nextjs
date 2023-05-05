@@ -32,11 +32,11 @@ label.toc__header {
   width: var(--toc-width);
   max-width: 100%;
   height: 100%;
-  margin: 2px 3em;
+  margin: 2px 3em 0 3em;
   justify-content: space-between;
   padding: 0.5em 0.75em 0.5em 1em;
   background-color: var(--toc-header-bg);
-  box-shadow: 0 0 1px 1px var(--toc-header-shadow);
+  border: 1px solid var(--toc-header-shadow);
 }
 
 h4.toc__label {
@@ -65,7 +65,7 @@ input.toc__hidden:checked + label.toc__header svg.toc__caret {
 
 nav.toc__block {
   border-radius: 0 0 7.5px 7.5px;
-  box-shadow: 0 1px 1px 1px var(--toc-header-shadow);
+  border: 1px solid var(--toc-header-shadow);
   max-height: 0;
   opacity: 0;
   width: var(--toc-width);
