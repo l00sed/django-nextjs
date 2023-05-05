@@ -29,8 +29,8 @@ label.toc__header {
   display: flex;
   cursor: pointer;
   border-radius: 7.5px;
-  width: 100%;
-  max-width: var(--toc-width) !important;
+  width: var(--toc-width);
+  max-width: 100%;
   height: 100%;
   margin: 2px 3em;
   justify-content: space-between;
@@ -68,8 +68,8 @@ nav.toc__block {
   box-shadow: 0 1px 1px 1px var(--toc-header-shadow);
   max-height: 0;
   opacity: 0;
-  width: 100%;
-  max-width: var(--toc-width) !important;
+  width: var(--toc-width);
+  max-width: 100%;
   z-index: 9;
   position: relative;
   overflow: hidden;
