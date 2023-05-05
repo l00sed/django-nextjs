@@ -1,18 +1,61 @@
 'use client';
 
-import React, { useEffect } from 'react';
+/* Styles */
 import dark_mode_toggle_styles from '../styles/DarkModeToggle.module.scss'
-import { setTheme } from '../lib/theme';
-
+/* Cookies */
+import Cookies from 'js-cookie';
+/* React */
+import React, { useEffect } from 'react';
 
 export default function DarkModeToggle() {
   useEffect(() => {
-    document.getElementById('dark-mode-toggle').addEventListener('click', setTheme);
+    /* Set initial theme (in cookie)
+     * or retrieve theme if set in cookies */
+    const getTheme = () => {
+      let currentTheme = Cookies.get('theme');
+      if (currentTheme === undefined) {
+        Cookies.set('theme', 'default', { expires: 365, secure: true, sameSite: 'strict' });
+        return 'default';
+      } else {
+        if (document.getElementById('theme-root')) {
+          document.getElementById('theme-root').classList = [currentTheme];
+        }
+      }
+      return currentTheme;
+    }
+    // Run once on component load to get the current theme from cookies
+    getTheme();
+
+    /* Set the theme.
+     * Determine if user has dark mode enabled.
+     * Swap to the opposite of what was last enabled. */
+    const setTheme = (_event) => {
+      let currentTheme = getTheme();
+      if (( window?.matchMedia('(prefers-color-scheme: dark)')?.matches &&
+            currentTheme === 'default') ||
+            currentTheme === 'dark') {
+        Cookies.set('theme', 'light', { path: '/' });
+        toggleTheme('light');
+      }
+
+      if (( window?.matchMedia('(prefers-color-scheme: light)')?.matches &&
+            currentTheme === 'default' ) ||
+            currentTheme === 'light' ) {
+        Cookies.set('theme', 'dark', { path: '/' });
+        toggleTheme('dark');
+      }
+    }
+
+    /* Do the actual class toggling */
+    const toggleTheme = (theme) => {
+      document.getElementById('theme-root').classList = [theme];
+    }
+
+    // Setup event listener
+    document.getElementById('dark-mode-toggle')?.addEventListener('click', setTheme);
 
     return () => {
-      if (document.getElementById('dark-mode-toggle')) {
-        document.getElementById('dark-mode-toggle').removeEventListener('click', setTheme);
-      }
+      document.getElementById('dark-mode-toggle')?.removeEventListener('click', setTheme);
     }
   }, []);
 
@@ -27,8 +70,7 @@ export default function DarkModeToggle() {
           viewBox="0 0 120 120"
           overflow="visible"
           version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
 					<g filter="url(#filter1_f_2_2)">
 						<path d="M32 95.576C38.0182 100.407 46.0648 103.824 54.3904 104.742C62.716 105.661 71.3207 104.081 78.2584 100.678C85.2531 97.3936 91.8485 91.6786 96.3013 84.6273C100.754 77.5759 103.064 69.1881 102.999 61.5C103.064 53.8118 100.754 45.4241 96.3013 38.3727C91.8485 31.3214 85.2531 25.6064 78.2584 22.3215C71.3207 18.9195 62.716 17.3392 54.3904 18.2575C46.0648 19.1759 38.0182 22.5929 32 27.4241C43.3174 20.4509 60.275 20.4509 71.5924 27.4241C83.3276 33.678 91.8064 48.2729 91.3887 61.5C91.8064 74.7271 83.3276 89.322 71.5924 95.576C60.275 102.549 43.3174 102.549 32 95.576Z" fill="#003262"/>
 						<path d="M32 95.576C38.0182 100.407 46.0648 103.824 54.3904 104.742C62.716 105.661 71.3207 104.081 78.2584 100.678C85.2531 97.3936 91.8485 91.6786 96.3013 84.6273C100.754 77.5759 103.064 69.1881 102.999 61.5C103.064 53.8118 100.754 45.4241 96.3013 38.3727C91.8485 31.3214 85.2531 25.6064 78.2584 22.3215C71.3207 18.9195 62.716 17.3392 54.3904 18.2575C46.0648 19.1759 38.0182 22.5929 32 27.4241C43.3174 20.4509 60.275 20.4509 71.5924 27.4241C83.3276 33.678 91.8064 48.2729 91.3887 61.5C91.8064 74.7271 83.3276 89.322 71.5924 95.576C60.275 102.549 43.3174 102.549 32 95.576Z" fill="#003262" stroke="#003262" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="1 1"/>
@@ -51,8 +93,7 @@ export default function DarkModeToggle() {
           viewBox="0 0 120 120"
           overflow="visible"
           version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
 					<g filter="url(#filter0_f_2_4)">
 						<path d="M61 72C67.0751 72 72 67.0751 72 61C72 54.9249 67.0751 50 61 50C54.9249 50 50 54.9249 50 61C50 67.0751 54.9249 72 61 72Z" fill="#FFB000"/>
 						<path d="M61 72C67.0751 72 72 67.0751 72 61C72 54.9249 67.0751 50 61 50C54.9249 50 50 54.9249 50 61C50 67.0751 54.9249 72 61 72Z" fill="#FFB000" stroke="#FFB000" strokeWidth="5" strokeLinecap="round"/>

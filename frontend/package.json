@@ -26,6 +26,7 @@
     "highlight.js": "^11.5.1",
     "html-react-parser": "^1.4.14",
     "intercept-stdout": "^0.1.2",
+    "js-cookie": "^3.0.5",
     "mdast-util-to-hast": "^12.1.1",
     "mdx-bundler": "^9.0.1",
     "net": "^1.0.2",
@@ -55,10 +56,10 @@
     "tls": "^0.0.1",
     "unified": "^10.1.2",
     "unified-stream": "^2.0.0",
-    "universal-cookie": "^4.0.4",
     "xdm": "^3.4.0"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.3",
     "@types/node": "^18.11.9",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",

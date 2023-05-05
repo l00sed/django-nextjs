@@ -3,15 +3,13 @@ import React from 'react';
 import '../styles/globals.scss';
 /* Head Component */
 import Head from './head';
-/* Theme */
-import { theme } from '../lib/theme';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <Head />
       <body>
-        <div id="theme-root" className={ theme() }>
+        <div id="theme-root" className="default">
           { children }
         </div>
       </body>
