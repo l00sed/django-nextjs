@@ -153,7 +153,17 @@ export default function Comment(props) {
             </div>
             <div className={ comment_styles.body_col_2 }>
               <Link href="/" className={ comment_styles.reply_button_wrapper } legacyBehavior>
-                <div className={ comment_styles.reply_button }>⮌</div>
+                <div className={ comment_styles.reply_button }>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24">
+                    <path
+                      fill="currentColor"
+                      d="M20 19q-.425 0-.713-.288T19 18v-3q0-1.25-.875-2.125T16 12H6.8l2.925 2.925Q10 15.2 10 15.6t-.3.7q-.275.275-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.213-.325T3.426 11q0-.2.063-.375T3.7 10.3l4.625-4.625Q8.6 5.4 9 5.4t.7.3q.275.275.275.7t-.275.7L6.8 10H16q2.075 0 3.538 1.463T21 15v3q0 .425-.288.713T20 19Z" />
+                  </svg>
+                </div>
               </Link>
             </div>
           </div>
@@ -169,12 +179,16 @@ export default function Comment(props) {
           </div>
           <div className={ comment_styles.upvote_button }>
             <Link href="/" legacyBehavior>
-              <span>⯅</span>
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="currentColor" d="M6.786 1.459a.903.903 0 0 0-1.572 0L1.122 8.628C.774 9.238 1.211 10 1.91 10h8.18c.698 0 1.135-.762.787-1.372l-4.092-7.17Z"/></svg>
+              </span>
             </Link>
           </div>
           <div className={ comment_styles.downvote_button }>
             <Link href="/" legacyBehavior>
-              <span>⯆</span>
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="currentColor" d="M5.214 10.541a.903.903 0 0 0 1.572 0l4.092-7.169C11.226 2.762 10.789 2 10.09 2H1.91c-.698 0-1.135.762-.787 1.372l4.092 7.17Z"/></svg>
+              </span>
             </Link>
           </div>
         </div>

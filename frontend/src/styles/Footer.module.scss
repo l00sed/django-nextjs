@@ -28,10 +28,13 @@
   background-color: var(--link-section-bg);
 }
 .link_row {
-  display: flex;
-  gap: 2em;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 8em;
+  row-gap: 4em;
   flex-direction: row;
-  max-width: 1200px;
+  flex-wrap: wrap;
+  max-width: min(100%, 1200px);
   padding: 3em 3em;
   margin: auto;
   line-height: 200%;
@@ -47,6 +50,7 @@
   }
 
   .link_col {
+    grid-column: span 4 / span 4;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -125,7 +129,6 @@ a:focus .icon path {
   .webring {
     width: 100%;
   }
-  .link_row,
   .webrings_row {
     flex-direction: column;
   }
@@ -133,7 +136,7 @@ a:focus .icon path {
     h4 {
       text-align: left;
     }
-    width: 100%;
+    min-width: 200px;
     padding: 0 0 1em 0;
   }
   .geekring_row {
@@ -146,12 +149,14 @@ a:focus .icon path {
     border-top: 1px solid var(--webring-center-border);
   }
 }
+@media screen and (min-width: 576px) {
+  .link_col {
+    grid-column: span 2 / span 2 !important;
+  }
+}
 @media screen and (min-width: 1200px) {
   .link_col {
-    h4 {
-      text-align: center;
-    }
-    width: 33%;
+    grid-column: span 1 / span 1 !important;
     padding: 0 2em 1em 2em;
   }
   .webring:last-child {

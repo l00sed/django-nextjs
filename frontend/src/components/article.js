@@ -1,6 +1,3 @@
-/* Date utils */
-import dateformat     from 'dateformat';
-
 /* Styles */
 import toc_styles     from '../styles/Toc.module.scss';
 import article_styles from '../styles/Article.module.scss';
@@ -19,15 +16,8 @@ import remarkCodeTitles           from '../utils/code_titles';
 
 import Mdx from './mdx';
 import Comments from './comments';
+import ArticleHead from './article_head';
 
-
-const datePublished = (meta) => {
-  let date = "";
-  if (meta.updated_at) {
-    date = dateformat(new Date(meta.updated_at), "h:MMtt | mmmm, dS yyyy").toString();
-  }
-  return date;
-}
 
 const getData = async (slug) => {
   const options_get = {
@@ -74,7 +64,7 @@ const getData = async (slug) => {
         [rehypeExternalLinks, {
           // Set external links to open in a new window
           target: '_blank',
-          rel: ['nofollow']
+          rel: ['noopener', 'nofollow', 'noreferrer']
         }],
         [rehypeToc, {
           headings: ["h2", "h3"],
@@ -99,60 +89,69 @@ const getData = async (slug) => {
               children: [
                 {
                   type: "element",
-                  tagName: "input",
+                  tagName: "div",
                   properties: {
-                    id: "toc",
-                    type: "checkbox",
-                    className: toc_styles.toc__hidden,
-                  },
-                },
-                {
-                  type: "element",
-                  tagName: "label",
-                  properties: {
-                    htmlFor: "toc",
-                    className: toc_styles.toc__header,
+                    className: toc_styles.toc__inner,
                   },
                   children: [
                     {
                       type: "element",
-                      tagName: "h4",
+                      tagName: "input",
                       properties: {
-                        className: toc_styles.toc__label,
+                        id: "toc",
+                        type: "checkbox",
+                        className: toc_styles.toc__hidden,
                       },
-                      children: [
-                        {
-                          type: "text",
-                          value: "Table of Contents",
-                        },
-                      ],
                     },
                     {
                       type: "element",
-                      tagName: "svg",
+                      tagName: "label",
                       properties: {
-                        className: toc_styles.toc__caret,
-                        width: "20",
-                        height: "20",
-                        viewBox: "0 0 20 20",
-                        fill: "none",
-                        xmlns: "http://www.w3.org/2000/svg",
+                        htmlFor: "toc",
+                        className: toc_styles.toc__header,
                       },
                       children: [
                         {
                           type: "element",
-                          tagName: "path",
+                          tagName: "h4",
                           properties: {
-                            d: "M7 4L13 10L7 16",
-                            strokeWidth: "3",
-                            strokeLinecap: "round",
+                            className: toc_styles.toc__label,
                           },
+                          children: [
+                            {
+                              type: "text",
+                              value: "Table of Contents",
+                            },
+                          ],
+                        },
+                        {
+                          type: "element",
+                          tagName: "svg",
+                          properties: {
+                            className: toc_styles.toc__caret,
+                            width: "20",
+                            height: "20",
+                            viewBox: "0 0 20 20",
+                            fill: "none",
+                            xmlns: "http://www.w3.org/2000/svg",
+                          },
+                          children: [
+                            {
+                              type: "element",
+                              tagName: "path",
+                              properties: {
+                                d: "M7 4L13 10L7 16",
+                                strokeWidth: "3",
+                                strokeLinecap: "round",
+                              },
+                            },
+                          ],
                         },
                       ],
                     },
+                    toc,
                   ],
                 },
-                toc,
               ],
             }
           },
@@ -187,13 +186,7 @@ export default async function Article (props) {
     <div className={ article_styles.main_wrapper }>
       <main className={ article_styles.main }>
         <article className={ article_styles.article_wrapper }>
-          <header className={ article_styles.article__head }>
-            <h1 className={ article_styles.article__title }>{ meta.title }</h1>
-            <div className={ article_styles.article__meta }>
-              <span className={ article_styles.article__date }>{ datePublished(meta) }</span>
-              <span className={ article_styles.article__author }>{ meta.author }</span>
-            </div>
-          </header>
+          <ArticleHead meta={ meta } />
           <div className={ article_styles.article__body }>
             <div className={ article_styles.article__description }>
               <Mdx content={ content } />

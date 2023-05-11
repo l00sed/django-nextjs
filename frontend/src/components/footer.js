@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import ScrollTop from './scroll_top';
 import footer_styles from '../styles/Footer.module.scss';
-import page_styles from '../styles/Page.module.scss';
 
 export default function Footer() {
   return (
-    <footer className={ `${footer_styles.footer} ${page_styles.full__width}` }>
+    <footer className={ footer_styles.footer }>
       <ScrollTop />
       <section className={ footer_styles.link_section }>
         <div className={ footer_styles.link_row }>

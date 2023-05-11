@@ -60,6 +60,8 @@ $l-white: #f3f3f3;
 $l-highlight-1: #b61115;
 $l-highlight-1-rgb: rgba($l-highlight-1, 0.95);
 
+$l-main-box-shadow: rgba(0,0,0,0.1);
+
 $l-toc-header-bg: rgba(255,255,255,0.5);
 $l-toc-header-shadow: rgba(0,0,0,0.15);
 $l-toc-nav-bg: rgba(255,255,255,0.4);
@@ -69,10 +71,11 @@ $l-anchor-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
 
 $l-main-text-color: #333;
 
-$l-comment-heading: rgba(255,255,255,0.5);
+$l-comment-heading: rgba(0,0,0,0.025);
 $l-comment-content: rgba(255,255,255,0.4);
 $l-comment-shadow: rgba(0,0,0,0.15);
-$l-reply-shadow: rgba(0,0,0,0.1);
+$l-comment-input-bg: rgba(0,0,0,0.1);
+$l-reply-shadow: rgba(0,0,0,0.035);
 $l-input-outline: rgba(0,0,0,0.5);
 $l-indent-1: rgba(0,0,0,0.1);
 $l-indent-2: rgba(0,0,0,0.2);
@@ -144,10 +147,12 @@ $l-blockquote-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
 $d-black: #f3f3f3;
 $d-white: #1b1b1b;
 
+$d-main-box-shadow: rgba(255,255,255,0.2);
+
 $d-highlight-1: #f93e17;
 $d-highlight-1-rgb: rgba($d-highlight-1,0.95);
 
-$d-toc-header-bg: rgba(255,255,255,0.1);
+$d-toc-header-bg: rgba(255,255,255,0.05);
 $d-toc-header-shadow: rgba(0,0,0,1);
 $d-toc-nav-bg: rgba(255,255,255,0.05);
 $d-toc-shadow: rgba(255,255,255,0.5);
@@ -156,10 +161,11 @@ $d-anchor-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
 
 $d-main-text-color: #e0e0e0;
 
-$d-comment-heading: rgba(255,255,255,0.1);
-$d-comment-content: rgba(255,255,255,0.05);
+$d-comment-heading: rgba(255,255,255,0.05);
+$d-comment-content: rgba(0,0,0,0.05);
 $d-comment-shadow: rgba(0,0,0,1);
-$d-reply-shadow: rgba(255,255,255,0.2);
+$d-comment-input-bg: rgba(0,0,0,0.3);
+$d-reply-shadow: rgba(255,255,255,0.05);
 $d-input-outline: rgba(0,0,0,1);
 $d-indent-1: rgba(255,255,255,0.1);
 $d-indent-2: rgba(255,255,255,0.2);
@@ -232,6 +238,8 @@ $d-blockquote-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
     --loosed-black: #{$l-black};
     --loosed-white: #{$l-white};
 
+    --main-box-shadow: #{$l-main-box-shadow};
+
     --loosed-highlight-1: #{$l-highlight-1};
     --loosed-highlight-1: #{$l-highlight-1-rgb};
 
@@ -247,6 +255,7 @@ $d-blockquote-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
     --comment-heading: #{$l-comment-heading};
     --comment-content: #{$l-comment-content};
     --comment-shadow: #{$l-comment-shadow};
+    --comment-input-bg: #{$l-comment-input-bg};
     --reply-shadow: #{$l-reply-shadow};
     --input-outline: #{$l-input-outline};
     --indent-1: #{$l-indent-1};
@@ -322,6 +331,8 @@ $d-blockquote-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
     --loosed-black: #{$d-black};
     --loosed-white: #{$d-white};
 
+    --main-box-shadow: #{$d-main-box-shadow};
+
     --loosed-highlight-1: #{$d-highlight-1};
     --loosed-highlight-1: #{$d-highlight-1-rgb};
 
@@ -337,6 +348,7 @@ $d-blockquote-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
     --comment-heading: #{$d-comment-heading};
     --comment-content: #{$d-comment-content};
     --comment-shadow: #{$d-comment-shadow};
+    --comment-input-bg: #{$d-comment-input-bg};
     --reply-shadow: #{$d-reply-shadow};
     --input-outline: #{$d-input-outline};
     --indent-1: #{$d-indent-1};
@@ -435,6 +447,9 @@ $d-blockquote-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
   --note-default: rgba(30,100,220,0.15);
   --note-success: rgba(7,203,100,0.15);
   --note-error: rgba(163,7,10,0.15);
+/* ## Parametric Components */
+  --rad-1: 7.5px;
+  --off-1: 3px;
 }
 
 
@@ -443,6 +458,8 @@ $d-blockquote-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
 .light {
   --loosed-black: #{$l-black} !important;
   --loosed-white: #{$l-white} !important;
+
+  --main-box-shadow: #{$l-main-box-shadow} !important;
 
   --loosed-highlight-1: #{$l-highlight-1} !important;
   --loosed-highlight-1: #{$l-highlight-1-rgb} !important;
@@ -461,6 +478,7 @@ $d-blockquote-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
   --comment-heading: #{$l-comment-heading} !important;
   --comment-content: #{$l-comment-content} !important;
   --comment-shadow: #{$l-comment-shadow} !important;
+  --comment-input-bg: #{$l-comment-input-bg} !important;
   --reply-shadow: #{$l-reply-shadow} !important;
   --input-outline: #{$l-input-outline} !important;
   --indent-1: #{$l-indent-1} !important;
@@ -548,6 +566,8 @@ $d-blockquote-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
   --loosed-white: #{$d-white} !important;
   --loosed-black: #{$d-black} !important;
 
+  --main-box-shadow: #{$d-main-box-shadow} !important;
+
   --loosed-highlight-1: #{$d-highlight-1} !important;
   --loosed-highlight-1: #{$d-highlight-1-rgb} !important;
 
@@ -565,6 +585,7 @@ $d-blockquote-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
   --comment-heading: #{$d-comment-heading} !important;
   --comment-content: #{$d-comment-content} !important;
   --comment-shadow: #{$d-comment-shadow} !important;
+  --comment-input-bg: #{$d-comment-input-bg} !important;
   --reply-shadow: #{$d-reply-shadow} !important;
   --input-outline: #{$d-input-outline} !important;
   --indent-1: #{$d-indent-1} !important;
@@ -656,6 +677,10 @@ body,
   font-family: 'JetBrains Mono', monospace;
 }
 
+::placeholder {
+  font-family: 'JetBrains Mono', monospace;
+}
+
 :focus {
   outline: none;
 }
@@ -721,8 +746,8 @@ blockquote {
   margin: 3em 3.25em;
   text-indent: 0.5em;
   padding: 0 2vw 3em 2vw;
-  border-radius: 5px;
-  box-shadow: 5px 5px 0 0 var(--blockquote-border);
+  border-radius: var(--rad-1);
+  box-shadow: var(--off-1) var(--off-1) 0 0 var(--main-box-shadow);
   border: 1px solid var(--blockquote-border);
 
   &::before {
@@ -772,7 +797,7 @@ pre {
 
 input,
 textarea {
-  background-color: var(--loosed-white);
+  background-color: var(--comment-input-bg);
   color: var(--main-text-color);
 }
 
@@ -806,6 +831,37 @@ figure {
   margin-block-end: 0;
   margin-inline-start: 0;
   margin-inline-end: 0;
+}
+
+/* # Article Citation/Footnotes */
+.data-footnote-backref {
+  font-size: 1.5em;
+  height: 1em;
+  top: 0;
+  display: inline-block;
+  padding: 1px 5px;
+}
+a[data-footnote-ref="true"] {
+  top: -5px;
+  padding: 2px 5px;
+}
+.data-footnote-backref,
+a[data-footnote-ref="true"] {
+  position: relative;
+  color: var(--loosed-black);
+  text-decoration: none !important;
+  text-align: center;
+  width: 1.5em;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  line-height: 0.85em;
+  background-color: var(--reply-shadow);
+
+  &:hover {
+    font-weight: normal;
+    background-color: var(--loosed-highlight-1);
+    color: #fff;
+  }
 }
 
 /* # Toggle Class */

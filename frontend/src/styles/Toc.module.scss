@@ -4,6 +4,15 @@
   overflow: hidden;
   margin-bottom: 2.5em;
 }
+.toc__inner {
+  width: fit-content;
+  margin: 0 3em;
+  display: inline-block;
+  background-color: var(--toc-header-bg);
+  border: 1px solid var(--main-box-shadow);
+  box-shadow: var(--off-1) var(--off-1) 0 0 var(--main-box-shadow);
+  border-radius: var(--rad-1);
+}
 /* Hidden input checkbox */
 input.toc__hidden {
   display: none;
@@ -20,7 +29,7 @@ input.toc__hidden:checked ~ nav.toc__block {
 }
 
 input.toc__hidden:checked + label.toc__header {
-  border-radius: 7.5px 7.5px 0 0;
+  border-radius: var(--rad-1) var(--rad-1) 0 0;
 }
 
 label.toc__header {
@@ -28,22 +37,19 @@ label.toc__header {
   position: relative;
   display: flex;
   cursor: pointer;
-  border-radius: 7.5px;
+  border-radius: var(--rad-1);
   width: var(--toc-width);
   max-width: 100%;
   height: 100%;
-  margin: 2px 3em 0 3em;
   justify-content: space-between;
-  padding: 0.5em 0.75em 0.5em 1em;
-  background-color: var(--toc-header-bg);
-  border: 1px solid var(--toc-header-shadow);
+  padding: 0.5em 0.75em 0.5em 1.5em;
 }
 
 h4.toc__label {
   width: 100%;
   content: "Table of Contents";
   display: inline-flex;
-  margin-top: 0;
+  margin-top: 2px;
   text-align: left;
   font-size: var(--normal);
   font-weight: bold;
@@ -57,6 +63,8 @@ svg.toc__caret {
   transform: rotate(0deg);
   transition: transform ease 250ms;
   stroke: var(--loosed-black);
+  right: 5px;
+  position: relative;
 }
 
 input.toc__hidden:checked + label.toc__header svg.toc__caret {
@@ -64,8 +72,8 @@ input.toc__hidden:checked + label.toc__header svg.toc__caret {
 }
 
 nav.toc__block {
-  border-radius: 0 0 7.5px 7.5px;
-  border: 1px solid var(--toc-header-shadow);
+  border-radius: 0 0 var(--rad-1) var(--rad-1);
+  border-top: 1px solid var(--main-box-shadow);
   max-height: 0;
   opacity: 0;
   width: var(--toc-width);
@@ -74,23 +82,30 @@ nav.toc__block {
   position: relative;
   overflow: hidden;
   background-color: var(--toc-nav-bg);
-  margin: 0 auto 2px 3em;
   transition: opacity var(--loosed-transition-medm) ease, max-height var(--loosed-transition-slow) ease;
   background-color: var(--toc-nav-bg);
 }
 
 nav.toc__block > ol {
   font-size: var(--small);
-  list-style: disc;
+  list-style: none;
   line-height: 125%;
   margin-top: 1em;
   margin-bottom: 0;
-  padding: 0.25em 1.5em 1.5em 2.5em;
+  padding: 0.25em 1.5em 1.5em 1.5em;
 }
 
 nav.toc__block li ol {
-  margin-top: 0.75em;
-  list-style: circle;
+  border-left: 1px solid var(--indent-1);
+
+  li {
+    margin-top: 0.75em;
+    list-style: none;
+  }
+
+  li::marker {
+    display: none;
+  }
 }
 
 .toc__block ol li:not(:last-child) {
