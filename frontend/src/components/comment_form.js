@@ -2,9 +2,14 @@
 
 /* Styles */
 import comment_styles from '../styles/Comment.module.scss';
+import { useState } from 'react';
 
 
 export default function CommentForm(props) {
+  //const [getPID, setPID] = useState(0);
+  //const [getAuthor, setAuthor] = useState('Anonymous');
+  //const [getContent, setContent] = useState('');
+
   async function handleCommentSubmit(e, meta) {
     e.preventDefault();
 
@@ -55,8 +60,8 @@ export default function CommentForm(props) {
   return (
     <form className={ comment_styles.comment_form } onSubmit={ (e) => { handleCommentSubmit(e, meta) } }>
       <input required hidden type="number" name="pid" value="0" onChange={ (e) => { setPID(e) } } />
-      <input type="text" name="author" placeholder="Name / Anonymous / I was never given a name." className={ comment_styles.name_input } onChange={ (e) => { setAuthor(e) } } />
-      <textarea required type="text" name="content" rows="5" placeholder="Type a reply or comment in this area." className={ comment_styles.comment_input } onChange={ (e) => { setContent(e) } } />
+      <input type="text" name="author" placeholder="Name" className={ comment_styles.name_input } onChange={ (e) => { setAuthor(e) } } />
+      <textarea required type="text" name="content" rows="5" placeholder="Type your comment or reply here" className={ comment_styles.comment_input } onChange={ (e) => { setContent(e) } } />
       <button type="submit" className={ comment_styles.comment_submit }>
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.4 19.425q-.5.2-.95-.088T3 18.5v-3.725q0-.35.2-.625t.55-.35L11 12l-7.25-1.8q-.35-.075-.55-.35T3 9.225V5.5q0-.55.45-.838t.95-.087l15.4 6.5q.625.275.625.925t-.625.925l-15.4 6.5Z"/></svg>
       </button>

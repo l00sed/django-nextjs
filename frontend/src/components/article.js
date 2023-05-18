@@ -16,7 +16,9 @@ import remarkCodeTitles           from '../utils/code_titles';
 
 import Mdx from './mdx';
 import Comments from './comments';
+import Button from './button';
 import ArticleHead from './article_head';
+import Link from 'next/link';
 
 
 const getData = async (slug) => {
@@ -178,15 +180,31 @@ const getData = async (slug) => {
   }
 }
 
-export default async function Article (props) {
+export default async function Article(props) {
   /* Get article content and its meta */
   const { meta, content } = await getData(props.slug);
+
+  let article_head = <ArticleHead meta={ meta } />;
+  if (props.head === false) {
+    article_head = <></>;
+  }
+
+  let live_button = (
+    <Link href="/live">
+      <Button type={ 'live' }>
+        live
+      </Button>
+    </Link>
+  );
+  if (props.slug === 'live') {
+    live_button = <></>;
+  }
 
   return (
     <div className={ article_styles.main_wrapper }>
       <main className={ article_styles.main }>
         <article className={ article_styles.article_wrapper }>
-          <ArticleHead meta={ meta } />
+          { article_head }
           <div className={ article_styles.article__body }>
             <div className={ article_styles.article__description }>
               <Mdx content={ content } />
@@ -197,6 +215,7 @@ export default async function Article (props) {
       <aside className={ article_styles.aside }>
         <div className={ article_styles.sticky }>
           <div className={ article_styles.scroll__y }>
+            { live_button }
             <Comments slug={ props.slug } />
           </div>
         </div>

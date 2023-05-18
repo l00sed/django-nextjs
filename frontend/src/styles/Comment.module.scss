@@ -11,7 +11,6 @@
 /* # Comments Section */
 
 .comments_section {
-  --comment-radius: 10px;
   width: 100%;
   padding: 0 3em 2em 3em;
 }
@@ -54,7 +53,7 @@
   width: 100%;
   height: 100%;
   content: "";
-  border-radius: var(--comment-radius);
+  border-radius: var(--rad-1);
 }
 
 .main_wrapper {
@@ -64,14 +63,14 @@
   flex-direction: row;
   align-items: stretch;
   border: 1px solid var(--main-box-shadow);
-  box-shadow: var(--off-1) var(--off-1) 0 0 var(--main-box-shadow);
+  box-shadow: 0 var(--off-1) 0 0 var(--main-box-shadow);
 }
 
 .comment_form_wrapper,
 .main_wrapper {
   font-size: 0.8em;
   width: 100%;
-  border-radius: var(--comment-radius);
+  border-radius: var(--rad-1);
 }
 
 .commentReply {
@@ -81,7 +80,7 @@
 .comment_form_wrapper {
   background-color: var(--comment-heading);
   border: 1px solid var(--main-box-shadow);
-  box-shadow: var(--off-1) var(--off-1) 0 0 var(--main-box-shadow);
+  box-shadow:0 var(--off-1) 0 0 var(--main-box-shadow);
   display: block;
   margin-top: 0;
   margin-bottom: 1em;
@@ -112,13 +111,13 @@
 /* ### Body Wrapper */
 .body_wrapper {
   width: 100%;
-  border-radius: var(--comment-radius) 0 0 var(--comment-radius);
+  border-radius: var(--rad-1) 0 0 var(--rad-1);
 }
 
 .body_row_1 {
   padding: 0.5em 1em;
   background-color: var(--comment-heading);
-  border-radius: var(--comment-radius) 0 0 0;
+  border-radius: var(--rad-1) 0 0 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -176,7 +175,7 @@
 
 .body_row_2 {
   padding: 1.1em;
-  border-radius: 0 0 0 var(--comment-radius);
+  border-radius: 0 0 0 var(--rad-1);
   background-color: var(--comment-content);
 }
 
@@ -200,7 +199,7 @@
 .vote_wrapper {
   padding: 0.75em 0;
   position: relative;
-  border-radius: 0 var(--comment-radius) var(--comment-radius) 0;
+  border-radius: 0 var(--rad-1) var(--rad-1) 0;
   border-left: 1px solid var(--main-box-shadow);
   background-color: var(--comment-heading);
   display: flex;

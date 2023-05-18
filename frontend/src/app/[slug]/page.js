@@ -15,6 +15,10 @@ import Footer from '../../components/footer';
 
 /* Default /[slug] page is a "Blog" page */
 export default function BlogPage({ params }) {
+  let head = true;
+  if (params.slug === "live") {
+    head = false;
+  }
   return (
     <div className={ page_styles.next_wrapper }>
       <MenuOverlay />
@@ -22,10 +26,9 @@ export default function BlogPage({ params }) {
       <div id="main_wrapper" className={ page_styles.main_wrapper }>
         <Title />
         <Donate />
-        <Article slug={ params.slug } />
+        <Article slug={ params.slug } head={ head } />
         <Footer />
       </div>
     </div>
   )
 }
-

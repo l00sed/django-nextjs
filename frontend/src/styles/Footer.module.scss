@@ -30,7 +30,7 @@
 .link_row {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  column-gap: 8em;
+  column-gap: 4em;
   row-gap: 4em;
   flex-direction: row;
   flex-wrap: wrap;

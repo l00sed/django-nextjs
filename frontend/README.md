@@ -1,5 +1,13 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## TODO
+
+- [ ] Share links
+- [ ] Live page and buttons in menu + sidebar
+- [ ] Subscribe form
+- [ ] Comment/reply submission
+- [ ] Upvote/downvote submission
+
 ## Getting Started
 
 First, run the development server:

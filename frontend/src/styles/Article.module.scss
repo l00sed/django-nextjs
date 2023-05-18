@@ -13,6 +13,7 @@
   justify-content: center;
   column-gap: 0;
   margin: 0 auto;
+  min-width: 100%;
   max-width: min(var(--page-max-width), 100%);
 }
 .main_wrapper p a,
@@ -121,6 +122,14 @@
 
   nav + h2 {
     margin-top: 0 !important;
+  }
+
+  iframe {
+    width: 100%;
+    border-radius: var(--rad-1);
+    margin: 0;
+    border-style: none;
+    aspect-ratio: 16/9;
   }
 }
 

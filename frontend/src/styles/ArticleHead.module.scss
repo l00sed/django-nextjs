@@ -4,7 +4,7 @@
   border-radius: var(--rad-1);
   background-color: var(--toc-header-bg);
   border: 1px solid var(--main-box-shadow);
-  box-shadow: var(--off-1) var(--off-1) 0 0 var(--main-box-shadow);
+  box-shadow: 0 var(--off-1) 0 0 var(--main-box-shadow);
 }
 
 /* # Article Meta */
