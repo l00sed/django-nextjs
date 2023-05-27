@@ -78,7 +78,7 @@
 }
 
 .comment_form_wrapper {
-  background-color: var(--comment-heading);
+  background-color: var(--comment-form-bg);
   border: 1px solid var(--main-box-shadow);
   box-shadow:0 var(--off-1) 0 0 var(--main-box-shadow);
   display: block;
@@ -90,6 +90,95 @@
     font-size: 1.25em;
     padding-bottom: 0.75em;
     margin-bottom: 0;
+  }
+
+  /* ## Comment Form */
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 0.25em;
+
+    label {
+      &[for="id_subscribe"] {
+        display: inline-block;
+        line-height: 36.666px;
+        padding-right: 1em;
+      }
+
+      font-size: var(--medium);
+      font-weight: bold;
+    }
+
+    div {
+      width: 100%;
+    }
+
+    input,
+    textarea {
+      border-radius: 4px;
+      width: 100%;
+      padding: 0.75em;
+      font-size: 1em;
+      border: 1px solid transparent;
+
+      &:focus,
+      &:active,
+      &:hover {
+        border-color: var(--loosed-highlight-1);
+      }
+    }
+
+    textarea {
+      outline: none;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 4px;
+    }
+
+    input[name="subscribe"]:checked {
+      + input[name="email"] {
+        display: block !important;
+        + div {
+          display: block !important;
+        }
+      }
+    }
+
+    input {
+      &[name="subscribe"] {
+        width: fit-content;
+        cursor: pointer;
+      }
+      &[name="email"] {
+        width: calc(100% - 4em);
+      }
+      &[name="subscribe"] {
+        display: inline-block;
+      }
+    }
+
+    button[type="submit"] {
+      background: transparent;
+      border: none;
+      width: 2.75em;
+      height: 2.75em;
+      position: relative;
+      cursor: pointer;
+      margin: 0 0 0 auto;
+      color: var(--loosed-black);
+
+      &::after {
+        background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M4.4 19.425q-.5.2-.95-.088T3 18.5v-3.725q0-.35.2-.625t.55-.35L11 12l-7.25-1.8q-.35-.075-.55-.35T3 9.225V5.5q0-.55.45-.838t.95-.087l15.4 6.5q.625.275.625.925t-.625.925l-15.4 6.5Z'/%3E%3C/svg%3E%0A");
+        width: 2.75em;
+        height: 2.75em;
+        cursor: pointer;
+      }
+
+      &:hover {
+        color: var(--loosed-highlight-1);
+      }
+    }
   }
 }
 
@@ -245,53 +334,4 @@
   text-align: center;
   align-content: stretch;
   width: 100%;
-}
-
-/* ## Comment Form */
-.comment_form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  row-gap: 0.25em;
-
-  input:not(.comment_submit) {
-    outline: none;
-    margin-bottom: 4px;
-  }
-
-  input,
-  textarea {
-    border-radius: 4px;
-    padding: 0.75em;
-    font-size: 1em;
-    border: 1px solid transparent;
-
-    &:focus,
-    &:active,
-    &:hover {
-      border-color: var(--loosed-highlight-1);
-    }
-  }
-}
-
-
-.comment_form textarea {
-  outline: none;
-  font-family: 'JetBrains Mono', monospace;
-  margin-bottom: 4px;
-}
-
-.comment_form .comment_submit {
-  background: transparent;
-  border: none;
-  width: 2.75em;
-  height: 2.75em;
-  position: relative;
-  cursor: pointer;
-  margin: -3.5em 0.5em 0 auto;
-  color: var(--loosed-black);
-
-  &:hover {
-    color: var(--loosed-highlight-1);
-  }
 }

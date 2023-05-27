@@ -1,7 +1,9 @@
 from rest_framework import generics, response, status
+from django.shortcuts import render
 from articles.models import Article
-from .serializers import CommentSerializer
+from .serializers import CommentFormSerializer, CommentSerializer
 from .models import Comment
+from .forms import CommentForm
 
 
 class CommentsAPIView(generics.ListAPIView):
@@ -110,3 +112,24 @@ class CommentSubmitAPIView(generics.CreateAPIView):
 
     def get_queryset(self):
         return Comment.objects.all()
+
+
+class CommentFormAPIView(generics.GenericAPIView):
+    """Get the comment form template from Django."""
+
+    serializer_class = CommentFormSerializer
+
+    def get(self, request, slug):
+        """get.
+        :param request:
+        """
+        form = CommentForm(data={'article': slug})
+        return render(request, 'backend/form.html', {'form': form})
+
+    def post(self, request):
+        """post.
+        :param request:
+        """
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            pass  # does nothing, just trigger the validation

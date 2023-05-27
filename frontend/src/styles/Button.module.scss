@@ -35,7 +35,7 @@
   background-image: linear-gradient(90deg, var(--loosed-highlight-1), red);
   background-repeat: no-repeat;
   background-position-x: 0;
-  background-size: 1000px 100px;
+  background-size: calc(100vw * 2) 100px;
   color: #ffffff;
   border: 1px solid var(--loosed-black);
   box-shadow: 0 var(--off-1) 0 0 var(--loosed-black);

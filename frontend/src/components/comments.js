@@ -9,7 +9,11 @@ import comment_styles from '../styles/Comment.module.scss';
 
 
 const getData = async (slug) => {
-  const options_get = {
+  /** FETCH: comments */
+  /** Setup promise for comments fetch.
+    * 1 Configure request header
+    * 2 Fetch endpoint */
+  const header_comments = {
     method: "GET",
     supportHeaderParams: true,
     headers: {
@@ -21,18 +25,18 @@ const getData = async (slug) => {
       revalidate: 480000,
     }
   }
-
-  const comments_promise = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${slug}`, options_get);
-
+  const comments_promise = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${slug}`, header_comments);
+  /* Empty array to receive JSON response */
   let comments_array = [];
   if (comments_promise.ok) {
     comments_array = await comments_promise.json();
   } else {
+    /* Provide error log if endpoint is having issues. */
     console.error( 'Could not fetch parent comments.' );
   }
 
   let comments = [];
-
+  /* Wrangle/clean-up some of the comment data. */
   if (comments_array instanceof Array && comments_array.length > 0) {
     comments_array.forEach(comment_json => {
       let comment = {
@@ -49,36 +53,54 @@ const getData = async (slug) => {
       comments.push(comment);
     });
   } else {
+    /* Additional error logging for easier debugging. */
+    console.error('Value is not an array, or is empty.');
+  }
+
+  /** FETCH: comment_form */
+  /** Setup promise for HTML Django form
+    * 1 Setup the request headers
+    * 2 Fetch the endpoint */
+  const header_comment_form = {
+    method: "GET",
+    supportHeaderParams: true,
+    headers: {
+      'Accept': 'text/html;encoding=utf-8',
+      'Content-Type': 'text/html;encoding=utf-8',
+    }
+  }
+  const comment_form_promise = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/${slug}/form`, header_comment_form);
+
+  /* Empty array to receive JSON response */
+  let comment_form_html_text = null;
+  if (comment_form_promise.ok) {
+    comment_form_html_text = await comment_form_promise.text();
+  } else {
+    /* Provide error log if endpoint is having issues. */
+    console.error( 'Could not fetch comment form HTML.' );
+  }
+
+  let comment_form = "";
+  /* Wrangle/clean-up some of the comment data. */
+  if (typeof comment_form_html_text === 'string' && comment_form_html_text.length > 0) {
+    comment_form = comment_form_html_text;
+  } else {
+    /* Additional error logging for easier debugging. */
     console.error('Value is not an array, or is empty.');
   }
 
   return {
-    comments
+    comments,
+    comment_form
   }
 }
 
 export default async function Comments (props) {
-  const { comments } = await getData(props.slug);
+  const { comments, comment_form } = await getData(props.slug);
 
   return(
     <div className={ comment_styles.comments_section }>
-      <div className={ comment_styles.comment_form_wrapper }>
-        <div className={ comment_styles.title_row }>
-          <h3 className={ comment_styles.comments_header }>Discussion</h3>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
-            viewBox="0 0 256 256">
-            <g fill="currentColor">
-              <path d="M224 64v128a8 8 0 0 1-8 8H82.5a8 8 0 0 0-5.15 1.88l-32.2 28.23A8 8 0 0 1 32 224V64a8 8 0 0 1 8-8h176a8 8 0 0 1 8 8Z" opacity=".2"/>
-              <path d="M216 48H40a16 16 0 0 0-16 16v160a15.85 15.85 0 0 0 9.24 14.5A16.13 16.13 0 0 0 40 240a15.89 15.89 0 0 0 10.25-3.78a.69.69 0 0 0 .13-.11L82.5 208H216a16 16 0 0 0 16-16V64a16 16 0 0 0-16-16ZM40 224Zm176-32H82.5a16 16 0 0 0-10.3 3.75l-.12.11L40 224V64h176ZM88 112a8 8 0 0 1 8-8h64a8 8 0 0 1 0 16H96a8 8 0 0 1-8-8Zm0 32a8 8 0 0 1 8-8h64a8 8 0 1 1 0 16H96a8 8 0 0 1-8-8Z"/>
-            </g>
-          </svg>
-          <span>{ comments.length ?? 0 }</span>
-        </div>
-        <CommentForm />
-      </div>
+      <CommentForm data={ comment_form } comment_count={ comments.length } />
       <div>
         {
           comments.map((comment, index) => {

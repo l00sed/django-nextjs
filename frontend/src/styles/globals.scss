@@ -64,7 +64,7 @@ $l-main-box-shadow: rgba(0,0,0,0.1);
 
 $l-toc-header-bg: rgba(255,255,255,0.5);
 $l-toc-header-shadow: rgba(0,0,0,0.15);
-$l-toc-nav-bg: rgba(255,255,255,0.4);
+$l-toc-nav-bg: rgba(0,0,0,0.05);
 $l-toc-shadow: rgba(0,0,0,0.5);
 $l-toc-hr: rgba(0,0,0,0.075);
 $l-anchor-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='%23b61115' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M8 4v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4V8h-4V4h-2v4h-4V4H8Zm6 10v-4h-4v4h4Z' clip-rule='evenodd'/%3E%3C/svg%3E");
@@ -74,6 +74,7 @@ $l-main-text-color: #333;
 $l-comment-heading: rgba(0,0,0,0.025);
 $l-comment-content: rgba(255,255,255,0.5);
 $l-comment-shadow: rgba(0,0,0,0.15);
+$l-comment-form-bg: rgba(255,255,255,0.5);
 $l-comment-input-bg: rgba(0,0,0,0.05);
 $l-reply-shadow: rgba(0,0,0,0.075);
 $l-input-outline: rgba(0,0,0,0.5);
@@ -156,7 +157,7 @@ $d-highlight-1-rgb: rgba($d-highlight-1,0.95);
 
 $d-toc-header-bg: rgba(255,255,255,0.05);
 $d-toc-header-shadow: rgba(0,0,0,1);
-$d-toc-nav-bg: rgba(255,255,255,0.05);
+$d-toc-nav-bg: rgba(0,0,0,0.5);
 $d-toc-shadow: rgba(255,255,255,0.5);
 $d-toc-hr: rgba(255,255,255,0.05);
 $d-anchor-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='%23f93e17' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M8 4v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4V8h-4V4h-2v4h-4V4H8Zm6 10v-4h-4v4h4Z' clip-rule='evenodd'/%3E%3C/svg%3E");
@@ -166,14 +167,15 @@ $d-main-text-color: #e0e0e0;
 $d-comment-heading: rgba(255,255,255,0.05);
 $d-comment-content: rgba(0,0,0,0.05);
 $d-comment-shadow: rgba(0,0,0,1);
+$d-comment-form-bg: rgba(255,255,255,0.05);
 $d-comment-input-bg: rgba(0,0,0,0.3);
 $d-reply-shadow: rgba(255,255,255,0.05);
 $d-input-outline: rgba(0,0,0,1);
-$d-indent-1: rgba(255,255,255,0.1);
-$d-indent-2: rgba(255,255,255,0.2);
-$d-indent-3: rgba(255,255,255,0.3);
-$d-indent-4: rgba(255,255,255,0.4);
-$d-indent-5: rgba(255,255,255,0.5);
+$d-indent-1: rgba(255,255,255,0.4);
+$d-indent-2: rgba(255,255,255,0.5);
+$d-indent-3: rgba(255,255,255,0.6);
+$d-indent-4: rgba(255,255,255,0.7);
+$d-indent-5: rgba(255,255,255,0.8);
 
 $d-card-shadow: rgba(0,0,0,0.75);
 $d-card-hover-background: rgba(255,255,255,0.15);
@@ -259,6 +261,7 @@ $d-live-button-icon: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/20
     --comment-heading: #{$l-comment-heading};
     --comment-content: #{$l-comment-content};
     --comment-shadow: #{$l-comment-shadow};
+    --comment-form-bg: #{$l-comment-form-bg};
     --comment-input-bg: #{$l-comment-input-bg};
     --reply-shadow: #{$l-reply-shadow};
     --input-outline: #{$l-input-outline};
@@ -354,6 +357,7 @@ $d-live-button-icon: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/20
     --comment-heading: #{$d-comment-heading};
     --comment-content: #{$d-comment-content};
     --comment-shadow: #{$d-comment-shadow};
+    --comment-form-bg: #{$d-comment-form-bg};
     --comment-input-bg: #{$d-comment-input-bg};
     --reply-shadow: #{$d-reply-shadow};
     --input-outline: #{$d-input-outline};
@@ -489,6 +493,7 @@ $d-live-button-icon: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/20
   --comment-heading: #{$l-comment-heading} !important;
   --comment-content: #{$l-comment-content} !important;
   --comment-shadow: #{$l-comment-shadow} !important;
+  --comment-form-bg: #{$l-comment-form-bg} !important;
   --comment-input-bg: #{$l-comment-input-bg} !important;
   --reply-shadow: #{$l-reply-shadow} !important;
   --input-outline: #{$l-input-outline} !important;
@@ -599,6 +604,7 @@ $d-live-button-icon: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/20
   --comment-heading: #{$d-comment-heading} !important;
   --comment-content: #{$d-comment-content} !important;
   --comment-shadow: #{$d-comment-shadow} !important;
+  --comment-form-bg: #{$d-comment-form-bg} !important;
   --comment-input-bg: #{$d-comment-input-bg} !important;
   --reply-shadow: #{$d-reply-shadow} !important;
   --input-outline: #{$d-input-outline} !important;
@@ -720,7 +726,7 @@ h6 {
 h1 {
   margin: 0 auto 0.25em -3px;
   font-weight: 900;
-  font-size: 3.5em;
+  font-size: 2.5em;
   letter-spacing: -1px;
   word-spacing: -10px;
   line-height: 0.9;
@@ -850,37 +856,57 @@ figure {
   margin-inline-end: 0;
 }
 
+@media (min-width: 1200px) {
+  h1 {
+    font-size: 3.5em;
+  }
+}
+
+
 /* # Article Citation/Footnotes */
 .data-footnote-backref {
-  font-size: 1.5em;
+  content: "";
   height: 1em;
-  top: 0;
-  display: inline-block;
-  padding: 1px 5px;
-  line-height: 0.75;
+  width: 2.5em;
+  display: inline-flex;
+  flex-direction: row;
+  visibility: hidden;
+
+  &::before {
+    content: "↗";
+    height: 1em;
+    width: 2.5em;
+    display: block;
+    position: relative;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    font-size: 1.5em;
+    line-height: 0.8;
+    color: var(--loosed-black);
+    background-color: var(--reply-shadow);
+    visibility: visible;
+  }
 }
 a[data-footnote-ref="true"] {
   top: -5px;
   padding: 2px 5px;
   line-height: 0.85;
+  color: var(--loosed-black);
 }
 .data-footnote-backref,
 a[data-footnote-ref="true"] {
   position: relative;
-  color: var(--loosed-black);
   text-decoration: none !important;
   text-align: center;
-  width: 1.5em;
-  border-radius: 4px;
-  border: 1px solid transparent;
-  background-color: var(--reply-shadow);
-
-  &:hover {
-    font-weight: normal;
-    background-color: var(--loosed-highlight-1);
-    color: #fff;
-  }
 }
+
+.data-footnote-backref:hover::before,
+a[data-footnote-ref="true"]:hover {
+  font-weight: normal;
+  background-color: var(--loosed-highlight-1);
+  color: #fff;
+}
+
 
 /* # Toggle Class */
 .hidden {

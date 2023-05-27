@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import os
-import socket
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,40 +21,44 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4!kv-i6$n0qi1(bbgh%&h%n2h*9!2+c4q_=rbf69n^1(x$%j0z'
+SECRET_KEY = 'django-insecure-4!kv-i6$n0qi1' \
+             '(bbgh%&h%n2h*9!2+c4q_=rbf69n^1(x$%j0z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
     '0.0.0.0',
+    '127.0.0.1',
+    '172.26.160.1',
     '192.168.0.100',
     '192.168.0.104',
-    '172.26.160.1',
+    'localhost',
 ]
 
 
 # Application definition
 
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+
 INSTALLED_APPS = [
+    'articles',
+    'comments',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.sites',
+    'django.contrib.sessions',
     'django.contrib.sitemaps',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
-    'rest_framework',
     'drf_yasg',
-    'corsheaders',
     'easy_thumbnails',
-    'webmention',
+    'rest_framework',
     'tinymce',
-    'articles',
-    'comments',
+    'webmention',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -73,21 +76,21 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     'http://0.0.0.0:3000',
     'http://0.0.0.0:3001',
-    'http://localhost:3000',
-    'http://localhost:3001',
     'http://127.0.0.1:3000',
     'http://127.0.0.1:3001',
+    'http://localhost:3000',
+    'http://localhost:3001',
 ]
 
 CORS_ORIGIN_WHITELIST = [
     'http://0.0.0.0:3000',
     'http://0.0.0.0:3001',
-    'http://localhost:3000',
-    'http://localhost:3001',
     'http://127.0.0.1:3000',
     'http://127.0.0.1:3001',
     'http://192.168.0.104:3000',
     'http://192.168.0.104:3001',
+    'http://localhost:3000',
+    'http://localhost:3001',
 ]
 
 SITE_ID = 1
@@ -96,14 +99,16 @@ ROOT_URLCONF = 'backend.urls'
 
 ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
 
-MEDIA_ROOT = BASE_DIR
+MEDIA_ROOT = PROJECT_PATH
 
-MEDIA_URL = os.path.join(ROOT_DIR, 'uploads/')
+MEDIA_URL = os.path.join(PROJECT_PATH, 'uploads/')
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(PROJECT_PATH, 'templates/'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -15,11 +15,12 @@ class Comment(TreeNode):
     )
     author = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
-    content = models.TextField(max_length=255)
+    content = models.CharField(max_length=2000)
     article = models.ForeignKey('articles.Article', on_delete=models.CASCADE)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
     reply_level = models.IntegerField(default=0)
+    approved = models.BooleanField(default=False)
 
     objects = TreeQuerySet.as_manager(with_tree_fields=True)
 
