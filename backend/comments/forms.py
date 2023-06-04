@@ -1,24 +1,18 @@
 from django import forms
-from .models import Comment
 
 
 class CommentForm(forms.Form):
     """Comment Form."""
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.label_suffix = ""  # Removes : as label suffix
+    name = "comment-form"
 
     # Hidden Fields
     cid = forms.IntegerField(
-        initial=None,
         widget=forms.HiddenInput()
     )
     parent = forms.IntegerField(
-        initial=0,
         widget=forms.HiddenInput()
     )
-    article = forms.SlugField(
+    article = forms.IntegerField(
         widget=forms.HiddenInput()
     )
     reply_level = forms.IntegerField(
@@ -29,7 +23,7 @@ class CommentForm(forms.Form):
     author = forms.CharField(
         label="",
         max_length=200,
-        initial="Anonymous",
+        help_text="",
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Name"
@@ -39,10 +33,11 @@ class CommentForm(forms.Form):
     content = forms.CharField(
         label="",
         max_length=2000,
-        initial="",
+        help_text="",
         widget=forms.Textarea(
             attrs={
-                "placeholder": "Message or reply"
+                "placeholder": "Message or reply",
+                "rows": 5
             }
         )
     )
@@ -56,11 +51,12 @@ class CommentForm(forms.Form):
     # Conditional on subscribe checkbox
     email = forms.EmailField(
         label="",
+        help_text="",
         max_length=254,
         required=True,
         widget=forms.EmailInput(
             attrs={
-                "style": "display: none;",
+                "style": "display:none;",
                 "placeholder": "Email"
             }
         )
@@ -68,12 +64,22 @@ class CommentForm(forms.Form):
 
     template = "backend/form.html"
 
+    # Additional setup on initialization
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""  # Removes : as label suffix
+        # print("Article slug exists in submitted form data")
+
+    # Override form validation "clean" method
     def clean(self):
         data = self.cleaned_data
+        # print(data)
+
         if data.get('subscribe', True) and data.get('email', None):
             raise forms.ValidationError(
-                "An email address is required in order "
-                "to subscribe to the discussion."
+                "An email address is required in order to receive "
+                "notifications when new comments are added to the discussion."
             )
         else:
+            # print(data)
             return data

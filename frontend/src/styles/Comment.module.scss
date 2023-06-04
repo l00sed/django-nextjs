@@ -136,22 +136,30 @@
       margin-bottom: 4px;
     }
 
-    input[name="subscribe"]:checked {
-      + input[name="email"] {
-        display: block !important;
-        + div {
-          display: block !important;
-        }
-      }
-    }
-
     input {
       &[name="subscribe"] {
         width: fit-content;
         cursor: pointer;
+
+        &:checked {
+          + input[name="email"] {
+            display: block !important;
+            + div {
+              display: block !important;
+              + button[type="submit"] {
+                bottom: 3em;
+              }
+            }
+          }
+        }
       }
       &[name="email"] {
         width: calc(100% - 4em);
+        display: none;
+        + div {
+          width: calc(100% - 4em);
+          display: none;
+        }
       }
       &[name="subscribe"] {
         display: inline-block;
@@ -161,11 +169,13 @@
     button[type="submit"] {
       background: transparent;
       border: none;
+      height: 0;
       width: 2.75em;
-      height: 2.75em;
       position: relative;
       cursor: pointer;
       margin: 0 0 0 auto;
+      bottom: 0;
+      right: 0;
       color: var(--loosed-black);
 
       &::after {

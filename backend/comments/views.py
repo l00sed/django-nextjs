@@ -1,5 +1,6 @@
 from rest_framework import generics, response, status
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from articles.models import Article
 from .serializers import CommentFormSerializer, CommentSerializer
 from .models import Comment
@@ -123,7 +124,8 @@ class CommentFormAPIView(generics.GenericAPIView):
         """get.
         :param request:
         """
-        form = CommentForm(data={'article': slug})
+        article = Article.objects.filter(slug=slug).first().id
+        form = CommentForm(data={'article': article})
         return render(request, 'backend/form.html', {'form': form})
 
     def post(self, request):
@@ -132,4 +134,4 @@ class CommentFormAPIView(generics.GenericAPIView):
         """
         form = CommentForm(request.POST)
         if form.is_valid():
-            pass  # does nothing, just trigger the validation
+            return HttpResponseRedirect(request.path_info)

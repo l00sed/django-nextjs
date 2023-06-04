@@ -95,12 +95,12 @@ const getData = async (slug) => {
   }
 }
 
-export default async function Comments (props) {
+export default async function Comments(props) {
   const { comments, comment_form } = await getData(props.slug);
 
   return(
     <div className={ comment_styles.comments_section }>
-      <CommentForm data={ comment_form } comment_count={ comments.length } />
+      <CommentForm comment_form={ comment_form } slug={ props.slug } comments={ comments } />
       <div>
         {
           comments.map((comment, index) => {
