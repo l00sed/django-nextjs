@@ -31,13 +31,47 @@ class CommentsByArticleAPIView(generics.GenericAPIView):
         article = Article.objects.filter(slug=slug).first()
 
         if article:
-            query_set = (Comment.objects.filter(article=article.id))
+            comment_query_set = (
+                Comment.objects
+                .filter(article=article.id)
+                .order_siblings_by("cid")
+            )
 
-            if query_set:
-                serializer = CommentSerializer(query_set, many=True)
+            if comment_query_set:
+                serializer = CommentSerializer(comment_query_set, many=True)
                 return response.Response(serializer.data)
 
         return response.Response('Not found', status=status.HTTP_404_NOT_FOUND)
+
+
+class CommentUpvoteAPIView(generics.GenericAPIView):
+    """Upvote comment."""
+    def put(self, request, cid):
+        """put.
+        :param request:
+        """
+
+        comment = Comment.objects.filter(cid=cid).first()
+        print(comment.upvotes)
+        comment.upvotes = comment.upvotes + 1
+        comment.save()
+
+        return response.Response('Updated upvotes count')
+
+
+class CommentDownvoteAPIView(generics.GenericAPIView):
+    """Downvote comment."""
+    def put(self, request, cid):
+        """put.
+        :param request:
+        """
+
+        comment = Comment.objects.filter(cid=cid).first()
+        print(comment.downvotes)
+        comment.downvotes = comment.downvotes + 1
+        comment.save()
+
+        return response.Response('Updated downvotes count')
 
 
 class ParentCommentsByArticleAPIView(generics.GenericAPIView):

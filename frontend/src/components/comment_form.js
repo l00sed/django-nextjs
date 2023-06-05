@@ -4,7 +4,7 @@
 import comment_styles from '../styles/Comment.module.scss';
 import { renderComments, processComments } from '../utils/comment_helpers'
 import { useEffect, useState } from 'react';
-import waitForElem from '../lib/wait_for_elem';
+import { waitForElem } from '../lib/wait_for_elem';
 import sanitize from '../utils/sanitize';
 import Parse from '../utils/parser';
 

@@ -2,6 +2,8 @@ from django.urls import path
 from .views import (
     CommentsAPIView,
     CommentsByArticleAPIView,
+    CommentUpvoteAPIView,
+    CommentDownvoteAPIView,
     ParentCommentsByArticleAPIView,
     CommentsByPIDAPIView,
     CommentByIDAPIView,
@@ -19,7 +21,17 @@ urlpatterns = [
         'comments/<str:slug>',
         CommentsByArticleAPIView.as_view(),
         name='comments'
-     ),
+    ),
+    path(
+        'comment/upvote/<int:cid>',
+        CommentUpvoteAPIView.as_view(),
+        name='comments'
+    ),
+    path(
+        'comment/downvote/<int:cid>',
+        CommentDownvoteAPIView.as_view(),
+        name='comments'
+    ),
     path(
         'comments/<str:slug>/parents',
         ParentCommentsByArticleAPIView.as_view(),

@@ -227,6 +227,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  button[name="reply"] {
+    border: none;
+    padding: 0;
+    background-color: transparent;
+  }
 }
 
 .reply_button {
@@ -276,6 +282,10 @@
   padding: 1.1em;
   border-radius: 0 0 0 var(--rad-1);
   background-color: var(--comment-content);
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .comment_author {

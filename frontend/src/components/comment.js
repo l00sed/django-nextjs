@@ -1,13 +1,14 @@
-'use client'
+"use client";
 
 /* React */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react';
 /* Next */
-import Link from 'next/link'
+import Link from 'next/link';
 /* Local utils */
-import useConstructor from '../utils/constructor'
-import Parse from '../utils/parser.js'
-import sanitize from '../utils/sanitize'
+import useConstructor from '../utils/constructor';
+import { waitForElems } from '../lib/wait_for_elem';
+import Parse from '../utils/parser.js';
+import sanitize from '../utils/sanitize';
 /* Styles */
 import comment_styles from '../styles/Comment.module.scss'
 
@@ -108,9 +109,116 @@ export default function Comment(props) {
     setMessage(props.comment.content ? Parse(autoLinkText(sanitize(props.comment.content))) : '');
   });
 
+  useEffect(() => {
+    // Reply button event handler
+    const handleReply = (e) => {
+      // Get the comment root node when clicking the reply button
+      let this_comment_row = e.target.closest(comment_styles.row_wrapper);
+      let this_comment = e.target.closest(comment_styles.main_wrapper);
+      // Get the reply level
+      let this_reply_level = this_comment_row?.querySelectorAll(comment_styles.indent_block)?.length + 1;
+      // Set the comment form's parent ID
+      document.getElementById('id_parent').value = this_comment.id;
+      // Set the reply level
+      document.getElementById('id_reply_level').value = this_reply_level;
+      // Finally, focus the "author" field
+      document.getElementById('id_author').focus();
+    }
+    // Upvote button event handler
+    const handleUpvote = async(e) => {
+      let comment_id = e.target.closest(comment_styles.main_wrapper)?.id;
+      const header_upvote = {
+        method: "PUT",
+        supportHeaderParams: true,
+        headers: {
+          'Accept': 'application/json;encoding=utf-8',
+          'Content-Type': 'application/json;encoding=utf-8',
+        }
+      }
+      const upvote_promise = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/upvote/${comment_id}`, header_upvote);
+      /* Empty array to receive JSON response */
+      let upvote_response = [];
+      if (upvote_promise.ok) {
+        upvote_response = await upvote_promise.json();
+      } else {
+        /* Provide error log if endpoint is having issues. */
+        console.error( 'Could not upvote comment.' );
+      }
+    }
+    // Downvote button event handler
+    const handleDownvote = async(e) => {
+      let comment_id = e.target.closest(comment_styles.main_wrapper)?.id;
+      const header_downvote = {
+        method: "PUT",
+        supportHeaderParams: true,
+        headers: {
+          'Accept': 'application/json;encoding=utf-8',
+          'Content-Type': 'application/json;encoding=utf-8',
+        }
+      }
+      const downvote_promise = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/downvote/${comment_id}`, header_downvote);
+      /* Empty array to receive JSON response */
+      let downvote_response = [];
+      if (downvote_promise.ok) {
+        downvote_response = await downvote_promise.json();
+      } else {
+        /* Provide error log if endpoint is having issues. */
+        console.error( 'Could not downvote comment.' );
+      }
+    }
+
+    // Button event listeners
+    waitForElems(comment_styles.reply_button_wrapper).then(replyButtons => {
+      if (replyButtons.length) {
+        replyButtons.forEach(rB => {
+          rB.addEventListener('click', handleReply);
+        });
+      }
+    });
+    // Upvote event listeners
+    waitForElems(comment_styles.upvote_button).then(upvoteButtons => {
+      if (upvoteButtons.length) {
+        upvoteButtons.forEach(uB => {
+          uB.addEventListener('click', handleUpvote);
+        });
+      }
+    });
+    // Downvote event listeners
+    waitForElems(comment_styles.downvote_button).then(downvoteButtons => {
+      if (downvoteButtons.length) {
+        downvoteButtons.forEach(dB => {
+          dB.addEventListener('click', handleDownvote);
+        });
+      }
+    });
+
+    // Clean up
+    return () => {
+      let replyButtons = document.querySelectorAll(comment_styles.reply_button_wrapper);
+      if (replyButtons.length) {
+        replyButtons.forEach(rB => {
+          rB.removeEventListener('click', handleReply);
+        });
+      }
+      let upvoteButtons = document.querySelectorAll(comment_styles.upvote_button);
+      if (upvoteButtons.length) {
+        upvoteButtons.forEach(uB => {
+          uB.removeEventListener('click', handleUpvote);
+        });
+      }
+      let downvoteButtons = document.querySelectorAll(comment_styles.downvote_button);
+      if (downvoteButtons.length) {
+        downvoteButtons.forEach(dB => {
+          dB.removeEventListener('click', handleDownvote);
+        });
+      }
+    }
+  }, []);
+
   const indent = () => {
     let indentBlocks = [];
-    for (let i = 0; i < props.comment.reply_level; i++) {
+    let reply_level = props.comment.reply_level || 0;
+    for (let i = 0; i < reply_level; i++) {
       indentBlocks.push(<div key={ i } className={ `${comment_styles.indent_block} indent-${ i+1 }` } />);
     }
     return indentBlocks;
@@ -152,7 +260,7 @@ export default function Comment(props) {
               <span className={ comment_styles.comment_date }>{ timeSince(new Date(comment.created_at)) }</span>
             </div>
             <div className={ comment_styles.body_col_2 }>
-              <Link href="/" className={ comment_styles.reply_button_wrapper } legacyBehavior>
+              <button name="reply" className={ comment_styles.reply_button_wrapper }>
                 <div className={ comment_styles.reply_button }>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +272,7 @@ export default function Comment(props) {
                       d="M20 19q-.425 0-.713-.288T19 18v-3q0-1.25-.875-2.125T16 12H6.8l2.925 2.925Q10 15.2 10 15.6t-.3.7q-.275.275-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.213-.325T3.426 11q0-.2.063-.375T3.7 10.3l4.625-4.625Q8.6 5.4 9 5.4t.7.3q.275.275.275.7t-.275.7L6.8 10H16q2.075 0 3.538 1.463T21 15v3q0 .425-.288.713T20 19Z" />
                   </svg>
                 </div>
-              </Link>
+              </button>
             </div>
           </div>
           <div className={ comment_styles.body_row_2 }>
@@ -178,18 +286,14 @@ export default function Comment(props) {
             <span className={ comment_styles.count_text }>{ uvc }</span>
           </div>
           <div className={ comment_styles.upvote_button }>
-            <Link href="/" legacyBehavior>
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="currentColor" d="M6.786 1.459a.903.903 0 0 0-1.572 0L1.122 8.628C.774 9.238 1.211 10 1.91 10h8.18c.698 0 1.135-.762.787-1.372l-4.092-7.17Z"/></svg>
-              </span>
-            </Link>
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="currentColor" d="M6.786 1.459a.903.903 0 0 0-1.572 0L1.122 8.628C.774 9.238 1.211 10 1.91 10h8.18c.698 0 1.135-.762.787-1.372l-4.092-7.17Z"/></svg>
+            </span>
           </div>
           <div className={ comment_styles.downvote_button }>
-            <Link href="/" legacyBehavior>
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="currentColor" d="M5.214 10.541a.903.903 0 0 0 1.572 0l4.092-7.169C11.226 2.762 10.789 2 10.09 2H1.91c-.698 0-1.135.762-.787 1.372l4.092 7.17Z"/></svg>
-              </span>
-            </Link>
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="currentColor" d="M5.214 10.541a.903.903 0 0 0 1.572 0l4.092-7.169C11.226 2.762 10.789 2 10.09 2H1.91c-.698 0-1.135.762-.787 1.372l4.092 7.17Z"/></svg>
+            </span>
           </div>
         </div>
       </div>
