@@ -44,34 +44,48 @@ class CommentsByArticleAPIView(generics.GenericAPIView):
         return response.Response('Not found', status=status.HTTP_404_NOT_FOUND)
 
 
-class CommentUpvoteAPIView(generics.GenericAPIView):
+class CommentUpvoteAPIView(generics.UpdateAPIView):
     """Upvote comment."""
     def put(self, request, cid):
         """put.
         :param request:
         """
 
-        comment = Comment.objects.filter(cid=cid).first()
-        print(comment.upvotes)
-        comment.upvotes = comment.upvotes + 1
-        comment.save()
+        if request.method == "PUT":
+            comment = Comment.objects.filter(cid=cid).first()
+            if comment:
+                print(comment.upvotes)
+                comment.upvotes = comment.upvotes + 1
+                print(comment.upvotes)
+                comment.save()
 
-        return response.Response('Updated upvotes count')
+                return response.Response('Updated upvotes count')
+            else:
+                return response.Response(f'No comment with id ({cid}) found')
+        else:
+            return response.Response('Request type not accepted')
 
 
-class CommentDownvoteAPIView(generics.GenericAPIView):
+class CommentDownvoteAPIView(generics.UpdateAPIView):
     """Downvote comment."""
     def put(self, request, cid):
         """put.
         :param request:
         """
 
-        comment = Comment.objects.filter(cid=cid).first()
-        print(comment.downvotes)
-        comment.downvotes = comment.downvotes + 1
-        comment.save()
+        if request.method == "PUT":
+            comment = Comment.objects.filter(cid=cid).first()
+            if comment:
+                print(comment.downvotes)
+                comment.downvotes = comment.downvotes + 1
+                print(comment.downvotes)
+                comment.save()
 
-        return response.Response('Updated downvotes count')
+                return response.Response('Updated downvotes count')
+            else:
+                return response.Response(f'No comment with id ({cid}) found')
+        else:
+            return response.Response('Request type not accepted')
 
 
 class ParentCommentsByArticleAPIView(generics.GenericAPIView):
@@ -154,18 +168,21 @@ class CommentFormAPIView(generics.GenericAPIView):
 
     serializer_class = CommentFormSerializer
 
-    def get(self, request, slug):
+    def get(self, request, slug, data={}):
         """get.
         :param request:
         """
-        article = Article.objects.filter(slug=slug).first().id
-        form = CommentForm(data={'article': article})
+        if not data:
+            article = Article.objects.filter(slug=slug).first().id
+            data['article'] = article
+        form = CommentForm(data=data)
         return render(request, 'backend/form.html', {'form': form})
 
-    def post(self, request):
+    def post(self, request, slug):
         """post.
         :param request:
         """
         form = CommentForm(request.POST)
+        print(form.data)
         if form.is_valid():
             return HttpResponseRedirect(request.path_info)

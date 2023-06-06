@@ -103,6 +103,7 @@
     label {
       &[for="id_subscribe"] {
         display: inline-block;
+        height: 34px;
         line-height: 36.666px;
         padding-right: 1em;
       }
@@ -138,8 +139,18 @@
 
     input {
       &[name="subscribe"] {
-        width: fit-content;
+        width: 1em;
+        height: 1em;
+        border-radius: 5px;
         cursor: pointer;
+        outline: 1px solid transparent;
+        margin: auto 0;
+        vertical-align: middle;
+
+        &:focus,
+        &:hover {
+          outline-color: var(--loosed-highlight-1);
+        }
 
         &:checked {
           + input[name="email"] {
@@ -185,7 +196,8 @@
         cursor: pointer;
       }
 
-      &:hover {
+      &:hover,
+      &:focus {
         color: var(--loosed-highlight-1);
       }
     }
@@ -227,15 +239,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  button[name="reply"] {
-    border: none;
-    padding: 0;
-    background-color: transparent;
-  }
 }
 
 .reply_button {
+  border: none;
+  padding: 0;
+  background-color: transparent;
   position: relative;
   color: var(--loosed-black);
   display: flex;
@@ -267,7 +276,8 @@
     z-index: 2;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     svg {
       color: #fff;
     }

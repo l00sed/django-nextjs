@@ -1,4 +1,5 @@
 from django import forms
+from django.core import validators
 
 
 class CommentForm(forms.Form):
@@ -59,7 +60,8 @@ class CommentForm(forms.Form):
                 "style": "display:none;",
                 "placeholder": "Email"
             }
-        )
+        ),
+        validators=[validators.validate_email]
     )
 
     template = "backend/form.html"
@@ -73,7 +75,7 @@ class CommentForm(forms.Form):
     # Override form validation "clean" method
     def clean(self):
         data = self.cleaned_data
-        # print(data)
+        print(data)
 
         if data.get('subscribe', True) and data.get('email', None):
             raise forms.ValidationError(

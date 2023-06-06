@@ -6,6 +6,7 @@ import dark_mode_toggle_styles from '../styles/DarkModeToggle.module.scss'
 import Cookies from 'js-cookie';
 /* React */
 import React, { useEffect } from 'react';
+import { waitForElem } from '../lib/wait_for_elem';
 
 export default function DarkModeToggle() {
   useEffect(() => {
@@ -52,10 +53,14 @@ export default function DarkModeToggle() {
     }
 
     // Setup event listener
-    document.getElementById('dark-mode-toggle')?.addEventListener('click', setTheme);
+    waitForElem('#dark-mode-toggle').then(darkModeToggle => {
+      darkModeToggle.onclick = setTheme;
+    });
 
     return () => {
-      document.getElementById('dark-mode-toggle')?.removeEventListener('click', setTheme);
+      waitForElem('#dark-mode-toggle').then(darkModeToggle => {
+        darkModeToggle.onclick = null;
+      });
     }
   }, []);
 
