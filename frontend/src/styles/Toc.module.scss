@@ -12,6 +12,10 @@
   border: 1px solid var(--main-box-shadow);
   box-shadow: 0 var(--off-1) 0 0 var(--main-box-shadow);
   border-radius: var(--rad-1);
+
+  &:hover {
+    --off-1: 0;
+  }
 }
 /* Hidden input checkbox */
 input.toc__hidden {

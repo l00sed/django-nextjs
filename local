@@ -27,7 +27,7 @@ case "$1" in
       start
       ;;
     *)
-        cat << EOF
+      cat << EOF
 
 Command line interface for the Docker-based web development environment demo.
 

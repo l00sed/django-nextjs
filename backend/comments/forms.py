@@ -8,9 +8,11 @@ class CommentForm(forms.Form):
 
     # Hidden Fields
     cid = forms.IntegerField(
+        required=False,
         widget=forms.HiddenInput()
     )
     parent = forms.IntegerField(
+        required=False,
         widget=forms.HiddenInput()
     )
     article = forms.IntegerField(
@@ -54,7 +56,7 @@ class CommentForm(forms.Form):
         label="",
         help_text="",
         max_length=254,
-        required=True,
+        required=False,
         widget=forms.EmailInput(
             attrs={
                 "style": "display:none;",

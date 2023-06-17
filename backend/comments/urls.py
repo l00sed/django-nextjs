@@ -7,7 +7,6 @@ from .views import (
     ParentCommentsByArticleAPIView,
     CommentsByPIDAPIView,
     CommentByIDAPIView,
-    CommentSubmitAPIView,
     CommentFormAPIView
 )
 
@@ -45,11 +44,6 @@ urlpatterns = [
     path(
         'comment/pid/<int:cid>',
         CommentsByPIDAPIView.as_view(),
-        name='comments'
-    ),
-    path(
-        'comment/submit',
-        CommentSubmitAPIView.as_view(),
         name='comments'
     ),
     path(

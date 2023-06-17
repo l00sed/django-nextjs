@@ -1,8 +1,14 @@
+import json
 from rest_framework import generics, response, status
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from articles.models import Article
-from .serializers import CommentFormSerializer, CommentSerializer
+from .serializers import (
+    CommentFormSerializer,
+    CommentSerializer,
+    CommentUpvoteSerializer,
+    CommentDownvoteSerializer
+)
 from .models import Comment
 from .forms import CommentForm
 
@@ -46,6 +52,8 @@ class CommentsByArticleAPIView(generics.GenericAPIView):
 
 class CommentUpvoteAPIView(generics.UpdateAPIView):
     """Upvote comment."""
+    serializer_class = CommentUpvoteSerializer
+
     def put(self, request, cid):
         """put.
         :param request:
@@ -68,6 +76,8 @@ class CommentUpvoteAPIView(generics.UpdateAPIView):
 
 class CommentDownvoteAPIView(generics.UpdateAPIView):
     """Downvote comment."""
+    serializer_class = CommentDownvoteSerializer
+
     def put(self, request, cid):
         """put.
         :param request:
@@ -154,15 +164,6 @@ class CommentByIDAPIView(generics.GenericAPIView):
         return response.Response('Not found', status=status.HTTP_404_NOT_FOUND)
 
 
-class CommentSubmitAPIView(generics.CreateAPIView):
-    """CommentSubmitAPIView."""
-
-    serializer_class = CommentSerializer
-
-    def get_queryset(self):
-        return Comment.objects.all()
-
-
 class CommentFormAPIView(generics.GenericAPIView):
     """Get the comment form template from Django."""
 
@@ -182,7 +183,33 @@ class CommentFormAPIView(generics.GenericAPIView):
         """post.
         :param request:
         """
-        form = CommentForm(request.POST)
+        form = CommentForm(request.data)
+        print('form.data')
         print(form.data)
+        print('is_bound')
+        print(form.is_bound)
+
         if form.is_valid():
+            print('Valid!')
+            parent = None
+            if form.data['parent']:
+                parent = Comment.objects.get(cid=int(form.data['parent']))
+                print(parent)
+            author = form.data['author']
+            content = form.data['content']
+            article = Article.objects.get(id=int(form.data['article']))
+            reply_level = form.data['reply_level']
+
+            comment = Comment(
+                parent=parent,
+                author=author,
+                content=content,
+                article=article,
+                reply_level=reply_level
+            )
+            comment.save()
             return HttpResponseRedirect(request.path_info)
+        else:
+            print('Invalid!')
+            print(form.errors)
+            return render(request, 'backend/form.html', {'form': form})

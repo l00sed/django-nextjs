@@ -48,133 +48,117 @@ export default function CommentForm(props) {
     let approved = true;
     let parent = sanitize(document.getElementById("id_parent").value) || null;
     let article = sanitize(document.getElementById("id_article").value);
+    let subscribe = document.getElementById("id_subscribe").checked;
 
     const object = {
-      'author': author,
-      'content': content,
-      'upvotes': upvotes,
-      'downvotes': downvotes,
+      'author': author,  // str
+      'content': content,  // str
+      'upvotes': upvotes,  // int
+      'downvotes': downvotes,  // int
       'reply_level': reply_level,
-      'approved': approved,
+      'approved': approved,  // bool
       'parent': parent,  // int, id
       'article': article,  // int, id
+      'subscribe': subscribe   // bool
     }
     console.log(object);
 
-    //setLoadingCommentForm(true);
-    ///** FETCH: comment_form */
-    ///** Setup promise for HTML Django form
-    //  * 1 Setup the request headers
-    //  * 2 Fetch the endpoint */
-    //try {
-    //  const header_comment_form = {
-    //    method: "POST",
-    //    supportHeaderParams: true,
-    //    headers: {
-    //      'Accept': 'text/html;encoding=utf-8',
-    //      'Content-Type': 'text/html;encoding=utf-8',
-    //    },
-    //    body: JSON.stringify(object),
-    //  }
-    //  fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/${props.slug}/form`,  // Endpoint URL
-    //    header_comment_form)  // Header Options
-    //    .then(res => {
-    //      console.log(res);
-    //      if (res.ok) {
-    //        return res.text();
-    //      }
-    //    })
-    //    .then(data => {
-    //      console.log(data);
-    //      let comment_form = "";
-    //      /* Wrangle/clean-up some of the comment data. */
-    //      if (typeof data === 'string' && data.length > 0) {
-    //        comment_form = data;
-    //        setCommentFormData(comment_form);
-    //        setLoadingCommentForm(false);
-    //      } else {
-    //        /* Additional error logging for easier debugging. */
-    //        console.error('Value is not an array, or is empty.');
-    //        setLoadingCommentForm(false);
-    //      }
-    //    });
-    //} catch (Error) {
-    //  /* Provide error log if endpoint is having issues. */
-    //  console.error( 'Could not fetch comment form HTML.' );
-    //}
-
-    //setLoadingComments(true);
-    ///** FETCH: comments */
-    ///** Setup promise for comments fetch.
-    //  * 1 Configure request header
-    //  * 2 Fetch endpoint */
-    //try {
-    //  const header_comments = {
-    //    method: "GET",
-    //    supportHeaderParams: true,
-    //    headers: {
-    //      'Accept': 'application/json;encoding=utf-8',
-    //      'Content-Type': 'application/json;encoding=utf-8',
-    //    }
-    //  }
-    //  fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${props.slug}`,  // Endpoint URL
-    //    header_comments)  // Header Options
-    //    .then(res => {
-    //      console.log(res);
-    //      if (res.ok) {
-    //        return res.json();
-    //      }
-    //    })
-    //    .then(data => {
-    //      console.log(data);
-    //      let comments = [];
-    //      /* Wrangle/clean-up some of the comment data. */
-    //      if (data instanceof Array && data.length > 0) {
-    //        data.forEach(comment_json => {
-    //          let comment = {
-    //            cid: comment_json.cid,
-    //            parent: comment_json.parent,
-    //            author: comment_json.author,
-    //            created_at: comment_json.created_at,
-    //            content: comment_json.content,
-    //            upvotes: comment_json.upvotes,
-    //            downvotes: comment_json.downvotes,
-    //            article: comment_json.article,
-    //            reply_level: comment_json.reply_level,
-    //          }
-    //          comments.push(comment);
-    //        });
-    //        setCommentsData(comments);
-    //        setLoadingComments(false);
-    //        console.log(commentsData);
-    //      } else {
-    //        /* Additional error logging for easier debugging. */
-    //        console.error('Value is not an array, or is empty.');
-    //        setLoadingComments(false);
-    //      }
-    //    });
-    //} catch (Error) {
-    //  /* Provide error log if endpoint is having issues. */
-    //  console.error( 'Could not fetch comments.' );
-    //}
-
-    const options_post = {
-      method: "POST",
-      supportHeaderParams: true,
-      headers: {
-        'Accept': 'application/json;encoding=utf-8',
-        'Content-Type': 'application/json;encoding=utf-8',
-      },
-      body: JSON.stringify(object),
+    setLoadingCommentForm(true);
+    /** FETCH: comment_form */
+    /** Setup promise for HTML Django form
+      * 1 Setup the request headers
+      * 2 Fetch the endpoint */
+    try {
+      const header_comment_form = {
+        method: "POST",
+        supportHeaderParams: true,
+        headers: {
+          'Accept': 'application/json;encoding=utf-8',
+          'Content-Type': 'application/json;encoding=utf-8',
+        },
+        body: JSON.stringify(object),
+      }
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/${props.slug}/form`,  // Endpoint URL
+        header_comment_form)  // Header Options
+        .then(res => {
+          console.log(res);
+          if (res.ok) {
+            return res.text();
+          }
+        })
+        .then(data => {
+          console.log(data);
+          let comment_form = "";
+          /* Wrangle/clean-up some of the comment data. */
+          if (typeof data === 'string' && data.length > 0) {
+            comment_form = data;
+            setCommentFormData(comment_form);
+            setLoadingCommentForm(false);
+          } else {
+            /* Additional error logging for easier debugging. */
+            console.error('Value is not an array, or is empty.');
+            setLoadingCommentForm(false);
+          }
+        });
+    } catch (Error) {
+      /* Provide error log if endpoint is having issues. */
+      console.error( 'Could not fetch comment form HTML.' );
     }
 
-    const results = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/submit`, options_post)
-      .catch(error => console.log( error ))
-    const json = await results.json()
-
-    console.log(commentsData);
-    console.log(json);
-    return json;
+    setLoadingComments(true);
+    /** FETCH: comments */
+    /** Setup promise for comments fetch.
+      * 1 Configure request header
+      * 2 Fetch endpoint */
+    try {
+      const header_comments = {
+        method: "GET",
+        supportHeaderParams: true,
+        headers: {
+          'Accept': 'application/json;encoding=utf-8',
+          'Content-Type': 'application/json;encoding=utf-8',
+        }
+      }
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${props.slug}`,  // Endpoint URL
+        header_comments)  // Header Options
+        .then(res => {
+          console.log(res);
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .then(data => {
+          console.log(data);
+          let comments = [];
+          /* Wrangle/clean-up some of the comment data. */
+          if (data instanceof Array && data.length > 0) {
+            data.forEach(comment_json => {
+              let comment = {
+                cid: comment_json.cid,
+                parent: comment_json.parent,
+                author: comment_json.author,
+                created_at: comment_json.created_at,
+                content: comment_json.content,
+                upvotes: comment_json.upvotes,
+                downvotes: comment_json.downvotes,
+                article: comment_json.article,
+                reply_level: comment_json.reply_level,
+              }
+              comments.push(comment);
+            });
+            setCommentsData(comments);
+            setLoadingComments(false);
+            console.log(commentsData);
+          } else {
+            /* Additional error logging for easier debugging. */
+            console.error('Value is not an array, or is empty.');
+            setLoadingComments(false);
+          }
+        });
+    } catch (Error) {
+      /* Provide error log if endpoint is having issues. */
+      console.error( 'Could not fetch comments.' );
+    }
   }
 
   useEffect(() => {

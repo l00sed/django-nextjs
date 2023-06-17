@@ -12,3 +12,15 @@ class CommentFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'
+
+
+class CommentUpvoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = 'upvote'
+
+
+class CommentDownvoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = 'downvote'
