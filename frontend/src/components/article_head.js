@@ -8,7 +8,7 @@ export default function ArticleHead(props) {
     if (meta.updated_at) {
       date = dateformat(new Date(meta.updated_at), "h:MMtt | mmmm, dS yyyy").toString();
     }
-    return date;
+    return date
   }
 
   return (
@@ -19,5 +19,5 @@ export default function ArticleHead(props) {
         <span className={ article_styles.article__author }>{ props.meta.author }</span>
       </div>
     </header>
-  );
+  )
 }

@@ -16,7 +16,7 @@ String.prototype.replaceArray = function(find, replace) {
   let replaceString = this;
   // Replace found strings (in array)
   // with new strings (in a second array)
-  for (let i = 0; i < find.length; i++) {
+  for (let i = 0; i < find?.length; i++) {
     replaceString = replaceString.replace(find[i], replace[i]);
   }
   return replaceString;
@@ -24,7 +24,6 @@ String.prototype.replaceArray = function(find, replace) {
 
 export default function Comment(props) {
   const [comment, setComment] = useState(props.comment);
-  const [uvc, setUVC] = useState(0);
   const [message, setMessage] = useState('');
 
   const parseUpvotes = (upvote_count) => {
@@ -153,45 +152,49 @@ export default function Comment(props) {
     // Finally, focus the "author" field
     document.getElementById('id_author').focus();
   }
+
   // Upvote button event handler
-  const handleUpvote = async(e) => {
-    e.preventDefault();
-    let comment_id = e.target.closest(`.${comment_styles.main_wrapper}`)?.id;
+  const handleUpvote = async(id) => {
     const header_upvote = {
       method: "PUT",
       supportHeaderParams: true,
       headers: {
         'Accept': 'application/json;encoding=utf-8',
         'Content-Type': 'application/json;encoding=utf-8',
-      }
+      },
+      body: JSON.stringify({ upvotes: 1 })
     }
-    const upvote_promise = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/upvote/${comment_id}`, header_upvote);
+    const upvote_promise = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/upvote/${id}`, header_upvote);
     /* Empty array to receive JSON response */
     let upvote_response = [];
     if (upvote_promise.ok) {
       upvote_response = await upvote_promise.json();
+      let vote = parseInt(document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText)
+      document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText = (vote + 1).toString();
     } else {
       /* Provide error log if endpoint is having issues. */
       console.error( 'Could not upvote comment.' );
     }
   }
+
   // Downvote button event handler
-  const handleDownvote = async(e) => {
-    e.preventDefault();
-    let comment_id = e.target.closest(`.${comment_styles.main_wrapper}`)?.id;
+  const handleDownvote = async(id, vote) => {
     const header_downvote = {
       method: "PUT",
       supportHeaderParams: true,
       headers: {
         'Accept': 'application/json;encoding=utf-8',
         'Content-Type': 'application/json;encoding=utf-8',
-      }
+      },
+      body: JSON.stringify({ downvotes: 1 })
     }
-    const downvote_promise = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/downvote/${comment_id}`, header_downvote);
+    const downvote_promise = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/downvote/${id}`, header_downvote);
     /* Empty array to receive JSON response */
     let downvote_response = [];
     if (downvote_promise.ok) {
       downvote_response = await downvote_promise.json();
+      let vote = parseInt(document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText)
+      document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText = (vote + 1).toString();
     } else {
       /* Provide error log if endpoint is having issues. */
       console.error( 'Could not downvote comment.' );
@@ -201,7 +204,7 @@ export default function Comment(props) {
   useEffect(() => {
     // Button event listeners
     waitForElems(`.${comment_styles.reply_button}`).then(replyButtons => {
-      if (replyButtons.length) {
+      if (replyButtons?.length) {
         replyButtons?.forEach(rB => {
           rB.onclick = handleReply;
         });
@@ -209,17 +212,19 @@ export default function Comment(props) {
     });
     // Upvote event listeners
     waitForElems(`.${comment_styles.upvote_button}`).then(upvoteButtons => {
-      if (upvoteButtons.length) {
-        upvoteButtons.forEach(uB => {
-          uB.onclick = handleUpvote;
+      if (upvoteButtons?.length) {
+        upvoteButtons?.forEach(uB => {
+          let comment_id = uB.closest(`.${comment_styles.main_wrapper}`)?.id;
+          uB.onclick = handleUpvote(comment_id);
         });
       }
     });
     // Downvote event listeners
     waitForElems(`.${comment_styles.downvote_button}`).then(downvoteButtons => {
-      if (downvoteButtons.length) {
-        downvoteButtons.forEach(dB => {
-          dB.onclick = handleDownvote;
+      if (downvoteButtons?.length) {
+        downvoteButtons?.forEach(dB => {
+          let comment_id = dB.closest(`.${comment_styles.main_wrapper}`)?.id;
+          dB.onclick = handleDownvote(comment_id);
         });
       }
     });
@@ -248,7 +253,6 @@ export default function Comment(props) {
   }, []);
 
   useConstructor(() => {
-    setUVC(parseUpvotes(props.comment.upvotes - props.comment.downvotes));
     setMessage(props.comment.content ? Parse(autoLinkText(sanitize(props.comment.content))) : '');
   });
 
@@ -284,7 +288,7 @@ export default function Comment(props) {
         </div>
         <div className={ comment_styles.vote_wrapper }>
           <div className={ comment_styles.vote_count }>
-            <span className={ comment_styles.count_text }>{ uvc }</span>
+            <span className={ comment_styles.count_text }>{ parseUpvotes(props.comment.upvotes - props.comment.downvotes) }</span>
           </div>
           <div className={ comment_styles.upvote_button }>
             <span>

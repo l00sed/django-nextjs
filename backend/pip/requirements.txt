@@ -11,3 +11,4 @@ djangorestframework
 drf-yasg
 easy-thumbnails
 markdown
+python-frontmatter

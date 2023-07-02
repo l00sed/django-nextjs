@@ -3,7 +3,11 @@ from django.template.defaultfilters import slugify
 
 
 def get_upload_path(instance, filename):
-    return "uploads/articles/{}/{}".format(instance.slug, filename)
+    return "uploads/{}/{}/{}".format(
+        instance.content_type,
+        instance.slug,
+        filename
+    )
 
 
 class Article(models.Model):

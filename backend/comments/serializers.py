@@ -17,10 +17,10 @@ class CommentFormSerializer(serializers.ModelSerializer):
 class CommentUpvoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = 'upvote'
+        fields = ['upvotes']
 
 
 class CommentDownvoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = 'downvote'
+        fields = ['downvotes']
