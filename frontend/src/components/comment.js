@@ -1,7 +1,7 @@
 "use client";
 
 /* React */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 /* Next */
 import Link from 'next/link';
 /* Local utils */
@@ -16,7 +16,7 @@ String.prototype.replaceArray = function(find, replace) {
   let replaceString = this;
   // Replace found strings (in array)
   // with new strings (in a second array)
-  for (let i = 0; i < find?.length; i++) {
+  for (let i=0; i<find?.length; i++) {
     replaceString = replaceString.replace(find[i], replace[i]);
   }
   return replaceString;
@@ -137,24 +137,10 @@ export default function Comment(props) {
     return `${Math.floor(seconds).toString()} seconds ago`;
   }
 
-  // Reply button event handler
-  const handleReply = (e) => {
-    e.preventDefault();
-    // Get the comment root node when clicking the reply button
-    let this_comment_row = e.target.closest(`.${comment_styles.row_wrapper}`);
-    let this_comment = e.target.closest(`.${comment_styles.main_wrapper}`);
-    // Get the reply level
-    let this_reply_level = this_comment_row?.querySelectorAll(`.${comment_styles.indent_block}`)?.length + 1;
-    // Set the comment form's parent ID
-    document.getElementById('id_parent').value = this_comment.id;
-    // Set the reply level
-    document.getElementById('id_reply_level').value = this_reply_level;
-    // Finally, focus the "author" field
-    document.getElementById('id_author').focus();
-  }
-
   // Upvote button event handler
-  const handleUpvote = async(id) => {
+  const handleUpvote = async e => {
+    e.preventDefault();
+    let id = e.target.closest(`.${comment_styles.main_wrapper}`)?.id;
     const header_upvote = {
       method: "PUT",
       supportHeaderParams: true,
@@ -178,7 +164,9 @@ export default function Comment(props) {
   }
 
   // Downvote button event handler
-  const handleDownvote = async(id, vote) => {
+  const handleDownvote = async e => {
+    e.preventDefault();
+    let id = e.target.closest(`.${comment_styles.main_wrapper}`)?.id;
     const header_downvote = {
       method: "PUT",
       supportHeaderParams: true,
@@ -194,11 +182,27 @@ export default function Comment(props) {
     if (downvote_promise.ok) {
       downvote_response = await downvote_promise.json();
       let vote = parseInt(document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText)
-      document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText = (vote + 1).toString();
+      document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText = (vote - 1).toString();
     } else {
       /* Provide error log if endpoint is having issues. */
       console.error( 'Could not downvote comment.' );
     }
+  }
+
+  // Reply button event handler
+  const handleReply = e => {
+    e.preventDefault();
+    // Get the comment root node when clicking the reply button
+    let this_comment_row = e.target.closest(`.${comment_styles.row_wrapper}`);
+    let this_comment = e.target.closest(`.${comment_styles.main_wrapper}`);
+    // Get the reply level
+    let this_reply_level = this_comment_row?.querySelectorAll(`.${comment_styles.indent_block}`)?.length + 1;
+    // Set the comment form's parent ID
+    document.getElementById('id_parent').value = this_comment.id;
+    // Set the reply level
+    document.getElementById('id_reply_level').value = this_reply_level;
+    // Finally, focus the "author" field
+    document.getElementById('id_author').focus();
   }
 
   useEffect(() => {
@@ -210,45 +214,51 @@ export default function Comment(props) {
         });
       }
     });
+
     // Upvote event listeners
     waitForElems(`.${comment_styles.upvote_button}`).then(upvoteButtons => {
       if (upvoteButtons?.length) {
         upvoteButtons?.forEach(uB => {
-          let comment_id = uB.closest(`.${comment_styles.main_wrapper}`)?.id;
-          uB.onclick = handleUpvote(comment_id);
+          uB.onclick = handleUpvote;
         });
       }
     });
+
     // Downvote event listeners
     waitForElems(`.${comment_styles.downvote_button}`).then(downvoteButtons => {
       if (downvoteButtons?.length) {
         downvoteButtons?.forEach(dB => {
           let comment_id = dB.closest(`.${comment_styles.main_wrapper}`)?.id;
-          dB.onclick = handleDownvote(comment_id);
+          dB.onclick = handleDownvote;
         });
       }
     });
 
     // Clean up
     return () => {
-      let replyButtons = document.querySelectorAll(`.${comment_styles.reply_button}`);
-      if (replyButtons.length) {
-        replyButtons.forEach(rB => {
-          rB.onclick = null;
-        });
-      }
-      let upvoteButtons = document.querySelectorAll(`.${comment_styles.upvote_button}`);
-      if (upvoteButtons.length) {
-        upvoteButtons.forEach(uB => {
-          uB.onclick = null;
-        });
-      }
-      let downvoteButtons = document.querySelectorAll(`.${comment_styles.downvote_button}`);
-      if (downvoteButtons.length) {
-        downvoteButtons.forEach(dB => {
-          dB.onclick = null;
-        });
-      }
+      waitForElems(`.${comment_styles.reply_button}`).then(replyButtons => {
+        if (replyButtons?.length) {
+          replyButtons?.forEach(rB => {
+            rB.onclick = null;
+          });
+        }
+      });
+      // Downvote event listeners
+      waitForElems(`.${comment_styles.upvote_button}`).then(upvoteButtons => {
+        if (upvoteButtons?.length) {
+          upvoteButtons?.forEach(uB => {
+            uB.onclick = null;
+          });
+        }
+      });
+      // Downvote event listeners
+      waitForElems(`.${comment_styles.downvote_button}`).then(downvoteButtons => {
+        if (downvoteButtons?.length) {
+          downvoteButtons?.forEach(dB => {
+            dB.onclick = null;
+          });
+        }
+      });
     }
   }, []);
 
