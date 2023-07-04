@@ -26,16 +26,16 @@ export default function Comment(props) {
   const [comment, setComment] = useState(props.comment);
   const [message, setMessage] = useState('');
 
-  const parseUpvotes = (upvote_count) => {
+  const parseVotes = upvote_count => {
     if ( upvote_count > 999 ) {
       if ( upvote_count > 99999 ) {
-        upvote_count = 'max';
+        upvote_count = '🔥';
       } else {
-        upvote_count = `${upvote_count.slice(0, -3).toString()}k`;
+        upvote_count = `${upvote_count.toString().slice(0, -3)}k`;
       }
     } else {
       if ( upvote_count < -99 ) {
-        upvote_count = '🪠';
+        upvote_count = '💩';
       }
     }
     return upvote_count;
@@ -69,7 +69,7 @@ export default function Comment(props) {
     }
   }
 
-  const abbreviateUrl = ( url ) => {
+  const abbreviateUrl = url => {
     // Remove 'www'
     let abbreviated_url = url.replace(/^https?\:\/\//i, '').replace(/^www./, '');
     // Abbreviate with ellipses if long
@@ -83,7 +83,7 @@ export default function Comment(props) {
     return `<span><a href=${ url } target="_blank" rel="noopener nofollow noreferrer">${ abbreviated_url }</a></span>`;
   }
 
-  const getUrlsFromString = (post) => {
+  const getUrlsFromString = post => {
     // gruber revised expression - http://rodneyrehm.de/t/url-regex.html
     // matches URLs in a string
     let uri_pattern = /\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/ig;
@@ -112,7 +112,7 @@ export default function Comment(props) {
     return indentBlocks;
   }
 
-  const timeSince = (date) => {
+  const timeSince = date => {
     const seconds = Math.floor((new Date() - date) / 1000);
     let interval = seconds / 31536000;
     if (interval > 1) {
@@ -155,8 +155,9 @@ export default function Comment(props) {
     let upvote_response = [];
     if (upvote_promise.ok) {
       upvote_response = await upvote_promise.json();
-      let vote = parseInt(document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText)
-      document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText = (vote + 1).toString();
+      let vote = parseInt(document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).dataset.voteCount)
+      document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).dataset.voteCount = vote + 1;
+      document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText = parseVotes(vote + 1);
     } else {
       /* Provide error log if endpoint is having issues. */
       console.error( 'Could not upvote comment.' );
@@ -181,8 +182,9 @@ export default function Comment(props) {
     let downvote_response = [];
     if (downvote_promise.ok) {
       downvote_response = await downvote_promise.json();
-      let vote = parseInt(document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText)
-      document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText = (vote - 1).toString();
+      let vote = parseInt(document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).dataset.voteCount)
+      document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).dataset.voteCount = vote - 1;
+      document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText = parseVotes(vote - 1);
     } else {
       /* Provide error log if endpoint is having issues. */
       console.error( 'Could not downvote comment.' );
@@ -206,7 +208,7 @@ export default function Comment(props) {
   }
 
   useEffect(() => {
-    // Button event listeners
+    // Reply button event listeners
     waitForElems(`.${comment_styles.reply_button}`).then(replyButtons => {
       if (replyButtons?.length) {
         replyButtons?.forEach(rB => {
@@ -215,7 +217,7 @@ export default function Comment(props) {
       }
     });
 
-    // Upvote event listeners
+    // Upvote button event listeners
     waitForElems(`.${comment_styles.upvote_button}`).then(upvoteButtons => {
       if (upvoteButtons?.length) {
         upvoteButtons?.forEach(uB => {
@@ -224,7 +226,7 @@ export default function Comment(props) {
       }
     });
 
-    // Downvote event listeners
+    // Downvote button event listeners
     waitForElems(`.${comment_styles.downvote_button}`).then(downvoteButtons => {
       if (downvoteButtons?.length) {
         downvoteButtons?.forEach(dB => {
@@ -236,6 +238,7 @@ export default function Comment(props) {
 
     // Clean up
     return () => {
+      // Reply button event listeners
       waitForElems(`.${comment_styles.reply_button}`).then(replyButtons => {
         if (replyButtons?.length) {
           replyButtons?.forEach(rB => {
@@ -243,7 +246,7 @@ export default function Comment(props) {
           });
         }
       });
-      // Downvote event listeners
+      // Upvote button event listeners
       waitForElems(`.${comment_styles.upvote_button}`).then(upvoteButtons => {
         if (upvoteButtons?.length) {
           upvoteButtons?.forEach(uB => {
@@ -251,7 +254,7 @@ export default function Comment(props) {
           });
         }
       });
-      // Downvote event listeners
+      // Downvote button event listeners
       waitForElems(`.${comment_styles.downvote_button}`).then(downvoteButtons => {
         if (downvoteButtons?.length) {
           downvoteButtons?.forEach(dB => {
@@ -298,7 +301,7 @@ export default function Comment(props) {
         </div>
         <div className={ comment_styles.vote_wrapper }>
           <div className={ comment_styles.vote_count }>
-            <span className={ comment_styles.count_text }>{ parseUpvotes(props.comment.upvotes - props.comment.downvotes) }</span>
+            <span className={ comment_styles.count_text } data-vote-count={ props.comment.upvotes - props.comment.downvotes }>{ parseVotes(props.comment.upvotes - props.comment.downvotes) }</span>
           </div>
           <div className={ comment_styles.upvote_button }>
             <span>
