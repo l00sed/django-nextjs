@@ -1,21 +1,21 @@
 "use client";
 
-/* Local Utilities */
-//import { renderComments, processComments } from '../utils/comment_helpers'
-import sanitize from '../utils/sanitize';
+/* React */
+import { useEffect, useState, createContext } from 'react';
+/* Local Components */
 import Comment from './comment';
 import CommentForm from './comment_form';
-
 /* Styles */
 import comment_styles from '../styles/Comment.module.scss';
-import { useEffect, useState, createContext } from 'react';
 
-
+/* Create data context for comment form an comments */
 export const CommentsContext = createContext('comment_data');
 
 export default function Comments(props) {
+  /* Comments Data */
   const [commentsData, setCommentsData] = useState([]);
   const [commentsLoading, setLoadingComments] = useState(false);
+  /* Comment Form Data */
   const [commentFormData, setCommentFormData] = useState("");
   const [commentFormLoading, setLoadingCommentForm] = useState(false);
 
@@ -148,11 +148,11 @@ export default function Comments(props) {
         <div>
           {
             commentsData.map((comment, index) => {
-                return <Comment key={ comment.cid } comment={ comment } index={ index } />
-              })
-            }
-          </div>
-        </CommentsContext.Provider>
-      </div>
-    )
-  }
+              return <Comment key={ comment.cid } comment={ comment } index={ index } />
+            })
+          }
+        </div>
+      </CommentsContext.Provider>
+    </div>
+  )
+}

@@ -1,11 +1,8 @@
 "use client";
 
 /* React */
-import React, { useEffect, useState, useCallback } from 'react';
-/* Next */
-import Link from 'next/link';
+import React, { useEffect } from 'react';
 /* Local utils */
-import useConstructor from '../utils/constructor';
 import { waitForElems } from '../lib/wait_for_elem';
 import Parse from '../utils/parser.js';
 import sanitize from '../utils/sanitize';
@@ -16,25 +13,22 @@ String.prototype.replaceArray = function(find, replace) {
   let replaceString = this;
   // Replace found strings (in array)
   // with new strings (in a second array)
-  for (let i=0; i<find?.length; i++) {
+  for (let i = 0; i < find?.length; i++) {
     replaceString = replaceString.replace(find[i], replace[i]);
   }
   return replaceString;
 }
 
 export default function Comment(props) {
-  const [comment, setComment] = useState(props.comment);
-  const [message, setMessage] = useState('');
-
   const parseVotes = upvote_count => {
-    if ( upvote_count > 999 ) {
-      if ( upvote_count > 99999 ) {
+    if (upvote_count > 999) {
+      if (upvote_count > 99999) {
         upvote_count = '🔥';
       } else {
         upvote_count = `${upvote_count.toString().slice(0, -3)}k`;
       }
     } else {
-      if ( upvote_count < -99 ) {
+      if (upvote_count < -99) {
         upvote_count = '💩';
       }
     }
@@ -42,26 +36,26 @@ export default function Comment(props) {
   }
 
   const autoLinkText = (post, approved=1) => {
-    let urls = getUrlsFromString( post );
+    let urls = getUrlsFromString(post);
     let blur = '';
     if (approved !== 1) {
       blur = ' className="blur"';
     }
     let processed_urls = [];
-    if ( urls !== false ) {
+    if (urls !== false) {
       const imgExt = ['png','gif','jpg','jpeg','webp'];
       const urlExt = (this_url) => getUrlExtension(this_url);
       const abbvUrl = (this_url) => abbreviateUrl(this_url);
-      urls.forEach(function( url ) {
+      urls.forEach(url => {
         let extension = urlExt(url) ?? false;
         if (imgExt.includes(extension)) {
           processed_urls.push(`<div${blur}><img src="${url}" className="lazyload commentImage" /></div>`);
         } else {
-          const abbreviated_url = abbvUrl( url );
+          const abbreviated_url = abbvUrl(url);
           processed_urls.push(abbreviated_url);
         }
       });
-      if ( processed_urls.length === urls.length ) {
+      if (processed_urls.length === urls.length) {
         return post.replaceArray(urls, processed_urls);
       }
     } else {
@@ -137,6 +131,22 @@ export default function Comment(props) {
     return `${Math.floor(seconds).toString()} seconds ago`;
   }
 
+  // Reply button event handler
+  const handleReply = e => {
+    e.preventDefault();
+    // Get the comment root node when clicking the reply button
+    let this_comment_row = e.target.closest(`.${comment_styles.row_wrapper}`);
+    let this_comment = e.target.closest(`.${comment_styles.main_wrapper}`);
+    // Get the reply level
+    let this_reply_level = this_comment_row?.querySelectorAll(`.${comment_styles.indent_block}`)?.length + 1;
+    // Set the comment form's parent ID
+    document.getElementById('id_parent').value = this_comment.id;
+    // Set the reply level
+    document.getElementById('id_reply_level').value = this_reply_level;
+    // Finally, focus the "author" field
+    document.getElementById('id_author').focus();
+  }
+
   // Upvote button event handler
   const handleUpvote = async e => {
     e.preventDefault();
@@ -191,22 +201,6 @@ export default function Comment(props) {
     }
   }
 
-  // Reply button event handler
-  const handleReply = e => {
-    e.preventDefault();
-    // Get the comment root node when clicking the reply button
-    let this_comment_row = e.target.closest(`.${comment_styles.row_wrapper}`);
-    let this_comment = e.target.closest(`.${comment_styles.main_wrapper}`);
-    // Get the reply level
-    let this_reply_level = this_comment_row?.querySelectorAll(`.${comment_styles.indent_block}`)?.length + 1;
-    // Set the comment form's parent ID
-    document.getElementById('id_parent').value = this_comment.id;
-    // Set the reply level
-    document.getElementById('id_reply_level').value = this_reply_level;
-    // Finally, focus the "author" field
-    document.getElementById('id_author').focus();
-  }
-
   useEffect(() => {
     // Reply button event listeners
     waitForElems(`.${comment_styles.reply_button}`).then(replyButtons => {
@@ -216,7 +210,6 @@ export default function Comment(props) {
         });
       }
     });
-
     // Upvote button event listeners
     waitForElems(`.${comment_styles.upvote_button}`).then(upvoteButtons => {
       if (upvoteButtons?.length) {
@@ -225,12 +218,10 @@ export default function Comment(props) {
         });
       }
     });
-
     // Downvote button event listeners
     waitForElems(`.${comment_styles.downvote_button}`).then(downvoteButtons => {
       if (downvoteButtons?.length) {
         downvoteButtons?.forEach(dB => {
-          let comment_id = dB.closest(`.${comment_styles.main_wrapper}`)?.id;
           dB.onclick = handleDownvote;
         });
       }
@@ -265,19 +256,15 @@ export default function Comment(props) {
     }
   }, []);
 
-  useConstructor(() => {
-    setMessage(props.comment.content ? Parse(autoLinkText(sanitize(props.comment.content))) : '');
-  });
-
   return <>
     <div className={ comment_styles.row_wrapper }>
       { indent() }
-      <div id={ comment.cid } className={ comment_styles.main_wrapper }>
+      <div id={ props.comment.cid } className={ comment_styles.main_wrapper }>
         <div className={ comment_styles.body_wrapper }>
           <div className={ comment_styles.body_row_1 }>
             <div className={ comment_styles.body_col_1 }>
-              <span className={ comment_styles.comment_author }>{ comment.author }</span>
-              <span className={ comment_styles.comment_date }>{ timeSince(new Date(comment.created_at)) }</span>
+              <span className={ comment_styles.comment_author }>{ props.comment.author }</span>
+              <span className={ comment_styles.comment_date }>{ timeSince(new Date(props.comment.created_at)) }</span>
             </div>
             <div className={ comment_styles.body_col_2 }>
               <button name="reply" className={ comment_styles.reply_button }>
@@ -295,7 +282,7 @@ export default function Comment(props) {
           </div>
           <div className={ comment_styles.body_row_2 }>
             <div className={ comment_styles.comment_wrapper }>
-              <div className={ comment_styles.comment_content }>{ message }</div>
+              <div className={ comment_styles.comment_content }>{ props.comment.content ? Parse(autoLinkText(sanitize(props.comment.content))) : '' }</div>
             </div>
           </div>
         </div>
