@@ -3,7 +3,6 @@ import datetime
 import pytz
 from os.path import join, dirname, abspath
 from os import listdir
-from django.utils import timezone
 from django.core.management.base import BaseCommand
 from articles.models import Article
 
@@ -65,11 +64,8 @@ class Command(BaseCommand):
                                 file['updated_at'], '%m/%d/%Y %H:%M:%S'
                             )
                         ),
-                        "featured_image": f"\
-                            uploads/\
-                            {t}/\
-                            {file['slug']}/\
-                            {file['featured_image']}",
+                        "featured_image":
+                        f"uploads/{t}/{file['slug']}/{file['featured_image']}",
                         "image_alt": file['image_alt'],
                         "content": file,
                         "content_type": file['content_type']

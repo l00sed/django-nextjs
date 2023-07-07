@@ -83,7 +83,8 @@ a:focus-visible .card .card__thumbnail {
 }
 
 .card__meta {
-  line-height: 1.5;
+  line-height: 1.25;
+  font-size: var(--small);
 }
 
 .card__author,
