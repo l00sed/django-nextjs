@@ -1,4 +1,22 @@
+# Generic
 tags*
 **/tags*
 **/__pycache__
 **/**/__pycache__
+
+# Environment-specific configs
+.docker/production/certbot/conf
+.docker/production/certbot/conf/*
+.docker/production/certbot/www
+.docker/production/certbot/www/*
+.docker/production/keys/*
+.docker/production/keys
+
+.docker/local/nginx/certs/*
+
+# Node modules
+app/frontend/node_modules
+app/frontend/node_modules/*
+
+local.yml
+production.yml

@@ -4,18 +4,123 @@
 # FUNCTIONS
 #######################################
 
-start () {
+# Remove build artifacts from project root
+clean() {
   (
-    trap 'kill 0' SIGINT ;
-    cd ./frontend &&
-    npm run dev &
-    cd ./backend &&
-    eval "$(conda shell.bash hook)" &&
-    conda deactivate &&
-    conda activate django-nextjs &&
-    python ./manage.py runserver
+    if [ -f "./local.yml" ]; then
+      rm local.yml
+    fi
+    if [ -f "./backend.Dockerfile" ]; then
+      rm backend.Dockerfile
+    fi
+    if [ -f "./frontend.Dockerfile" ]; then
+      rm frontend.Dockerfile
+    fi
   )
 }
+
+# Generate a self-signed certificate
+generate_cert () {
+  (
+    rm -Rf .docker/local/nginx/certs/loosed.test.*
+    clean
+    cp .docker/local/local.yml .
+    docker compose -f local.yml run --rm nginx sh -c "cd /etc/nginx/certs && touch openssl.cnf && cat /etc/ssl/openssl.cnf > openssl.cnf && echo \"\" >> openssl.cnf && echo \"[ SAN ]\" >> openssl.cnf && echo \"subjectAltName=DNS.1:loosed.test,DNS.2:*.loosed.test\" >> openssl.cnf && openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout loosed.test.key -out loosed.test.crt -days 3650 -subj \"/CN=*.loosed.test\" -config openssl.cnf -extensions SAN && rm openssl.cnf"
+  )
+}
+
+# Install certificate
+install_cert () {
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain .docker/local/nginx/certs/loosed.test.crt
+  elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+    sudo ln -s "$(pwd)/.docker/local/nginx/certs/loosed.test.crt" /usr/local/share/ca-certificates/loosed.test.crt
+    sudo update-ca-certificates
+  else
+    echo "Could not install the certificate on the host machine, please do it manually"
+  fi
+}
+
+# Stop and start the app
+restart() {
+  (
+    stop
+    start
+  )
+}
+
+# Backend Docker container's command script
+run_backend() {
+  (
+    cd /app/backend
+    . ./bin/activate
+    # Run Django app prep
+    python manage.py collectstatic --no-input
+    # python manage.py makemigrations
+    # python manage.py migrate
+
+    # Run Gunicorn WSGI client
+    gunicorn backend.wsgi:application --bind 0.0.0.0:8000
+  )
+}
+
+run_frontend() {
+  (
+    cd /app/frontend
+    npm run dev
+  )
+}
+
+# Start the containers
+start() {
+  (
+    # Always clean first to make sure we're starting with the right Dockerfile
+    clean
+    cp .docker/local/local.yml .
+    docker compose -f local.yml --verbose up
+  )
+}
+
+# Stop the containers
+stop() {
+  (
+    # Always clean first to make sure we're starting with the right Dockerfile
+    clean
+    cp .docker/local/local.yml .
+    docker compose -f local.yml down
+    clean
+  )
+}
+
+# Build the containers
+build() {
+  (
+    # Always clean first to make sure we're starting with the right Dockerfile
+    clean
+    # Pull the local backend Dockerfile into the project root
+    cp .docker/local/backend/backend.Dockerfile .
+    # Pull the local frontend Dockerfile into the project root
+    cp .docker/local/frontend/frontend.Dockerfile .
+    # Grab the local.yml
+    cp .docker/local/local.yml .
+    # Run docker compose to build the image with the local Dockerfile
+    docker compose -f local.yml build --progress plain --no-cache
+    clean
+  )
+}
+
+# start () {
+#   (
+#     trap 'kill 0' SIGINT ;
+#     cd app/frontend &&
+#     npm run dev &
+#     cd app/backend &&
+#     eval "$(conda shell.bash hook)" &&
+#     conda deactivate &&
+#     conda activate django-nextjs &&
+#     python ./manage.py runserver
+#   )
+# }
 
 
 #######################################
@@ -23,19 +128,51 @@ start () {
 #######################################
 
 case "$1" in
-    start)
-      start
-      ;;
-    *)
-      cat << EOF
+  build)
+    build
+    ;;
+  clean)
+    clean
+    ;;
+  generate_cert)
+    generate_cert
+    ;;
+  install_cert)
+    install_cert
+    ;;
+  restart)
+    restart
+    ;;
+  run_backend)
+    run_backend
+    ;;
+  run_frontend)
+    run_frontend
+    ;;
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  *)
+    cat << EOF
 
-Command line interface for the Docker-based web development environment demo.
+Command line interface for Docker-based Web application environment.
 
 Usage:
-    app <command> [options] [arguments]
+  local <command> [options] [arguments]
 
 Available commands:
-    start ..................................... Start the containers
+  build ..................................... Build the containers' images
+  clean ..................................... Remove build artifacts
+  generate_cert ............................. Generate an SSL certificate
+  install_cert .............................. Install cert on host machine
+  restart ................................... Restart the containers
+  run_backend ............................... Run backend (Django) in container
+  run_frontend .............................. Run frontend (React) in container
+  start ..................................... Start the containers
+  stop ...................................... Stop the containers
 
 EOF
   exit
