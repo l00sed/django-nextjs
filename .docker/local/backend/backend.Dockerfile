@@ -4,6 +4,8 @@ FROM python:3.11-slim-bookworm
 
 # Get unbuffered Python log out to STDOUT
 ENV PYTHONUNBUFFERED 1
+# Keeps Python from generating .pyc files in the container
+ENV PYTHONDONTWRITEBYTECODE 1
 # Ensure headless Debian
 ENV DEBIAN_FRONTEND noninteractive
 # Ignore warnings about running pip as root
