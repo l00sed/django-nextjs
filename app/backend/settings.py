@@ -34,6 +34,7 @@ ALLOWED_HOSTS = [
     '192.168.0.100',
     '192.168.0.104',
     'localhost',
+    'loosed.local',
 ]
 
 
@@ -80,6 +81,28 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3001',
     'http://localhost:3000',
     'http://localhost:3001',
+    'https://0.0.0.0:3000',
+    'https://0.0.0.0:3001',
+    'https://127.0.0.1:3000',
+    'https://127.0.0.1:3001',
+    'https://localhost:3000',
+    'https://localhost:3001',
+    'https://loosed.local:3000',
+    'https://loosed.local:3001',
+    'http://0.0.0.0:8000',
+    'http://0.0.0.0:8001',
+    'http://127.0.0.1:8000',
+    'http://127.0.0.1:8001',
+    'http://localhost:8000',
+    'http://localhost:8001',
+    'https://0.0.0.0:8000',
+    'https://0.0.0.0:8001',
+    'https://127.0.0.1:8000',
+    'https://127.0.0.1:8001',
+    'https://localhost:8000',
+    'https://localhost:8001',
+    'https://loosed.local:8000',
+    'https://loosed.local:8001',
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -91,6 +114,28 @@ CORS_ORIGIN_WHITELIST = [
     'http://192.168.0.104:3001',
     'http://localhost:3000',
     'http://localhost:3001',
+    'https://0.0.0.0:3000',
+    'https://0.0.0.0:3001',
+    'https://127.0.0.1:3000',
+    'https://127.0.0.1:3001',
+    'https://localhost:3000',
+    'https://localhost:3001',
+    'https://loosed.local:3000',
+    'https://loosed.local:3001',
+    'http://0.0.0.0:8000',
+    'http://0.0.0.0:8001',
+    'http://127.0.0.1:8000',
+    'http://127.0.0.1:8001',
+    'http://localhost:8000',
+    'http://localhost:8001',
+    'https://0.0.0.0:8000',
+    'https://0.0.0.0:8001',
+    'https://127.0.0.1:8000',
+    'https://127.0.0.1:8001',
+    'https://localhost:8000',
+    'https://localhost:8001',
+    'https://loosed.local:8000',
+    'https://loosed.local:8001',
 ]
 
 SITE_ID = 1
@@ -160,7 +205,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 # ===========================
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_PATH, 'static/')
 
 # Default primary key field type

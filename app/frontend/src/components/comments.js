@@ -34,7 +34,7 @@ export default function Comments(props) {
           'Content-Type': 'application/json;encoding=utf-8',
         }
       }
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${props.slug}`,  // Endpoint URL
+      fetch(`https://backend:8000/api/comments/${props.slug}`,  // Endpoint URL
         header_comments)  // Header Options
         .then(res => {
           console.log(res);
@@ -89,7 +89,7 @@ export default function Comments(props) {
           'Content-Type': 'text/html;encoding=utf-8',
         }
       }
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/${props.slug}/form`,  // Endpoint URL
+      fetch(`https://backend:8000/api/comment/${props.slug}/form`,  // Endpoint URL
         header_comment_form)  // Header Options
         .then(res => {
           if (res.ok) {
