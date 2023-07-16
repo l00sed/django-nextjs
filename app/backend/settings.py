@@ -33,10 +33,16 @@ ALLOWED_HOSTS = [
     '172.26.160.1',
     '192.168.0.100',
     '192.168.0.104',
+    'backend',
+    'frontend',
     'localhost',
     'loosed.local',
 ]
 
+CSRF_TRUSTED_ORIGINS = []
+
+if DEBUG:
+    CSRF_TRUSTED_ORIGINS = ['loosed.local']
 
 # Application definition
 
@@ -75,6 +81,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
+    'http://backend:8000',
+    'http://frontend:3000',
     'http://0.0.0.0:3000',
     'http://0.0.0.0:3001',
     'http://127.0.0.1:3000',
@@ -101,6 +109,7 @@ CORS_ALLOWED_ORIGINS = [
     'https://127.0.0.1:8001',
     'https://localhost:8000',
     'https://localhost:8001',
+    'https://loosed.local',
     'https://loosed.local:8000',
     'https://loosed.local:8001',
 ]
@@ -108,6 +117,8 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ORIGIN_WHITELIST = [
     'http://0.0.0.0:3000',
     'http://0.0.0.0:3001',
+    'http://backend',
+    'http://frontend',
     'http://127.0.0.1:3000',
     'http://127.0.0.1:3001',
     'http://192.168.0.104:3000',
@@ -134,6 +145,7 @@ CORS_ORIGIN_WHITELIST = [
     'https://127.0.0.1:8001',
     'https://localhost:8000',
     'https://localhost:8001',
+    'https://loosed.local',
     'https://loosed.local:8000',
     'https://loosed.local:8001',
 ]

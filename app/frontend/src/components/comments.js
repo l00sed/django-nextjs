@@ -7,6 +7,7 @@ import Comment from './comment';
 import CommentForm from './comment_form';
 /* Styles */
 import comment_styles from '../styles/Comment.module.scss';
+import ResponseError from '../utils/error_handling';
 
 /* Create data context for comment form an comments */
 export const CommentsContext = createContext('comment_data');
@@ -20,7 +21,15 @@ export default function Comments(props) {
   const [commentFormLoading, setLoadingCommentForm] = useState(false);
 
   useEffect(() => {
+    /* Fetch comments */
     setLoadingComments(true);
+    commentsFetch();
+    /* Fetch the comment form */
+    setLoadingCommentForm(true);
+    commentsFormFetch();
+  }, []);
+
+  function commentsFetch() {
     /** FETCH: comments */
     /** Setup promise for comments fetch.
       * 1 Configure request header
@@ -34,16 +43,19 @@ export default function Comments(props) {
           'Content-Type': 'application/json;encoding=utf-8',
         }
       }
-      fetch(`https://backend:8000/api/comments/${props.slug}`,  // Endpoint URL
-        header_comments)  // Header Options
+
+      fetch(
+        `https://loosed.local/api/comments/${props.slug}`,  // Endpoint URL
+        header_comments  // Header Options
+      )
         .then(res => {
-          console.log(res);
           if (res.ok) {
             return res.json();
+          } else {
+            throw new ResponseError('Could not retrieve comments data from the API.', res);
           }
         })
         .then(data => {
-          console.log(data);
           let comments = [];
           /* Wrangle/clean-up some of the comment data. */
           if (data instanceof Array && data.length > 0) {
@@ -70,12 +82,30 @@ export default function Comments(props) {
             setLoadingComments(false);
           }
         });
-    } catch (Error) {
-      /* Provide error log if endpoint is having issues. */
-      console.error( 'Could not fetch comments.' );
+    } catch (err) {
+      // Handle the error, with full access to status and body
+      switch (err.response.status) {
+        case 400:
+          /* Handle */
+          console.error( 'Could not fetch comments. 400' );
+          break;
+        case 401:
+          /* Handle */
+          console.error( 'Could not fetch comments. 401' );
+          break;
+        case 404:
+          /* Handle */
+          console.error( 'Could not fetch comments. 404' );
+          break;
+        case 500:
+          /* Handle */
+          console.error( 'Could not fetch comments. 500' );
+          break;
+      }
     }
+  }
 
-    setLoadingCommentForm(true);
+  async function commentsFormFetch() {
     /** FETCH: comment_form */
     /** Setup promise for HTML Django form
       * 1 Setup the request headers
@@ -89,15 +119,19 @@ export default function Comments(props) {
           'Content-Type': 'text/html;encoding=utf-8',
         }
       }
-      fetch(`https://backend:8000/api/comment/${props.slug}/form`,  // Endpoint URL
-        header_comment_form)  // Header Options
+
+      fetch(
+        `https://loosed.local/api/comment/${props.slug}/form`,  // Endpoint URL
+        header_comment_form  // Header Options
+      )
         .then(res => {
           if (res.ok) {
             return res.text();
+          } else {
+            throw new ResponseError('Could not retrieve comment form data from the API.', res);
           }
         })
         .then(data => {
-          console.log(data);
           let comment_form = "";
           /* Wrangle/clean-up some of the comment data. */
           if (typeof data === 'string' && data.length > 0) {
@@ -110,11 +144,28 @@ export default function Comments(props) {
             setLoadingCommentForm(false);
           }
         });
-    } catch (Error) {
-      /* Provide error log if endpoint is having issues. */
-      console.error( 'Could not fetch comment form HTML.' );
+    } catch (err) {
+      // Handle the error, with full access to status and body
+      switch (err.response.status) {
+        case 400:
+          /* Handle */
+          console.error( 'Could not fetch comment form. 400' );
+          break;
+        case 401:
+          /* Handle */
+          console.error( 'Could not fetch comment form. 401' );
+          break;
+        case 404:
+          /* Handle */
+          console.error( 'Could not fetch comment form. 404' );
+          break;
+        case 500:
+          /* Handle */
+          console.error( 'Could not fetch comment form. 500' );
+          break;
+      }
     }
-  }, []);
+  }
 
   if (commentsLoading || commentFormLoading) {
     return <></>;

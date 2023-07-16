@@ -31,7 +31,7 @@ const getData = async (slug) => {
     }
   }
 
-  const data_promise = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/articles/${slug}`, options_get);
+  const data_promise = await fetch(`http://localhost:8000/api/articles/${slug}`, options_get);
 
   let data_json = {};
 

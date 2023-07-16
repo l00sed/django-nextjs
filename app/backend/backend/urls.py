@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
 from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 
 from rest_framework import permissions
@@ -33,8 +34,8 @@ schema_view = get_schema_view(
     openapi.Info(
         title="Article Management API",
         default_version='v1',
-        description="This API enables the Django backend \
-            to connect to the Next.js frontend.",
+        description="This API enables the Django backend "
+                    "to connect to the Next.js frontend.",
         terms_of_service="https://www.google.com/policies/terms",
         contact=openapi.Contact(email="contact@snippets.local"),
         license=openapi.License(name="BSD License"),
@@ -53,6 +54,9 @@ urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap')
 ]
+
+# Needed to serve static files through Gunicorn
+urlpatterns += staticfiles_urlpatterns()
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

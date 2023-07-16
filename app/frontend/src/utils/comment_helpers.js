@@ -61,7 +61,7 @@ export function getReplies(comment) {
   console.log('Current comment being processed for replies:');
   console.log(comment);
   if (comment.pid !== 0) {
-    const comments = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/pid/${comment.cid}`, options_get);
+    const comments = fetch(`http://localhost:8000/api/comment/pid/${comment.cid}`, options_get);
     let json = {}
     if (comments.ok) {
       json = comments.json();

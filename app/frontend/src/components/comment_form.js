@@ -31,7 +31,7 @@ export default function CommentForm(props) {
         'Content-Type': 'application/json;encoding=utf-8',
       }
     }
-    const results = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${props.slug}/parents`, options_get)
+    const results = await fetch(`http://localhost:8000/api/comments/${props.slug}/parents`, options_get)
       .catch(error => console.log( error ));
     const json = results.json()
     setCommentsData(renderComments(processComments(json)));
@@ -78,7 +78,7 @@ export default function CommentForm(props) {
         },
         body: JSON.stringify(object),
       }
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/${props.slug}/form`,  // Endpoint URL
+      fetch(`http://localhost:8000/api/comment/${props.slug}/form`,  // Endpoint URL
         header_comment_form)  // Header Options
         .then(res => {
           console.log(res);
@@ -119,7 +119,7 @@ export default function CommentForm(props) {
           'Content-Type': 'application/json;encoding=utf-8',
         }
       }
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/${props.slug}`,  // Endpoint URL
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/comments/${props.slug}`,  // Endpoint URL
         header_comments)  // Header Options
         .then(res => {
           console.log(res);
