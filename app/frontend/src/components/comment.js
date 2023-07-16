@@ -160,7 +160,7 @@ export default function Comment(props) {
       },
       body: JSON.stringify({ upvotes: 1 })
     }
-    const upvote_promise = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/upvote/${id}`, header_upvote);
+    const upvote_promise = await fetch(`http://localhost:8000/api/comment/upvote/${id}`, header_upvote);
     /* Empty array to receive JSON response */
     let upvote_response = [];
     if (upvote_promise.ok) {
@@ -187,7 +187,7 @@ export default function Comment(props) {
       },
       body: JSON.stringify({ downvotes: 1 })
     }
-    const downvote_promise = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/downvote/${id}`, header_downvote);
+    const downvote_promise = await fetch(`http://localhost:8000/api/comment/downvote/${id}`, header_downvote);
     /* Empty array to receive JSON response */
     let downvote_response = [];
     if (downvote_promise.ok) {

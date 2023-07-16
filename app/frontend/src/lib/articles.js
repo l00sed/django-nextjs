@@ -1,3 +1,5 @@
+import ResponseError from '../utils/error_handling.js';
+
 export default async function articles() {
   const options_get = {
     method: "GET",
@@ -5,21 +7,17 @@ export default async function articles() {
     headers: {
       'Accept': 'application/json;encoding=utf-8',
       'Content-Type': 'application/json;encoding=utf-8',
-    },
-    next: {
-      // Re-hydrate every 4 minutes
-      revalidate: 480000,
     }
   }
 
-  const articles_promise = await fetch( `${process.env.NEXT_PUBLIC_BASE_URL}/articles`, options_get );
+  const articles_promise = await fetch('http://localhost:8000/api/articles', options_get );
 
   let articles_json = {};
 
   if (articles_promise.ok) {
     articles_json = await articles_promise.json();
   } else {
-    console.log( 'Could not retrieve articles data from API.' );
+    throw new ResponseError('Could not retrieve articles data from the API', res);
   }
 
   return articles_json;

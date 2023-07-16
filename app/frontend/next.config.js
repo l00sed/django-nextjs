@@ -38,11 +38,14 @@ const nextConfig = {
       '192.168.0.104:3000',
     ],
   },
+  assetPrefix: 'https://loosed.local/',
   /* Fixes 404 on webpack-hmr when dockerizing the app */
-  webpackDevMiddleware: config => {
+  swcMinify: true,
+  // except for webpack, other parts are left as generated
+  webpack: (config, _context) => {
     config.watchOptions = {
       poll: 1000,
-      aggregateTimeout: 300,
+      aggregateTimeout: 300
     }
     return config
   }

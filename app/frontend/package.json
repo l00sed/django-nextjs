@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect=5000' next dev",
+    "dev": "NODE_OPTIONS='--inspect=5000' WATCHPACK_POLLING=true next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -15,7 +15,7 @@
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
-    "@next/mdx": "^13.4.7",
+    "@next/mdx": "^13.4.10",
     "builtin-modules": "^3.3.0",
     "dateformat": "^5.0.3",
     "esbuild": "^0.14.44",
