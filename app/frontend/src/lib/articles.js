@@ -1,4 +1,5 @@
 import ResponseError from '../utils/error_handling.js';
+import HOST_URL from '../utils/api_server.js';
 
 export default async function articles() {
   const options_get = {
@@ -10,7 +11,7 @@ export default async function articles() {
     }
   }
 
-  const articles_promise = await fetch('http://localhost:8000/api/articles', options_get );
+  const articles_promise = await fetch(`${HOST_URL()}/api/articles`, options_get );
 
   let articles_json = {};
 

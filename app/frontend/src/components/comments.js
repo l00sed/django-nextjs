@@ -8,6 +8,7 @@ import CommentForm from './comment_form';
 /* Styles */
 import comment_styles from '../styles/Comment.module.scss';
 import ResponseError from '../utils/error_handling';
+import HOST_URL from '../utils/api_server';
 
 /* Create data context for comment form an comments */
 export const CommentsContext = createContext('comment_data');
@@ -45,7 +46,7 @@ export default function Comments(props) {
       }
 
       fetch(
-        `https://loosed.local/api/comments/${props.slug}`,  // Endpoint URL
+        `${HOST_URL()}/api/comments/${props.slug}`,  // Endpoint URL
         header_comments  // Header Options
       )
         .then(res => {
@@ -120,8 +121,9 @@ export default function Comments(props) {
         }
       }
 
+      console.log(`${HOST_URL()}`);
       fetch(
-        `https://loosed.local/api/comment/${props.slug}/form`,  // Endpoint URL
+        `${HOST_URL()}/api/comment/${props.slug}/form`,  // Endpoint URL
         header_comment_form  // Header Options
       )
         .then(res => {

@@ -1,4 +1,5 @@
-import Comment from '../components/comment'
+import Comment from '../components/comment';
+import HOST_URL from '../utils/api_server';
 
 let index = 0;
 let reply_level = 0;
@@ -61,7 +62,7 @@ export function getReplies(comment) {
   console.log('Current comment being processed for replies:');
   console.log(comment);
   if (comment.pid !== 0) {
-    const comments = fetch(`http://localhost:8000/api/comment/pid/${comment.cid}`, options_get);
+    const comments = fetch(`${HOST_URL()}/api/comment/pid/${comment.cid}`, options_get);
     let json = {}
     if (comments.ok) {
       json = comments.json();

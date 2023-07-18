@@ -12,42 +12,42 @@ from .views import (
 
 urlpatterns = [
     path(
-        'api/comments',
+        'comments',
         CommentsAPIView.as_view(),
         name='comments'
     ),
     path(
-        'api/comments/<str:slug>',
+        'comments/<str:slug>',
         CommentsByArticleAPIView.as_view(),
         name='comments'
     ),
     path(
-        'api/comment/upvote/<int:cid>',
+        'comment/upvote/<int:cid>',
         CommentUpvoteAPIView.as_view(),
         name='comments'
     ),
     path(
-        'api/comment/downvote/<int:cid>',
+        'comment/downvote/<int:cid>',
         CommentDownvoteAPIView.as_view(),
         name='comments'
     ),
     path(
-        'api/comments/<str:slug>/parents',
+        'comments/<str:slug>/parents',
         ParentCommentsByArticleAPIView.as_view(),
         name='comments'
     ),
     path(
-        'api/comment/<int:cid>',
+        'comment/<int:cid>',
         CommentByIDAPIView.as_view(),
         name='comments'
     ),
     path(
-        'api/comment/pid/<int:cid>',
+        'comment/pid/<int:cid>',
         CommentsByPIDAPIView.as_view(),
         name='comments'
     ),
     path(
-        'api/comment/<str:slug>/form',
+        'comment/<str:slug>/form',
         CommentFormAPIView.as_view(),
         name='comments'
     )

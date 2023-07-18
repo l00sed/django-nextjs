@@ -67,6 +67,7 @@ run_backend() {
 run_frontend() {
   (
     cd /app/frontend
+    rm -rf .next/
     npm run dev
   )
 }
