@@ -7,6 +7,8 @@ import { CommentsContext } from './comments';
 import { useEffect, useState, useContext } from 'react';
 import { waitForElem } from '../lib/wait_for_elem';
 import sanitize from '../utils/sanitize';
+import ResponseError from '../utils/error_handling';
+import HOST_URL from '../utils/api_server';
 import Parse from '../utils/parser';
 
 
@@ -22,20 +24,20 @@ export default function CommentForm(props) {
     setLoadingCommentForm
   } = useContext(CommentsContext)
 
-  async function getNewComments() {
-    const options_get = {
-      method: "GET",
-      supportHeaderParams: true,
-      headers: {
-        'Accept': 'application/json;encoding=utf-8',
-        'Content-Type': 'application/json;encoding=utf-8',
-      }
-    }
-    const results = await fetch(`http://localhost:8000/api/comments/${props.slug}/parents`, options_get)
-      .catch(error => console.log( error ));
-    const json = results.json()
-    setCommentsData(renderComments(processComments(json)));
-  }
+  //async function getNewComments() {
+  //  const options_get = {
+  //    method: "GET",
+  //    supportHeaderParams: true,
+  //    headers: {
+  //      'Accept': 'application/json;encoding=utf-8',
+  //      'Content-Type': 'application/json;encoding=utf-8',
+  //    }
+  //  }
+  //  const results = await fetch(`http://localhost:8000/api/comments/${props.slug}/parents`, options_get)
+  //    .catch(error => console.log( error ));
+  //  const json = results.json()
+  //  setCommentsData(renderComments(processComments(json)));
+  //}
 
   async function handleCommentSubmit(e) {
     e.preventDefault();
@@ -78,16 +80,20 @@ export default function CommentForm(props) {
         },
         body: JSON.stringify(object),
       }
-      fetch(`http://localhost:8000/api/comment/${props.slug}/form`,  // Endpoint URL
-        header_comment_form)  // Header Options
+      fetch(
+        `${HOST_URL()}/api/comment/${props.slug}/form`,  // Endpoint URL
+        header_comment_form  // Header Options
+      )
         .then(res => {
-          console.log(res);
+          //console.log(res);
           if (res.ok) {
             return res.text();
+          } else {
+            throw new ResponseError('Could not fetch comment form from API.', res);
           }
         })
         .then(data => {
-          console.log(data);
+          //console.log(data);
           let comment_form = "";
           /* Wrangle/clean-up some of the comment data. */
           if (typeof data === 'string' && data.length > 0) {
@@ -119,12 +125,16 @@ export default function CommentForm(props) {
           'Content-Type': 'application/json;encoding=utf-8',
         }
       }
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/comments/${props.slug}`,  // Endpoint URL
-        header_comments)  // Header Options
+      fetch(
+        `${HOST_URL()}/api/comments/${props.slug}`,  // Endpoint URL
+        header_comments  // Header Options
+      )
         .then(res => {
           console.log(res);
           if (res.ok) {
             return res.json();
+          } else {
+            throw new ResponseError('Could not fetch comments from the API.', res);
           }
         })
         .then(data => {

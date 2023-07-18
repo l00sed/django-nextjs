@@ -6,6 +6,8 @@ import React, { useEffect } from 'react';
 import { waitForElems } from '../lib/wait_for_elem';
 import Parse from '../utils/parser.js';
 import sanitize from '../utils/sanitize';
+import ResponseError from '../utils/error_handling';
+import HOST_URL from '../utils/api_server';
 /* Styles */
 import comment_styles from '../styles/Comment.module.scss'
 
@@ -160,7 +162,7 @@ export default function Comment(props) {
       },
       body: JSON.stringify({ upvotes: 1 })
     }
-    const upvote_promise = await fetch(`http://localhost:8000/api/comment/upvote/${id}`, header_upvote);
+    const upvote_promise = await fetch(`${HOST_URL()}/api/comment/upvote/${id}`, header_upvote);
     /* Empty array to receive JSON response */
     let upvote_response = [];
     if (upvote_promise.ok) {
@@ -170,7 +172,7 @@ export default function Comment(props) {
       document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText = parseVotes(vote + 1);
     } else {
       /* Provide error log if endpoint is having issues. */
-      console.error( 'Could not upvote comment.' );
+      throw new ResponseError( 'Could not upvote comment.', upvote_promise);
     }
   }
 
@@ -187,7 +189,7 @@ export default function Comment(props) {
       },
       body: JSON.stringify({ downvotes: 1 })
     }
-    const downvote_promise = await fetch(`http://localhost:8000/api/comment/downvote/${id}`, header_downvote);
+    const downvote_promise = await fetch(`${HOST_URL()}/api/comment/downvote/${id}`, header_downvote);
     /* Empty array to receive JSON response */
     let downvote_response = [];
     if (downvote_promise.ok) {
@@ -197,7 +199,7 @@ export default function Comment(props) {
       document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText = parseVotes(vote - 1);
     } else {
       /* Provide error log if endpoint is having issues. */
-      console.error( 'Could not downvote comment.' );
+      throw new ResponseError('Could not downvote comment through the API.', downvote_promise);
     }
   }
 

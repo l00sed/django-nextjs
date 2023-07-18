@@ -12,10 +12,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
+from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -27,22 +27,56 @@ SECRET_KEY = 'django-insecure-4!kv-i6$n0qi1' \
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
+ALLOWED_HOSTS = []
+ALLOWED_HOSTS_BASE = [
     '0.0.0.0',
     '127.0.0.1',
-    '172.26.160.1',
-    '192.168.0.100',
-    '192.168.0.104',
+    'localhost',
     'backend',
     'frontend',
-    'localhost',
     'loosed.local',
 ]
 
-CSRF_TRUSTED_ORIGINS = []
-
+# Swagger
+ENDPOINT_DOMAIN = "https://l-o-o-s-e-d.net"
 if DEBUG:
-    CSRF_TRUSTED_ORIGINS = ['loosed.local']
+    ENDPOINT_DOMAIN = "https://loosed.local"
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        }
+    },
+    'DEFAULT_API_URL': ENDPOINT_DOMAIN,
+}
+# ReDoc
+REDOC_SETTINGS = {
+    'LAZY_RENDERING': True,
+}
+
+# Without port specified
+ALLOWED_HOSTS_HTTP = [f"http://{host}" for host in ALLOWED_HOSTS_BASE]
+ALLOWED_HOSTS_HTTPS = [f"https://{host}" for host in ALLOWED_HOSTS_BASE]
+ALLOWED_HOSTS += ALLOWED_HOSTS_HTTP
+ALLOWED_HOSTS += ALLOWED_HOSTS_HTTPS
+# Frontend (port 3000)
+ALLOWED_HOSTS_FRONTEND = [f"{host}:3000" for host in ALLOWED_HOSTS_HTTP]
+ALLOWED_HOSTS_FRONTEND += [f"{host}:3000" for host in ALLOWED_HOSTS_HTTPS]
+ALLOWED_HOSTS += ALLOWED_HOSTS_FRONTEND
+# Backend (port 8000)
+ALLOWED_HOSTS_BACKEND = [f"{host}:8000" for host in ALLOWED_HOSTS_HTTP]
+ALLOWED_HOSTS_BACKEND += [f"{host}:8000" for host in ALLOWED_HOSTS_HTTPS]
+ALLOWED_HOSTS += ALLOWED_HOSTS_BACKEND
+# Then add them
+ALLOWED_HOSTS += ALLOWED_HOSTS_BASE
+
+# CSRF
+# Exclude domains without protocols in CSRF setting
+CSRF_TRUSTED_ORIGINS = []
+CSRF_TRUSTED_ORIGINS += ALLOWED_HOSTS_HTTP
+CSRF_TRUSTED_ORIGINS += ALLOWED_HOSTS_HTTPS
+CSRF_TRUSTED_ORIGINS += ALLOWED_HOSTS_FRONTEND
+CSRF_TRUSTED_ORIGINS += ALLOWED_HOSTS_BACKEND
 
 # Application definition
 
@@ -80,74 +114,11 @@ MIDDLEWARE = [
     'webmention.middleware.webmention_middleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    'http://backend:8000',
-    'http://frontend:3000',
-    'http://0.0.0.0:3000',
-    'http://0.0.0.0:3001',
-    'http://127.0.0.1:3000',
-    'http://127.0.0.1:3001',
-    'http://localhost:3000',
-    'http://localhost:3001',
-    'https://0.0.0.0:3000',
-    'https://0.0.0.0:3001',
-    'https://127.0.0.1:3000',
-    'https://127.0.0.1:3001',
-    'https://localhost:3000',
-    'https://localhost:3001',
-    'https://loosed.local:3000',
-    'https://loosed.local:3001',
-    'http://0.0.0.0:8000',
-    'http://0.0.0.0:8001',
-    'http://127.0.0.1:8000',
-    'http://127.0.0.1:8001',
-    'http://localhost:8000',
-    'http://localhost:8001',
-    'https://0.0.0.0:8000',
-    'https://0.0.0.0:8001',
-    'https://127.0.0.1:8000',
-    'https://127.0.0.1:8001',
-    'https://localhost:8000',
-    'https://localhost:8001',
-    'https://loosed.local',
-    'https://loosed.local:8000',
-    'https://loosed.local:8001',
-]
-
-CORS_ORIGIN_WHITELIST = [
-    'http://0.0.0.0:3000',
-    'http://0.0.0.0:3001',
-    'http://backend',
-    'http://frontend',
-    'http://127.0.0.1:3000',
-    'http://127.0.0.1:3001',
-    'http://192.168.0.104:3000',
-    'http://192.168.0.104:3001',
-    'http://localhost:3000',
-    'http://localhost:3001',
-    'https://0.0.0.0:3000',
-    'https://0.0.0.0:3001',
-    'https://127.0.0.1:3000',
-    'https://127.0.0.1:3001',
-    'https://localhost:3000',
-    'https://localhost:3001',
-    'https://loosed.local:3000',
-    'https://loosed.local:3001',
-    'http://0.0.0.0:8000',
-    'http://0.0.0.0:8001',
-    'http://127.0.0.1:8000',
-    'http://127.0.0.1:8001',
-    'http://localhost:8000',
-    'http://localhost:8001',
-    'https://0.0.0.0:8000',
-    'https://0.0.0.0:8001',
-    'https://127.0.0.1:8000',
-    'https://127.0.0.1:8001',
-    'https://localhost:8000',
-    'https://localhost:8001',
-    'https://loosed.local',
-    'https://loosed.local:8000',
-    'https://loosed.local:8001',
+# CORS
+CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS + ALLOWED_HOSTS_BASE
+CORS_ORIGIN_WHITELIST = CSRF_TRUSTED_ORIGINS + ALLOWED_HOSTS_BASE
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://\w+\.loosed\.local$",
 ]
 
 SITE_ID = 1

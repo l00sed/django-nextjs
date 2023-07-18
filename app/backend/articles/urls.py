@@ -7,12 +7,12 @@ from .views import (
 
 urlpatterns = [
     path(
-        'api/articles',
+        'articles',
         ArticleListAPIView.as_view(),
         name='articles'
     ),
     path(
-        'api/articles/<str:slug>',
+        'articles/<str:slug>',
         ArticleDetailAPIView.as_view(),
         name='articles'
     ),

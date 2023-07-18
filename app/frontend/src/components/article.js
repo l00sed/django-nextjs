@@ -13,6 +13,8 @@ import remarkGfm                  from 'remark-gfm';
 
 /* Local Utils */
 import remarkCodeTitles           from '../utils/code_titles';
+import ResponseError              from '../utils/error_handling';
+import HOST_URL                   from '../utils/api_server';
 
 import Mdx from './mdx';
 import Comments from './comments';
@@ -31,14 +33,14 @@ const getData = async (slug) => {
     }
   }
 
-  const data_promise = await fetch(`http://localhost:8000/api/articles/${slug}`, options_get);
+  const data_promise = await fetch(`${HOST_URL()}/api/articles/${slug}`, options_get);
 
   let data_json = {};
 
   if (data_promise.ok) {
     data_json = await data_promise.json();
   } else {
-    console.error( 'Could not fetch article content.' );
+    throw new ResponseError('Could not fetch article content from the API.', data_promise);
   }
 
   // Organize meta info into a separate object
