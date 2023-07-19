@@ -1,11 +1,15 @@
 'use client';
 
+/* React */
+import { useEffect, useContext } from 'react';
 /* Styles */
 import comment_styles from '../styles/Comment.module.scss';
-import { renderComments, processComments } from '../utils/comment_helpers'
+/* Load data context */
 import { CommentsContext } from './comments';
-import { useEffect, useState, useContext } from 'react';
+/* Utils */
+//import { renderComments, processComments } from '../utils/comment_helpers'
 import { waitForElem } from '../lib/wait_for_elem';
+import csrfToken from '../utils/csrf_token.js';
 import sanitize from '../utils/sanitize';
 import ResponseError from '../utils/error_handling';
 import HOST_URL from '../utils/api_server';
@@ -77,6 +81,7 @@ export default function CommentForm(props) {
         headers: {
           'Accept': 'application/json;encoding=utf-8',
           'Content-Type': 'application/json;encoding=utf-8',
+          'X-CSRFToken': csrfToken()
         },
         body: JSON.stringify(object),
       }

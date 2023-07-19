@@ -34,20 +34,33 @@ class CommentsByArticleAPIView(generics.GenericAPIView):
         :param slug:
         """
 
+        # Get article object with the API slug
         article = Article.objects.filter(slug=slug).first()
 
+        # If article exists...
         if article:
+            # ...see if it has comments
             comment_query_set = (
                 Comment.objects
                 .filter(article=article.id)
                 .order_siblings_by("cid")
             )
 
+            # If comments, send them back in the response
             if comment_query_set:
                 serializer = CommentSerializer(comment_query_set, many=True)
                 return response.Response(serializer.data)
+            # If not, send an empty JSON
+            else:
+                return response.Response({})
 
-        return response.Response('Not found', status=status.HTTP_404_NOT_FOUND)
+        # No article with the given slug
+        return response.Response(
+            'Article could not be retrieved from the API with the given slug: '
+            f'(  { slug }  ) '
+            'Article not found.',
+            status=status.HTTP_404_NOT_FOUND
+        )
 
 
 class CommentUpvoteAPIView(generics.UpdateAPIView):
@@ -62,9 +75,9 @@ class CommentUpvoteAPIView(generics.UpdateAPIView):
         if request.method == "PUT":
             comment = Comment.objects.filter(cid=cid).first()
             if comment:
-                print(comment.upvotes)
+                # print(comment.upvotes)
                 comment.upvotes = comment.upvotes + 1
-                print(comment.upvotes)
+                # print(comment.upvotes)
                 comment.save()
 
                 return response.Response('Updated upvotes count')
@@ -86,9 +99,9 @@ class CommentDownvoteAPIView(generics.UpdateAPIView):
         if request.method == "PUT":
             comment = Comment.objects.filter(cid=cid).first()
             if comment:
-                print(comment.downvotes)
+                # print(comment.downvotes)
                 comment.downvotes = comment.downvotes + 1
-                print(comment.downvotes)
+                # print(comment.downvotes)
                 comment.save()
 
                 return response.Response('Updated downvotes count')
@@ -184,13 +197,14 @@ class CommentFormAPIView(generics.GenericAPIView):
         :param request:
         """
         form = CommentForm(request.data)
-        print('form.data')
-        print(form.data)
-        print('is_bound')
-        print(form.is_bound)
+        # NOTE: For debugging:
+        # print('form.data')
+        # print(form.data)
+        # print('is_bound')
+        # print(form.is_bound)
 
         if form.is_valid():
-            print('Valid!')
+            # print('Valid!')
             parent = None
             if form.data['parent']:
                 parent = Comment.objects.get(cid=int(form.data['parent']))
@@ -210,6 +224,6 @@ class CommentFormAPIView(generics.GenericAPIView):
             comment.save()
             return HttpResponseRedirect(request.path_info)
         else:
-            print('Invalid!')
-            print(form.errors)
+            # print('Invalid!')
+            # print(form.errors)
             return render(request, 'backend/form.html', {'form': form})

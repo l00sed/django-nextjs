@@ -33,3 +33,7 @@ RUN python3.11 -m pip install --upgrade pip
 
 # Install pip requirements
 RUN python3.11 -m pip install -r pip/requirements.txt
+
+# WARN: Enable makemigrations + migrate for production build
+# RUN python3.11 manage.py makemigrations
+# RUN python3.11 manage.py migrate

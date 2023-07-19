@@ -1,6 +1,8 @@
-# Django + NEXT.js
+# Loosed Blog Web Application
 
-Started by following along with this [tutorial](https://www.youtube.com/watch?v=zS3vKMbsUfY).
+This application is setup to use Docker. It containerizes an Nginx image, a Python image, and a Node image. The Nginx image directs traffic from requests to either the backend (Python) or the frontend (Node.js).
+
+The backend Python image is used to install and run a RESTful API from a Django server, with Gunicorn (WSGI) pumping out responses from the Python code. The frontend is Next.js (a React framework, framework) for fetching these API endpoints and displaying data.
 
 ## Project Setup
 
