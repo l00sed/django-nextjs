@@ -56,11 +56,9 @@ run_backend() {
     . ./bin/activate
     # Run Django app prep
     python manage.py collectstatic --no-input
-    # python manage.py makemigrations
-    # python manage.py migrate
-
     # Run Gunicorn WSGI client
-    gunicorn backend.wsgi:application --bind 0.0.0.0:8000
+    # WARN: (`--reload` argument not recommended for production)
+    gunicorn backend.wsgi:application --bind :8000 --reload
   )
 }
 

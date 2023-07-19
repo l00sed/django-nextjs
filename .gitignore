@@ -18,5 +18,5 @@ tags*
 app/frontend/node_modules
 app/frontend/node_modules/*
 
-local.yml
-production.yml
+./local.yml
+./production.yml
