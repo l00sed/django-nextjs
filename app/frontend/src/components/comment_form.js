@@ -28,21 +28,6 @@ export default function CommentForm(props) {
     setLoadingCommentForm
   } = useContext(CommentsContext)
 
-  //async function getNewComments() {
-  //  const options_get = {
-  //    method: "GET",
-  //    supportHeaderParams: true,
-  //    headers: {
-  //      'Accept': 'application/json;encoding=utf-8',
-  //      'Content-Type': 'application/json;encoding=utf-8',
-  //    }
-  //  }
-  //  const results = await fetch(`http://localhost:8000/api/comments/${props.slug}/parents`, options_get)
-  //    .catch(error => console.log( error ));
-  //  const json = results.json()
-  //  setCommentsData(renderComments(processComments(json)));
-  //}
-
   async function handleCommentSubmit(e) {
     e.preventDefault();
 
@@ -50,10 +35,10 @@ export default function CommentForm(props) {
     let content = sanitize(document.getElementById("id_content").value);
     let upvotes = 0  // No upvotes initially
     let downvotes = 0  // No downvotes initially
-    let reply_level = sanitize(document.getElementById('id_reply_level').value) || 0;
+    let reply_level = parseInt(sanitize(document.getElementById('id_reply_level').value)) || 0;
     let approved = true;
-    let parent = sanitize(document.getElementById("id_parent").value) || null;
-    let article = sanitize(document.getElementById("id_article").value);
+    let parent = parseInt(sanitize(document.getElementById("id_parent").value)) || null;
+    let article = parseInt(sanitize(document.getElementById("id_article").value));
     let subscribe = document.getElementById("id_subscribe").checked;
 
     const object = {
@@ -107,13 +92,13 @@ export default function CommentForm(props) {
             setLoadingCommentForm(false);
           } else {
             /* Additional error logging for easier debugging. */
-            console.error('Value is not an array, or is empty.');
+            console.error('Comment form API returned a value that is not an array, or is empty.');
             setLoadingCommentForm(false);
           }
         });
     } catch (Error) {
       /* Provide error log if endpoint is having issues. */
-      console.error( 'Could not fetch comment form HTML.' );
+      console.error('Could not fetch comment form HTML.');
     }
 
     setLoadingComments(true);
@@ -166,7 +151,7 @@ export default function CommentForm(props) {
             console.log(commentsData);
           } else {
             /* Additional error logging for easier debugging. */
-            console.error('Value is not an array, or is empty.');
+            console.error('Comments API returned a value that either is not an array, or is empty.');
             setLoadingComments(false);
           }
         });

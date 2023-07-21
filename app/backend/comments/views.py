@@ -186,9 +186,8 @@ class CommentFormAPIView(generics.GenericAPIView):
         """get.
         :param request:
         """
-        if not data:
-            article = Article.objects.filter(slug=slug).first().id
-            data['article'] = article
+        article = Article.objects.filter(slug=slug).first().id
+        data['article'] = article
         form = CommentForm(data=data)
         return render(request, 'backend/form.html', {'form': form})
 

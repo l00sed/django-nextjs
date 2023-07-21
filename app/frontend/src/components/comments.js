@@ -79,13 +79,13 @@ export default function Comments(props) {
             console.log(commentsData);
           } else {
             /* Additional error logging for easier debugging. */
-            console.error('Value is not an array, or is empty.');
+            console.error('Comments API returned a value that either is not an array, or is empty.');
             setLoadingComments(false);
           }
         });
     } catch (err) {
       // Handle the error, with full access to status and body
-      switch (err.response.status) {
+      switch (err.response?.status) {
         case 400:
           /* Handle */
           console.error( 'Could not fetch comments. 400' );
@@ -106,12 +106,14 @@ export default function Comments(props) {
     }
   }
 
-  async function commentsFormFetch() {
+  function commentsFormFetch() {
     /** FETCH: comment_form */
     /** Setup promise for HTML Django form
       * 1 Setup the request headers
       * 2 Fetch the endpoint */
     try {
+      console.log('props.slug');
+      console.log(props.slug);
       const header_comment_form = {
         method: "GET",
         supportHeaderParams: true,
@@ -148,7 +150,7 @@ export default function Comments(props) {
         });
     } catch (err) {
       // Handle the error, with full access to status and body
-      switch (err.response.status) {
+      switch (err.response?.status) {
         case 400:
           /* Handle */
           console.error( 'Could not fetch comment form. 400' );
@@ -200,7 +202,7 @@ export default function Comments(props) {
         <CommentForm slug={ props.slug } />
         <div>
           {
-            commentsData.map((comment, index) => {
+            commentsData?.map((comment, index) => {
               return <Comment key={ comment.cid } comment={ comment } index={ index } />
             })
           }
