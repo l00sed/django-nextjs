@@ -1,11 +1,10 @@
 "use client";
-
 /* React */
-import React, { useEffect } from 'react';
+import React from 'react';
 /* Local utils */
-import { waitForElems } from '../lib/wait_for_elem';
-import Parse from '../utils/parser.js';
+import Parse from '../utils/parser';
 import sanitize from '../utils/sanitize';
+import csrfToken from '../utils/csrf_token';
 import ResponseError from '../utils/error_handling';
 import HOST_URL from '../utils/api_server';
 /* Styles */
@@ -159,6 +158,7 @@ export default function Comment(props) {
       headers: {
         'Accept': 'application/json;encoding=utf-8',
         'Content-Type': 'application/json;encoding=utf-8',
+        'X-CSRFToken': csrfToken()
       },
       body: JSON.stringify({ upvotes: 1 })
     }
@@ -186,6 +186,7 @@ export default function Comment(props) {
       headers: {
         'Accept': 'application/json;encoding=utf-8',
         'Content-Type': 'application/json;encoding=utf-8',
+        'X-CSRFToken': csrfToken()
       },
       body: JSON.stringify({ downvotes: 1 })
     }
@@ -203,61 +204,6 @@ export default function Comment(props) {
     }
   }
 
-  useEffect(() => {
-    // Reply button event listeners
-    waitForElems(`.${comment_styles.reply_button}`).then(replyButtons => {
-      if (replyButtons?.length) {
-        replyButtons?.forEach(rB => {
-          rB.onclick = handleReply;
-        });
-      }
-    });
-    // Upvote button event listeners
-    waitForElems(`.${comment_styles.upvote_button}`).then(upvoteButtons => {
-      if (upvoteButtons?.length) {
-        upvoteButtons?.forEach(uB => {
-          uB.onclick = handleUpvote;
-        });
-      }
-    });
-    // Downvote button event listeners
-    waitForElems(`.${comment_styles.downvote_button}`).then(downvoteButtons => {
-      if (downvoteButtons?.length) {
-        downvoteButtons?.forEach(dB => {
-          dB.onclick = handleDownvote;
-        });
-      }
-    });
-
-    // Clean up
-    return () => {
-      // Reply button event listeners
-      waitForElems(`.${comment_styles.reply_button}`).then(replyButtons => {
-        if (replyButtons?.length) {
-          replyButtons?.forEach(rB => {
-            rB.onclick = null;
-          });
-        }
-      });
-      // Upvote button event listeners
-      waitForElems(`.${comment_styles.upvote_button}`).then(upvoteButtons => {
-        if (upvoteButtons?.length) {
-          upvoteButtons?.forEach(uB => {
-            uB.onclick = null;
-          });
-        }
-      });
-      // Downvote button event listeners
-      waitForElems(`.${comment_styles.downvote_button}`).then(downvoteButtons => {
-        if (downvoteButtons?.length) {
-          downvoteButtons?.forEach(dB => {
-            dB.onclick = null;
-          });
-        }
-      });
-    }
-  }, []);
-
   return <>
     <div className={ comment_styles.row_wrapper }>
       { indent() }
@@ -269,7 +215,7 @@ export default function Comment(props) {
               <span className={ comment_styles.comment_date }>{ timeSince(new Date(props.comment.created_at)) }</span>
             </div>
             <div className={ comment_styles.body_col_2 }>
-              <button name="reply" className={ comment_styles.reply_button }>
+              <button name="reply" className={ comment_styles.reply_button } onClick={ (e) => { handleReply(e) } } onKeyDown={ (e) => { handleReply(e) } }>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -292,14 +238,14 @@ export default function Comment(props) {
           <div className={ comment_styles.vote_count }>
             <span className={ comment_styles.count_text } data-vote-count={ props.comment.upvotes - props.comment.downvotes }>{ parseVotes(props.comment.upvotes - props.comment.downvotes) }</span>
           </div>
-          <div className={ comment_styles.upvote_button }>
+          <div className={ comment_styles.upvote_button } onClick={ (e) => { handleUpvote(e) } } onKeyDown={ (e) => { handleUpvote(e) } }>
             <span>
               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
                 <path fill="currentColor" d="M6.786 1.459a.903.903 0 0 0-1.572 0L1.122 8.628C.774 9.238 1.211 10 1.91 10h8.18c.698 0 1.135-.762.787-1.372l-4.092-7.17Z"/>
               </svg>
             </span>
           </div>
-          <div className={ comment_styles.downvote_button }>
+          <div className={ comment_styles.downvote_button } onClick={ (e) => { handleDownvote(e) } } onKeyDown={ (e) => { handleDownvote(e) } }>
             <span>
               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
                 <path fill="currentColor" d="M5.214 10.541a.903.903 0 0 0 1.572 0l4.092-7.169C11.226 2.762 10.789 2 10.09 2H1.91c-.698 0-1.135.762-.787 1.372l4.092 7.17Z"/>

@@ -84,7 +84,7 @@
   display: block;
   margin-top: 0;
   margin-bottom: 1em;
-  padding: 1.5em 1.5em 2em 1.5em;
+  padding: 1.5em;
 
   h3 {
     font-size: 1.25em;
@@ -108,7 +108,7 @@
         padding-right: 1em;
       }
 
-      font-size: var(--medium);
+      font-size: var(--small);
       font-weight: bold;
     }
 
@@ -299,6 +299,7 @@
 }
 
 .comment_author {
+  user-select: none;
   font-weight: bold;
   margin-bottom: 5px
 }

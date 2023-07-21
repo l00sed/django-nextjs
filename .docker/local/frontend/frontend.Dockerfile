@@ -10,3 +10,6 @@ WORKDIR /app/frontend
 
 # Install node packages
 RUN npm i
+# Disable NEXT.js telemetry
+RUN npx next telemetry disable
+RUN npx next telemetry status

@@ -45,7 +45,7 @@ class CommentForm(forms.Form):
         )
     )
     subscribe = forms.BooleanField(
-        label="Subscribe to this discussion?",
+        label="Email notifications?",
         initial=False,
         required=False,
         widget=forms.CheckboxInput()
