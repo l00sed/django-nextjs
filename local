@@ -52,7 +52,9 @@ restart() {
 # Backend Docker container's command script
 run_backend() {
   (
+    # change into the backend directory
     cd /app/backend
+    # Activate the virtual environment (where Django is installed)
     . ./bin/activate
     # Run Django app prep
     python manage.py collectstatic --no-input
@@ -100,6 +102,8 @@ build() {
     cp .docker/local/backend/backend.Dockerfile .
     # Pull the local frontend Dockerfile into the project root
     cp .docker/local/frontend/frontend.Dockerfile .
+    # Pull the local nginx Dockerfile into the project root
+    cp .docker/local/nginx/nginx.Dockerfile .
     # Grab the local.yml
     cp .docker/local/local.yml .
     # Run docker compose to build the image with the local Dockerfile
@@ -107,20 +111,6 @@ build() {
     clean
   )
 }
-
-# start () {
-#   (
-#     trap 'kill 0' SIGINT ;
-#     cd app/frontend &&
-#     npm run dev &
-#     cd app/backend &&
-#     eval "$(conda shell.bash hook)" &&
-#     conda deactivate &&
-#     conda activate django-nextjs &&
-#     python ./manage.py runserver
-#   )
-# }
-
 
 #######################################
 # MENU
