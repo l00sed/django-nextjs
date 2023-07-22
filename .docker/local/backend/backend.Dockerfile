@@ -1,6 +1,12 @@
 FROM python:3.11-slim-bookworm
 
+# UPDATES =========================================
+# Update debian packages
+RUN apt-get update -y
+
 # ENVIRONMENT VARIABLES ===========================
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
 
 # Get unbuffered Python log out to STDOUT
 ENV PYTHONUNBUFFERED 1
@@ -12,28 +18,32 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV PIP_ROOT_USER_ACTION ignore
 
 # BACKEND =========================================
+# Run backend as "user__backend" instead of root
+RUN groupadd -r application
+RUN useradd -r -M -g application user__backend
 
 # Copy application code to container
-COPY app/backend /app/backend
-# Copy the entrypoint script to container
-COPY local /
+COPY --chown=user__backend:application app/backend /app/backend
+# Copy the entrypoint script (local) to the container
+COPY --chown=user__backend:application local /
 
 # Set Python working directory
 WORKDIR /app/backend
 
-# Update packages before installing VENV
-RUN apt-get update -y
-RUN apt-get install -y python3.11-venv
+# Update pip before installing virtualenv
+RUN pip install --upgrade pip
+# Install virtual environment handler
+RUN pip install virtualenv
 
-RUN python3.11 -m venv .
+# Create a virtual environment in the current directory.
+RUN python -m venv .
+# Activate new VENV
 RUN . ./bin/activate
-
-# Run before requirements.txt install for cache efficiency
-RUN python3.11 -m pip install --upgrade pip
-
-# Install pip requirements
-RUN python3.11 -m pip install -r pip/requirements.txt
+# Upgrade pip (this time, for the virtual environment)
+RUN pip install --upgrade pip
+# Install pip requirements in virtual environment
+RUN pip install -r pip/requirements.txt
 
 # WARN: Enable makemigrations + migrate for production build
-# RUN python3.11 manage.py makemigrations
-# RUN python3.11 manage.py migrate
+# RUN python manage.py makemigrations
+# RUN python manage.py migrate

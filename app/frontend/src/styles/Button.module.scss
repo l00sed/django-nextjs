@@ -45,3 +45,10 @@
     background-position-x: -500px;
   }
 }
+
+@media screen and (min-width: 1200px) {
+  .live__link {
+    width: calc(100% - 3em);
+    margin-left: 0;
+  }
+}
