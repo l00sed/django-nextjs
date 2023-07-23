@@ -1,18 +1,5 @@
 /** @type {import('next').NextConfig} */
-const intercept = require('intercept-stdout')
 const path = require('path');
-
-// safely ignore recoil stdout warning messages
-// https://github.com/facebookexperimental/Recoil/issues/733#issuecomment-925072943
-function interceptStdout(text) {
-  if (text.includes('Duplicate atom key')) {
-    return ''
-  }
-  return text
-}
-
-// Intercept in dev and prod
-intercept(interceptStdout)
 
 // Config
 const nextConfig = {
@@ -26,6 +13,7 @@ const nextConfig = {
   /* TODO: Include logic here to detect application environment.
    * Switch between development and production domain. */
   assetPrefix: 'https://loosed.local',
+  output: 'standalone',
   images: {
     domains: [
       'localhost',
