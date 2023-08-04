@@ -13,7 +13,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./app:/app
+      - ./app:/var/www/app
       - ./.docker/local/keys:/var/keys
       - ./.docker/local/nginx/conf.d:/etc/nginx/conf.d
       - ./.docker/local/nginx/certs:/etc/nginx/certs
@@ -24,18 +24,21 @@ services:
       restart_policy:
         condition: on-failure
         max_attempts: 3
+    networks:
+      app__network:
 
   # Python/Django Service
   backend:
     build:
       context: .
       dockerfile: backend.Dockerfile
-    command: "/./local run_backend"
+    command: "/var/www/app/./local run_backend"
     expose:
       - 8000
+    networks:
+      app__network:
     volumes:
-      - ./app:/app
-      # - ./.docker/local/keys:/var/keys
+      - ./app:/var/www/app
     # depends_on:
     #   mysql:
     #     condition: service_healthy
@@ -47,9 +50,11 @@ services:
       dockerfile: frontend.Dockerfile
     expose:
       - 3000
-    command: "/./local run_frontend"
+    command: "/var/www/app/./local run_frontend"
+    networks:
+      app__network:
     volumes:
-      - ./app:/app
+      - ./app:/var/www/app
     # depends_on:
     #   mysql:
     #     condition: service_healthy
@@ -73,5 +78,8 @@ services:
 
 # Volumes
 volumes:
-
   app:
+
+# Networks
+networks:
+  app__network:

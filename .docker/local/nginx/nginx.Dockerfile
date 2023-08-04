@@ -4,6 +4,9 @@ FROM nginx:1.25-bookworm
 # Update debian packages
 RUN apt-get update -y
 
+# Use vi-mode for shell navigation
+RUN set -o vi
+
 # Install SSL packages
 RUN apt-get install -y openssl
 

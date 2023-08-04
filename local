@@ -16,6 +16,9 @@ clean() {
     if [ -f "./frontend.Dockerfile" ]; then
       rm frontend.Dockerfile
     fi
+    if [ -f "./nginx.Dockerfile" ]; then
+      rm nginx.Dockerfile
+    fi
   )
 }
 
@@ -53,21 +56,26 @@ restart() {
 run_backend() {
   (
     # change into the backend directory
-    cd /app/backend
+    echo "Changing into backend working directory..."
+    cd /var/www/app/backend
     # Activate the virtual environment (where Django is installed)
+    echo "Activating the backend virtual environment..."
     . ./bin/activate
+    echo "Collecting static files in Django..."
     # Run Django app prep
     python manage.py collectstatic --no-input
+    echo "Starting gunicorn backend, binding to port 8000..."
     # Run Gunicorn WSGI client
     # WARN: (`--reload` argument not recommended for production)
-    gunicorn backend.wsgi:application --bind :8000 --reload
+    python bin/gunicorn backend.wsgi:application --bind :8000 --reload
   )
 }
 
 run_frontend() {
   (
-    cd /app/frontend
-    rm -rf .next/
+    echo "Changing into frontend working directory..."
+    cd /var/www/app/frontend
+    echo "Starting Node frontend..."
     npm run dev
   )
 }

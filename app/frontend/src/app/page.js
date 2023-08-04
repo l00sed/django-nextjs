@@ -9,10 +9,10 @@ import MenuToggle from '../components/menu_toggle';
 import Footer from '../components/footer';
 import Card from '../components/card';
 /* Lib */
-import articles from '../lib/articles';
+  //import articles from '../lib/articles';
 
 export default async function Home() {
-  const data = await articles();
+  //const data = await articles();
 
   return (
     <div className={ `${page_styles.next_wrapper} ${styles.homepage}` }>

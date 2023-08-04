@@ -17,8 +17,7 @@ class Command(BaseCommand):
             # Import from either the articles or pages dir
             MDX_DIRECTORY = join(
                 abspath(dirname(__name__)),
-                '..',
-                f'frontend/src/mdx/{t}'
+                f'mdx/{t}'
             )
 
             self.stdout.write(

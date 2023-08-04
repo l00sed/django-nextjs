@@ -4,6 +4,9 @@ FROM python:3.11-slim-bookworm
 # Update debian packages
 RUN apt-get update -y
 
+# Use vi-mode for shell navigation
+RUN set -o vi
+
 # ENVIRONMENT VARIABLES ===========================
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
@@ -19,16 +22,16 @@ ENV PIP_ROOT_USER_ACTION ignore
 
 # BACKEND =========================================
 # Run backend as "user__backend" instead of root
-RUN groupadd -r application
-RUN useradd -r -M -g application user__backend
+RUN groupadd -r -g 1001 backend
+RUN useradd -r -M -u 1001 -g 1001 user__backend
 
 # Copy application code to container
-COPY --chown=user__backend:application app/backend /app/backend
+COPY --chown=1001:1001 app/backend /var/www/app/backend
 # Copy the entrypoint script (local) to the container
-COPY --chown=user__backend:application local /
+COPY --chown=1001:1001 local /var/www/app
 
 # Set Python working directory
-WORKDIR /app/backend
+WORKDIR /var/www/app/backend
 
 # Update pip before installing virtualenv
 RUN pip install --upgrade pip
@@ -43,7 +46,10 @@ RUN . ./bin/activate
 RUN pip install --upgrade pip
 # Install pip requirements in virtual environment
 RUN pip install -r pip/requirements.txt
+# Migrate database tables
+RUN python manage.py makemigrations
+RUN python manage.py migrate
+# Import pages
+RUN python manage.py sync_local_mdx
 
-# WARN: Enable makemigrations + migrate for production build
-# RUN python manage.py makemigrations
-# RUN python manage.py migrate
+USER user__backend
