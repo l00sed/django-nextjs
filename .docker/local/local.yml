@@ -29,6 +29,8 @@ services:
 
   # Python/Django Service
   backend:
+    env_file: ./.env
+    entrypoint: "/var/www/app/./local entry_backend"
     build:
       context: .
       dockerfile: backend.Dockerfile
@@ -48,6 +50,7 @@ services:
     build:
       context: .
       dockerfile: frontend.Dockerfile
+    entrypoint: "/var/www/app/./local entry_frontend"
     expose:
       - 3000
     command: "/var/www/app/./local run_frontend"
@@ -75,10 +78,6 @@ services:
     #      test: mysqladmin ping -h 127.0.0.1 -u ${LOCAL_USER} --password=${LOCAL_PASSWORD}
     #      interval: 5s
     #      retries: 10
-
-# Volumes
-volumes:
-  app:
 
 # Networks
 networks:

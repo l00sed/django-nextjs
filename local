@@ -22,6 +22,18 @@ clean() {
   )
 }
 
+# Setup frontend env variables
+entry_frontend () {
+  export UID=$(id -u)
+  export GID=$(id -g)
+}
+
+# Setup backend env variables
+entry_backend () {
+  export UID=$(id -u)
+  export GID=$(id -g)
+}
+
 # Generate a self-signed certificate
 generate_cert () {
   (
@@ -131,6 +143,12 @@ case "$1" in
   clean)
     clean
     ;;
+  entry_backend)
+    entry_backend
+    ;;
+  entry_frontend)
+    entry_frontend
+    ;;
   generate_cert)
     generate_cert
     ;;
@@ -163,6 +181,8 @@ Usage:
 Available commands:
   build ..................................... Build the containers' images
   clean ..................................... Remove build artifacts
+  entry_backend ............................. Set environment variables for backend
+  entry_frontend ............................ Set environment variables for frontend
   generate_cert ............................. Generate an SSL certificate
   install_cert .............................. Install cert on host machine
   restart ................................... Restart the containers
