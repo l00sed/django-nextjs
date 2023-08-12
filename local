@@ -114,14 +114,9 @@ build() {
     cp .docker/local/nginx/nginx.Dockerfile .
     # Grab the local.yml
     cp .docker/local/local.yml .
-    # User/Group IDs
-    export USER_ID=$(id -u)
-    export GROUP_ID=$(id -g)
     # Run docker compose to build the image with the local Dockerfile
     docker compose \
       -f local.yml build \
-      --build-arg USER_ID=$USER_ID \
-      --build-arg GROUP_ID=$GROUP_ID \
       --progress plain \
       --no-cache
     clean

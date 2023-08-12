@@ -13,7 +13,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - app:/var/www/app
+      - ./app:/var/www/app
       - ./.docker/local/nginx/conf.d:/etc/nginx/conf.d
       - ./.docker/local/nginx/certs:/etc/nginx/certs
     depends_on:
@@ -33,7 +33,7 @@ services:
     expose:
       - 8000
     volumes:
-      - app:/var/www/app
+      - ./app:/var/www/app
 
   # Node/Next.js Service
   frontend:
@@ -44,7 +44,7 @@ services:
     expose:
       - 3000
     volumes:
-      - app:/var/www/app
+      - ./app:/var/www/app
 
 volumes:
   app:
