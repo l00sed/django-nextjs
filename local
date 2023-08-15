@@ -8,12 +8,15 @@
 clean() {
   (
     if [ -f "./local.yml" ]; then
+      echo "Removing compose file."
       rm local.yml
     fi
     if [ -f "./backend.Dockerfile" ]; then
+      echo "Removing backend Dockerfile."
       rm backend.Dockerfile
     fi
     if [ -f "./frontend.Dockerfile" ]; then
+      echo "Removing frontend Dockerfile."
       rm frontend.Dockerfile
     fi
   )
@@ -22,9 +25,13 @@ clean() {
 # Generate a self-signed certificate
 generate_cert () {
   (
+    echo "Removing existing certificates."
     rm -Rf .docker/local/nginx/certs/loosed.test.*
+    echo "Cleaning build files..."
     clean
+    echo "Copying local docker compose file to current directory."
     cp .docker/local/local.yml .
+    echo "Generating a certificate with OpenSSL."
     docker compose -f local.yml run --rm nginx sh -c "cd /etc/nginx/certs && touch openssl.cnf && cat /etc/ssl/openssl.cnf > openssl.cnf && echo \"\" >> openssl.cnf && echo \"[ SAN ]\" >> openssl.cnf && echo \"subjectAltName=DNS.1:loosed.test,DNS.2:*.loosed.test\" >> openssl.cnf && openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout loosed.test.key -out loosed.test.crt -days 3650 -subj \"/CN=*.loosed.test\" -config openssl.cnf -extensions SAN && rm openssl.cnf"
   )
 }
@@ -66,8 +73,7 @@ run_backend() {
 
 run_frontend() {
   (
-    cd /app/frontend
-    rm -rf .next/
+    cd /home/nextjs
     npm run dev
   )
 }
@@ -78,6 +84,8 @@ start() {
     # Always clean first to make sure we're starting with the right Dockerfile
     clean
     cp .docker/local/local.yml .
+    export USER_ID=$(id -u)
+    export GROUP_ID=$(id -g)
     docker compose -f local.yml --verbose up
   )
 }
@@ -85,10 +93,14 @@ start() {
 # Stop the containers
 stop() {
   (
+    echo "Cleaning build files."
     # Always clean first to make sure we're starting with the right Dockerfile
     clean
+    echo "Copying docker compose file to the current directory."
     cp .docker/local/local.yml .
+    echo "Killing and removing project containers."
     docker compose -f local.yml down
+    echo "Again, cleaning up build files."
     clean
   )
 }
@@ -106,8 +118,16 @@ build() {
     cp .docker/local/nginx/nginx.Dockerfile .
     # Grab the local.yml
     cp .docker/local/local.yml .
+    export USER_ID=$(id -u)
+    export GROUP_ID=$(id -g)
+    export COMPOSE_DOCKER_CLI_BUILD=1
+    export DOCKER_BUILDKIT=1
     # Run docker compose to build the image with the local Dockerfile
-    docker compose -f local.yml build --progress plain --no-cache
+    docker compose -f local.yml build \
+      --progress plain \
+      --build-arg USER_ID=${USER_ID} \
+      --build-arg GROUP_ID=${GROUP_ID} \
+      --no-cache
     clean
   )
 }

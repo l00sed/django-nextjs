@@ -12,10 +12,11 @@ ENV LC_ALL C.UTF-8
 ENV PYTHONUNBUFFERED 1
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE 1
-# Ensure headless Debian
-ENV DEBIAN_FRONTEND noninteractive
 # Ignore warnings about running pip as root
 ENV PIP_ROOT_USER_ACTION ignore
+
+# Ensure headless Debian (for apt installation)
+ENV DEBIAN_FRONTEND noninteractive
 
 # BACKEND =========================================
 # Run backend as "user__backend" instead of root
@@ -44,6 +45,6 @@ RUN pip install --upgrade pip
 # Install pip requirements in virtual environment
 RUN pip install -r pip/requirements.txt
 
-# WARN: Enable makemigrations + migrate for production build
-# RUN python manage.py makemigrations
-# RUN python manage.py migrate
+# Enable makemigrations + migrate for production build
+RUN python manage.py makemigrations
+RUN python manage.py migrate

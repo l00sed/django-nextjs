@@ -13,7 +13,6 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./app:/app
       - ./.docker/local/keys:/var/keys
       - ./.docker/local/nginx/conf.d:/etc/nginx/conf.d
       - ./.docker/local/nginx/certs:/etc/nginx/certs
@@ -45,11 +44,14 @@ services:
     build:
       context: .
       dockerfile: frontend.Dockerfile
+      target: runner
+    command: "npm run dev"
+    depends_on:
+      - backend
     expose:
       - 3000
-    command: "/./local run_frontend"
     volumes:
-      - ./app:/app
+      - ./app/frontend:/home/nextjs
     # depends_on:
     #   mysql:
     #     condition: service_healthy
@@ -73,5 +75,4 @@ services:
 
 # Volumes
 volumes:
-
   app:
