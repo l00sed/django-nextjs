@@ -59,8 +59,6 @@ restart() {
 # Backend Docker container's command script
 run_backend() {
   (
-    # change into the backend directory
-    cd /app/backend
     # Activate the virtual environment (where Django is installed)
     . ./bin/activate
     # Run Django app prep
@@ -68,13 +66,6 @@ run_backend() {
     # Run Gunicorn WSGI client
     # WARN: (`--reload` argument not recommended for production)
     gunicorn backend.wsgi:application --bind :8000 --reload
-  )
-}
-
-run_frontend() {
-  (
-    cd /home/nextjs
-    npm run dev
   )
 }
 
@@ -110,6 +101,15 @@ build() {
   (
     # Always clean first to make sure we're starting with the right Dockerfile
     clean
+
+    # Get current user id/group
+    export USER_ID=$(id -u)
+    export GROUP_ID=$(id -g)
+
+    # Set environment variables to speed up build
+    export COMPOSE_DOCKER_CLI_BUILD=1
+    export DOCKER_BUILDKIT=1
+
     # Pull the local backend Dockerfile into the project root
     cp .docker/local/backend/backend.Dockerfile .
     # Pull the local frontend Dockerfile into the project root
@@ -118,10 +118,6 @@ build() {
     cp .docker/local/nginx/nginx.Dockerfile .
     # Grab the local.yml
     cp .docker/local/local.yml .
-    export USER_ID=$(id -u)
-    export GROUP_ID=$(id -g)
-    export COMPOSE_DOCKER_CLI_BUILD=1
-    export DOCKER_BUILDKIT=1
     # Run docker compose to build the image with the local Dockerfile
     docker compose -f local.yml build \
       --progress plain \
@@ -155,9 +151,6 @@ case "$1" in
   run_backend)
     run_backend
     ;;
-  run_frontend)
-    run_frontend
-    ;;
   start)
     start
     ;;
@@ -179,7 +172,6 @@ Available commands:
   install_cert .............................. Install cert on host machine
   restart ................................... Restart the containers
   run_backend ............................... Run backend (Django) in container
-  run_frontend .............................. Run frontend (React) in container
   start ..................................... Start the containers
   stop ...................................... Stop the containers
 
