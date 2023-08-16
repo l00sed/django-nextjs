@@ -13,7 +13,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./.docker/local/keys:/var/keys
+      # - ./.docker/local/keys:/var/keys
       - ./.docker/local/nginx/conf.d:/etc/nginx/conf.d
       - ./.docker/local/nginx/certs:/etc/nginx/certs
     depends_on:
