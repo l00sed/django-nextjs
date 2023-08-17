@@ -5,74 +5,72 @@ services:
 
   # Nginx Service
   nginx:
-    build: ./.docker/production/nginx
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     ports:
       - 80:80
       - 443:443
     volumes:
-      - ./backend:/var/www/loosed/backend
-      - ./frontend:/var/www/loosed/frontend
-      - ./uploads:/var/www/loosed/uploads
-      - ./.docker/production/keys:/var/keys
-      - ./.docker/production/mailgun-php:/var/www/mailgun-php
-      - ./.docker/production/nginx/conf.d:/etc/nginx/conf.d
-      - ./.docker/production/certbot/conf:/etc/letsencrypt
-      - ./.docker/production/certbot/www:/var/www/certbot
+      # - ./.docker/local/keys:/var/keys
+      - ./.docker/local/nginx/conf.d:/etc/nginx/conf.d
+      - ./.docker/local/nginx/certs:/etc/nginx/certs
     depends_on:
-      - python
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+      - backend
+      - frontend
     deploy:
       restart_policy:
         condition: on-failure
         max_attempts: 3
 
-  # Python Service
-  python:
-    build: ./.docker/production/python
-    working_dir: /var/www/loosed
+  # Python/Django Service
+  backend:
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    command: "/./local run_backend"
+    expose:
+      - 8000
     volumes:
-      - ./backend:/var/www/loosed/backend
-      - ./uploads:/var/www/loosed/uploads
-      - ./.docker/production/keys:/var/keys
-      - ./.docker/production/mailgun-php:/var/www/mailgun-php
+      - ./app:/app
+      # - ./.docker/local/keys:/var/keys
+    # depends_on:
+    #   mysql:
+    #     condition: service_healthy
+
+  # Node/Next.js Service
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend.Dockerfile
+      target: runner
+    command: "npm run dev"
     depends_on:
-      mysql:
-        condition: service_healthy
-    deploy:
-      restart_policy:
-        condition: on-failure
-        max_attempts: 3
+      - backend
+    expose:
+      - 3000
+    # depends_on:
+    #   mysql:
+    #     condition: service_healthy
 
   # MySQL Service
-  mysql:
-    image: mysql/mysql-server:8.0
-    environment:
-      MYSQL_ROOT_USER: ${PROD_USER}
-      MYSQL_ROOT_PASSWORD: ${PROD_PASSWORD}
-      MYSQL_DATABASE: ${PROD_DATABASE}
-      MYSQL_ROOT_HOST: "%"
-    volumes:
-      - ./.docker/production/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./.docker/production/mysql:/docker-entrypoint-initdb.d
-      - mysqldata:/var/lib/mysql
-    healthcheck:
-      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_ROOT_USER --password=$MYSQL_ROOT_PASSWORD
-      interval: 5s
-      retries: 10
-    deploy:
-      restart_policy:
-        condition: on-failure
-        max_attempts: 3
-
-  # Certbot Service
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./.docker/production/certbot/conf:/etc/letsencrypt
-      - ./.docker/production/certbot/www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+  # mysql:
+    # image: mysql/mysql-server:8.0
+    #    environment:
+    #      MYSQL_DATABASE: ${LOCAL_DATABASE}
+    #      MYSQL_ROOT_USER: ${LOCAL_USER}
+    #      MYSQL_ROOT_PASSWORD: ${LOCAL_PASSWORD}
+    #      MYSQL_ROOT_HOST: "%"
+    # volumes:
+    #   - ../.docker/local/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    #   - ../.docker/local/mysql:/docker-entrypoint-initdb.d
+    #   - mysqldata:/var/lib/mysql
+    # healthcheck:
+    #      test: mysqladmin ping -h 127.0.0.1 -u ${LOCAL_USER} --password=${LOCAL_PASSWORD}
+    #      interval: 5s
+    #      retries: 10
 
 # Volumes
 volumes:
-
-  mysqldata:
+  app:

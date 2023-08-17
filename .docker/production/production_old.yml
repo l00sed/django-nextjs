@@ -1,0 +1,78 @@
+version: '3.8'
+
+# Services
+services:
+
+  # Nginx Service
+  nginx:
+    build: ./.docker/production/nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./backend:/var/www/loosed/backend
+      - ./frontend:/var/www/loosed/frontend
+      - ./uploads:/var/www/loosed/uploads
+      - ./.docker/production/keys:/var/keys
+      - ./.docker/production/mailgun-php:/var/www/mailgun-php
+      - ./.docker/production/nginx/conf.d:/etc/nginx/conf.d
+      - ./.docker/production/certbot/conf:/etc/letsencrypt
+      - ./.docker/production/certbot/www:/var/www/certbot
+    depends_on:
+      - python
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+
+  # Python Service
+  python:
+    build: ./.docker/production/python
+    working_dir: /var/www/loosed
+    volumes:
+      - ./backend:/var/www/loosed/backend
+      - ./uploads:/var/www/loosed/uploads
+      - ./.docker/production/keys:/var/keys
+      - ./.docker/production/mailgun-php:/var/www/mailgun-php
+    depends_on:
+      mysql:
+        condition: service_healthy
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+
+  # MySQL Service
+  mysql:
+    image: mysql/mysql-server:8.0
+    environment:
+      MYSQL_ROOT_USER: ${PROD_USER}
+      MYSQL_ROOT_PASSWORD: ${PROD_PASSWORD}
+      MYSQL_DATABASE: ${PROD_DATABASE}
+      MYSQL_ROOT_HOST: "%"
+    volumes:
+      - ./.docker/production/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./.docker/production/mysql:/docker-entrypoint-initdb.d
+      - mysqldata:/var/lib/mysql
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_ROOT_USER --password=$MYSQL_ROOT_PASSWORD
+      interval: 5s
+      retries: 10
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+
+  # Certbot Service
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./.docker/production/certbot/conf:/etc/letsencrypt
+      - ./.docker/production/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+# Volumes
+volumes:
+
+  mysqldata:

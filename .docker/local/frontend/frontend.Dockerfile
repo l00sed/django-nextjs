@@ -1,24 +1,4 @@
-FROM node:20.4-bookworm-slim AS deps
-
-WORKDIR /home/node
-
-COPY app/frontend/package.json ./
-COPY app/frontend/package-lock.json ./
-
-# Update NPM to latest version
-RUN npm i -g npm@latest
-# Install application node modules
-RUN npm i
-
-FROM node:20.4-bookworm-slim AS builder
-
-WORKDIR /home/node
-COPY --from=deps /home/node/node_modules ./node_modules
-COPY app/frontend .
-
 FROM node:20.4-bookworm-slim AS runner
-
-WORKDIR /home/node
 
 # ENVIRONMENT VARIABLES ===========================
 ENV LANG C.UTF-8
@@ -40,22 +20,12 @@ RUN alias vim=nvim
 # Use vi-mode for shell navigation
 RUN set -o vi
 
-# Re-create frontend "node" user with host's UID/GID
-RUN userdel -f node || echo 'User "node" does not exist.'
-RUN if getent group node;then groupdel node;fi
-RUN groupadd -g 1001 node || echo 'Group "node" already exists.'
-RUN useradd -l -u 1001 -g node node || echo 'User "node" already exists.'
-RUN install -d -m 0755 -o node -g node /home/node || echo 'User directory already exists for "node".'
+WORKDIR /home/node
 
-# Copy application code to container
-COPY --from=builder --chown=1001:1001 /home/node .
-#COPY --from=builder --chown=1001:1001 /home/node/.next ./.next
-COPY --from=builder /home/node/node_modules ./node_modules
-COPY --from=builder /home/node/package.json ./package.json
+COPY app/frontend/package.json .
+COPY app/frontend/package-lock.json .
 
-RUN chown --changes --silent --no-dereference --recursive 1001:1001 /home/node
-RUN mkdir -p /home/node/.npm
-RUN chown --changes --silent --no-dereference --recursive 1001:1001 /home/node/.npm
-
-# Switch to the "node" user
-USER node
+# Update NPM to latest version
+RUN npm i -g npm@latest
+# Install application node modules
+RUN npm i

@@ -65,7 +65,7 @@ svg.toc__caret {
   height: auto;
   width: 20px;
   transform: rotate(0deg);
-  transition: transform ease 250ms;
+  transition: transform var(--loosed-transition-medm) ease;
   stroke: var(--loosed-black);
   right: 5px;
   position: relative;
@@ -86,7 +86,7 @@ nav.toc__block {
   position: relative;
   overflow: hidden;
   background-color: var(--toc-nav-bg);
-  transition: opacity var(--loosed-transition-medm) ease, max-height var(--loosed-transition-slow) ease;
+  transition: opacity var(--loosed-transition-fast) ease, max-height var(--loosed-transition-medm) ease;
   background-color: var(--toc-nav-bg);
 }
 
