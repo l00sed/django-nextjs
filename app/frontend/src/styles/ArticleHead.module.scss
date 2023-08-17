@@ -10,6 +10,7 @@
 /* # Article Meta */
 .article__title {
   padding-bottom: 5px;
+  hyphens: auto;
 }
 .article__meta {
   border-top: 1px solid var(--main-box-shadow);

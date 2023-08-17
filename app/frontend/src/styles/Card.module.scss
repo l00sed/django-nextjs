@@ -150,6 +150,7 @@ a:focus-visible .card .card__thumbnail {
   line-height: 1em;
   letter-spacing: -0.05em;
   word-spacing: -0.35em;
+  hyphens: auto;
 }
 .card__head h2::after {
   display: none;
