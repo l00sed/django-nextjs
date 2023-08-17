@@ -1,0 +1,431 @@
+---
+title: Vim Clutch
+author: Daniel Tompkins
+description: Hacking together a <i>Vim Clutch</i> from the foot-pedal control of a dictation machine. Learn how to make a Raspberry Pi 0 be recognized across operating systems as a plug-and-play <i>Human-Interface Device</i> (HID), or keyboard. See me struggle with Python and solder some really tiny leads.
+slug: vim-clutch
+created_at: 05/21/2021 23:28:00
+updated_at: 05/21/2021 23:28:00
+featured_image: pedal_clicks.gif
+image_alt: Gif of me clicking the middle and right switches on a black foot-pedal with 3 switches total
+content_type: blog
+---
+<ProseWrapper>
+## Goodwill Strikes Again
+
+A symptom of heavy [Vim](https://www.vim.org) usage is that your brain begins to re-partition old memories for keyboard shortcuts— trashing old brain files for small boosts in finger dexterity.
+
+It was this mass of tangled brains in my own dome that compelled me to purchase a weighty foot-pedal at Goodwill. The model I got is actually a combination of three, springy switches. Sold for the reasonable price of $3.
+
+<TwoColumn>
+  <ImageWrapper
+    alt="Picture of pedal assembly on it's face with the bottom up. Getting ready to unscrew the clamshell housing with a screwdriver."
+    src="/assets/img/blog/vim-clutch/screwdriver.jpg"
+    width={ 500 }
+    height={ 889 }
+  />
+  <ImageWrapper
+    alt='The foot pedal has a wide, center pedal (with an embossed "PLAY"). Two, thinner pedals on either side read "REW" and "FWD", respectively. All 3 switches are really clicky.'
+    src="/assets/img/blog/vim-clutch/pedal_clicks.gif"
+    width={ 300 }
+    height={ 334 }
+  />
+</TwoColumn>
+
+
+It's a surprisingly hefty contraption. The base is a thick stock of foam that helps keep it from sliding across the floor. It's a clamshell design, sandwiched together by a screw at each of the four corners.
+
+Traditionally, I've coded with my fingers, and my feet remain flat on the floor. The thought of throwing another appendage into the mix had, however, actually crossed my mind (if you can believe it).
+
+The serendipity of discovering the pedal among the other assortment of donated goods gave the idea shape.🦆
+
+## What the heck is a Vim Clutch?
+
+Sometimes it feels like we're living in the future. A sci-fi fantasy where you can buy electric cars with digital coins and speculate on blockchains founded on memes.
+
+Unsurprisingly, I'm not the only one under the _Vimperious_ curse... (yes, that was a Vim + Harry Potter pun) In fact, there have been a good many other model Vim Clutches:
+
+<HorizontalScroller className="full__width">
+  <Card
+    element={{
+      id: "0",
+      slug: "https://github.com/alevchuk/vim-clutch",
+      image_alt: "The O.G. Vim Clutch by Aleksandr Levchuk, hooked up to a desktop.",
+      featured_image: "/assets/img/blog/vim-clutch/og_pedal-thumbnail.jpg",
+      title: "The O.G.?",
+      updated_at: "Apr 2011",
+      auto_update_at: "false",
+      author: "Aleksandr Levchuk",
+      description: "As far as I can tell, this is the O.G. Vim Clutch. First committed by Aleksandr Levchuk in 2011. Aleksandr uses <i>two</i> USB foot switches&mdash; costing $20. Not exactly thrift prices, but not at all bad. These pedals use an infrared sensor that gets interrupted by a <i>toothpick</i> when the pedal is depressed.<br><br>Aleksandr used one pedal for the \"i\" key, and the other for \"Esc\". So, I can imagine some real <i>Fast and Furious</i> vibes in Aleksandr's home office. The GitHub write-up that Aleksandr did is really excellent too&mdash; well-documented, and well worth a read.",
+      unbound: "true",
+      date_override: "true"
+    }}
+  />
+  <Card
+    element={{
+      id: "1",
+      slug: "https://github.com/foxweb/vim-pedal",
+      image_alt: "clutch",
+      featured_image:"/assets/img/blog/vim-clutch/aleksey_two-thumbnail.jpg",
+      title:"Aleksey #2",
+      updated_at:"Jul 2014",
+      auto_update_at:"false",
+      author:"Aleksey Kurepin",
+      description:"There's another great GitHub write-up (<i>Digression:</i> isn't it nice when people use GitHub READMEs like a blog post?) on a pedal by Aleksey Kurepin.Alek #2 called out Alek #1 (Levchuck) as the inspiration for this Vim Clutch project. Aleksey's pedal also uses an optical sensor to detect pedal presses. Aleksey, however, introduces an <i>Arduino Leonardo</i> microboard clone to send \"i\" on press <i>and</i> send \"Esc\" on release using the same pedal. Neat.",
+      unbound: "true",
+      date_override: "true"
+    }}
+  />
+  <Card
+    element={{
+      id: "2",
+      slug: "https://spin.atomicobject.com/2017/04/07/vim-clutch/",
+      image_alt: "A shoe about to press down on a unique-looking Vim clutch.",
+      featured_image: "/assets/img/blog/vim-clutch/vim_clutch_shoe-thumbnail.jpg",
+      title: "Fancy-Shoe Joe",
+      updated_at: "Apr 2017",
+      auto_update_at: "false",
+      author: "Joe Chrysler",
+      description: "Another super cool person, Joe Chrysler, wanted to ride the <i>Vim</i>bus 2000. This is a fun piece because Joe talks a little more about the other unique interfaces that he's seen and that have inspired him&mdash; curved, split, mechanical keyboards, giant trackpads, and Echo Dots to name a few.<br><br>Joe paid $25 bucks on Amazon for his \"sturdy, if somewhat sketchy\" pedal. I like these descriptions Joe, keep 'em coming.",
+      unbound: "true",
+      date_override: "true"
+    }}
+  />
+  <Card
+    element={{
+      id: "3",
+      slug: "https://twitter.com/peterssonjesper/status/934957115709333505",
+      image_alt: "Seemingly an electric piano pedal, but actually... a Vim clutch.",
+      featured_image: "/assets/img/blog/vim-clutch/piano_pedal-thumbnail.jpg",
+      title: "Piano Player",
+      updated_at: "Nov 2017",
+      auto_update_at: "false",
+      author: "Jesper Petersson",
+      description: "Pay special attention to the socks in this one, that's the true source of this programmer's text-editing prowess...<br><br>Jesper didn't seem to have a write-up on his pedal (correct me if I'm wrong, Jesper), just this short Twitter demo. I liked the allegory of the piano pedal, so I put it in the list.",
+      unbound: "true",
+      date_override: "true"
+    }}
+  />
+  <Card
+    element={{
+      id: "4",
+      slug: "https://www.reddit.com/r/vimporn/comments/gus5ri/vim_clutch_vc1_pedal_by_boss/?utm_source=share&utm_medium=web2x&context=3",
+      image_alt: "A modified BOSS guitar pedal. In convincing BOSS-style lettering, it says \"Vim Clutch\".",
+      featured_image: "/assets/img/blog/vim-clutch/boss_pedal-thumbnail.jpg",
+      title: "Boss Pedal, VC-1",
+      updated_at: "Jun 2020",
+      auto_update_at: "false",
+      author: "u/sjachim",
+      description: "This pedal is hardcore, rock-n-roll. I found it on Reddit, via <i>u/sjachim</i>. This project also has a recent timestamp (which means it's still a super cool, hip thing to do).<br><br>The <i>VC-1</i> model is a converted <i>BOSS</i> guitar pedal. It's one of the most legit-looking custom clutches that I've come across&mdash; especially with the vinyl-sticker lettering. The red pilot light also adds to the badass-ery. I might have to add some LEDs to mine...",
+      unbound: "true",
+      date_override: "true"
+    }}
+  />
+  <Card
+    element={{
+      id: "5",
+      slug: "https://yeah.nah.nz/electronics/vim-clutch-2/",
+      image_alt: "Close-up of this Vim clutch's wiring showing an Arduino and switch.",
+      featured_image: "/assets/img/blog/vim-clutch/vim_clutch_micro-thumbnail.jpg",
+      title: "Yeah, nah, aye",
+      updated_at: "Sep 2020",
+      auto_update_at: "false",
+      author: "David Phillips",
+      description: "David Phillips, a.k.a. <i>Yeah, nah, aye</i>, is another contemporary pedal hacker. Perhaps the flood of Vim clutches in 2020 is because all the developers were going crazy WFH. I don't know.<br><br>David's \"improved\" pedal (that's a Vim pun folks) uses an ATMega32u4 Arduino-compatible board. David also calls out Alek #1 as the O.G. Vim clutch hacker&mdash; and <i>does</i> indeed make some unique improvements upon the original project.<br><br>Definitely worth a read.",
+      unbound: "true",
+      date_override: "true"
+    }}
+  />
+  <Card
+    element={{
+      id: "6",
+      slug: "https://github.com/moretea/kludge",
+      image_alt: "Looking into the messy electronic innards of the \"Kludge\", another unique Vim clutch",
+      featured_image: "/assets/img/blog/vim-clutch/kludge-thumbnail.jpg",
+      title: "The Kludge",
+      updated_at: "Mar 2021",
+      auto_update_at: "false",
+      author: "Maarten Hoogendoorn",
+      description: "Hoogendoorn shared his pedal in the comments on <i>Hacker News</i>. The \"kludge\" pedal is also a misused piano pedal, similar in shape to one of the previous clutches. Maarten's, however, triples the fun with three switches.<br><br>My favorite part about Maarten's hack is that he also configured it to work as a push-to-talk pedal for calls! Wicked. Another excellent GitHub writeup and a unique way of coding it together.",
+      unbound: "true",
+      date_override: "true"
+    }}
+  />
+  <Card
+    element={{
+      id: "7",
+      slug: "https://github.com/tenderlove/initial-v",
+      image_alt: "A Vim clutch made from a salvaged BMW shifter and a 3D-printed enclosure.",
+      featured_image: "/assets/img/blog/vim-clutch/clutch-thumbnail.jpg",
+      title: "Initial V",
+      updated_at: "Mar 2023",
+      auto_update_at: "false",
+      author: "Aaron Patterson",
+      description: "Patterson (a.k.a. <i>tenderlove</i>) broke the mold when designing the <i>Initial V</i> Vim clutch. It's made from an actual BMW shifter and features a 3D-printed enclosure and custom PCB. It certainly feels antithetical to the Vim ethos of keeping our fingers planted firmly on the home-row; but, no one can deny this is a remarkable invention in the Vim clutch hall of fame.",
+      unbound: "true",
+      date_override: "true"
+    }}
+  />
+</HorizontalScroller>
+
+Looking at these examples, it's clear that a Vim Clutch can assume many forms. At its core, a Vim Clutch is a pedal that engages or disengages the _INSERT_ mode in the Vim editor. In Vim (Visual-editor IMproved) you can type `i`,`I`,`a`,`A`, or a few other keys to enter _INSERT_ mode, pinning the cursor to specific starting locations.
+
+_INSERT_ mode lets you type normally— like you would in a Google doc or in Notepad. Pressing the `Esc` button brings you back to _NORMAL_ mode...
+
+<OneColumn>
+  <ImageWrapper
+    src="/assets/img/blog/vim-clutch/vim.svg"
+    alt="Vim logo"
+    width={ 100 }
+    height={ 100 }
+    caption={ false }
+  />
+</OneColumn>
+
+If you've used Vim, then you know _NORMAL_ mode is anything but "normal". You can jump to matched characters, do clever search and replace maneuvers, build macros on-the-fly and much much more from within _NORMAL_ mode.
+
+A proper _Vim Clutch_ would have to take the place of one of the _INSERT_-enabling and disabling key presses. Depressing the pedal would enter _INSERT_ mode, and releasing the pedal returns to _NORMAL_ mode.
+
+Instead of settling into a cubicle'd menagerie of isolated and burnt-out developers, the _Vim Clutch_ puts you in the cockpit with Vim Diesel— racing stick, staying above 50 words-per-minute to save all the innocent bus riders.
+
+So that's the "what" and the "why", but before I give you the "how"— If you've made a dope Vim Clutch, and you're not in the list— what gives?? Leave a comment, paste in some links or images. I'll put it in with the others.
+
+## Vim-Clutch Hardware
+
+The Goodwill pedal had about 4-feet of flat, fettuccine-looking cable coming out the back. It terminated in a telephone jack. After a quick Google search, it seemed like the pedal would have been used to control playback on a transcribing machine.
+
+You'd engage the center pedal for normal playback, step on the left pedal to rewind, or step right to fast-foward while listening to a recording of speech. It would've provided a quick way to navigate (probably a casette) back and forth while simultaneously having both hands free to type out the actual letters and spellings of what was said— at a keyboard or electric typewriter, I'm guessing. Similar models go for a decent chunk of change on Amazon:
+
+<OneColumn>
+  <ImageWrapper
+    alt='This Dictaphone model was one of several other models that were indistinguishable from the one I snagged at Goodwill. It was a range of about $30-$90, and some of the pedals terminated in a USB connector rather than a telephone jack.'
+    src='/assets/img/blog/vim-clutch/amazon_dictaphone.jpg'
+    width={ 660 }
+    height={ 205 }
+  />
+</OneColumn>
+
+All the more re-assured by the deal that I got, I decided to hack it apart and see what was happening inside. The previous owner definitely had cats. The insides contained a treasure-trove of hair, whiskers and dust bunnies.
+
+There were two metal weights affixed to the bottom-half of the clamshell. They keep the pedal from scooting across the floor. Springs at each of the switches set-off the plastic pedals from engaging the switch mechanism. I looked up the string of numbers and letters that are printed on the side of each of the switches (out of curiousity); but no conclusive result about the design or manufacturer. The pedal itself has no distinguishing brand markings.
+
+<OneColumn>
+  <ImageWrapper
+    alt="I wasn't really sure how I would convert switch presses to keypresses... but this was a good look at the pedal guts. There's a slightly thicker red wire that loops the current into all three switches. Each independent switch completes or closes it's own isolated loop through another wire (going out to the telephone jack). This was good news to me. It meant that each switch can be tracked separately, and the pedal could probably do combination presses."
+    src='/assets/img/blog/vim-clutch/pedal_guts.jpg'
+    width={ 500 }
+    height={ 281 }
+  />
+</OneColumn>
+
+The springs are were also an exciting find. They could probably be swapped out, giving some control over the quality of the pedal's action. After playing with it, I feel like it'd be more comfortable to have a stiffer press. Right now, the weight of my foot is enough to create an accidental key-click.
+
+## A Controller: RPi Zero
+
+We'll have to add $10 to our budget. I decided to use the Raspberry Pi 0 for the keypress controller— the thing that'll turn our pedal presses into "i" and "Esc". That's $13 total… still worth it. I had a couple of the Pi 0 [SBCs](https://en.wikipedia.org/wiki/Single-board_computer) lying around from projects past, so it was a convenient option.
+
+The Raspberry Pi 0 was a go-to board for some of my [school projects](/signs-of-life) in the past. I like the Zero model a lot. It's insane to have a programmable device that can use a display, provide WiFi and an SSH connection, GPIO and more for such a low price. Plus it's about the size of a few sticks of gum! Which is more than small enough to fit comfortably within the foot-pedal casing.
+
+So now it's a project. I think the Pi will come in handy if I ever want to try sending keypresses via Bluetooth. Could you imagine that? The first (AFAIK) _wireless_ Vim Clutch. That would be legit. We'll see. Probably don't have the energy. I don't know, maybe that would be worth it…
+
+Bottomline, the Pi 0 gives you a lot of flexibility in an exceptionally tiny form-factor. The physical interfaces of the Pi 0 are diverse and low-profile— the micro-USB is convenient for simultaneously powering the device and sending data.
+
+<OneColumn>
+  <ImageWrapper
+    alt="The Raspberry Pi 3 measures about the same as the model 4, on a 85 x 56mm PCB. The Pi 0 (and Zero W, wireless, model), has a 65 x 30mm footprint. I haven't gotten my hands on the smallest Raspberry Pi, the Pico— which measures only 51 x 20mm and is supposed to cost $4."
+    src='/assets/img/blog/vim-clutch/rpi0_schematic.jpg'
+    width={ 616 }
+    height={ 346 }
+  />
+</OneColumn>
+
+In the past, I'd tried setting up the headless Pi 0 using a single USB for both data and power. The tutorials online seem super straight-forward and fool-proof; but I've still never gotten it to work seamlessly.
+
+The first Pi Zero I bought as a kit with all the silly dongles and adapters to plug in a mouse, keyboard, and display. I had more resolve to get it working this time, but still got into some muddy waters with setting up the Ethernet gadget for SSH'ing over USB.
+
+A useful, succinct tutorial by [Andrew Mulholland](https://gist.github.com/gbaman/975e2db164b3ca2b51ae11e45e8fd40a#file-howtootgfast-md) provides the basic documentation for setting it up. There's also a good one from [Adafruit](https://learn.adafruit.com/turning-your-raspberry-pi-zero-into-a-usb-gadget/ethernet-gadget) that provides more context for Mac and Windows users. Most people seem to get it working by following those directions, but it always gets a little sticky for me.
+
+### Raspberry Pi OS Config
+
+On Linux (Ubuntu 20.04), I would install the [Raspberry Pi Imager](https://www.raspberrypi.org/software/) with aptitude:
+
+<Pre>
+```bash
+sudo apt-get install rpi-imager
+```
+</Pre>
+
+The RPi Imager has become incredibly easy to use and gives you a nice pre-populated catalog of compatible OS's. I was able to quickly flash "Raspberry Pi OS Lite" after selecting it from a menu of recommended options. I used an 8GB micro-SD card (probably overkill for this project).
+
+<OneColumn>
+  <ImageWrapper
+    alt='The Raspberry Pi Imager has releases for multiple platforms. The interface is really simple. Just click "Raspberry Pi OS" and select the "Lite" image. Then select your SD card and write the image to the card.'
+    src='/assets/img/blog/vim-clutch/RaspberryPiImager.jpg'
+    width={ 741 }
+    height={ 478 }
+  />
+</OneColumn>
+
+After flashing the SD card, it'll prompt you to eject it. I just pop it out and back in. You'll probably see two things: `rootfs` and `boot`. The next step is to open boot, then edit `config.txt`.
+
+At the bottom of `config.txt`, add a new line:
+
+<Pre>
+```bash:config.txt
+dtoverlay=dwc2
+```
+</Pre>
+
+Next, you have to edit the `cmdline.txt` file. As Andrew pointed out in his [gist](https://gist.github.com/gbaman/975e2db164b3ca2b51ae11e45e8fd40a#file-howtootgfast-md), each parameter is separated by a single space (no new lines). In here, you will insert the following after "rootwait":
+
+<Pre>
+```bash:cmdline.txt
+modules-load=dwc2,g_ether
+```
+</Pre>
+
+After this, you should be able to plug in the Raspberry Pi 0 with a micro-USB cable (making sure to use the port that isn't the power port) and SSH into `pi@raspberrypi.local` as a USB Ethernet gadget. I managed to get this "working" in a hacky sort of way (helped along by this [blog post](https://shallowsky.com/blog/linux/raspberry-pi-ethernet-gadget.html)), but ultimately removed the "g_ether" option and configured the Pi to SSH over my local WiFi instead.
+
+Maybe one day I'll get it to work on the first try. [Configuring the Pi to connect to the Wi-Fi network](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md) is a perfectly acceptable alternative solution. On a running Pi, you would use `sudo raspi-config` to configure Wi-Fi and other important options— like language and locale.
+
+Alternatively, you can create a file on the micro SD card called `wpa_supplicant.conf`:
+
+<Pre>
+```bash
+sudo vim /etc/wpa_supplicant/wpa_supplicant.conf
+```
+</Pre>
+
+In this file, include the 2-letter ISO code for your country as well as the SSID and password of your network.
+
+<Pre>
+```bash:wp_supplicant.conf
+country=US
+network={
+   ssid="Chance the Router"
+   psk="CocoabutterKisses"
+}
+```
+</Pre>
+
+If you have other Raspberry Pi computers on the network, I recommend you turn them off or disconnect them temporarily (unless they have a different host name). I had a Pi 4 that was already broadcasting as `raspberrypi.local` and it was another stick in the spokes. I've since set the newly-connected Pi's hostname as `vimclutch.local`.
+
+One last recommendation (just to make your life easier)— don't go crazy with the password. I had a whacky password with a double-quote or something stupid, and I'm still convinced it was the culprit after going down yet another debugging rabbit-hole.
+
+## Software
+
+One last excuse to use the Pi (rather than an Arduino, for example) was that it gave me a chance to try out some of the GPIO Python libraries. The one I ended up importing is [gpiozero](https://gpiozero.readthedocs.io/en/stable/).
+
+This library provides a ton of convenient features around the "Button" object. A gpiozero "Button" is instantiated with the GPIO pin number— for example, `pedal = Button(2)`. It accepts a few other parameters that will dictate the Button's attributes and behavior.
+
+You can then use methods like: `pedal.is_pressed`, `pedal.is_held`, `pedal.when_released`, and much more. Have a look at the [Button-specific documentation](https://gpiozero.readthedocs.io/en/stable/api_input.html?highlight=Button#gpiozero.Button) for a full list of capabilities.
+
+<OneColumn>
+  <ImageWrapper
+    alt='After setting up a breadboard, I wired up a basic circuit with another switch I had on-hand. Messed around with the gpiozero Python library for a bit (it is awesome). Finally managed to get everything setup so that a button press would print "Hello World".'
+    src='/assets/img/blog/vim-clutch/hello_world_scrot.jpg'
+    width={ 927 }
+    height={ 521 }
+  />
+</OneColumn>
+
+Setting a `Button()` lets the script detect that the 5V boolean "high" signal "is_pressed", or "is_released". Now we have to turn that "high" or "low" into keypresses. The script below opens the Pi as a _human interface device_ (HID) that sends emulated keypresses (as structs) to the computer the Pi is plugged into.
+
+<Pre>
+```py:keypress.py showLineNumbers
+def press(char):
+  mod,key=hid_codes[char]
+  raw=struct.pack("BBBBL", mod, 0x00, key, 0x00, 0x00000000)
+  with open("/dev/hidg0", "w") as fd:
+    fd.write(raw)
+    fd.write(struct.pack("Q" 0))
+    sleep(0.005)
+```
+</Pre>
+
+The _struct_ library interprets Python bytes as packed binary data. The weird "BBBBL" pattern is just dictating 4 unsigned chars (BBBB) followed by one unsigned long (L) integer. The code is bummed a little further than some other examples I've found (mostly using Python's `write_report` function. I ripped it from a rather cool presentation, [One Device to PWN Them All](/assets/files/articles/vim-clutch/upenn_philpolstra_1d2PWNta.pdf).
+
+The gist of the function above is that we're able to build the unreadable keypress signals (one long string of bytes) by referencing the readable character (i.e., the letter "o" or "i") in a lookup table. The lookup table packs the bytes for that key and its modifier (i.e., "Shift" or "Ctrl") into the longer struct. If there's someone smart reading this article, they can please explain this better.
+
+As far as how those binary bits are actually interpretted as keypresses, I'm not sure how that works…
+
+Before this script will work, we need the Pi to say, "hello, I am a keyboard", whenever it's plugged into another computer via USB. I put a link to the blog post with the relevant script (as well as a few other useful links) in the footer to this project's [GitHub README](https://github.com/l00sed/vim-clutch.git). Here it is below as well:
+
+<Pre>
+```bash:/usr/bin/vimclutch_usb showLineNumbers
+#!/bin/bash
+cd /sys/kernel/config/usb_gadget/
+mkdir -p vimclutch
+cd vimclutch
+echo 0x1d6b > idVendor # Linux Foundation
+echo 0x0104 > idProduct # Multifunction Composite Gadget
+echo 0x0100 > bcdDevice # v1.0.0
+echo 0x0200 > bcdUSB # USB2
+mkdir -p strings/0x409
+echo "fedcba9876543210" > strings/0x409/serialnumber
+echo "l00sed" > strings/0x409/manufacturer
+echo "VimClutch USB Device" > strings/0x409/product
+mkdir -p configs/c.1/strings/0x409
+echo "Config 1: ECM network" > configs/c.1/strings/0x409/configuration
+echo 250 > configs/c.1/MaxPower
+
+# Add functions here
+mkdir -p functions/hid.usb0
+echo 1 > functions/hid.usb0/protocol
+echo 1 > functions/hid.usb0/subclass
+echo 8 > functions/hid.usb0/report_length
+echo -ne \\x05\\x01\\x09\\x06\\xa1\\x01\\x05\\x07\\x19\\xe0\\x29\\xe7\\x15\\x00\\x25\\x01\\x75\\x01\\x95\\x08\\x81\\x02\\x95\\x01\\x75\\x08\\x81\\x03\\x95\\x05\\x75\\x01\\x05\\x08\\x19\\x01\\x29\\x05\\x91\\x02\\x95\\x01\\x75\\x03\\x91\\x03\\x95\\x06\\x75\\x08\\x15\\x00\\x25\\x65\\x05\\x07\\x19\\x00\\x29\\x65\\x81\\x00\\xc0 > functions/hid.usb0/report_desc
+ln -s functions/hid.usb0 configs/c.1/
+# End functions
+
+ls /sys/class/udc > UDC
+```
+</Pre>
+
+Save this script to `/usr/bin/vimclutch_usb` on the Raspberry Pi Zero (or give it another name). It also needs to be made executable:
+
+<Pre>
+```bash
+chmod +x /usr/bin/vimclutch_usb
+```
+</Pre>
+
+Then put a line in `/etc/rc.local` (before the `exit 0` line) that will allow the script to be automatically run, setting up the Pi as a USB keyboard:
+
+<Pre  copyButton={ false }>
+```diff:/etc/rc.local
+...
+
++ /usr/bin/vimclutch_usb
+exit 0
+```
+</Pre>
+
+## Soldering
+
+The fettuccine cable running out the back of the pedal was removed. I severed the leads from the switches, and soldered them directly to the GPIO pins (2, 3, and 26) of the Pi. I also soldered the thicker red wire to the Pi's 5V out, and closed the other end of the loop to ground. Depressing any of the three switches now closes the circuit with its specific GPIO pin.
+
+<OneColumn>
+  <ImageWrapper
+    alt="Soldered the connections directly to the Pi Zero's GPIO pins— plus two more wires, one to 5V and one to ground. Not very pretty, but I got the job done."
+    src='/assets/img/blog/vim-clutch/pi_in_a_pedal.jpg'
+    width={ 600 }
+    height={ 338 }
+  />
+</OneColumn>
+
+To keep the Pi firmly in place, I drilled some holes through the base of the pedal and mounted the corners of the board to two standoffs. The single USB cable connects to the side of the Pi and exits out the same hole in the back— protected by a rubber grommet.
+
+I've been using the pedal to code for about a month now, and it really is a lot of fun. It took some getting used to at first, but after a couple days practice it's easy to build up the muscle memory. It also incentivized me to learn about the different ways to enter INSERT mode— I had no idea about _SHIFT+a_ until I looked it up for this project!
+
+Unfortunately (after a couple weeks of usage) the main center pedal's switch started to get a bit funky… might just be a bad solder joint; but hopefully the switch isn't faulty. Luckily I could just SSH into the pedal and swap out the keys. I still have the right and left working swimmingly.
+
+<OneColumn>
+  <iframe width="498" height="315" src="https://www.youtube.com/embed/9JegZhkDhrw" title="Vim Clutch Demo" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+</OneColumn>
+
+## Conclusion
+
+This has been an enlightening project. I think it's given me a lot of useful knowledge that I will carry forward in my future projects. Excited to be doing more with electronics and linking physical interactions with digital events and vice versa.
+
+Until then, thank you so much for taking a minute to share my excitement over this project. Like I said earlier, if you've made a Vim Clutch, or another bonkers HID, please share a link in the comments! Happy coding.
+</ProseWrapper>

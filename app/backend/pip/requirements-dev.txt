@@ -1,0 +1,6 @@
+django-stubs
+django-stubs-ext
+pylint
+pylint-django
+pylint-plugin-utils
+pyright

@@ -1,0 +1,58 @@
+.note__wrapper {
+  margin: 2em 3em 2em 3em;
+}
+.note__row {
+  display: flex;
+  flex-direction: row;
+  padding: 0.5em 1em 0.5em 1em;
+  margin-bottom: 1em;
+
+  svg {
+    position: relative;
+    right: 0;
+  }
+}
+.note__base {
+  border-radius: var(--rad-1);
+
+  h4 {
+    width: 100%;
+    margin: 0;
+  }
+
+  p {
+    line-height: 150%;
+    padding: 0 1em 1em 1em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+.note__default {
+  .note__row {
+    background-color: var(--note-default);
+    color: var(--note-default-icon);
+  }
+  background-color: var(--note-default);
+  box-shadow: 0 var(--off-1) 0 0 var(--note-default-border);
+  border: 1px solid var(--note-default-border);
+}
+.note__success {
+  .note__row {
+    background-color: var(--note-success);
+    color: var(--note-success-icon);
+  }
+  background-color: var(--note-success);
+  box-shadow: 0 var(--off-1) 0 0 var(--note-success-border);
+  border: 1px solid var(--note-success-border);
+}
+.note__error {
+  .note__row {
+    background-color: var(--note-error);
+    color: var(--note-error-icon);
+  }
+  background-color: var(--note-error);
+  box-shadow: 0 var(--off-1) 0 0 var(--note-error-border);
+  border: 1px solid var(--note-error-border);
+}

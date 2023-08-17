@@ -1,0 +1,29 @@
+/* BEGIN - Table of Contents ==================================== *
+
+   +   Next.js Wrapper
+   +   Main Wrapper
+
+ * END   - Table of Contents ==================================== */
+
+/* # Next.js Wrapper */
+.next_wrapper {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+  background-color: var(--loosed-white);
+  color: var(--main-text-color);
+}
+
+/* # Main Wrapper */
+.main_wrapper {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}

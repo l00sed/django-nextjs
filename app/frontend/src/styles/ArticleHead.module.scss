@@ -1,0 +1,24 @@
+.article__head {
+  margin: 0 3em 2em 3em;
+  padding: 1.5em;
+  border-radius: var(--rad-1);
+  background-color: var(--toc-header-bg);
+  border: 1px solid var(--main-box-shadow);
+  box-shadow: 0 var(--off-1) 0 0 var(--main-box-shadow);
+}
+
+/* # Article Meta */
+.article__title {
+  padding-bottom: 5px;
+  hyphens: auto;
+}
+.article__meta {
+  border-top: 1px solid var(--main-box-shadow);
+  padding-top: 1em;
+}
+.article__meta span {
+  width: 100%;
+  display: block;
+  line-height: 1.5;
+  font-size: 90%;
+}

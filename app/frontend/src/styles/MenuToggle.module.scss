@@ -1,0 +1,95 @@
+/* BEGIN - Table of Contents ==================================== *
+
+   *   Wifi Animation --------------------
+
+ * END   - Table of Contents ==================================== */
+
+.header_logo {
+  position: fixed;
+  top: 2em;
+  left: 2em;
+  cursor: pointer;
+  height: 70px;
+  width: 70px;
+  z-index: 998;
+  background: none;
+  border: none;
+}
+
+.header_logo svg {
+  height: 70px;
+  width: 70px;
+  border-radius: 35px;
+  backdrop-filter: blur(3px);
+  transition: opacity 0.5s ease;
+  transition: -webkit-filter 0.5s ease;
+  transition: filter 0.5s ease;
+  transition: filter 0.5s ease, -webkit-filter 0.5s ease;
+}
+.header_logo:not(.parked_top) svg {
+  box-shadow: inset 0 0 0 2px var(--menu-border), 0 0 3px 0 var(--menu-toggle-box-shadow);
+  background-color: var(--menu-toggle-background);
+  backdrop-filter: blur(2px);
+}
+
+.header_logo path {
+  fill: var(--loosed-black);
+}
+
+.header_logo::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 35px;
+  top: 0;
+  left: 0;
+  box-shadow: 0 0 12px 2px var(--menu-toggle-box-shadow);
+  opacity: 0;
+  transition: all var(--loosed-transition-medm) ease;
+}
+
+.header_logo:hover svg,
+.header_logo:focus svg,
+.label_wrapper:focus .header_logo svg,
+.header_logo svg:focus,
+.header_logo svg:hover {
+  background-color: var(--loosed-highlight-1);
+  box-shadow: inset 0 0 0 2px var(--menu-border), 0 2px 2px 0 var(--menu-toggle-box-shadow);
+  backdrop-filter: blur(2px);
+}
+.header_logo:hover::before,
+.header_logo:focus::before,
+.label_wrapper:focus .header_logo::before {
+  opacity: 1;
+}
+
+.logo_wifi1,
+.logo_wifi2,
+.logo_wifi3 {
+  animation-direction: normal;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-name: wifi_animation;
+}
+.logo_wifi1 {
+  animation-delay: .5s;
+}
+.logo_wifi2 {
+  animation-delay: 0.25s;
+}
+.logo_wifi3 {
+  animation-delay: 0s;
+}
+/* ## Wifi Animation -------------------- */
+@keyframes wifi_animation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

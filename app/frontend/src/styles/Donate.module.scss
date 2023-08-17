@@ -1,0 +1,151 @@
+.donate_overlay:not(.open) {
+  display: none !important;
+}
+
+.menu_text {
+  max-width: 280px;
+  font-size: 80%;
+  align-self: center;
+  background-color: var(--donate-menu-background-color);
+  padding: 2em 1.5em;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px var(--menu-box-shadow);
+}
+
+.donate_overlay {
+  --button-border-radius: 5px;
+  z-index: 999;
+  background-color: var(--overlay-background-color);
+  backdrop-filter: blur(7px);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.donate_overlay:not(.menu_text):hover {
+  cursor: pointer;
+}
+
+.donate {
+  position: absolute;
+  top: 0.5em;
+  right: 1.5em;
+  cursor: pointer;
+  padding: 0;
+  font-size: 100%;
+  font-family: inherit;
+  background: transparent;
+  color: var(--loosed-black);
+  font-style: oblique;
+  border: none;
+}
+
+.donate:hover,
+.donate:focus {
+  border-bottom: 1px solid var(--loosed-black);
+}
+
+.donate_button {
+  position: relative;
+  background-color: var(--loosed-black);
+  color: var(--loosed-white);
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.5em 2em;
+  border-radius: var(--button-border-radius);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.venmo:hover,
+.venmo:focus {
+  background-color: #3d95ce !important;
+}
+.paypal:hover,
+.paypal:focus {
+  background-color: #253B80 !important;
+}
+.btc:hover,
+.btc:focus {
+  background-color: #f2a900 !important;
+}
+.eth:hover,
+.eth:focus {
+  background-color: #555555 !important;
+}
+
+.paypal:hover,
+.paypal:focus,
+.eth:hover,
+.eth:focus {
+  color: #fff;
+}
+
+
+.donate_button::before {
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: var(--button-border-radius);
+  transition: all var(--loosed-transition-medm) ease;
+  box-shadow: 0 0 8px 0 var(--donate-button-box-shadow);
+  opacity: 0;
+}
+
+.donate_button:hover::before,
+.donate_button:focus::before {
+  opacity: 1;
+}
+
+.ethereum {
+  fill: var(--loosed-highlight-1);
+  height: 75px;
+  padding-bottom: 20px;
+  width: 100%;
+}
+
+.eth_1,
+.eth_2,
+.eth_3,
+.eth_4,
+.eth_5 {
+  animation-direction: alternate;
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+  animation-name: eth_animation;
+}
+.eth_5 {
+  animation-delay: 1s;
+}
+.eth_4 {
+  animation-delay: .75s;
+}
+.eth_3 {
+  animation-delay: .5s;
+}
+.eth_2 {
+  animation-delay: 0.25s;
+}
+.eth_1 {
+  animation-delay: 0s;
+}
+/* # Ethereum animation ------------------ */
+@keyframes eth_animation {
+  0% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}

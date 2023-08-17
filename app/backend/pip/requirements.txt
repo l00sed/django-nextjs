@@ -1,0 +1,16 @@
+Django
+Pillow
+Pygments
+django-cors-headers
+django-filter
+django-tinymce
+django-tree-queries
+django-webmention
+django-widget-tweaks
+djangorestframework
+drf-yasg
+easy-thumbnails
+gunicorn
+markdown
+psycopg2-binary
+python-frontmatter

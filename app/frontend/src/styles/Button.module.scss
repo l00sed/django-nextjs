@@ -1,0 +1,54 @@
+.button__main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: var(--rad-1);
+  color: var(--loosed-black);
+  padding: 0.5em 1em;
+
+  a {
+    width: 100%;
+    display: inline-block;
+  }
+
+  &::after {
+    content: var(--live-button-icon);
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+  }
+
+  svg {
+    position: relative;
+    height: 100%;
+    margin: auto;
+  }
+}
+
+.live__link {
+  width: calc(100% - 6em);
+  margin: 0 3em 1em 3em;
+  transition: background var(--loosed-transition-slow) ease;
+  background-image: linear-gradient(90deg, var(--loosed-highlight-1), red);
+  background-repeat: no-repeat;
+  background-position-x: 0;
+  background-size: calc(100vw * 2) 100px;
+  color: #ffffff;
+  border: 1px solid var(--loosed-black);
+  box-shadow: 0 var(--off-1) 0 0 var(--loosed-black);
+
+  &:hover {
+    --off-1: 0;
+    background-position-x: -500px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .live__link {
+    width: calc(100% - 3em);
+    margin-left: 0;
+  }
+}

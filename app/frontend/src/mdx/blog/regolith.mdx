@@ -1,0 +1,143 @@
+---
+title: Regolith Linux
+author: Daniel Tompkins
+description: When did you first use a computer? I remember sitting at the corner desk in my childhood bedroom playing Descent II. It was probably the first video game I had ever played. The keyboard controlled the...
+slug: regolith
+created_at: 02/04/2021 13:00:00
+updated_at: 02/04/2021 13:00:00
+featured_image: regolith_screen.jpg
+image_alt: Screenshot of desktop windows arranged with i3 (window manager) and the Regolith distro
+content_type: blog
+---
+<ProseWrapper>
+## Windows 95
+
+When did you first use a computer? I remember sitting at the corner desk in my childhood bedroom playing [Descent II](https://en.wikipedia.org/wiki/Descent_II). It was probably the first video game I had ever played.
+
+The keyboard controlled the yaw, roll, and pitch of a spacecraft as you navigated through a labyrinth of sci-fi tunnels and airlocks. You had to fend off flying robots with lasers and missiles.
+
+<OneColumn>
+  <ImageWrapper
+    src="/assets/img/blog/regolith/DescentII_DOS.jpg"
+    alt="The cover of Descent II, one of the first video games I'd ever played. You navigated a spaceship through a maze of airlocks, shooting missiles and lasers at flying robots."
+    width={ 316 }
+    height={ 316 }
+  />
+</OneColumn>
+
+This was the early 2000's&mdash; before Spotify, when people still owned their own music. My dad swapped digital music collections on hard-drives with his co-workers and friends. I discovered Nirvana, [Portishead](https://www.youtube.com/watch?v=UeVYVq37KQE), and Static-X in the overwhelming (10GB+) depths of folders.
+
+## Windows 98
+
+Growing up, I shared a room with one of my younger sisters. We had the old Windows 95 _Compaq_ PC in our room because my mom bought a new computer for work. Her's was running Windows 98 and had dial-up Internet.
+
+Even though it was off-limits at first, I still managed to get online&mdash; quite frequently, actually, once I was introduced to _Neopets_ and _Runescape_ by my friends.
+
+<OneColumn>
+  <ImageWrapper
+    src="/assets/img/blog/regolith/runescape_logo.png"
+    alt="The O.G. Runescape Logo"
+    width={ 448 }
+    height={ 147 }
+    caption={ false }
+  />
+</OneColumn>
+
+## Windows XP
+
+In high school, we replaced the old Windows 95 _Compaq_ PC in our bedroom with a _Hewlett Packard_. It had a whopping 2GB of RAM. Our local library had a collection of PC games that were suddenly made accessible with this newfound computing power.
+
+Our library had some cool PC games, and I ended up buying a 50-ft Ethernet cable that I draped through the kitchen and up the stairs to download mods for _The Elder Scrolls IV: Oblivion_&mdash; and to update _MySpace_.
+
+<OneColumn>
+  <ImageWrapper
+    src="/assets/img/blog/regolith/oblivion-logo.png"
+    alt="The Elder Scrolls: Oblivion, Logo"
+    width={ 461 }
+    height={ 287 }
+    caption={ false }
+  />
+</OneColumn>
+
+## Windows 7
+
+When my application to pursue a degree in architecture was accepted, I was gifted an incredible Alienware laptop. It was a Windows 7 machine with maxed-out specs&mdash; an i7 processor, 24GB of RAM, and a full TB of storage!
+
+This machine made for quick work while modeling or rendering in [Rhino3D](https://www.rhino3d.com/) and [V-Ray](https://www.chaosgroup.com/)&mdash; and could run any video game at max settings. It had an HDMI-in to use as a display, as well as all the RGB LEDs you could ask for.
+
+## Windows 10 + WSL
+
+Most Windows 7 devices offered a free upgrade to Windows 10 when Microsoft was advertising its flagship release. I resisted for a while, but eventually made the plunge. After a little debugging, the hardware was cooperating with its new OS.
+
+The sharp lines, flat icons, and keyboard shortcuts for snapping and exposing windows were all very appealing. However, it was around this time that I was also introduced to the Raspberry Pi&mdash; and, consequently, the Unix terminal.
+
+A friend of mine, who's daily carry was a MacBook Air, showed me how to navigate the terminal with Tmux and Vim. He also showed me the basics of Web development. We started working on a [project](/killing-a-startup) together, and I installed the [Windows Subsystem on Linux](https://docs.microsoft.com/en-us/windows/wsl/about) (WSL) to use the same commands and follow a similar environment setup.
+
+## Ubuntu
+
+After a couple of years, I was getting very comfortable in the Ubuntu terminal. I was using CSS, HTML, JS, and Python at school and at work. At the time, I was commuting to Chicago on the train, and the Alienware was big, heavy, and had poor battery life.
+
+In a stroke of luck, my sister gifted me her Dell XPS13 when the keyboard stopped working. I replaced the keyboard module for $35, upgraded the hard-drive (128GB &rarr; 256GB), and&mdash; more recently&mdash; replaced the battery. This laptop is still my daily carry.
+
+After much encouragement from my friends in tech, I decided to dual-boot Ubuntu. A full Linux distro takes interfaces with the laptop's hardware in a way that WSL cannot (at least, not at the time of writing).
+
+I was loving Ubuntu 18.04; but since the little laptop wasn't quite powerful enough to run all the software that I'd been using on Windows, I really had no reason to keep Windows. So, I quickly went from dual-boot to straight Linux.
+
+WSL had been serving me faithfully, but I was tired of struggling with networking and hardware issues. Even after upgrading to the latest WSL2 build as a Windows Insider, I was still frustrated with the hoops and hurdles of getting a working Docker setup or accessing the GPU for machine learning.
+
+### i3wm
+
+More recently, I had been frequenting the [r/unixporn](https://reddit.com/r/unixporn) subreddit. I had done some simple customization: downloaded GTK themes, gnome-tweaks, and given the terminal a face-lift with color and vim-plugins.
+
+I started to investigate [i3wm](https://i3wm.org/) and [Polybar](https://github.com/polybar/polybar), in pursuit of a seamless terminal and to banish those distracting titlebars from my screen. Eventually, I settled on a set of config files that I was pretty proud of:
+
+<OneColumn>
+  <ImageWrapper
+    src="/assets/img/blog/regolith/i3_screen.jpg"
+    alt="Windows arranged with i3 (window manager) and a custom polybar."
+    width={ 1920 }
+    height={ 1080 }
+  />
+</OneColumn>
+
+Resources and dotfiles for setting up your Ubuntu environment with Tmux, Vim, polybar and the i3 window tiling manager are available in my [Knowledge Base](/kb).
+
+### Regolith
+
+My system was running so wonderfully... I had a polybar to envy, I was beginning to commit my i3 shortcuts to memory&mdash; and then something broke. When you're working in the terminal, small mistakes can be catastrophic.
+
+This time, I couldn't pin-point what I'd done wrong; but I decided to take this opportunity to backup my files (while I still could!) and test out [Regolith Linux](https://regolith-linux.org/)&mdash; a preconfigured Ubuntu+i3wm Linux distro that I'd been eyeballing with great interest.
+
+I'm so glad that I did! The Regolith build installs from a USB just like a typical Ubuntu image. However, Regolith. I was disappointed that all of the time and effort I'd spent setting up volume and network UI blocks for my system's statusbar went down the drain; but, Regolith does it for you&mdash; and does it well:
+
+<OneColumn>
+  <ImageWrapper
+    src="/assets/img/blog/regolith/regolith_screen.jpg"
+    alt="This polybar setup is the default provided by the Regolith distro. Not a bad RICE for defaults!"
+    width={ 1920 }
+    height={ 1080 }
+  />
+</OneColumn>
+
+## Conclusion
+
+I took my sweet time exploring Ubuntu before cutting ties with Windows; but I wish I'd listened to my friend's advice and made the switch years ago! I still have WSL2 on a Windows 10 laptop at work (for 3D modeling and rendering); but I've even installed the Regolith desktop on that machine using [VcXsrv](https://medium.com/@dhanar.santika/installing-wsl-with-gui-using-vcxsrv-6f307e96fac0)!
+
+It was a little tricky, and Regolith doesn't make it obvious, but you can manually start the desktop GUI by starting xlaunch.exe, moving your regolith config files to the appropriate /root folders, exporting the correct $DISPLAY variable, and then running:
+
+<Pre>
+```bash
+sudo i3-gnome-flashback-session
+```
+</Pre>
+
+If you're an experienced programmer, I encourage you to checkout Regolith; or, if you're like me, take it slow and start by diving into WSL. Good luck and happy coding!
+
+### update &mdash; 07/17/2020
+
+If you don't want to leave the gnome shell&mdash; but want all the convenience and efficiency of i3&mdash; checkout [Pop Shell](https://github.com/pop-os/shell). I haven't used it yet... However, from what I've gathered, it lets you keep some classic Gnome features (like the application bar and window-exposer) while giving you the beautiful tiled screen that i3 provides.
+
+### update &mdash; 02/04/2020
+
+I ended up writing a full [post about getting WSL2 installed with Regolith Linux.](/wsl2)
+</ProseWrapper>

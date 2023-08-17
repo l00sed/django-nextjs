@@ -1,0 +1,38 @@
+.wrapper {
+  margin: 3em auto;
+}
+.horizontal_scroller {
+  display: inline-flex;
+  justify-content: center;
+  background-color: var(--scroll-area-background);
+  border-width: 0 1px;
+  border-color: var(--scroll-area-border);
+  border-style: solid;
+  width: 100%;
+
+  .scroller_container {
+    display: inline-flex;
+    overflow-x: auto;
+    padding: 2em;
+    column-gap: 1.5em;
+  }
+
+  & ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  & ::-webkit-scrollbar {
+    background: var(--scrollbar-color);
+    height: 0.5em;
+  }
+
+  & ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .wrapper {
+    margin-right: 1.5em;
+  }
+}

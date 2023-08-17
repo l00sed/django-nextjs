@@ -1,0 +1,93 @@
+---
+title: Hot Tub Phone Repair
+author: Daniel Tompkins
+description: You shouldn't be allowed to have nice things when you forget your phone in your swimsuit pocket— not once, but <i>twice</i>! The first time was a Motorola Razr. I was swimming at my grandma's condo and came out of the pool with a dripping flip phone...
+slug: hot-tub
+created_at: 10/15/2019 08:45:00
+updated_at: 10/15/2019 08:45:00
+featured_image: pope.jpg
+image_alt: Pope flicking holy water from an aspergillum
+content_type: blog
+---
+<ProseWrapper>
+## The Splashening
+
+You shouldn't be allowed to have nice things when you forget your phone in your swimsuit pocket&mdash; not once, but _twice!_ The first time was a Motorola Razr. I was swimming at my grandma's condo and came out of the pool with a dripping flip phone.
+
+<OneColumn>
+  <ImageWrapper
+    src="/assets/img/blog/hot-tub/razr.png"
+    alt="Motorola Razr phone meme."
+    width={ 500 }
+    height={ 510 }
+  />
+</OneColumn>
+
+## Cell Phones Nostalgia
+
+A couple of my friends' parents worked at Motorola, so somehow I got my hands on a lot of unique devices at an early age. One of my all-time favorites was the Motorola "MOTOROI" XT720, which featured Android 2.0 and a 720MHz mobile processor.
+
+I ended up [rooting](https://www.xda-developers.com/reasons-for-root-android/) this phone&mdash; and it's still running! Here's a [review](https://phys.org/news/2010-01-motorola-motoroi-korea-android-smart.html) from 2010, when it was released:
+
+> huge 3.7 inch, high-definition WVGA (480x854) display, making it easy to view full page websites, videos, games, or photos.
+
+_Okay_. This post is _Hot Tub Phone Repair_, not _Hot Tub Time Machine_. So I'll stop pondering the evolution of mobile technology and get to the point! I was on a business trip on the west coast when I <u>completely drowned my Galaxy S7 in the hotel's hot tub.</u>
+
+This might have been my longest lasting phone&mdash; 3 years and not a scratch! But it didn't matter. That expensive OtterBox and "water resistant" label couldn't save this cellphone from getting blasted by a Jacuzzi jet for 50 minutes. It was bricked.🧱 🧱 🧱
+
+Luckily one of my co-workers had the foresight to remove the MicroSD card. My first thought was to shake the water out at at his face like the pope waving an aspergillum on Easter.
+
+<OneColumn>
+  <ImageWrapper
+    src="/assets/img/blog/hot-tub/pope.jpg"
+    alt="Pope flicking holy water from an aspergillum."
+    width={ 600 }
+    height={ 500 }
+  />
+</OneColumn>
+
+Spoiler alert: I didn't fix the phone. 😞️ That's a misleading title... I _did_, however, manage to recover my photos from a corrupt SD card!
+
+When I first put the SD card into my PC, I was met with a disappointing message from Windows:
+
+<OneColumn>
+  <ImageWrapper
+    src="/assets/img/blog/hot-tub/fucking-windows.jpg"
+    alt="Windows error: you sat in a hot tub."
+    width={ 374 }
+    height={ 172 }
+  />
+</OneColumn>
+
+## Adapter Desperation...
+
+Most people are aware of the fact that formatting removes all the device's data. So, obviously this is _not_ what I was hoping for, but... Thank Poseidon! I tried another MicroSD adapter, and I was able to access files on the card.
+
+I didn't really care about my apps, but I hadn't backed up my photos or videos for a year. I hate Google Photos and all that "cloud" bullshit, but now it was really biting me in the ass... If there's one thing you need to take away from this article, it's backup your photos.
+
+Even though I could see all my photos, almost all of them were corrupt! Reading the files directly from the card revealed horizontal strips and chunks of the image over a pixelated (green?) color. I tried to copy the images to my PC, but everything was trapped on the card.
+
+## Recovery Research
+
+A quick Google search led me to [ddrescue](https://www.gnu.org/software/ddrescue/). While this seems like an incredible recovery tool, it was unable to build a usable image from the SD card... 🤔️
+
+The images were readable from the card, but weren't displaying correctly (or at all). I couldn't copy them onto my local machine... So, finally, I thought&mdash; perhaps I could recover the broken images by compiling them into a video?
+
+In the past, I'd used [ffmpeg](https://www.ffmpeg.org/) to convert individual stills to a video file. After another quick search, I discovered that ffmpeg not only has built-in error detection on the input frames; but it will also automatically discard irrecoverably corrupt frames.
+
+A post on [StackOverflow](https://stackoverflow.com/questions/45983605/ffmpeg-jpg-frame-capture-how-to-discard-corrupted-frames) gave me what I needed. The user had the "-err_detect aggressive" flag on an rtsp stream in an attempt to clean the incoming live footage.
+
+### FFMpeg Saves the Day!
+
+Eureka! A simple ffmpeg command using the same error detection flag within the image directory managed to recover every photo into a video file!
+
+<Pre>
+```bash
+ffmpeg -err_detect aggressive -fflags discardcorrupt -framerate 1 -pattern_type glob -i '*.jpg' -c:v libx264 -preset:v slow OUTPUT_VIDEO_NAME.avi
+```
+</Pre>
+
+After that, I opened the video in Adobe Premiere and did a simple frame export to retrieve all the individual images! 😍️ Okay, I'll admit, this was a pretty unique situation...
+
+Aside from that awful feeling of being without a device for a week, the last thing you want is to lose years of photos and memories. So, if any of you enjoy warm, bubbly tubs with your mobile devices, perhaps you can learn something from my experience. Of course, I hope you can all avoid this disaster with the occasional backup!
+</ProseWrapper>

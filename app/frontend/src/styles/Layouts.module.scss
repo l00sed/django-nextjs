@@ -1,0 +1,34 @@
+/* # One Column */
+.one_column {
+  text-align: center;
+
+  iframe,
+  img,
+  video {
+    max-width: 100%;
+  }
+}
+
+/* # Two Column */
+.two_column {
+  column-gap: 2em;
+  row-gap: 2em;
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-flow: wrap;
+}
+
+@media screen and (max-width: 1199px) {
+  .two_column {
+    flex-direction: column;
+  }
+}
+
+/* # One + Two Column */
+.one_column,
+.two_column {
+  margin: 3em auto;
+}

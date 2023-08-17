@@ -1,0 +1,23 @@
+/* # Scrollbar ----------------------------- */
+.code_wrapper {
+  position: relative;
+  margin: 2em auto;
+
+  pre::-webkit-scrollbar,
+  pre::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-pre-color);
+    border-radius: 0 0 7.5px 7.5px;
+    height: 5px;
+  }
+  pre::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-pre-thumb);
+    border-radius: 7.5px;
+  }
+
+  code[class*=language-],
+  pre[class*=language-] {
+    display: block;
+    width: 100%;
+    min-height: 20px;
+  }
+}

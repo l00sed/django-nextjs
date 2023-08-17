@@ -1,0 +1,26 @@
+/* BEGIN - Table of Contents ==================================== *
+
+   +   Homepage
+
+ * END   - Table of Contents ==================================== */
+
+/* # Homepage
+ * ------------------------- */
+
+.homepage {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.homepage__content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 2em 2em 4em 2em;
+  column-gap: 1.5em;
+  row-gap: 1.5em;
+  justify-content: center;
+}
+

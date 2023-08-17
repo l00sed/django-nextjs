@@ -1,0 +1,195 @@
+/* BEGIN - Table of Contents ==================================== *
+
+   +   Main Layout
+   +   Article Meta
+   +   Images
+
+ * END   - Table of Contents ==================================== */
+
+/* # Main Layout */
+.main_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 0;
+  margin: 0 auto;
+  min-width: 100%;
+  max-width: min(var(--page-max-width), 100%);
+}
+.main_wrapper li a,
+.main_wrapper span a,
+.main_wrapper p a {
+  --offset: 5px;
+  position: relative;
+  transition: text-decoration-color var(--loosed-transition-medm) linear, text-underline-offset var(--loosed-transition-medm) linear;
+  text-decoration: underline 2px;
+  text-decoration-color: transparent;
+  text-underline-offset: var(--offset);
+}
+.main_wrapper li a:hover,
+.main_wrapper li a:focus,
+.main_wrapper span a:hover,
+.main_wrapper span a:focus,
+.main_wrapper p a:hover,
+.main_wrapper p a:focus {
+  --offset: 2px;
+  font-weight: bold;
+  text-decoration-color: var(--loosed-highlight-1);
+  text-underline-offset: var(--offset);
+}
+.main_wrapper a[rel~="nofollow"]::after,
+.main_wrapper a[rel~="noopener"]::after,
+.main_wrapper a[rel~="noreferrer"]::after {
+  position: relative;
+  content: url("data:image/svg+xml,%3Csvg width='8' height='8' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.6667 15.6667C16.6667 16.219 16.219 16.6667 15.6667 16.6667H4.33333C3.78105 16.6667 3.33333 16.219 3.33333 15.6667V4.36819C3.33333 3.82171 3.77203 3.37644 4.31844 3.3683L5.68156 3.348C6.22797 3.33987 6.66667 2.89459 6.66667 2.34811V0.999999C6.66667 0.447714 6.21895 0 5.66667 0H0.999999C0.447714 0 0 0.447715 0 1V19C0 19.5523 0.447715 20 1 20H19C19.5523 20 20 19.5523 20 19V12.6667C20 12.1144 19.5523 11.6667 19 11.6667H17.6667C17.1144 11.6667 16.6667 12.1144 16.6667 12.6667V15.6667ZM12.4142 0C11.5233 0 11.0771 1.07714 11.7071 1.70711L12.6262 2.62623C13.0168 3.01675 13.0168 3.64992 12.6262 4.04044L9.04044 7.62623C8.64992 8.01675 8.64992 8.64992 9.04044 9.04044L10.9596 10.9596C11.3501 11.3501 11.9832 11.3501 12.3738 10.9596L15.9596 7.37377C16.3501 6.98325 16.9832 6.98325 17.3738 7.37377L18.2929 8.29289C18.9229 8.92286 20 8.47669 20 7.58579V1C20 0.447716 19.5523 0 19 0H12.4142Z' fill='%23F85C37' fill-opacity='0.5'/%3E%3C/svg%3E%0A");
+  width: 100%;
+  height: 100%;
+  margin-left: 5px;
+  top: -4px;
+}
+.main {
+  width: 66.666%;
+  margin-bottom: 3em;
+  line-height: 200%;
+  padding: 2em 0;
+
+  section > * {
+    max-width: calc(100% - 6em);
+  }
+  section {
+    & > ul {
+      margin: 0 0 0 3em;
+    }
+    & > ol {
+      margin: 0 0 0 3.5em;
+    }
+    & > hr {
+      margin: 3em;
+    }
+    & > iframe {
+      margin: 0 3em;
+    }
+  }
+
+  h2 {
+    font-size: var(--large);
+    line-height: 1.2em;
+    margin: 3em 1.5em 2.5em 1.5em;
+    width: fit-content;
+    position: relative;
+  }
+
+  h3 {
+    margin-left: 2.75em;
+    margin-right: 2.75em;
+  }
+
+  h2 a {
+    min-width: 250px;
+    display: block;
+  }
+
+  h2 a,
+  h3 a {
+    color: var(--loosed-black) !important;
+  }
+
+  h2 a::after,
+  h3 a::after {
+    content: var(--anchor-icon);
+    display: inline-flex;
+    opacity: 0.5;
+    width: 25px;
+    height: 40px;
+  }
+
+  h2 a:hover::after,
+  h2 a:focus::after,
+  h3 a:hover::after,
+  h3 a:focus::after {
+    opacity: 1
+  }
+
+  h2 a::after {
+    position: relative;
+    display: inline-block;
+    top: -8px;
+    right: -3px;
+    width: 0;
+    height: 0;
+  }
+
+  h3 a::after {
+    position: relative;
+    display: inline-block;
+    transform: scale(0.8);
+    top: 3px;
+    right: -3px;
+    width: 0;
+    height: 0;
+  }
+
+  nav + h2 {
+    margin-top: 0 !important;
+  }
+
+  iframe {
+    width: 100%;
+    border-radius: var(--rad-1);
+    margin: 0;
+    border-style: none;
+    aspect-ratio: 16/9;
+  }
+}
+
+.aside {
+  width: 33.333%;
+  min-width: 33.333%;
+  max-width: 33.333%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .sticky {
+    position: sticky;
+    align-self: flex-start;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar {
+      background: var(--scrollbar-color);
+      width: 0.5em;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+    }
+
+    .scroll__y {
+      padding: 2em 0;
+      max-height: 100%;
+      min-height: 100%;
+      overflow-y: auto;
+    }
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .main_wrapper {
+    flex-direction: column;
+  }
+  .main,
+  .aside {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .sticky {
+    height: fit-content !important;
+  }
+}
+
