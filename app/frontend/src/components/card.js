@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Parse from '../utils/parser';
+import Parse, { parseTitle } from '../utils/parser';
 import styles from '../styles/Card.module.scss';
 import dateformat from 'dateformat';
 
@@ -23,7 +23,7 @@ export default function Card({ element, index }) {
     return false;
   }
 
-  const parsed_url = (slug) => {
+  const parseUrl = (slug) => {
     const re = new RegExp("^https?://");
     const found = re.exec(slug);
     if (found) {
@@ -33,7 +33,7 @@ export default function Card({ element, index }) {
     }
   }
 
-  const new_window = (slug) => {
+  const newWindow = (slug) => {
     const re = new RegExp("^https?://");
     const found = re.exec(slug);
     if (found) {
@@ -43,7 +43,7 @@ export default function Card({ element, index }) {
     }
   }
 
-  const parsed_date = (date) => {
+  const parseDate = (date) => {
     let d = new Date(date);
     if (Object.prototype.toString.call(d) === "[object Date]") {
       if (isNaN(d) || element.date_override) { // d.getTime() or d.valueOf() will also work
@@ -56,7 +56,7 @@ export default function Card({ element, index }) {
     }
   }
 
-  const parsed_description = (element) => {
+  const parseDescription = (element) => {
     var classes = styles.card__description;
     if (element.unbound) {
       classes += ` ${styles.card__cropped}`;
@@ -67,7 +67,7 @@ export default function Card({ element, index }) {
   }
 
   return (
-    (<Link key={ element.id } href={ parsed_url(element.slug) } target={ new_window(element.slug) }>
+    (<Link key={ element.id } href={ parseUrl(element.slug) } target={ newWindow(element.slug) }>
       <div className={ styles.card }>
         <div className={ styles.card__thumbnail_wrapper }>
           <Image
@@ -84,14 +84,14 @@ export default function Card({ element, index }) {
           />
         </div>
         <div className={ styles.card__head }>
-          <h2 className={ styles.card__title }>{ element.title }</h2>
+          <h2 className={ styles.card__title }>{ parseTitle(element) }</h2>
           <div className={ styles.card__meta }>
-            <span className={ styles.card__date }>{ parsed_date(element.updated_at) }</span>
+            <span className={ styles.card__date }>{ parseDate(element.updated_at) }</span>
             <span className={ styles.card__author }>{ element.author }</span>
           </div>
         </div>
         <div className={ styles.card__body }>
-          { parsed_description(element) }
+          { parseDescription(element) }
         </div>
       </div>
     </Link>)

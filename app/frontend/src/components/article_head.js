@@ -1,5 +1,6 @@
 /* Date utils */
 import dateformat     from 'dateformat';
+import { parseTitle } from '../utils/parser.js';
 import article_styles from '../styles/ArticleHead.module.scss';
 
 export default function ArticleHead(props) {
@@ -13,7 +14,7 @@ export default function ArticleHead(props) {
 
   return (
     <header className={ article_styles.article__head }>
-      <h1 className={ article_styles.article__title }>{ props.meta.title }</h1>
+      <h1 className={ article_styles.article__title }>{ parseTitle(props.meta) }</h1>
       <div className={ article_styles.article__meta }>
         <span className={ article_styles.article__date }>{ datePublished(props.meta) }</span>
         <span className={ article_styles.article__author }>{ props.meta.author }</span>
