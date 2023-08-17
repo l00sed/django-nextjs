@@ -1,0 +1,1015 @@
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[5].oneOf[13].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[5].oneOf[13].use[5]!./src/styles/code_themes/prism-base16-brewer.dark.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
+/*
+
+Name:       Base16 Brewer Dark
+Author:     Timothée Poisot (http://github.com/tpoisot)
+
+Prism template by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/prism/)
+Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)
+
+*/
+.remark-code-title {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #0a0a0c;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+code[class*=language-],
+pre[class*=language-] {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  line-height: 1.375;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  hyphens: none;
+  background: #0c0d0e;
+  color: #b7b8b9;
+}
+
+pre[class*=language-]::selection, pre[class*=language-] ::selection,
+code[class*=language-]::selection, code[class*=language-] ::selection {
+  text-shadow: none;
+  background: #959697;
+}
+
+/* Code blocks */
+pre[class*=language-] {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+}
+
+/* Inline code */
+:not(pre) > code[class*=language-] {
+  padding: 0.1em;
+  border-radius: 0.3em;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #737475;
+}
+
+.token.punctuation {
+  color: #b7b8b9;
+}
+
+.token.namespace {
+  opacity: 0.7;
+}
+
+.token.operator,
+.token.boolean,
+.token.number {
+  color: #e6550d;
+}
+
+.token.property {
+  color: #dca060;
+}
+
+.token.tag {
+  color: #3182bd;
+}
+
+.token.string {
+  color: #80b1d3;
+}
+
+.token.selector {
+  color: #756bb1;
+}
+
+.token.attr-name {
+  color: #e6550d;
+}
+
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #80b1d3;
+}
+
+.token.attr-value,
+.token.keyword,
+.token.control,
+.token.directive,
+.token.unit {
+  color: #31a354;
+}
+
+.token.statement,
+.token.regex,
+.token.atrule {
+  color: #80b1d3;
+}
+
+.token.placeholder,
+.token.variable {
+  color: #3182bd;
+}
+
+.token.deleted {
+  text-decoration: line-through;
+}
+
+.token.inserted {
+  border-bottom: 1px dotted #fcfdfe;
+  text-decoration: none;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.important {
+  color: #e31a1c;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+pre > code.highlight {
+  outline: 0.4em solid #e31a1c;
+  outline-offset: 0.4em;
+}
+
+.line-numbers .line-numbers-rows {
+  border-right-color: #2e2f30 !important;
+}
+
+.line-numbers-rows > span:before {
+  color: #515253 !important;
+}
+
+.line-highlight {
+  background: rgba(252, 253, 254, 0.2) !important;
+  background: linear-gradient(to right, rgba(252, 253, 254, 0.2) 70%, rgba(252, 253, 254, 0)) !important;
+}
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[5].oneOf[13].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[5].oneOf[13].use[5]!./src/styles/code_themes/prism-extras.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+pre {
+  overflow-x: auto;
+  border-radius: 7.5px;
+  padding: 1em 2em !important;
+}
+
+.relative {
+  margin: 3em 0;
+}
+
+.remark-code-title + pre {
+  border-radius: 0 0 7.5px 7.5px;
+  margin-top: 0 !important;
+}
+
+.remark-code-title {
+  text-align: left;
+  border-radius: 7.5px 7.5px 0 0;
+  padding: 10px 1em 10px 1em;
+  line-height: 30px;
+}
+
+.remark-code-title,
+pre {
+  filter: var(--code-filter);
+}
+
+/**
+ * Inspired by gatsby remark prism - https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs/
+ * 1. Make the element just wide enough to fit its content.
+ * 2. Always fill the visible space in .code-highlight.
+ */
+.code-highlight {
+  min-width: 99%; /* 2 */
+}
+
+.code-line {
+  line-height: 150% !important;
+  display: unset;
+  padding-left: 1em;
+  padding-right: 4em;
+  margin-left: -2em;
+  margin-right: -2em;
+  border-left: 4px solid transparent; /* Set code block color */
+  border-right: 4px solid transparent; /* Set code block color */
+}
+
+.code-line.line-number {
+  padding-left: 2em;
+}
+
+.relative {
+  position: relative;
+}
+
+.line-number::before {
+  display: inline-block;
+  width: 1rem;
+  text-align: right;
+  margin-right: 1em;
+  margin-left: -1em;
+  color: rgb(156, 163, 175); /* Line number color */
+  padding-right: 1em;
+  content: attr(line);
+  border-right: 1px solid rgba(156, 163, 175, 0.1); /* Line number color */
+}
+
+.line-number.highlight-line::before {
+  margin-left: calc(-1em - 4px);
+}
+
+/* # Code Copy Button */
+.code-copy-button {
+  z-index: 1;
+  cursor: pointer;
+  position: absolute;
+  top: 9px;
+  right: 10px;
+  margin-bottom: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--copy-button-background);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  transition: all var(--loosed-transition-medm) ease;
+  padding: 5px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.code-copy-button svg {
+  color: var(--copy-button-svg);
+}
+
+.code-copy-button + .remark-code-title {
+  top: 20px !important;
+}
+
+.code-copy-button:hover {
+  background-color: var(--copy-button-hover);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5), inset 1px 1px 1px rgba(255, 255, 255, 0.2), inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.code-copy-button:hover svg {
+  color: var(--copy-button-hover-color);
+}
+
+.code-copied {
+  background-color: black;
+  background-color: rgba(155, 240, 155, 0.5) !important;
+  opacity: 1;
+}
+
+.code-copied svg {
+  color: rgb(0, 105, 45) !important;
+}
+
+.code-copied::before {
+  mix-blend-mode: multiply;
+  border-radius: 5px;
+  position: absolute;
+  content: "";
+  z-index: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.2), inset -1px -1px 1px rgba(0, 0, 0, 0.2), 0 0 8px rgba(0, 205, 45, 0.4) !important;
+  background-color: rgba(155, 240, 155, 0.5) !important;
+}
+
+.remark-code-title + .code-copy-button {
+  top: 30px;
+}
+
+.code-line.highlight-line,
+.code-line.inserted,
+.code-line.deleted {
+  display: block;
+}
+
+.code-line.highlight-line {
+  border-left-color: var(--code-highlight);
+  background-color: var(--code-highlight-bg);
+}
+
+.code-line.inserted {
+  border-left: 4px solid var(--code-inserted);
+  background-color: var(--code-inserted-bg);
+}
+
+.code-line.deleted {
+  border-left: 4px solid var(--code-deleted);
+  background-color: var(--code-deleted-bg);
+}
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[5].oneOf[13].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[5].oneOf[13].use[5]!./src/styles/globals.scss ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
+/* BEGIN - Table of Contents ==================================== *
+
+   +   Themes --------------------------------
+     *   Global Color Palette
+   +   Other Variables -----------------------
+     *   Transition Speeds
+     *   Fonts
+   +   Scrollbar -----------------------------
+   +   Default Theme
+     *   Table of Contents
+     *   article.js
+     *   comment.js
+     *   card.js
+     *   menu_toggle.js
+     *   menu_overlay.js
+     *   dark_mode_toggle.js
+     *   footer.js
+     *   donate.js
+     *   pre.js
+   +   Dark Theme
+     *   Table of Contents
+     *   Global Color Palette
+     *   article.js
+     *   comments.js
+     *   card.js
+     *   menu_toggle.js
+     *   menu_overlay.js
+     *   dark_mode_toggle
+     *   footer.js
+     *   donate.js
+     *   pre.js
+   +   HTML + body tags
+   +   Headings (H1, H2)
+   +   Horizontal Rule
+   +   Paragraph Styles
+   +   Lists
+   +   Links
+   +   Code
+   +   Toggle Class
+   +   Box-Sizing
+   +   Table of Contents
+
+ * END   - Table of Contents ==================================== */
+/* Import <code> tag theme for hljs */
+/* Used for paragraph link underline offset */
+@property --offset {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 5px;
+}
+/* LIGHT */
+/* DARK */
+@media (prefers-color-scheme: light) {
+  .default {
+    --loosed-black: #1b1b1b;
+    --loosed-white: #f3f3f3;
+    --main-box-shadow: rgba(0, 0, 0, 0.3);
+    --loosed-highlight-1: #b61115;
+    --loosed-highlight-1: rgba(182, 17, 21, 0.95);
+    --toc-header-bg: rgba(255, 255, 255, 0.5);
+    --toc-header-shadow: rgba(0, 0, 0, 0.15);
+    --toc-nav-bg: rgba(0, 0, 0, 0.05);
+    --toc-shadow: rgba(0, 0, 0, 0.5);
+    --toc-hr: rgba(0, 0, 0, 0.075);
+    --anchor-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='%23b61115' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M8 4v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4V8h-4V4h-2v4h-4V4H8Zm6 10v-4h-4v4h4Z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    --main-text-color: #333;
+    --comment-heading: rgba(0, 0, 0, 0.025);
+    --comment-content: rgba(255, 255, 255, 0.5);
+    --comment-shadow: rgba(0, 0, 0, 0.15);
+    --comment-form-bg: rgba(255, 255, 255, 0.5);
+    --comment-input-bg: rgba(0, 0, 0, 0.05);
+    --reply-shadow: rgba(0, 0, 0, 0.075);
+    --input-outline: rgba(0, 0, 0, 0.5);
+    --indent-1: rgba(0, 0, 0, 0.1);
+    --indent-2: rgba(0, 0, 0, 0.2);
+    --indent-3: rgba(0, 0, 0, 0.3);
+    --indent-4: rgba(0, 0, 0, 0.4);
+    --indent-5: rgba(0, 0, 0, 0.5);
+    --card-shadow: rgba(0, 0, 0, 0.5);
+    --card-hover-background: rgba(0, 0, 0, 0.15);
+    --card-active: rgba(0, 0, 0, 0.35);
+    --menu-toggle-background: rgba(0, 0, 0, 0.2);
+    --menu-toggle-box-shadow: rgba(0, 0, 0, 0.4);
+    --menu-border: rgba(0, 0, 0, 0.7);
+    --menu-hover-border: rgba(0, 0, 0, 0.8);
+    --overlay-background-color: rgba(255, 255, 255, 0.4);
+    --menu-background-color: rgba(255, 255, 255, 0.95);
+    --menu-box-shadow: rgba(0, 0, 0, 0.1);
+    --button-box-shadow: rgba(0, 0, 0, 0.7);
+    --light-display: none;
+    --dark-display: flex;
+    --toggle-hover-glow: rgba(50, 50, 150, 0.8);
+    --normal-background: rgba(0, 155, 255, 0.2);
+    --hover-background: rgba(0, 155, 255, 0.4);
+    --footer-border: rgba(0, 0, 0, 0.4);
+    --webring-background: rgba(0, 0, 0, 0.05);
+    --webring-center-border: rgba(0, 0, 0, 0.2);
+    --scroll-top-bg: rgba(255, 255, 255, 0.4);
+    --scroll-top-shadow: rgba(0, 0, 0, 0.1);
+    --scroll-top-svg: rgba(0, 0, 0, 0.5);
+    --scroll-top-hover: rgba(182, 17, 21, 0.95);
+    --footer-icon: #1b1b1b;
+    --link-section-bg: rgb(255, 255, 255);
+    --donate-menu-background-color: rgba(255, 255, 255, 0.9);
+    --donate-button-box-shadow: rgba(255, 255, 255, 0.8);
+    --code-filter: invert(0.95);
+    --code-highlight: rgb(225, 155, 35);
+    --code-highlight-bg: rgba(225, 155, 35, 0.25);
+    --code-inserted: rgb(248, 52, 155);
+    --code-inserted-bg: rgba(248, 52, 155, 0.25);
+    --code-deleted: rgb(92, 248, 245);
+    --code-deleted-bg: rgba(92, 248, 245, 0.35);
+    --copy-button-svg: rgba(0, 0, 0, 0.2);
+    --copy-button-background: rgba(0, 0, 0, 0.01);
+    --copy-button-hover: rgba(0, 0, 0, 0.05);
+    --copy-button-hover-color: rgba(0, 0, 0, 0.6);
+    --caption-leader: rgba(0, 0, 0, 0.75);
+    --scrollbar-color: rgba(0, 0, 0, 0.05);
+    --scrollbar-thumb: rgba(0, 0, 0, 0.3);
+    --scrollbar-pre-color: rgba(255, 255, 255, 0.05);
+    --scrollbar-pre-thumb: rgba(255, 255, 255, 0.35);
+    --scroll-area-border: rgba(0, 0, 0, 0.1);
+    --scroll-area-background: rgba(255, 255, 255, 0.65);
+    --table-separator: rgba(0, 0, 0, 0.25);
+    --blockquote-bg: rgba(255, 255, 255, 0.5);
+    --blockquote-border: #888;
+    --blockquote-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Cg fill='none'%3E%3Cpath d='M24 0v24H0V0h24ZM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01l-.184-.092Z'/%3E%3Cpath fill='%23555555' d='M8.4 6.2a1 1 0 0 1 1.2 1.6c-1.564 1.173-2.46 2.314-2.973 3.31A3.5 3.5 0 1 1 4 14.558a7.565 7.565 0 0 1 .508-3.614C5.105 9.438 6.272 7.796 8.4 6.2Zm9 0a1 1 0 0 1 1.2 1.6c-1.564 1.173-2.46 2.314-2.973 3.31A3.5 3.5 0 1 1 13 14.558a7.565 7.565 0 0 1 .508-3.614c.598-1.506 1.764-3.148 3.892-4.744Z'/%3E%3C/g%3E%3C/svg%3E");
+    --live-button-icon: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M6.343 4.938a1 1 0 0 1 0 1.415a8.003 8.003 0 0 0 0 11.317a1 1 0 1 1-1.414 1.414c-3.907-3.906-3.907-10.24 0-14.146a1 1 0 0 1 1.414 0Zm12.732 0c3.906 3.907 3.906 10.24 0 14.146a1 1 0 0 1-1.415-1.414a8.003 8.003 0 0 0 0-11.317a1 1 0 0 1 1.415-1.415ZM9.31 7.812a1 1 0 0 1 0 1.414a3.92 3.92 0 0 0 0 5.544a1 1 0 1 1-1.415 1.414a5.92 5.92 0 0 1 0-8.372a1 1 0 0 1 1.415 0Zm6.958 0a5.92 5.92 0 0 1 0 8.372a1 1 0 0 1-1.414-1.414a3.92 3.92 0 0 0 0-5.544a1 1 0 0 1 1.414-1.414Zm-4.186 2.77a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Z'/%3E%3C/svg%3E%0A");
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .default {
+    --loosed-black: #f3f3f3;
+    --loosed-white: #1b1b1b;
+    --main-box-shadow: rgba(255, 255, 255, 0.2);
+    --loosed-highlight-1: #f93e17;
+    --loosed-highlight-1: rgba(249, 62, 23, 0.95);
+    --toc-header-bg: rgba(255, 255, 255, 0.05);
+    --toc-header-shadow: rgb(0, 0, 0);
+    --toc-nav-bg: rgba(0, 0, 0, 0.5);
+    --toc-shadow: rgba(255, 255, 255, 0.5);
+    --toc-hr: rgba(255, 255, 255, 0.05);
+    --anchor-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='%23f93e17' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M8 4v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4V8h-4V4h-2v4h-4V4H8Zm6 10v-4h-4v4h4Z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    --main-text-color: #e0e0e0;
+    --comment-heading: rgba(255, 255, 255, 0.05);
+    --comment-content: rgba(0, 0, 0, 0.05);
+    --comment-shadow: rgb(0, 0, 0);
+    --comment-form-bg: rgba(255, 255, 255, 0.05);
+    --comment-input-bg: rgba(0, 0, 0, 0.3);
+    --reply-shadow: rgba(255, 255, 255, 0.05);
+    --input-outline: rgb(0, 0, 0);
+    --indent-1: rgba(255, 255, 255, 0.2);
+    --indent-2: rgba(255, 255, 255, 0.3);
+    --indent-3: rgba(255, 255, 255, 0.4);
+    --indent-4: rgba(255, 255, 255, 0.5);
+    --indent-5: rgba(255, 255, 255, 0.6);
+    --card-shadow: rgba(0, 0, 0, 0.75);
+    --card-hover-background: rgba(255, 255, 255, 0.15);
+    --card-active: rgb(0, 0, 0);
+    --menu-toggle-background: rgba(255, 255, 255, 0.2);
+    --menu-toggle-box-shadow: rgba(200, 30, 40, 0.35);
+    --menu-border: rgba(255, 255, 255, 0.7);
+    --menu-hover-border: rgba(255, 255, 255, 0.8);
+    --overlay-background-color: rgba(0, 0, 0, 0.5);
+    --menu-background-color: rgba(0, 0, 0, 0.95);
+    --menu-box-shadow: rgba(255, 255, 255, 0.1);
+    --button-box-shadow: rgba(255, 255, 255, 0.3);
+    --light-display: flex;
+    --dark-display: none;
+    --toggle-hover-glow: rgba(80, 50, 0, 0.9);
+    --normal-background: rgba(255, 185, 0, 0.1);
+    --hover-background: rgba(255, 185, 0, 0.2);
+    --footer-border: rgba(255, 255, 255, 0.5);
+    --webring-background: rgba(255, 255, 255, 0.05);
+    --webring-center-border: rgba(255, 255, 255, 0.2);
+    --scroll-top-bg: rgba(0, 0, 0, 0.05);
+    --scroll-top-shadow: rgba(255, 255, 255, 0.1);
+    --scroll-top-svg: rgba(255, 255, 255, 0.7);
+    --scroll-top-hover: rgba(249, 62, 23, 0.95);
+    --footer-icon: #f3f3f3;
+    --link-section-bg: rgba(0, 0, 0, 0.25);
+    --donate-menu-background-color: rgba(0, 0, 0, 0.85);
+    --donate-button-box-shadow: rgb(0, 0, 0);
+    --code-filter: none;
+    --code-highlight: rgb(30, 100, 220);
+    --code-highlight-bg: rgba(30, 100, 220, 0.25);
+    --code-inserted: rgb(7, 203, 100);
+    --code-inserted-bg: rgba(7, 203, 100, 0.25);
+    --code-deleted: rgb(163, 7, 10);
+    --code-deleted-bg: rgba(163, 7, 10, 0.35);
+    --copy-button-svg: rgba(255, 255, 255, 0.2);
+    --copy-button-background: rgba(255, 255, 255, 0.05);
+    --copy-button-hover: rgba(255, 255, 255, 0.06);
+    --copy-button-hover-color: rgba(255, 255, 255, 0.4);
+    --caption-leader: rgba(255, 255, 255, 0.75);
+    --scrollbar-color: rgba(255, 255, 255, 0.05);
+    --scrollbar-thumb: rgba(255, 255, 255, 0.35);
+    --scrollbar-pre-color: rgba(255, 255, 255, 0.05);
+    --scrollbar-pre-thumb: rgba(255, 255, 255, 0.35);
+    --scroll-area-border: rgba(255, 255, 255, 0.15);
+    --scroll-area-background: rgba(0, 0, 0, 0.25);
+    --table-separator: rgba(255, 255, 255, 0.25);
+    --blockquote-bg: rgba(0, 0, 0, 0.5);
+    --blockquote-border: #ddd;
+    --blockquote-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'%3E%3Cg fill='none'%3E%3Cpath d='M24 0v24H0V0h24ZM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01l-.184-.092Z'/%3E%3Cpath fill='%23ffffff' d='M8.4 6.2a1 1 0 0 1 1.2 1.6c-1.564 1.173-2.46 2.314-2.973 3.31A3.5 3.5 0 1 1 4 14.558a7.565 7.565 0 0 1 .508-3.614C5.105 9.438 6.272 7.796 8.4 6.2Zm9 0a1 1 0 0 1 1.2 1.6c-1.564 1.173-2.46 2.314-2.973 3.31A3.5 3.5 0 1 1 13 14.558a7.565 7.565 0 0 1 .508-3.614c.598-1.506 1.764-3.148 3.892-4.744Z'/%3E%3C/g%3E%3C/svg%3E");
+    --live-button-icon: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M6.343 4.938a1 1 0 0 1 0 1.415a8.003 8.003 0 0 0 0 11.317a1 1 0 1 1-1.414 1.414c-3.907-3.906-3.907-10.24 0-14.146a1 1 0 0 1 1.414 0Zm12.732 0c3.906 3.907 3.906 10.24 0 14.146a1 1 0 0 1-1.415-1.414a8.003 8.003 0 0 0 0-11.317a1 1 0 0 1 1.415-1.415ZM9.31 7.812a1 1 0 0 1 0 1.414a3.92 3.92 0 0 0 0 5.544a1 1 0 1 1-1.415 1.414a5.92 5.92 0 0 1 0-8.372a1 1 0 0 1 1.415 0Zm6.958 0a5.92 5.92 0 0 1 0 8.372a1 1 0 0 1-1.414-1.414a3.92 3.92 0 0 0 0-5.544a1 1 0 0 1 1.414-1.414Zm-4.186 2.77a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Z'/%3E%3C/svg%3E%0A");
+  }
+}
+:root {
+  /* # Themes -------------------------------- */
+  /* # Other Variables ----------------------- */
+  /* ## Page max width */
+  --page-max-width: 1920px;
+  /* ## Transition Speeds */
+  --loosed-transition-fast: 50ms;
+  --loosed-transition-medm: 200ms;
+  --loosed-transition-slow: 500ms;
+  --loosed-transition-slower: 800ms;
+  /* ## Fonts */
+  --small: 0.9em;
+  --normal: 1em;
+  --medium: 1.25em;
+  --medium-large: 1.5em;
+  --large: 2em;
+  --x-large: 2.5em;
+  /* ## Colors */
+  --default: rgb(30,100,220);
+  --success: rgb(7,203,100);
+  --error: rgb(163,7,10);
+  /* ## Notes */
+  --note-default-icon: rgba(30,100,220,0.75);
+  --note-success-icon: rgba(7,203,100,0.75);
+  --note-error-icon: rgba(163,7,10,0.75);
+  --note-default-border: rgba(30,100,220,0.5);
+  --note-success-border: rgba(7,203,100,0.5);
+  --note-error-border: rgba(163,7,10,0.5);
+  --note-default: rgba(30,100,220,0.15);
+  --note-success: rgba(7,203,100,0.15);
+  --note-error: rgba(163,7,10,0.15);
+  /* ## Parametric Components */
+  --rad-1: 7.5px;
+  --off-1: 3px;
+}
+
+/* # Light Theme
+ * -------------------------------- */
+.light {
+  --loosed-black: #1b1b1b !important;
+  --loosed-white: #f3f3f3 !important;
+  --main-box-shadow: rgba(0, 0, 0, 0.3) !important;
+  --loosed-highlight-1: #b61115 !important;
+  --loosed-highlight-1: rgba(182, 17, 21, 0.95) !important;
+  /* ## Table of Contents */
+  --toc-header-bg: rgba(255, 255, 255, 0.5) !important;
+  --toc-header-shadow: rgba(0, 0, 0, 0.15) !important;
+  --toc-nav-bg: rgba(0, 0, 0, 0.05) !important;
+  --toc-shadow: rgba(0, 0, 0, 0.5) !important;
+  --toc-hr: rgba(0, 0, 0, 0.075) !important;
+  --anchor-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='%23b61115' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M8 4v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4V8h-4V4h-2v4h-4V4H8Zm6 10v-4h-4v4h4Z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
+  --main-text-color: #333 !important;
+  /* ## comment.js */
+  --comment-heading: rgba(0, 0, 0, 0.025) !important;
+  --comment-content: rgba(255, 255, 255, 0.5) !important;
+  --comment-shadow: rgba(0, 0, 0, 0.15) !important;
+  --comment-form-bg: rgba(255, 255, 255, 0.5) !important;
+  --comment-input-bg: rgba(0, 0, 0, 0.05) !important;
+  --reply-shadow: rgba(0, 0, 0, 0.075) !important;
+  --input-outline: rgba(0, 0, 0, 0.5) !important;
+  --indent-1: rgba(0, 0, 0, 0.1) !important;
+  --indent-2: rgba(0, 0, 0, 0.2) !important;
+  --indent-3: rgba(0, 0, 0, 0.3) !important;
+  --indent-4: rgba(0, 0, 0, 0.4) !important;
+  --indent-5: rgba(0, 0, 0, 0.5) !important;
+  /* ## card.js */
+  --card-shadow: rgba(0, 0, 0, 0.5) !important;
+  --card-hover-background: rgba(0, 0, 0, 0.15) !important;
+  --card-active: rgba(0, 0, 0, 0.35) !important;
+  /* ## menu_toggle.js */
+  --menu-toggle-background: rgba(0, 0, 0, 0.2) !important;
+  --menu-toggle-box-shadow: rgba(0, 0, 0, 0.4) !important;
+  --menu-border: rgba(0, 0, 0, 0.7) !important;
+  --menu-hover-border: rgba(0, 0, 0, 0.8) !important;
+  /* ## menu_overlay.js */
+  --overlay-background-color: rgba(255, 255, 255, 0.4) !important;
+  --menu-box-shadow: rgba(0, 0, 0, 0.1) !important;
+  --menu-background-color: rgba(255, 255, 255, 0.95) !important;
+  --button-box-shadow: rgba(0, 0, 0, 0.7) !important;
+  /* ## dark_mode_toggle.js */
+  --light-display: none !important;
+  --dark-display: flex !important;
+  --toggle-hover-glow: rgba(50, 50, 150, 0.8) !important;
+  --normal-background: rgba(0, 155, 255, 0.2) !important;
+  --hover-background: rgba(0, 155, 255, 0.4) !important;
+  /* ## footer.js */
+  --footer-border: rgba(0, 0, 0, 0.4) !important;
+  --webring-background: rgba(0, 0, 0, 0.05) !important;
+  --webring-center-border: rgba(0, 0, 0, 0.2) !important;
+  --scroll-top-bg: rgba(255, 255, 255, 0.4) !important;
+  --scroll-top-shadow: rgba(0, 0, 0, 0.1) !important;
+  --scroll-top-svg: rgba(0, 0, 0, 0.5) !important;
+  --scroll-top-hover: rgba(182, 17, 21, 0.95) !important;
+  --footer-icon: #1b1b1b !important;
+  --link-section-bg: rgb(255, 255, 255) !important;
+  /* ## donate.js */
+  --donate-menu-background-color: rgba(255, 255, 255, 0.9) !important;
+  --donate-button-box-shadow: rgba(255, 255, 255, 0.8) !important;
+  /* ## pre.js */
+  --code-filter: invert(0.95) !important;
+  --code-highlight: rgb(225, 155, 35) !important;
+  --code-highlight-bg: rgba(225, 155, 35, 0.25) !important;
+  --code-inserted: rgb(248, 52, 155) !important;
+  --code-inserted-bg: rgba(248, 52, 155, 0.25) !important;
+  --code-deleted: rgb(92, 248, 245) !important;
+  --code-deleted-bg: rgba(92, 248, 245, 0.35) !important;
+  --copy-button-svg: rgba(0, 0, 0, 0.2) !important;
+  --copy-button-background: rgba(0, 0, 0, 0.01) !important;
+  --copy-button-hover: rgba(0, 0, 0, 0.05) !important;
+  --copy-button-hover-color: rgba(0, 0, 0, 0.6) !important;
+  /* ## image_wrapper.js */
+  --caption-leader: rgba(0, 0, 0, 0.75) !important;
+  /* ## horizontal_scroller.js */
+  --scrollbar-color: rgba(0, 0, 0, 0.05) !important;
+  --scrollbar-thumb: rgba(0, 0, 0, 0.3) !important;
+  --scrollbar-pre-color: rgba(255, 255, 255, 0.05) !important;
+  --scrollbar-pre-thumb: rgba(255, 255, 255, 0.35) !important;
+  --scroll-area-border: rgba(0, 0, 0, 0.1) !important;
+  --scroll-area-background: rgba(255, 255, 255, 0.65) !important;
+  /* ## table */
+  --table-separator: rgba(0, 0, 0, 0.25) !important;
+  /* ## blockquote */
+  --blockquote-bg: rgba(255, 255, 255, 0.5) !important;
+  --blockquote-border: #888 !important;
+  --blockquote-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Cg fill='none'%3E%3Cpath d='M24 0v24H0V0h24ZM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01l-.184-.092Z'/%3E%3Cpath fill='%23555555' d='M8.4 6.2a1 1 0 0 1 1.2 1.6c-1.564 1.173-2.46 2.314-2.973 3.31A3.5 3.5 0 1 1 4 14.558a7.565 7.565 0 0 1 .508-3.614C5.105 9.438 6.272 7.796 8.4 6.2Zm9 0a1 1 0 0 1 1.2 1.6c-1.564 1.173-2.46 2.314-2.973 3.31A3.5 3.5 0 1 1 13 14.558a7.565 7.565 0 0 1 .508-3.614c.598-1.506 1.764-3.148 3.892-4.744Z'/%3E%3C/g%3E%3C/svg%3E") !important;
+  /* ## live button */
+  --live-button-icon: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M6.343 4.938a1 1 0 0 1 0 1.415a8.003 8.003 0 0 0 0 11.317a1 1 0 1 1-1.414 1.414c-3.907-3.906-3.907-10.24 0-14.146a1 1 0 0 1 1.414 0Zm12.732 0c3.906 3.907 3.906 10.24 0 14.146a1 1 0 0 1-1.415-1.414a8.003 8.003 0 0 0 0-11.317a1 1 0 0 1 1.415-1.415ZM9.31 7.812a1 1 0 0 1 0 1.414a3.92 3.92 0 0 0 0 5.544a1 1 0 1 1-1.415 1.414a5.92 5.92 0 0 1 0-8.372a1 1 0 0 1 1.415 0Zm6.958 0a5.92 5.92 0 0 1 0 8.372a1 1 0 0 1-1.414-1.414a3.92 3.92 0 0 0 0-5.544a1 1 0 0 1 1.414-1.414Zm-4.186 2.77a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Z'/%3E%3C/svg%3E%0A") !important;
+}
+
+/* # Dark Theme
+ * ---------------------------------- */
+.dark {
+  /* ## Global Color Palette */
+  --loosed-white: #1b1b1b !important;
+  --loosed-black: #f3f3f3 !important;
+  --main-box-shadow: rgba(255, 255, 255, 0.2) !important;
+  --loosed-highlight-1: #f93e17 !important;
+  --loosed-highlight-1: rgba(249, 62, 23, 0.95) !important;
+  /* ## Table of Contents */
+  --toc-header-bg: rgba(255, 255, 255, 0.05) !important;
+  --toc-header-shadow: rgb(0, 0, 0) !important;
+  --toc-nav-bg: rgba(0, 0, 0, 0.5) !important;
+  --toc-shadow: rgba(255, 255, 255, 0.5) !important;
+  --toc-hr: rgba(255, 255, 255, 0.05) !important;
+  --anchor-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='%23f93e17' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M8 4v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4V8h-4V4h-2v4h-4V4H8Zm6 10v-4h-4v4h4Z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
+  --main-text-color: #e0e0e0 !important;
+  /* ## comments.js */
+  --comment-heading: rgba(255, 255, 255, 0.05) !important;
+  --comment-content: rgba(0, 0, 0, 0.05) !important;
+  --comment-shadow: rgb(0, 0, 0) !important;
+  --comment-form-bg: rgba(255, 255, 255, 0.05) !important;
+  --comment-input-bg: rgba(0, 0, 0, 0.3) !important;
+  --reply-shadow: rgba(255, 255, 255, 0.05) !important;
+  --input-outline: rgb(0, 0, 0) !important;
+  --indent-1: rgba(255, 255, 255, 0.2) !important;
+  --indent-2: rgba(255, 255, 255, 0.3) !important;
+  --indent-3: rgba(255, 255, 255, 0.4) !important;
+  --indent-4: rgba(255, 255, 255, 0.5) !important;
+  --indent-5: rgba(255, 255, 255, 0.6) !important;
+  /* ## card.js */
+  --card-shadow: rgba(0, 0, 0, 0.75) !important;
+  --card-hover-background: rgba(255, 255, 255, 0.15) !important;
+  --card-active: rgb(0, 0, 0) !important;
+  /* ## menu_toggle.js */
+  --menu-toggle-background: rgba(255, 255, 255, 0.2) !important;
+  --menu-toggle-box-shadow: rgba(200, 30, 40, 0.35) !important;
+  --menu-border: rgba(255, 255, 255, 0.7) !important;
+  --menu-hover-border: rgba(255, 255, 255, 0.8) !important;
+  /* ## menu_overlay.js */
+  --overlay-background-color: rgba(0, 0, 0, 0.5) !important;
+  --menu-background-color: rgba(0, 0, 0, 0.95) !important;
+  --menu-box-shadow: rgba(255, 255, 255, 0.1) !important;
+  --button-box-shadow: rgba(255, 255, 255, 0.3) !important;
+  /* ## dark_mode_toggle */
+  --light-display: flex !important;
+  --dark-display: none !important;
+  --toggle-hover-glow: rgba(80, 50, 0, 0.9) !important;
+  --normal-background: rgba(255, 185, 0, 0.1) !important;
+  --hover-background: rgba(255, 185, 0, 0.2) !important;
+  /* ## footer.js */
+  --footer-border: rgba(255, 255, 255, 0.5) !important;
+  --webring-background: rgba(255, 255, 255, 0.05) !important;
+  --webring-center-border: rgba(255, 255, 255, 0.2) !important;
+  --scroll-top-bg: rgba(0, 0, 0, 0.05) !important;
+  --scroll-top-shadow: rgba(255, 255, 255, 0.1) !important;
+  --scroll-top-svg: rgba(255, 255, 255, 0.7) !important;
+  --scroll-top-hover: rgba(249, 62, 23, 0.95) !important;
+  --footer-icon: #f3f3f3 !important;
+  --link-section-bg: rgba(0, 0, 0, 0.25) !important;
+  /* ## donate.js */
+  --donate-menu-background-color: rgba(0, 0, 0, 0.85) !important;
+  --donate-button-box-shadow: rgb(0, 0, 0) !important;
+  /* ## pre.js */
+  --code-filter: none !important;
+  --code-highlight: rgb(30, 100, 220) !important;
+  --code-highlight-bg: rgba(30, 100, 220, 0.25) !important;
+  --code-inserted: rgb(7, 203, 100) !important;
+  --code-inserted-bg: rgba(7, 203, 100, 0.25) !important;
+  --code-deleted: rgb(163, 7, 10) !important;
+  --code-deleted-bg: rgba(163, 7, 10, 0.35) !important;
+  --copy-button-svg: rgba(255, 255, 255, 0.2) !important;
+  --copy-button-background: rgba(255, 255, 255, 0.05) !important;
+  --copy-button-hover: rgba(255, 255, 255, 0.06) !important;
+  --copy-button-hover-color: rgba(255, 255, 255, 0.4) !important;
+  /* ## image_wrapper.js */
+  --caption-leader: rgba(255, 255, 255, 0.75) !important;
+  /* ## horizontal_scroller.js */
+  --scrollbar-color: rgba(255, 255, 255, 0.05) !important;
+  --scrollbar-thumb: rgba(255, 255, 255, 0.35) !important;
+  --scrollbar-pre-color: rgba(255, 255, 255, 0.05) !important;
+  --scrollbar-pre-thumb: rgba(255, 255, 255, 0.35) !important;
+  --scroll-area-border: rgba(255, 255, 255, 0.15) !important;
+  --scroll-area-background: rgba(0, 0, 0, 0.25) !important;
+  /* ## table */
+  --table-separator: rgba(255, 255, 255, 0.25) !important;
+  /* ## blockquote */
+  --blockquote-bg: rgba(0, 0, 0, 0.5) !important;
+  --blockquote-border: #ddd !important;
+  --blockquote-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'%3E%3Cg fill='none'%3E%3Cpath d='M24 0v24H0V0h24ZM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01l-.184-.092Z'/%3E%3Cpath fill='%23ffffff' d='M8.4 6.2a1 1 0 0 1 1.2 1.6c-1.564 1.173-2.46 2.314-2.973 3.31A3.5 3.5 0 1 1 4 14.558a7.565 7.565 0 0 1 .508-3.614C5.105 9.438 6.272 7.796 8.4 6.2Zm9 0a1 1 0 0 1 1.2 1.6c-1.564 1.173-2.46 2.314-2.973 3.31A3.5 3.5 0 1 1 13 14.558a7.565 7.565 0 0 1 .508-3.614c.598-1.506 1.764-3.148 3.892-4.744Z'/%3E%3C/g%3E%3C/svg%3E") !important;
+  /* ## live button */
+  --live-button-icon: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M6.343 4.938a1 1 0 0 1 0 1.415a8.003 8.003 0 0 0 0 11.317a1 1 0 1 1-1.414 1.414c-3.907-3.906-3.907-10.24 0-14.146a1 1 0 0 1 1.414 0Zm12.732 0c3.906 3.907 3.906 10.24 0 14.146a1 1 0 0 1-1.415-1.414a8.003 8.003 0 0 0 0-11.317a1 1 0 0 1 1.415-1.415ZM9.31 7.812a1 1 0 0 1 0 1.414a3.92 3.92 0 0 0 0 5.544a1 1 0 1 1-1.415 1.414a5.92 5.92 0 0 1 0-8.372a1 1 0 0 1 1.415 0Zm6.958 0a5.92 5.92 0 0 1 0 8.372a1 1 0 0 1-1.414-1.414a3.92 3.92 0 0 0 0-5.544a1 1 0 0 1 1.414-1.414Zm-4.186 2.77a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Z'/%3E%3C/svg%3E%0A") !important;
+}
+
+/* # HTML + body tags */
+html,
+body,
+#__next {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  min-height: 100vh;
+  font-family: "JetBrains Mono", monospace;
+}
+
+::placeholder {
+  font-family: "JetBrains Mono", monospace;
+}
+
+:focus {
+  outline: none;
+}
+
+.full__width {
+  max-width: 100% !important;
+}
+
+/* # Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  width: -moz-fit-content;
+  width: fit-content;
+  color: var(--loosed-black);
+}
+
+h1 {
+  margin: 0 auto 0.25em -3px;
+  font-weight: 900;
+  font-size: 2.5em;
+  letter-spacing: -1px;
+  word-spacing: -10px;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+h2::after {
+  position: relative;
+  display: block;
+  content: "";
+  top: 1.15em;
+  left: 0;
+  width: 100px;
+  height: 4px;
+  background-color: var(--loosed-highlight-1);
+}
+
+h3 {
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+/* # Horizontal Rule */
+hr {
+  border: solid var(--loosed-black);
+  border-width: 1px 0 0 0;
+  margin: 3em 0;
+}
+
+/* # Paragraph Styles */
+p {
+  margin: 0 auto 1.25em auto;
+  font-size: 1em;
+}
+
+blockquote {
+  font-size: 90%;
+  line-height: 2;
+  background-color: var(--blockquote-bg);
+  font-style: italic;
+  margin: 3em 3.25em;
+  text-indent: 0.5em;
+  padding: 0 2vw 3em 2vw;
+  border-radius: var(--rad-1);
+  box-shadow: 0 var(--off-1) 0 0 var(--main-box-shadow);
+  border: 1px solid var(--blockquote-border);
+}
+blockquote::before {
+  content: var(--blockquote-icon);
+  color: var(--loosed-black);
+  width: 0;
+  height: 0;
+  position: relative;
+  top: 2.25em;
+  left: 0.5em;
+}
+blockquote i, blockquote em {
+  font-style: normal;
+}
+blockquote p {
+  padding: 0 2em;
+}
+blockquote p:first-child {
+  text-indent: 2em;
+}
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* # Lists */
+ol,
+ul {
+  -webkit-padding-start: 1.25em;
+          padding-inline-start: 1.25em;
+}
+
+/* # Links */
+a {
+  color: var(--loosed-highlight-1);
+  text-decoration: none;
+  overflow-wrap: break-word;
+}
+
+/* # Code */
+pre {
+  max-width: 100%;
+}
+
+input,
+textarea {
+  background-color: var(--comment-input-bg);
+  color: var(--main-text-color);
+}
+
+table {
+  border-collapse: collapse;
+  width: inherit;
+}
+table th,
+table td {
+  padding: 0.25em 2em 0.25em 0;
+}
+table tbody tr {
+  border-top: 1px solid var(--table-separator);
+}
+
+sup, sub {
+  vertical-align: baseline;
+  position: relative;
+  top: -0.4em;
+}
+
+sub {
+  top: 0.4em;
+}
+
+figure {
+  -webkit-margin-before: 0;
+          margin-block-start: 0;
+  -webkit-margin-after: 0;
+          margin-block-end: 0;
+  -webkit-margin-start: 0;
+          margin-inline-start: 0;
+  -webkit-margin-end: 0;
+          margin-inline-end: 0;
+}
+
+@media (min-width: 1200px) {
+  h1 {
+    font-size: 3.5em;
+  }
+}
+/* # Article Citation/Footnotes */
+.data-footnote-backref {
+  content: "";
+  height: 1em;
+  width: 2.5em;
+  display: inline-flex;
+  flex-direction: row;
+  visibility: hidden;
+}
+.data-footnote-backref::before {
+  content: "↗";
+  height: 1em;
+  width: 2.5em;
+  display: block;
+  position: relative;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  font-size: 1.5em;
+  line-height: 0.8;
+  color: var(--loosed-black);
+  background-color: var(--reply-shadow);
+  visibility: visible;
+}
+
+a[data-footnote-ref=true] {
+  top: -5px;
+  padding: 2px 5px;
+  border-radius: 4px;
+  line-height: 0.85;
+  color: var(--loosed-black);
+}
+
+.data-footnote-backref,
+a[data-footnote-ref=true] {
+  position: relative;
+  text-decoration: none !important;
+  text-align: center;
+}
+
+.data-footnote-backref:hover::before,
+a[data-footnote-ref=true]:hover {
+  font-weight: normal;
+  background-color: var(--loosed-highlight-1);
+  color: #fff;
+}
+
+/* # Toggle Class */
+.hidden {
+  display: none !important;
+}
+
+/* # Comments */
+.indent-1 {
+  border-left: 1px solid var(--indent-1);
+}
+
+.indent-2 {
+  border-left: 1px solid var(--indent-2);
+}
+
+.indent-3 {
+  border-left: 1px solid var(--indent-3);
+}
+
+.indent-4 {
+  border-left: 1px solid var(--indent-4);
+}
+
+.indent-5 {
+  border-left: 1px solid var(--indent-5);
+}
+
+#loosed-tv {
+  max-width: calc(100% - 6em);
+  margin: 0 3em;
+}
+
+/* # Box-Sizing */
+* {
+  box-sizing: border-box;
+}
