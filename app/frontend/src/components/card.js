@@ -46,14 +46,10 @@ export default function Card({ element, index }) {
   const parsed_date = (date) => {
     let d = new Date(date);
     if (Object.prototype.toString.call(d) === "[object Date]") {
-      if (isNaN(d)) { // d.getTime() or d.valueOf() will also work
+      if (isNaN(d) || element.date_override) { // d.getTime() or d.valueOf() will also work
         return date;
       } else {
-        if (dateformat(d, "h:MMTT") === "12:00AM") {
-          return dateformat(d, "mmmm yyyy");
-        } else {
-          return dateformat(d, "mmmm, dS yyyy | h:MMTT");
-        }
+        return dateformat(d, "mm dd yyyy");
       }
     } else {
       return date;

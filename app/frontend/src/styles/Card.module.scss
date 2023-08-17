@@ -64,6 +64,8 @@ a:focus-visible .card .card__thumbnail_wrapper {
 }
 .card__thumbnail_wrapper {
   transition: all var(--loosed-transition-medm) ease;
+  border-radius: calc(var(--card-radius) - 2px) calc(var(--card-radius) - 2px) 0 0;
+  background-image: linear-gradient(to bottom, var(--loosed-highlight-1), transparent);
   position: relative;
   height: 200px;
   width: calc( 100% - 6px);
@@ -76,6 +78,7 @@ a:focus-visible .card .card__thumbnail_wrapper {
   height: auto;
   object-fit: cover;
   filter: saturate(0.5);
+  backdrop-filter: brightness(0.8);
 }
 .card:hover .card__thumbnail,
 a:focus-visible .card .card__thumbnail {
@@ -85,11 +88,22 @@ a:focus-visible .card .card__thumbnail {
 .card__meta {
   line-height: 1.25;
   font-size: var(--small);
+  display: flex;
+  gap: 0.75em;
+  max-width: fit-content;
 }
 
 .card__author,
 .card__date {
   font-size: var(--small);
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: var(--loosed-white);
+  background-color: var(--loosed-black);
+  border-radius: 3px;
+  padding: 0.25em 0.75em;
+  white-space: nowrap;
 }
 
 .card__author {
@@ -126,14 +140,19 @@ a:focus-visible .card .card__thumbnail {
 }
 
 .card__head {
-  padding: 1em;
+  padding: 1.25em 1.25em 1em 1.25em;
 }
 .card__head h2 {
-  margin: 0 0 0.25em 0 !important;
-  padding-bottom: 0.25em;
+  margin: 0 0 0.5em 0 !important;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: var(--large);
+  line-height: 1em;
+  letter-spacing: -0.05em;
+  word-spacing: -0.35em;
 }
 .card__head h2::after {
-  top: 0.25em !important;
+  display: none;
 }
 
 .card__body {

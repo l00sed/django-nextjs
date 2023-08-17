@@ -1,6 +1,19 @@
 #!/bin/bash
 
 #######################################
+# GLOBALS
+#######################################
+export PROJECT_NAME="loosed"
+
+# Set environment variables to speed up build
+export COMPOSE_DOCKER_CLI_BUILD=1
+export DOCKER_BUILDKIT=1
+
+# Get current user id/group
+export USER_ID=$(id -u)
+export GROUP_ID=$(id -g)
+
+#######################################
 # FUNCTIONS
 #######################################
 
@@ -11,6 +24,10 @@ clean() {
       echo "Removing compose file."
       rm local.yml
     fi
+    if [ -f "./.dockerignore" ]; then
+      echo "Removing .dockerignore file."
+      rm .dockerignore
+    fi
     if [ -f "./backend.Dockerfile" ]; then
       echo "Removing backend Dockerfile."
       rm backend.Dockerfile
@@ -18,6 +35,10 @@ clean() {
     if [ -f "./frontend.Dockerfile" ]; then
       echo "Removing frontend Dockerfile."
       rm frontend.Dockerfile
+    fi
+    if [ -f "./nginx.Dockerfile" ]; then
+      echo "Removing nginx Dockerfile."
+      rm nginx.Dockerfile
     fi
   )
 }
@@ -32,7 +53,8 @@ generate_cert () {
     echo "Copying local docker compose file to current directory."
     cp .docker/local/local.yml .
     echo "Generating a certificate with OpenSSL."
-    docker compose -f local.yml run --rm nginx sh -c "cd /etc/nginx/certs && touch openssl.cnf && cat /etc/ssl/openssl.cnf > openssl.cnf && echo \"\" >> openssl.cnf && echo \"[ SAN ]\" >> openssl.cnf && echo \"subjectAltName=DNS.1:loosed.test,DNS.2:*.loosed.test\" >> openssl.cnf && openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout loosed.test.key -out loosed.test.crt -days 3650 -subj \"/CN=*.loosed.test\" -config openssl.cnf -extensions SAN && rm openssl.cnf"
+    docker compose -f local.yml \
+      run --rm nginx sh -c "cd /etc/nginx/certs && touch openssl.cnf && cat /etc/ssl/openssl.cnf > openssl.cnf && echo \"\" >> openssl.cnf && echo \"[ SAN ]\" >> openssl.cnf && echo \"subjectAltName=DNS.1:loosed.test,DNS.2:*.loosed.test\" >> openssl.cnf && openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout loosed.test.key -out loosed.test.crt -days 3650 -subj \"/CN=*.loosed.test\" -config openssl.cnf -extensions SAN && rm openssl.cnf"
   )
 }
 
@@ -74,10 +96,22 @@ start() {
   (
     # Always clean first to make sure we're starting with the right Dockerfile
     clean
+    # Pull the local backend Dockerfile into the project root
+    cp .docker/local/backend/backend.Dockerfile .
+    # Pull the local frontend Dockerfile into the project root
+    cp .docker/local/frontend/frontend.Dockerfile .
+    # Pull the local nginx Dockerfile into the project root
+    cp .docker/local/nginx/nginx.Dockerfile .
+    # Grab the local.yml and .dockerignore
+    cp .docker/local/.dockerignore .
     cp .docker/local/local.yml .
-    export USER_ID=$(id -u)
-    export GROUP_ID=$(id -g)
-    docker compose -f local.yml --verbose up
+
+    # Sync MDX before starting up
+    sync_mdx
+
+    docker compose -p "loosed" \
+      -f local.yml \
+      --verbose up
   )
 }
 
@@ -102,29 +136,32 @@ build() {
     # Always clean first to make sure we're starting with the right Dockerfile
     clean
 
-    # Get current user id/group
-    export USER_ID=$(id -u)
-    export GROUP_ID=$(id -g)
-
-    # Set environment variables to speed up build
-    export COMPOSE_DOCKER_CLI_BUILD=1
-    export DOCKER_BUILDKIT=1
-
     # Pull the local backend Dockerfile into the project root
     cp .docker/local/backend/backend.Dockerfile .
     # Pull the local frontend Dockerfile into the project root
     cp .docker/local/frontend/frontend.Dockerfile .
     # Pull the local nginx Dockerfile into the project root
     cp .docker/local/nginx/nginx.Dockerfile .
-    # Grab the local.yml
+    # Grab the local.yml and .dockerignore
+    cp .docker/local/.dockerignore .
     cp .docker/local/local.yml .
+
     # Run docker compose to build the image with the local Dockerfile
-    docker compose -f local.yml build \
+    docker compose -p "loosed" \
+      -f local.yml build \
       --progress plain \
       --build-arg USER_ID=${USER_ID} \
       --build-arg GROUP_ID=${GROUP_ID} \
       --no-cache
+
     clean
+  )
+}
+
+# Sync MDX
+sync_mdx() {
+  (
+    docker exec loosed-backend-1 /bin/bash -c "python manage.py sync_local_mdx"
   )
 }
 
@@ -157,6 +194,9 @@ case "$1" in
   stop)
     stop
     ;;
+  sync_mdx)
+    sync_mdx
+    ;;
   *)
     cat << EOF
 
@@ -174,6 +214,7 @@ Available commands:
   run_backend ............................... Run backend (Django) in container
   start ..................................... Start the containers
   stop ...................................... Stop the containers
+  sync_mdx .................................. Sync the MDX files
 
 EOF
   exit
