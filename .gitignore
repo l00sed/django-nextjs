@@ -19,6 +19,9 @@ tags*
 app/frontend/node_modules
 app/frontend/node_modules/*
 
+# Python Pip Packages
+app/backend/lib
+
 # Build files in main dir
 ./local.yml
 ./prod.yml
