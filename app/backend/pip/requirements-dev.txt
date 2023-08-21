@@ -1,5 +1,6 @@
 django-stubs
 django-stubs-ext
+flake8
 pylint
 pylint-django
 pylint-plugin-utils

@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Parse, { parseTitle } from '../utils/parser';
+import { Tags } from '../components/tag';
 import styles from '../styles/Card.module.scss';
 import dateformat from 'dateformat';
 
@@ -92,6 +93,7 @@ export default function Card({ element, index }) {
         </div>
         <div className={ styles.card__body }>
           { parseDescription(element) }
+          <Tags tags={ element.tags } />
         </div>
       </div>
     </Link>)

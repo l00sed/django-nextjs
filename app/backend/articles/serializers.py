@@ -1,8 +1,14 @@
 from rest_framework import serializers
 from .models import Article, Subscriber
+from taggit.serializers import (
+    TagListSerializerField,
+    TaggitSerializer
+)
 
 
-class ArticleSerializer(serializers.ModelSerializer):
+class ArticleSerializer(TaggitSerializer, serializers.ModelSerializer):
+
+    tags = TagListSerializerField()
 
     class Meta:
         model = Article

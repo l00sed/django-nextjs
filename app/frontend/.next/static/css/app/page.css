@@ -769,6 +769,28 @@ a:focus .Footer_icon__GFmB3 path {
   }
 }
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[5].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[5].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[5].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[5].oneOf[9].use[5]!./src/styles/Tags.module.scss ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.Tags_tags__3MAFZ {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+.Tags_tags__3MAFZ span.Tags_tag__MWHMz {
+  color: var(--loosed-white);
+  border-radius: 4px;
+  text-align: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  align-self: center;
+  padding: 0.25em 0.5em;
+  font-size: var(--small);
+}
+.Tags_tags__3MAFZ span.Tags_tag__MWHMz ::after {
+  display: none;
+}
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[5].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[5].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[5].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[5].oneOf[9].use[5]!./src/styles/Card.module.scss ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /* BEGIN - Table of Contents ==================================== *
@@ -799,7 +821,6 @@ a:focus .Footer_icon__GFmB3 path {
   box-shadow: 0 0 1px 1px var(--card-shadow);
   color: var(--loosed-black);
 }
-
 .Card_card__p0ho7::after {
   width: 100%;
   height: 100%;
@@ -829,20 +850,15 @@ a:focus-visible .Card_card__p0ho7::after {
 
 .Card_card__p0ho7:hover .Card_card__thumbnail_wrapper__g8hH4,
 a:focus-visible .Card_card__p0ho7 .Card_card__thumbnail_wrapper__g8hH4 {
-  width: 100%;
-  left: 0;
-  top: 0;
+  transform: scale(1);
 }
 
 .Card_card__thumbnail_wrapper__g8hH4 {
   transition: all var(--loosed-transition-medm) ease;
   border-radius: calc(var(--card-radius) - 2px) calc(var(--card-radius) - 2px) 0 0;
-  background-image: linear-gradient(to bottom, var(--loosed-highlight-1), transparent);
   position: relative;
   height: 200px;
-  width: calc(100% - 6px);
-  left: 3px;
-  top: 3px;
+  transform: scale(0.98);
 }
 
 .Card_card__thumbnail__A1XDW {
@@ -860,7 +876,6 @@ a:focus-visible .Card_card__p0ho7 .Card_card__thumbnail__A1XDW {
 }
 
 .Card_card__meta__AIn5N {
-  line-height: 1.25;
   font-size: var(--small);
   display: flex;
   gap: 0.75em;
@@ -870,14 +885,16 @@ a:focus-visible .Card_card__p0ho7 .Card_card__thumbnail__A1XDW {
 
 .Card_card__author__BawEN,
 .Card_card__date__m5K8_ {
+  display: flex;
   font-size: var(--small);
   text-align: center;
   text-transform: uppercase;
   font-weight: 900;
   color: var(--loosed-white);
   background-color: var(--loosed-black);
+  margin: auto;
+  padding: 0.125em 0.5em;
   border-radius: 3px;
-  padding: 0.25em 0.75em;
   white-space: nowrap;
 }
 
@@ -894,15 +911,15 @@ a:focus-visible .Card_card__p0ho7 .Card_card__thumbnail__A1XDW {
 .Card_card__description__PcBC_ {
   line-height: 1.25em;
   max-height: 6.25em;
-  margin-bottom: 20px;
+  margin-bottom: 2em;
   overflow: hidden;
 }
 
 .Card_card__description__PcBC_:before {
   content: "...";
   position: absolute;
-  left: 1.25em;
-  bottom: 1em;
+  left: 1em;
+  bottom: 3.75em;
 }
 
 .Card_card__cropped__aM_7w {
@@ -926,6 +943,8 @@ a:focus-visible .Card_card__p0ho7 .Card_card__thumbnail__A1XDW {
   line-height: 1em;
   letter-spacing: -0.05em;
   word-spacing: -0.35em;
+  -webkit-hyphens: auto;
+          hyphens: auto;
 }
 
 .Card_card__head__35VKT h2::after {
@@ -933,6 +952,6 @@ a:focus-visible .Card_card__p0ho7 .Card_card__thumbnail__A1XDW {
 }
 
 .Card_card__body__9XZw_ {
-  padding: 0 1.25em 0.75em 1.25em;
+  padding: 0 1.25em 1.25em 1.25em;
   font-size: var(--small);
 }

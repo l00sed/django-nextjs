@@ -3,6 +3,7 @@ Pillow
 Pygments
 django-cors-headers
 django-filter
+django-taggit
 django-tinymce
 django-tree-queries
 django-webmention

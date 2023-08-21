@@ -5,12 +5,12 @@ tags*
 **/**/__pycache__
 
 # Environment-specific configs
-.docker/production/certbot/conf
-.docker/production/certbot/conf/*
-.docker/production/certbot/www
-.docker/production/certbot/www/*
-.docker/production/keys/*
-.docker/production/keys
+.docker/prod/certbot/conf
+.docker/prod/certbot/conf/*
+.docker/prod/certbot/www
+.docker/prod/certbot/www/*
+.docker/prod/keys/*
+.docker/prod/keys
 
 .docker/local/nginx/certs/*
 
@@ -19,5 +19,7 @@ tags*
 app/frontend/node_modules
 app/frontend/node_modules/*
 
+# Build files in main dir
 ./local.yml
-./production.yml
+./prod.yml
+*.Dockerfile

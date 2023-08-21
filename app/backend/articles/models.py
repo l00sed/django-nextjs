@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from taggit.managers import TaggableManager
 
 
 def get_upload_path(instance, filename):
@@ -35,6 +36,7 @@ class Article(models.Model):
         choices=CONTENT_TYPES,
         default='blog'
     )
+    tags = TaggableManager()
 
     class Meta:
         ordering = ('-created_at', )

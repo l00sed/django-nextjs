@@ -1,26 +1,33 @@
 ---
 title: Microfactory 02
 author: Daniel Tompkins
-description: no
+description: During my undergrad in architecture, one of the things that most excited me was the opportunity to work in a fabrication shop. At the time, my school had a modest metal shop and a slightly more expansive wood shop. They also provided students with two 3-axis CNTMotion CNC mills— each with a 5x10' bed. I've used these machines professionally as well, and (while they cost as much as a new Porsche) they're really well-built tools.
 slug: microfactory-2
 created_at: 10/14/2020 23:30:00
 updated_at: 10/14/2020 23:30:00
-featured_image: micro.jpg
-image_alt: alt
+featured_image: powerwash.gif
+image_alt: Animated GIF of the bench being pressure-washed in the yard.
 content_type: blog
+tags: DIY, fabrication
 ---
 <ProseWrapper>
 ## A DIY Home Shop
 
 During my undergrad in architecture, one of the things that most excited me was the opportunity to work in a fabrication shop. At the time, my school had a modest metal shop and a slightly more expansive wood shop.
 
-They also provided students with two 3-axis CNTMotion CNC mills— each with a 5x10' bed. I've used these machines professionally as well, and (while they cost as much as a new Porsche) they're really well-built tools.
+They also provided students with two 3-axis <em>CNTMotion</em> CNC mills— each with a 5x10' bed. I've used these machines professionally as well, and (while they cost as much as a new Porsche) they're really well-built tools.
 
 Towards the end of my time there, a few 6-axis robots were also hanging around in the shop annex:
 
-ALT Workbench in the yard, post pressure-wash
-
-The re-purposed factory robot, Dionysus— a 6-axis, bandsaw-wielding Kuka KR-200. Image sourced from the Robot Construction Laboratory (RCL). Check out the resources for RCL's Open Source Factory.
+<OneColumn>
+  <ImageWrapper
+    src="/assets/img/blog/microfactory-2/kuka-kr-200.jpeg"
+    alt="Re-purposed factory robot, nicknamed Dionysus, with a mounted bandsaw."
+    caption={ <span>The re-purposed factory robot, <em>Dionysus</em>&mdash; a 6-axis, bandsaw-wielding <em>Kuka</em> KR-200. Image sourced from the Robot Construction Laboratory (RCL). Check out the resources for RCL's <a target='_blank' href='https://www.rcl-aap.com/open-source-factory'>Open Source Factory</a>.</span> }
+    width="500"
+    height="500"
+  />
+</OneColumn>
 
 In the first Microfactory post, I described my scant experiences with fabrication— usually in the garage with my dad and some power-tools. So, having more professional means and devices made the school's shop feel like a cathedral for invention, and I spent a great deal of time getting to know the different machines, mechanisms, and methods.
 
@@ -33,7 +40,16 @@ There was a Sears Grand that went out of business in my hometown in northern Ill
 Anyways, it went out of business. During the liquidation sale, my dad was kind enough to buy me a decent collection of tools— lots of Craftsman tool-bags, wrenches, hammers, pliers, etc. I've gradually accumulated a few more tools over the years— mainly from garage and estate sales. I also have an ever-growing collection of scrap electronics— power supplies, motors, LEDs, Arduinos, Raspberry Pis...
 
 Nothing's that big, but it's definitely a lot. And it's taking up a lot of room. The biggest problem that I've encountered is the lack of a work surface. The occasional house centipede coming to visit me from the dark corner of the basement can make soldering on the floor distracting.
-House-centipede with speech bubble:
+
+<OneColumn>
+  <ImageWrapper
+    src="/assets/img/blog/microfactory-2/house-centipede.jpeg"
+    alt='House-centipede with speech bubble, saying: "Bonjour"'
+    width="1000"
+    height="664"
+    visible={ false }
+  />
+</OneColumn>
 
 ## Bottom line, it was high time for a workbench.
 
@@ -51,9 +67,17 @@ In a relatively short period of time— maybe 40-to-60 years— there must have 
 After an hour or so of peeling nuts and bolts out of sticky corners and dusting metal shrapnel into the trash, we finally got to the point where we could actually move the bench out to the yard. Natalie's dad had an idea— to use his power-washer to blast off all the gooey oil— and it ended up being a good one.
 Animated GIF of the bench being pressure-washed in the yard.
 
-ALT We blasted off the surface layer of congealed oil with a Ryobi 1800PSI pressure-washer.
+<OneColumn>
+  <ImageWrapper
+    src='/assets/img/blog/microfactory-2/powerwash.gif'
+    alt='Animated GIF of the bench being pressure-washed in the yard.'
+    caption='We blasted off the surface layer of congealed oil with a Ryobi 1800PSI pressure-washer.'
+    width="360"
+    height="202"
+  />
+</OneColumn>
 
-Some of the folks in /r/Workbenches were disappointed that we were cutting away the patina. It is sad to see it go, but it was definitely a quick-and-easy way to get the bench clean— and I'm sure it'll get dirty again soon.
+Some of the folks in [/r/Workbenches](https://www.reddit.com/r/Workbenches/comments/j529iz/my_girlfriends_grandpa_was_a_machinist_and_had/?utm_source=share&utm_medium=web2x&context=3) were disappointed that we were cutting away the patina. It is sad to see it go, but it was definitely a quick-and-easy way to get the bench clean— and I'm sure it'll get dirty again soon.
 
 ## Workbench Installation
 
@@ -64,12 +88,18 @@ The legs are made up of a layered, folded steel. It's a unique design, and very 
 When we finally had all the parts moved into our basement, I cut some 2x4s to fit the floor-to-joist height and malleted them tight against the wall. Once those were frictioned into place, I made sure they were plumb and used a couple splice plates at the top to tie them into the joists. After shifting the workbench against the wall, I did some additional leveling with shims and scraps.
 
 <TwoColumn>
-  <ImageWrapper>
-    ALT Close-up of a 2x4 stud splice plate tying ino the floor joist
-  </ImageWrapper>
-  <ImageWrapper>
-    ALT Detail shot of the junction box above the workbench with a 4-plug outlet getting installed.
-  </ImageWrapper>
+  <ImageWrapper
+    alt="Close-up of a 2x4 stud splice plate tying ino the floor joist"
+    src="/assets/img/blog/microfactory-2/stud-splice-plate.jpg"
+    height="768"
+    width="432"
+  />
+  <ImageWrapper
+    alt="Detail shot of the junction box above the workbench with a 4-plug outlet getting installed."
+    src="/assets/img/blog/microfactory-2/workbench-electrical.jpg"
+    height="768"
+    width="432"
+  />
 </TwoColumn>
 
 I measured some 2-by-4's, cut them a hair long, malleted them to the wall. Then, I screwed in a splice-plate from the stud to the floor joists. There was also a conveniently located junction box where I put in a 4-plug outlet.
@@ -81,7 +111,12 @@ I returned the vise to its former resting place, and found a new use for some un
 Lucky for me, there happened to be a junction box right above the top shelf. I bought a pair of outlets and a cover-plate, and rewired the box for a total of 4 local plugs.
 
 <OneColumn>
-  ALT The finished workbench, solidly installed in the corner of the basement.
+  <ImageWrapper
+    alt="The finished workbench, solidly installed in the corner of the basement."
+    src="/assets/img/blog/microfactory-2/workbench-ready.jpg"
+    height="432"
+    width="768"
+  />
 </OneColumn>
 
 ## Closing Thoughts

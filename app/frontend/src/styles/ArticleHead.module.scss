@@ -13,12 +13,27 @@
   hyphens: auto;
 }
 .article__meta {
-  border-top: 1px solid var(--main-box-shadow);
-  padding-top: 1em;
+  align-self: center;
+  min-width: 270px;
 }
 .article__meta span {
   width: 100%;
   display: block;
   line-height: 1.5;
   font-size: 90%;
+}
+
+.tags__wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: auto;
+  gap: 1em;
+  padding-top: 1em;
+  border-top: 1px solid var(--main-box-shadow);
+  justify-content: space-between;
+
+  span {
+    line-height: 1.5em;
+  }
 }

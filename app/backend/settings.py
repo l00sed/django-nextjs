@@ -37,6 +37,9 @@ ALLOWED_HOSTS_BASE = [
     'loosed.local',
 ]
 
+# Taggit
+TAGGIT_CASE_INSENSITIVE = True
+
 # Swagger
 ENDPOINT_DOMAIN = "https://l-o-o-s-e-d.net"
 if DEBUG:
@@ -97,6 +100,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'easy_thumbnails',
     'rest_framework',
+    'taggit',
     'tinymce',
     'webmention',
     'widget_tweaks',
@@ -175,6 +179,11 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+# Web Administration
+ADMINS = [
+    ('Daniel W Tompkins', 'dan@l-o-o-s-e-d.net'),
 ]
 
 # Internationalization

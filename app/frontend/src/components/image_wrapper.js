@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import image_styles from '../styles/ImageWrapper.module.scss';
 
-export default function ImageWrapper({ src, alt, width, height, caption=true }) {
+export default function ImageWrapper({ src, alt, caption, width, height, visible=true }) {
   return (
     <>
       <figure className={ image_styles.image__wrapper }>
@@ -11,7 +11,7 @@ export default function ImageWrapper({ src, alt, width, height, caption=true }) 
           width={ width }
           height={ height }
         />
-        <Caption text={ alt } width={ width } visible={ caption } type='figure' />
+        <Caption text={ caption ? caption : alt } width={ width } visible={ visible } type='figure' />
       </figure>
     </>
   )

@@ -53,7 +53,7 @@ urlpatterns = [
     path('api/', include('comments.urls')),
     path('webmention/', include('webmention.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
-         name='django.contrib.sitemaps.views.sitemap')
+         name='django.contrib.sitemaps.views.sitemap'),
 ]
 
 # Needed to serve static files through Gunicorn

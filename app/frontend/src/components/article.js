@@ -50,7 +50,8 @@ const getData = async (slug) => {
     title: data_json.title,
     author: data_json.author,
     updated_at: data_json.updated_at,
-    likes: data_json.likes
+    likes: data_json.likes,
+    tags: data_json.tags
   }
 
   // Process blog content (parse and add features)

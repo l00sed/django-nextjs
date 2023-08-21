@@ -1,0 +1,20 @@
+.tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5em;
+
+  span.tag {
+    color: var(--loosed-white);
+    border-radius: 4px;
+    text-align: center;
+    width: fit-content;
+    align-self: center;
+    padding: 0.25em 0.5em;
+    font-size: var(--small);
+
+    ::after {
+      display: none;
+    }
+  }
+}

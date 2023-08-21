@@ -40,8 +40,8 @@ RUN pip install --upgrade pip
 COPY app/frontend/src/mdx /app/frontend/src/mdx
 # Copy application code to container
 COPY app/backend .
-# Copy the entrypoint script (local) to the container
-COPY local /
+# Copy the entrypoint script (loosed) to the container
+COPY loosed /
 
 # Install pip requirements in virtual environment
 RUN pip install -r pip/requirements.txt
