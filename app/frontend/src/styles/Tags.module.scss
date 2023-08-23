@@ -1,20 +1,34 @@
 .tags {
-  display: flex;
-  flex-direction: row;
+  display: inline-flex;
   flex-wrap: wrap;
-  gap: 0.5em;
+  gap: 0.25em;
 
-  span.tag {
-    color: var(--loosed-white);
-    border-radius: 4px;
+  a.tag {
+    display: flex;
+    color: var(--loosed-black);
+    border-radius: 2px;
     text-align: center;
+    cursor: pointer;
     width: fit-content;
     align-self: center;
-    padding: 0.25em 0.5em;
+    padding: 0.125em 0.75em;
+    border: 1px solid var(--main-box-shadow);
+    box-shadow: 0 var(--off-1) 0 0 var(--main-box-shadow);
     font-size: var(--small);
 
     ::after {
       display: none;
+    }
+
+    &:hover {
+      --off-1: 0;
+    }
+
+    .pound {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: auto;
     }
   }
 }

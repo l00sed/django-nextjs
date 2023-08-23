@@ -33,7 +33,7 @@ const getData = async (slug) => {
     }
   }
 
-  const data_promise = await fetch(`${HOST_URL()}/api/articles/${slug}`, options_get);
+  const data_promise = await fetch(`${ HOST_URL() }/api/articles/${ slug }`, options_get);
 
   let data_json = {};
 
@@ -183,7 +183,7 @@ const getData = async (slug) => {
   }
 }
 
-export default async function Article(props) {
+export default async function Article (props) {
   /* Get article content and its meta */
   const { meta, content } = await getData(props.slug);
 
@@ -208,6 +208,25 @@ export default async function Article(props) {
       <main className={ article_styles.main }>
         <article className={ article_styles.article_wrapper }>
           { article_head }
+          <div className={ article_styles.article__likes }>
+            { parseInt(meta.likes).toString() }
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-opacity="0.8"
+                stroke-width="2"
+                d="M7 8h10M7 11h10M7 14h4m-8 4V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7.667a2 2 0 0 0-1.2.4L3 21v-3z"
+              />
+            </svg>
+          </div>
           <div className={ article_styles.article__body }>
             <div className={ article_styles.article__description }>
               <Mdx content={ content } />

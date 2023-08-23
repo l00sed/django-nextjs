@@ -140,6 +140,28 @@
     border-style: none;
     aspect-ratio: 16/9;
   }
+
+  .article__likes {
+    width: fit-content;
+    font-size: var(--medium);
+    margin: 0 3em;
+    gap: 0.25em;
+    display: flex;
+    flex-direction: row;
+    padding: 0.25em 1em;
+    background-color: var(--toc-header-bg);
+    border: 1px solid var(--main-box-shadow);
+    box-shadow: 0 var(--off-1) 0 0 var(--main-box-shadow);
+    border-radius: var(--rad-1);
+
+    svg {
+      margin: auto 0;
+    }
+
+    &:hover {
+      --off-1: 0;
+    }
+  }
 }
 
 .aside {

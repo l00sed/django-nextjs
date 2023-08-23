@@ -3,7 +3,6 @@ from .models import Article, Subscriber
 from .serializers import ArticleSerializer, SubscriberSerializer
 
 
-# Create your views here.
 class ArticleListAPIView(generics.ListAPIView):
     """ArticleListAPIView."""
 
