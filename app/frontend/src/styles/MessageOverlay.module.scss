@@ -1,0 +1,25 @@
+.message_overlay {
+  z-index: 999;
+  background-color: var(--overlay-background-color);
+  backdrop-filter: blur(7px);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .inner_content {
+    margin: auto;
+  }
+
+  &:not(.inner_content) {
+    cursor: pointer;
+  }
+}
+
+.closed {
+  display: none !important;
+}

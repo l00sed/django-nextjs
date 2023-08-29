@@ -76,6 +76,8 @@ export default function Comments(props) {
             });
             setCommentsData(comments);
             setLoadingComments(false);
+            // Set article comment count button.
+            document.getElementById('comment_count').innerText = comments.length;
             console.log(commentsData);
           } else {
             /* Additional error logging for easier debugging. */

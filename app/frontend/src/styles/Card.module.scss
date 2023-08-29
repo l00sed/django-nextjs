@@ -83,6 +83,8 @@ a:focus-visible .card .card__thumbnail {
 .card__meta {
   font-size: var(--small);
   display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
   gap: 0.75em;
   line-height: 1.25em;
   max-width: fit-content;
@@ -97,34 +99,16 @@ a:focus-visible .card .card__thumbnail {
   font-weight: 900;
   color: var(--loosed-white);
   background-color: var(--loosed-black);
-  margin: auto;
   padding: 0.125em 0.75em;
   border-radius: 3px;
   white-space: nowrap;
-}
-
-.card__author {
-  width: 100%;
-  display: block;
-}
-
-.card__date {
-  width: 100%;
-  display: block;
+  width: fit-content;
 }
 
 .card__description {
+  color: var(--loosed-black);
   line-height: 1.25em;
-  max-height: 6.25em;
   margin-bottom: 2em;
-  overflow: hidden;
-}
-
-.card__description:before {
-  content: '...';
-  position: absolute;
-  left: 1em;
-  bottom: 3.75em;
 }
 
 .card__cropped {
@@ -154,6 +138,6 @@ a:focus-visible .card .card__thumbnail {
 }
 
 .card__body {
-  padding: 0 1.25em 1.25em 1.25em;
+  padding: 0 1.25em 1.5em 1.25em;
   font-size: var(--small);
 }

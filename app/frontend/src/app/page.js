@@ -23,8 +23,8 @@ export default async function Home() {
         <Donate />
         <div id="homepage__content" className={ styles.homepage__content }>
           {
-            data.map((element, index) => {
-              return <Card key={ element.id } element={ element } index={ index } />
+            data?.map((element, index) => {
+              return <Card key={ element.id } element={ element } truncate={ true } index={ index } />
             })
           }
         </div>

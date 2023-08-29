@@ -1,15 +1,19 @@
 /* Styles */
-import toc_styles     from '../styles/Toc.module.scss';
 import article_styles from '../styles/Article.module.scss';
 
 /* MDX / Remark / Rehype */
 import { serialize }              from 'next-mdx-remote/serialize';
-import rehypeToc                  from '@jsdevtools/rehype-toc';
 import rehypeSlug                 from 'rehype-slug';
 import rehypeAutolinkHeadings     from 'rehype-autolink-headings';
 import rehypeExternalLinks        from 'rehype-external-links';
 import rehypePrism                from 'rehype-prism-plus';
 import remarkGfm                  from 'remark-gfm';
+
+/* Used for ToC */
+import { hasProperty } from "hast-util-has-property"
+import { headingRank } from "hast-util-heading-rank"
+import { toString } from "hast-util-to-string"
+import { visit } from "unist-util-visit"
 
 /* Local Utils */
 import remarkCodeTitles           from '../utils/code_titles';
@@ -20,8 +24,8 @@ import Mdx from './mdx';
 import Comments from './comments';
 import Button from './button';
 import ArticleHead from './article_head';
+import ArticleMeta from './article_meta';
 import Link from 'next/link';
-
 
 const getData = async (slug) => {
   const options_get = {
@@ -54,6 +58,25 @@ const getData = async (slug) => {
     tags: data_json.tags
   }
 
+  const headings = []
+  function rehypeExtractHeadings () {
+    return (tree) => {
+      visit(tree, "element", node => {
+        if (
+          headingRank(node) === 2 || headingRank(node) === 3 &&
+          node.properties &&
+          hasProperty(node, "id")
+        ) {
+          headings.push({
+            id: node.properties.id.toString(),
+            title: toString(node),
+            rank: headingRank(node)
+          })
+        }
+      })
+    }
+  }
+
   // Process blog content (parse and add features)
   const content = await serialize(data_json.content, {
     mdxOptions: {
@@ -71,96 +94,6 @@ const getData = async (slug) => {
           target: '_blank',
           rel: ['noopener', 'nofollow', 'noreferrer']
         }],
-        [rehypeToc, {
-          headings: ["h2", "h3"],
-          cssClasses: {
-            // Automatically generate ToC
-            toc: toc_styles.toc__block,
-            // Build links to h3 headings only
-            link: toc_styles.toc__sub_heading
-          },
-          customizeTOC: (toc) => {
-            try {
-              const childrenOfChildren = toc?.children[0]?.children;
-              if (!childrenOfChildren?.length) return null;
-            } catch (e) {}
-
-            return {
-              type: "element",
-              tagName: "section",
-              properties: {
-                className: toc_styles.toc__wrapper,
-              },
-              children: [
-                {
-                  type: "element",
-                  tagName: "div",
-                  properties: {
-                    className: toc_styles.toc__inner,
-                  },
-                  children: [
-                    {
-                      type: "element",
-                      tagName: "input",
-                      properties: {
-                        id: "toc",
-                        type: "checkbox",
-                        className: toc_styles.toc__hidden,
-                      },
-                    },
-                    {
-                      type: "element",
-                      tagName: "label",
-                      properties: {
-                        htmlFor: "toc",
-                        className: toc_styles.toc__header,
-                      },
-                      children: [
-                        {
-                          type: "element",
-                          tagName: "h4",
-                          properties: {
-                            className: toc_styles.toc__label,
-                          },
-                          children: [
-                            {
-                              type: "text",
-                              value: "Table of Contents",
-                            },
-                          ],
-                        },
-                        {
-                          type: "element",
-                          tagName: "svg",
-                          properties: {
-                            className: toc_styles.toc__caret,
-                            width: "20",
-                            height: "20",
-                            viewBox: "0 0 20 20",
-                            fill: "none",
-                            xmlns: "http://www.w3.org/2000/svg",
-                          },
-                          children: [
-                            {
-                              type: "element",
-                              tagName: "path",
-                              properties: {
-                                d: "M7 4L13 10L7 16",
-                                strokeWidth: "3",
-                                strokeLinecap: "round",
-                              },
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                    toc,
-                  ],
-                },
-              ],
-            }
-          },
-        }],
         [rehypePrism, {
           /* Show line numbers in
            * syntax-highlighted code blocks
@@ -177,21 +110,42 @@ const getData = async (slug) => {
     parseFrontmatter: false
   });
 
+  /* Generate ToC data */
+  await serialize(data_json.content, {
+    mdxOptions: {
+      rehypePlugins: [
+        rehypeSlug,
+        [rehypeExtractHeadings, {
+          headings
+        }]
+      ],
+      development: process.env.NODE_ENV !== 'production'
+    },
+    parseFrontmatter: false
+  });
+
   return {
     meta,
+    headings,
     content
   }
 }
 
 export default async function Article (props) {
-  /* Get article content and its meta */
-  const { meta, content } = await getData(props.slug);
+  /* Get article meta, toc headings, and content */
+  const {
+    meta,
+    headings,
+    content
+  } = await getData(props.slug);
 
+  /* Add article_head */
   let article_head = <ArticleHead meta={ meta } />;
   if (props.head === false) {
     article_head = <></>;
   }
 
+  /* Add "LIVE" button */
   let live_button = (
     <Link href="/live">
       <Button type={ 'live' }>
@@ -208,30 +162,8 @@ export default async function Article (props) {
       <main className={ article_styles.main }>
         <article className={ article_styles.article_wrapper }>
           { article_head }
-          <div className={ article_styles.article__likes }>
-            { parseInt(meta.likes).toString() }
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-opacity="0.8"
-                stroke-width="2"
-                d="M7 8h10M7 11h10M7 14h4m-8 4V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7.667a2 2 0 0 0-1.2.4L3 21v-3z"
-              />
-            </svg>
-          </div>
-          <div className={ article_styles.article__body }>
-            <div className={ article_styles.article__description }>
-              <Mdx content={ content } />
-            </div>
-          </div>
+          <ArticleMeta meta={ meta } headings={ headings } />
+          <Mdx content={ content } />
         </article>
       </main>
       <aside className={ article_styles.aside }>

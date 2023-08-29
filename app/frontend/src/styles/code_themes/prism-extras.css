@@ -12,6 +12,7 @@ pre {
 }
 .remark-code-title {
   text-align: left;
+  overflow-x: auto;
   border-radius: 7.5px 7.5px 0 0;
   padding: 10px 1em 10px 1em;
   line-height: 30px;

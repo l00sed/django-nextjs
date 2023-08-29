@@ -1,4 +1,5 @@
-import tag_styles     from '../styles/Tags.module.scss';
+import tag_styles from '../styles/Tags.module.scss';
+import Link from 'next/link';
 
 export function Tag (props) {
   const tagBg = tagSlug => {
@@ -29,7 +30,7 @@ export function Tag (props) {
   }
 
   return (
-    <a
+    <Link
       key={ props.key }
       className={ `${ tag_styles.tag } ${ tagBg(props.slug) }` }
       href={ `/tags/${ props.slug }` }
@@ -43,21 +44,21 @@ export function Tag (props) {
         >
           <path
             fill="currentColor"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="M8 4v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4V8h-4V4h-2v4h-4V4H8Zm6 10v-4h-4v4h4Z"
-            clip-rule="evenodd"
+            clipRule="evenodd"
           />
         </svg>
       </span>
       <span>{ props.tag }</span>
-    </a>
+    </Link>
   )
 }
 
 export function Tags({ tags }) {
   if (tags) {
     return (
-      <div className={ tag_styles.tags }>
+      <div id="tags" className={ tag_styles.tags }>
         {
           tags.map((t, i) => {
             return (

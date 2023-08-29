@@ -6,7 +6,7 @@ import { Tags } from '../components/tag';
 import styles from '../styles/Card.module.scss';
 import dateformat from 'dateformat';
 
-export default function Card({ element, index }) {
+export default function Card({ element, truncate, index }) {
   const above_the_fold = 3;
 
   const loading = (index) => {
@@ -58,12 +58,18 @@ export default function Card({ element, index }) {
   }
 
   const parseDescription = (element) => {
-    var classes = styles.card__description;
+    let classes = styles.card__description;
     if (element.unbound) {
       classes += ` ${styles.card__cropped}`;
     }
+    let truncateDesc = false;
+    if (truncate) {
+      truncateDesc = truncate;
+    }
     return (
-      <div className={ classes }>{ Parse(element.description) }</div>
+      <div className={ classes }>
+        { Parse(element.description, truncateDesc) }
+      </div>
     )
   }
 

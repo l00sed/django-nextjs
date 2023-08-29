@@ -8,9 +8,17 @@ export default function ArticleHead(props) {
   const datePublished = (meta) => {
     let date = "";
     if (meta.updated_at) {
-      date = dateformat(new Date(meta.updated_at), "h:MMtt | mmmm, dS yyyy").toString();
+      date = dateformat(new Date(meta.updated_at), "mmmm, dS yyyy").toString();
     }
     return date
+  }
+
+  const timePublished = (meta) => {
+    let time = "";
+    if (meta.updated_at) {
+      time = dateformat(new Date(meta.updated_at), "h:MMtt").toString();
+    }
+    return time
   }
 
   return (
@@ -19,6 +27,8 @@ export default function ArticleHead(props) {
         <h1 className={ article_styles.article__title }>{ parseTitle(props.meta) }</h1>
         <div className={ article_styles.tags__wrapper }>
           <div className={ article_styles.article__meta }>
+            <span className={ article_styles.article__time }>{ timePublished(props.meta) }</span>
+            <span> | </span>
             <span className={ article_styles.article__date }>{ datePublished(props.meta) }</span>
             <span className={ article_styles.article__author }>{ props.meta.author }</span>
           </div>

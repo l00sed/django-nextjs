@@ -62,9 +62,9 @@ $l-highlight-1-rgb: rgba($l-highlight-1, 0.95);
 
 $l-main-box-shadow: rgba(0,0,0,0.3);
 
-$l-toc-header-bg: rgba(255,255,255,0.5);
+$l-toc-header-bg: rgba(255,255,255,0.6);
 $l-toc-header-shadow: rgba(0,0,0,0.15);
-$l-toc-nav-bg: rgba(0,0,0,0.05);
+$l-toc-nav-bg: rgba(255,255,255,0.75);
 $l-toc-shadow: rgba(0,0,0,0.5);
 $l-toc-hr: rgba(0,0,0,0.075);
 $l-anchor-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='%23b61115' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M8 4v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4V8h-4V4h-2v4h-4V4H8Zm6 10v-4h-4v4h4Z' clip-rule='evenodd'/%3E%3C/svg%3E");
@@ -170,9 +170,9 @@ $d-main-box-shadow: rgba(255,255,255,0.2);
 $d-highlight-1: #f93e17;
 $d-highlight-1-rgb: rgba($d-highlight-1,0.95);
 
-$d-toc-header-bg: rgba(255,255,255,0.05);
+$d-toc-header-bg: rgba(0,0,0,0.2);
 $d-toc-header-shadow: rgba(0,0,0,1);
-$d-toc-nav-bg: rgba(0,0,0,0.5);
+$d-toc-nav-bg: rgba(0,0,0,0.3);
 $d-toc-shadow: rgba(255,255,255,0.5);
 $d-toc-hr: rgba(255,255,255,0.05);
 $d-anchor-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='%23f93e17' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M8 4v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4V8h-4V4h-2v4h-4V4H8Zm6 10v-4h-4v4h4Z' clip-rule='evenodd'/%3E%3C/svg%3E");
