@@ -3,12 +3,56 @@
 import article_styles from '../styles/ArticleMeta.module.scss';
 import { toggleOverlay } from './message_overlay';
 import Toc from './toc';
+import csrfToken from '../utils/csrf_token';
+import ResponseError from '../utils/error_handling';
+import HOST_URL from '../utils/api_server';
 
 export default function ArticleMeta({ meta, headings }) {
+  const parseLikes = likes_count => {
+    if (likes_count > 999) {
+      likes_count = `${likes_count.toString().slice(0, -3)}k`;
+    }
+    return likes_count;
+  }
+
+  // "Like" button event handler
+  const handleLike = async e => {
+    e.preventDefault();
+    const header_like = {
+      method: "PUT",
+      supportHeaderParams: true,
+      headers: {
+        'Accept': 'application/json;encoding=utf-8',
+        'Content-Type': 'application/json;encoding=utf-8',
+        'X-CSRFToken': csrfToken()
+      },
+      body: JSON.stringify({ likes: 1 })
+    }
+    const like_promise = await fetch(`${HOST_URL()}/api/articles/like/${meta.slug}`, header_like);
+    /* Empty array to receive JSON response */
+    let like_response = [];
+    if (like_promise.ok) {
+      like_response = await like_promise.json();
+      let like = document.querySelector(`.${article_styles.likes__count}`).dataset.likeCount ?? 0
+      document.querySelector(`.${article_styles.likes__count}`).dataset.likeCount = parseInt(like) + 1;
+      document.querySelector(`.${article_styles.likes__count}`).innerText = parseLikes(parseInt(like) + 1);
+    } else {
+      /* Provide error log if endpoint is having issues. */
+      throw new ResponseError( 'Could not like article.', like_promise);
+    }
+  }
+
   return (
     <div className={ article_styles.meta__row }>
-      <div className={ article_styles.article__likes }>
-        <span>{ parseInt(meta.likes).toString() }</span>
+      <div
+        className={ article_styles.article__likes }
+        onClick={ (e) => { handleLike(e) } }
+        onKeyDown={ (e) => { handleLike(e) } }
+      >
+        <span
+          className={ article_styles.likes__count }
+          data-like-count={ parseInt(meta.likes).toString() }
+        >{ parseInt(meta.likes).toString() }</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"

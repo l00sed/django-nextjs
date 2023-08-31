@@ -58,6 +58,10 @@
 
     span {
       padding-top: 2px;
+
+      &.likes__count {
+        cursor: pointer;
+      }
     }
 
     span, svg {

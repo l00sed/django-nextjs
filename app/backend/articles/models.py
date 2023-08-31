@@ -21,7 +21,7 @@ class Article(models.Model):
     author = models.CharField(max_length=200)
     description = models.CharField(max_length=1024)
     slug = models.SlugField(max_length=255)
-    likes = models.IntegerField(default=0)
+    likes = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=False)
     updated_at = models.DateTimeField(auto_now=False)
     featured_image = models.ImageField(

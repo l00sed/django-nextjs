@@ -2,6 +2,7 @@ from django.urls import path
 from .views import (
     ArticleListAPIView,
     ArticleDetailAPIView,
+    ArticleLikesAPIView,
     SubscribeToArticleAPIView
 )
 
@@ -12,8 +13,13 @@ urlpatterns = [
         name='articles'
     ),
     path(
-        'articles/<str:slug>',
+        'articles/<slug:slug>',
         ArticleDetailAPIView.as_view(),
+        name='articles'
+    ),
+    path(
+        'articles/like/<slug:slug>',
+        ArticleLikesAPIView.as_view(),
         name='articles'
     ),
     path(

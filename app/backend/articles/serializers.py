@@ -17,6 +17,12 @@ class ArticleSerializer(TagSerializer, serializers.ModelSerializer):
         fields = "__all__"
 
 
+class ArticleLikesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = ['likes']
+
+
 class SubscriberSerializer(serializers.ModelSerializer):
 
     class Meta:

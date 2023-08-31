@@ -32,7 +32,7 @@ urlpatterns = [
         name='comments'
     ),
     path(
-        'comments/<str:slug>/parents',
+        'comments/<slug:slug>/parents',
         ParentCommentsByArticleAPIView.as_view(),
         name='comments'
     ),
@@ -47,7 +47,7 @@ urlpatterns = [
         name='comments'
     ),
     path(
-        'comment/<str:slug>/form',
+        'comment/<slug:slug>/form',
         CommentFormAPIView.as_view(),
         name='comments'
     )
