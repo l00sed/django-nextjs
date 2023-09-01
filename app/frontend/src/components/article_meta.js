@@ -1,6 +1,7 @@
 "use client";
 
 import article_styles from '../styles/ArticleMeta.module.scss';
+import Cookies from 'js-cookie';
 import { toggleOverlay } from './message_overlay';
 import Toc from './toc';
 import csrfToken from '../utils/csrf_token';
@@ -33,9 +34,11 @@ export default function ArticleMeta({ meta, headings }) {
     let like_response = [];
     if (like_promise.ok) {
       like_response = await like_promise.json();
-      let like = document.querySelector(`.${article_styles.likes__count}`).dataset.likeCount ?? 0
-      document.querySelector(`.${article_styles.likes__count}`).dataset.likeCount = parseInt(like) + 1;
-      document.querySelector(`.${article_styles.likes__count}`).innerText = parseLikes(parseInt(like) + 1);
+      if (like_response.indexOf('ERROR') < 0) {
+        let like = document.querySelector(`.${article_styles.likes__count}`).dataset.likeCount ?? 0
+        document.querySelector(`.${article_styles.likes__count}`).dataset.likeCount = parseInt(like) + 1;
+        document.querySelector(`.${article_styles.likes__count}`).innerText = parseLikes(parseInt(like) + 1);
+      }
     } else {
       /* Provide error log if endpoint is having issues. */
       throw new ResponseError( 'Could not like article.', like_promise);

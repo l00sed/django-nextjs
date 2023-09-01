@@ -3,6 +3,7 @@ from rest_framework import generics, response, status
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from articles.models import Article
+from backend.tools import get_client_ip
 from .serializers import (
     CommentFormSerializer,
     CommentSerializer,
@@ -71,20 +72,30 @@ class CommentUpvoteAPIView(generics.UpdateAPIView):
         """put.
         :param request:
         """
-
-        if request.method == "PUT":
-            comment = Comment.objects.filter(cid=cid).first()
-            if comment:
-                # print(comment.upvotes)
-                comment.upvotes = comment.upvotes + 1
-                # print(comment.upvotes)
-                comment.save()
-
-                return response.Response('Updated upvotes count')
+        # Get requester's IP address
+        ip = get_client_ip(request)
+        # Set a unique cookie for this article and the IP address
+        cookie = request.COOKIES.get(f"{cid}-upvote-{ip}")
+        if cookie is None:
+            # Cookie is not set and request is PUT, update article likes count
+            if request.method == "PUT":
+                comment = Comment.objects.filter(cid=cid).first()
+                if comment:
+                    # print(comment.upvotes)
+                    comment.upvotes = comment.upvotes + 1
+                    # print(comment.upvotes)
+                    comment.save()
+                    # Set the cookie so that the same IP can't upvote the same comment again
+                    # (or until cookies are cleared)
+                    res = response.Response('Updated upvotes count')
+                    res.set_cookie(f"{cid}-upvote-{ip}")
+                    return res
+                else:
+                    return response.Response(f'ERROR: No comment with id ({cid}) found')
             else:
-                return response.Response(f'No comment with id ({cid}) found')
+                return response.Response('ERROR: Request type not accepted')
         else:
-            return response.Response('Request type not accepted')
+            return response.Response('ERROR: IP already upvoted this comment.')
 
 
 class CommentDownvoteAPIView(generics.UpdateAPIView):
@@ -95,20 +106,30 @@ class CommentDownvoteAPIView(generics.UpdateAPIView):
         """put.
         :param request:
         """
-
-        if request.method == "PUT":
-            comment = Comment.objects.filter(cid=cid).first()
-            if comment:
-                # print(comment.downvotes)
-                comment.downvotes = comment.downvotes + 1
-                # print(comment.downvotes)
-                comment.save()
-
-                return response.Response('Updated downvotes count')
+        # Get requester's IP address
+        ip = get_client_ip(request)
+        # Set a unique cookie for this article and the IP address
+        cookie = request.COOKIES.get(f"{cid}-downvote-{ip}")
+        if cookie is None:
+            # Cookie is not set and request is PUT, update article likes count
+            if request.method == "PUT":
+                comment = Comment.objects.filter(cid=cid).first()
+                if comment:
+                    # print(comment.downvotes)
+                    comment.downvotes = comment.downvotes + 1
+                    # print(comment.downvotes)
+                    comment.save()
+                    # Set the cookie so that the same IP can't downvote the same comment again
+                    # (or until cookies are cleared)
+                    res = response.Response('Updated downvotes count')
+                    res.set_cookie(f"{cid}-downvote-{ip}")
+                    return res
+                else:
+                    return response.Response(f'ERROR: No comment with id ({cid}) found')
             else:
-                return response.Response(f'No comment with id ({cid}) found')
+                return response.Response('ERROR: Request type not accepted')
         else:
-            return response.Response('Request type not accepted')
+            return response.Response('ERROR: IP already downvoted this comment')
 
 
 class ParentCommentsByArticleAPIView(generics.GenericAPIView):

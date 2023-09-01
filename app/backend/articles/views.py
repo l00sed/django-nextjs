@@ -5,6 +5,7 @@ from .serializers import (
     SubscriberSerializer,
     ArticleLikesSerializer
 )
+from backend.tools import get_client_ip
 
 
 class ArticleListAPIView(generics.ListAPIView):
@@ -43,18 +44,28 @@ class ArticleLikesAPIView(generics.UpdateAPIView):
         """put.
         :param request:
         """
-
-        if request.method == "PUT":
-            article = Article.objects.filter(slug=slug).first()
-            if article:
-                article.likes += 1
-                article.save()
-
-                return response.Response('Updated article likes count')
+        # Get requester's IP address
+        ip = get_client_ip(request)
+        # Set a unique cookie for this article and the IP address
+        cookie = request.COOKIES.get(f"{slug}-like-{ip}")
+        if cookie is None:
+            # Cookie is not set and request is PUT, update article likes count
+            if request.method == "PUT":
+                article = Article.objects.filter(slug=slug).first()
+                if article:
+                    article.likes += 1
+                    article.save()
+                    # Set the cookie so that the same IP can't like the same article again
+                    # (or until cookies are cleared)
+                    res = response.Response('Updated article likes count')
+                    res.set_cookie(f"{slug}-like-{ip}")
+                    return res
+                else:
+                    return response.Response(f'ERROR: No article with slug ({slug}) found')
             else:
-                return response.Response(f'No article with slug ({slug}) found')
+                return response.Response('ERROR: Request type not accepted')
         else:
-            return response.Response('Request type not accepted')
+            return response.Response('ERROR: IP already liked this article.')
 
 
 class SubscribeToArticleAPIView(generics.CreateAPIView):

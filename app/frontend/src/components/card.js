@@ -74,8 +74,12 @@ export default function Card({ element, truncate, index }) {
   }
 
   return (
-    (<Link key={ element.id } href={ parseUrl(element.slug) } target={ newWindow(element.slug) }>
-      <div className={ styles.card }>
+    (<div className={ styles.card }>
+      <Link
+        key={ element.id }
+        href={ parseUrl(element.slug) }
+        target={ newWindow(element.slug) }
+      >
         <div className={ styles.card__thumbnail_wrapper }>
           <Image
             alt={ element.image_alt }
@@ -99,9 +103,11 @@ export default function Card({ element, truncate, index }) {
         </div>
         <div className={ styles.card__body }>
           { parseDescription(element) }
-          <Tags tags={ element.tags } />
         </div>
+      </Link>
+      <div className={ styles.card__tags }>
+        <Tags tags={ element.tags } />
       </div>
-    </Link>)
+    </div>)
   );
 }

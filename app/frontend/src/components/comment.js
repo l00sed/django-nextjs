@@ -167,9 +167,11 @@ export default function Comment(props) {
     let upvote_response = [];
     if (upvote_promise.ok) {
       upvote_response = await upvote_promise.json();
-      let vote = parseInt(document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).dataset.voteCount)
-      document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).dataset.voteCount = vote + 1;
-      document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText = parseVotes(vote + 1);
+      if (upvote_response.indexOf('ERROR') < 0) {
+        let vote = parseInt(document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).dataset.voteCount)
+        document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).dataset.voteCount = vote + 1;
+        document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText = parseVotes(vote + 1);
+      }
     } else {
       /* Provide error log if endpoint is having issues. */
       throw new ResponseError( 'Could not upvote comment.', upvote_promise);
@@ -195,9 +197,11 @@ export default function Comment(props) {
     let downvote_response = [];
     if (downvote_promise.ok) {
       downvote_response = await downvote_promise.json();
-      let vote = parseInt(document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).dataset.voteCount)
-      document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).dataset.voteCount = vote - 1;
-      document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText = parseVotes(vote - 1);
+      if (downvote_response.indexOf('ERROR') < 0) {
+        let vote = parseInt(document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).dataset.voteCount)
+        document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).dataset.voteCount = vote - 1;
+        document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText = parseVotes(vote - 1);
+      }
     } else {
       /* Provide error log if endpoint is having issues. */
       throw new ResponseError('Could not downvote comment through the API.', downvote_promise);
