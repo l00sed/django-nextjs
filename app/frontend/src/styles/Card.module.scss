@@ -22,6 +22,7 @@
 .card {
   --card-radius: 10px;
   border-radius: var(--card-radius);
+  min-width: min(300px, 100vw);
   width: min(400px, 100vw);
   position: relative;
   display: inline-block;
