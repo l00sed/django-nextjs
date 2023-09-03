@@ -11,7 +11,7 @@ import Title from '../../components/title';
 import Donate from '../../components/donate';
 import Article from '../../components/article';
 import Footer from '../../components/footer';
-import Share from '../../components/share';
+import ShareOverlay from '../../components/share_overlay';
 
 
 /* Default /[slug] page is a "Blog" page */
@@ -27,7 +27,7 @@ export default function BlogPage({ params }) {
       <div id="main_wrapper" className={ page_styles.main_wrapper }>
         <Title />
         <Donate />
-        <Share />
+        <ShareOverlay />
         <Article slug={ params.slug } head={ head } />
         <Footer />
       </div>

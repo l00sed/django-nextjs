@@ -1,4 +1,3 @@
-import json
 from rest_framework import generics, response, status
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -88,7 +87,11 @@ class CommentUpvoteAPIView(generics.UpdateAPIView):
                     # Set the cookie so that the same IP can't upvote the same comment again
                     # (or until cookies are cleared)
                     res = response.Response('Updated upvotes count')
-                    res.set_cookie(f"{cid}-upvote-{ip}")
+                    res.set_cookie(
+                        f"{cid}-upvote-{ip}",
+                        samesite='Strict',
+                        secure=True
+                    )
                     return res
                 else:
                     return response.Response(f'ERROR: No comment with id ({cid}) found')
@@ -122,7 +125,11 @@ class CommentDownvoteAPIView(generics.UpdateAPIView):
                     # Set the cookie so that the same IP can't downvote the same comment again
                     # (or until cookies are cleared)
                     res = response.Response('Updated downvotes count')
-                    res.set_cookie(f"{cid}-downvote-{ip}")
+                    res.set_cookie(
+                        f"{cid}-downvote-{ip}",
+                        samesite='Strict',
+                        secure=True
+                    )
                     return res
                 else:
                     return response.Response(f'ERROR: No comment with id ({cid}) found')

@@ -82,4 +82,22 @@
       --off-1: 0;
     }
   }
+
+  .article__likes,
+  .article__comments {
+    svg {
+      position: relative;
+      top: 1px;
+    }
+  }
+
+  .liked {
+    svg {
+      color: var(--loosed-highlight-1);
+
+      path {
+        opacity: 1;
+      }
+    }
+  }
 }

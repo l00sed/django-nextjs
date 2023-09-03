@@ -199,4 +199,8 @@ nav.toc__block {
 
 .toc__sub_heading {
   color: var(--main-text-color);
+
+  &:hover li {
+    color: var(--loosed-highlight-1);
+  }
 }

@@ -145,6 +145,16 @@ export default async function Article (props) {
     article_head = <></>;
   }
 
+  /* Add article_meta */
+  let article_meta = <ArticleMeta meta={ meta } headings={ headings } />;
+  let live_meta = <></>;
+  if (props.slug === 'live') {
+    live_meta = article_meta;
+  }
+  if (props.head === false) {
+    article_meta = <></>;
+  }
+
   /* Add "LIVE" button */
   let live_button = (
     <Link href="/live">
@@ -162,8 +172,9 @@ export default async function Article (props) {
       <main className={ article_styles.main }>
         <article className={ article_styles.article_wrapper }>
           { article_head }
-          <ArticleMeta meta={ meta } headings={ headings } />
+          { article_meta }
           <Mdx content={ content } />
+          { live_meta }
         </article>
       </main>
       <aside className={ article_styles.aside }>

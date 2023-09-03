@@ -148,6 +148,10 @@ export default function CommentForm(props) {
             });
             setCommentsData(comments);
             setLoadingComments(false);
+            // Set article comment count button.
+            waitForElem('#comment_count').then(elem => {
+              elem.innerText = comments.length;
+            });
             console.log(commentsData);
           } else {
             /* Additional error logging for easier debugging. */

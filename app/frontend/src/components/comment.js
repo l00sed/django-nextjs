@@ -9,6 +9,7 @@ import ResponseError from '../utils/error_handling';
 import HOST_URL from '../utils/api_server';
 /* Styles */
 import comment_styles from '../styles/Comment.module.scss'
+import { waitForElem } from '../lib/wait_for_elem';
 
 String.prototype.replaceArray = function(find, replace) {
   let replaceString = this;
@@ -168,9 +169,11 @@ export default function Comment(props) {
     if (upvote_promise.ok) {
       upvote_response = await upvote_promise.json();
       if (upvote_response.indexOf('ERROR') < 0) {
-        let vote = parseInt(document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).dataset.voteCount)
-        document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).dataset.voteCount = vote + 1;
-        document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText = parseVotes(vote + 1);
+        waitForElem(`[id="${ id.toString() }"]`).then(elem => {
+          let vote = parseInt(elem.querySelector(`.${comment_styles.count_text}`).dataset.voteCount)
+          elem.querySelector(`.${comment_styles.count_text}`).dataset.voteCount = vote + 1;
+          elem.querySelector(`.${comment_styles.count_text}`).innerText = parseVotes(vote + 1);
+        });
       }
     } else {
       /* Provide error log if endpoint is having issues. */
@@ -198,9 +201,13 @@ export default function Comment(props) {
     if (downvote_promise.ok) {
       downvote_response = await downvote_promise.json();
       if (downvote_response.indexOf('ERROR') < 0) {
-        let vote = parseInt(document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).dataset.voteCount)
-        document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).dataset.voteCount = vote - 1;
-        document.getElementById(id.toString()).querySelector(`.${comment_styles.count_text}`).innerText = parseVotes(vote - 1);
+        /* Using numeric ids requires special handling. See:
+         * https://stackoverflow.com/questions/20306204/using-queryselector-with-ids-that-are-numbers  */
+        waitForElem(`[id="${ id.toString() }"]`).then(elem => {
+          let vote = parseInt(elem.querySelector(`.${comment_styles.count_text}`).dataset.voteCount)
+          elem.querySelector(`.${comment_styles.count_text}`).dataset.voteCount = vote - 1;
+          elem.querySelector(`.${comment_styles.count_text}`).innerText = parseVotes(vote - 1);
+        });
       }
     } else {
       /* Provide error log if endpoint is having issues. */

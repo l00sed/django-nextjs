@@ -7,7 +7,7 @@ export default function Toc (props) {
         <input id="toc" type="checkbox" className={ toc_styles.toc__hidden } />
         <div className={ toc_styles.toc__wrapper }>
           <div className={ toc_styles.toc__inner }>
-            <label for="toc" className={ toc_styles.toc__header }>
+            <label htmlFor="toc" className={ toc_styles.toc__header }>
               <h4 className={ toc_styles.toc__label }>Table of Contents</h4>
               <svg
                 className={ toc_styles.toc__caret }
@@ -31,15 +31,15 @@ export default function Toc (props) {
                       styles = toc_styles.toc__h3;
                     }
                     return (
-                      <li
+                      <a
                         key={ index }
-                        className={ styles }
+                        href={ `#${heading.id}` }
+                        className={ toc_styles.toc__sub_heading }
                       >
-                        <a
-                          href={ `#${heading.id}` }
-                          className={ toc_styles.toc__sub_heading }
-                        >{ heading.title }</a>
-                      </li>
+                        <li
+                          className={ styles }
+                        >{ heading.title }</li>
+                      </a>
                     )
                   })
                 }

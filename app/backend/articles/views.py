@@ -55,13 +55,20 @@ class ArticleLikesAPIView(generics.UpdateAPIView):
                 if article:
                     article.likes += 1
                     article.save()
-                    # Set the cookie so that the same IP can't like the same article again
+                    # Set the cookie so that the same IP
+                    # can't like the same article again
                     # (or until cookies are cleared)
                     res = response.Response('Updated article likes count')
-                    res.set_cookie(f"{slug}-like-{ip}")
+                    res.set_cookie(
+                        f"{slug}-like-{ip}",
+                        samesite='Strict',
+                        secure=True
+                    )
                     return res
                 else:
-                    return response.Response(f'ERROR: No article with slug ({slug}) found')
+                    return response.Response(
+                        f'ERROR: No article with slug ({slug}) found'
+                    )
             else:
                 return response.Response('ERROR: Request type not accepted')
         else:

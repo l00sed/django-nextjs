@@ -9,6 +9,7 @@ import CommentForm from './comment_form';
 import comment_styles from '../styles/Comment.module.scss';
 import ResponseError from '../utils/error_handling';
 import HOST_URL from '../utils/api_server';
+import { waitForElem } from '../lib/wait_for_elem';
 
 /* Create data context for comment form an comments */
 export const CommentsContext = createContext('comment_data');
@@ -77,7 +78,9 @@ export default function Comments(props) {
             setCommentsData(comments);
             setLoadingComments(false);
             // Set article comment count button.
-            document.getElementById('comment_count').innerText = comments.length;
+            waitForElem('#comment_count').then(elem => {
+              elem.innerText = comments.length;
+            });
             console.log(commentsData);
           } else {
             /* Additional error logging for easier debugging. */
