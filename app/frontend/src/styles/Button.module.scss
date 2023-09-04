@@ -14,13 +14,6 @@
     display: inline-block;
   }
 
-  &::after {
-    content: var(--live-button-icon);
-    display: inline-block;
-    height: 20px;
-    width: 20px;
-  }
-
   svg {
     position: relative;
     height: 100%;
@@ -40,6 +33,14 @@
   width: calc(100% - 4em);
   margin: 0 2em 1em 2em;
 
+  svg {
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    margin-left: auto;
+    margin-right: 0;
+  }
+
   @media screen and (min-width: 576px) {
     width: calc(100% - 6em);
     margin: 0 3em 1em 3em;
@@ -55,5 +56,20 @@
   .live__link {
     width: calc(100% - 3em);
     margin-left: 0;
+  }
+}
+
+.live__menu {
+  .live__link {
+    width: 100%;
+    margin: 2em 0 1em 0;
+  }
+}
+
+.share__button {
+  &:hover {
+    .button__main {
+      color: var(--loosed-highlight-1);
+    }
   }
 }

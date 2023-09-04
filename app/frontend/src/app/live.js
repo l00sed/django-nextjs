@@ -23,7 +23,7 @@ export default function LivePage({ params }) {
       <div id="main_wrapper" className={ page_styles.main_wrapper }>
         <Title />
         <Donate />
-        <ShareOverlay />
+        <ShareOverlay slug={ params.slug } />
         <Article
           slug={ params.slug }
           head={ false }

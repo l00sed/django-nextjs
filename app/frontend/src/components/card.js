@@ -105,9 +105,13 @@ export default function Card({ element, truncate, index }) {
           { parseDescription(element) }
         </div>
       </Link>
-      <div className={ styles.card__tags }>
-        <Tags tags={ element.tags } />
-      </div>
+      {
+        element?.tags?.length ?
+          <div className={ styles.card__tags }>
+            <Tags tags={ element.tags } />
+          </div>
+        : <></>
+      }
     </div>)
   );
 }
