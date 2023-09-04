@@ -15,23 +15,7 @@ import ShareOverlay from '../../components/share_overlay';
 
 
 /* Default /[slug] page is a "Blog" page */
-export default function BlogPage({ params }) {
-  /* Default article */
-  let article = <Article slug={ params.slug } head={ true } meta={ true } />
-  /* Different page settings for "live" page */
-  if (params.slug === 'live') {
-    article =
-      <Article
-        slug={ params.slug }
-        head={ false }
-        meta={ true }
-        show={ ['likes', 'comments', 'share'] }
-        style={{ marginBottom: 0, paddingBottom: 0 }}
-        metaPosition='after'
-        disableLiveButton
-      />
-  }
-
+export default function LivePage({ params }) {
   return (
     <div className={ page_styles.next_wrapper }>
       <MenuOverlay />
@@ -40,7 +24,13 @@ export default function BlogPage({ params }) {
         <Title />
         <Donate />
         <ShareOverlay />
-        { article }
+        <Article
+          slug={ params.slug }
+          head={ false }
+          meta={ true }
+          metaPosition={ 'after' }
+          disableLiveButton
+        />
         <Footer />
       </div>
     </div>

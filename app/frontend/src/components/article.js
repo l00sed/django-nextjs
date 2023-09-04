@@ -140,48 +140,52 @@ export default async function Article (props) {
   } = await getData(props.slug);
 
   /* Add article_head */
-  let article_head = <ArticleHead meta={ meta } />;
-  if (props.head === false) {
-    article_head = <></>;
+  let article_head = <></>;
+  if (props.head) {
+    article_head = <ArticleHead meta={ meta } />;
   }
 
   /* Add article_meta */
-  let article_meta = <ArticleMeta meta={ meta } headings={ headings } />;
-  let live_meta = <></>;
-  if (props.slug === 'live') {
-    live_meta = article_meta;
+  let article_meta = <></>;
+  if (props.meta) {
+    article_meta = <ArticleMeta meta={ meta } headings={ headings } show={ props.show } />
   }
-  if (props.head === false) {
-    article_meta = <></>;
+
+  let metaPosition = 'before';
+  if ('metaPosition' in props) {
+    metaPosition = props.metaPosition;
   }
 
   /* Add "LIVE" button */
   let live_button = (
     <Link href="/live">
-      <Button type={ 'live' }>
-        live
-      </Button>
+      <Button type={ 'live' }>live</Button>
     </Link>
   );
-  if (props.slug === 'live') {
+  if (props.disableLiveButton) {
     live_button = <></>;
+  }
+
+  let comments = <Comments slug={ props.slug } />;
+  if (props.disableComments) {
+    comments = <></>;
   }
 
   return (
     <div className={ article_styles.main_wrapper }>
-      <main className={ article_styles.main }>
+      <main className={ article_styles.main } style={ props.style }>
         <article className={ article_styles.article_wrapper }>
           { article_head }
-          { article_meta }
+          { metaPosition === 'before' ? article_meta : <></> }
           <Mdx content={ content } />
-          { live_meta }
+          { metaPosition === 'after'  ? article_meta : <></> }
         </article>
       </main>
       <aside className={ article_styles.aside }>
         <div className={ article_styles.sticky }>
           <div className={ article_styles.scroll__y }>
             { live_button }
-            <Comments slug={ props.slug } />
+            { comments }
           </div>
         </div>
       </aside>

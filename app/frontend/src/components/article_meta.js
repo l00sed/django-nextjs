@@ -4,7 +4,11 @@ import Likes from './likes';
 import Share from './share';
 import CommentsCount from './comments_count';
 
-export default function ArticleMeta({ meta, headings, show=['likes', 'comments', 'share', 'toc'] }) {
+export default function ArticleMeta({
+  meta,
+  headings,
+  show=['likes', 'comments', 'share', 'toc']
+}) {
   let likes = <Likes meta={ meta } />;
   if (show.indexOf('likes') < 0 ) {
     likes = <></>;
