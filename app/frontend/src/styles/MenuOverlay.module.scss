@@ -96,6 +96,9 @@ button.close_menu:focus svg {
   font-size: var(--medium);
   cursor: pointer;
 }
+.menu_text a:last-child {
+  margin-top: auto;
+}
 
 .menu_text a:hover p,
 .menu_text a:focus p {
@@ -107,4 +110,3 @@ button.close_menu:focus svg {
   display: inline-flex;
   justify-content: space-between;
 }
-

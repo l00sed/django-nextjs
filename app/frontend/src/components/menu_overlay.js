@@ -16,7 +16,7 @@ export const toggleMenu = (e) => {
   }
 }
 
-export default function MenuOverlay() {
+export default function MenuOverlay(props) {
   return (
     <>
       <input type="checkbox" id="menu-overlay-input" className={ menu_overlay_styles.menu_checkbox } hidden />
@@ -43,14 +43,19 @@ export default function MenuOverlay() {
           <Link href="mailto:dan@l-o-o-s-e-d.net">
             <p>Contact</p>
           </Link>
-          <Link
-            className={ button_styles.live__menu }
-            href="/live"
-          >
-            <Button
-              type={ 'live' }
-            >live</Button>
-          </Link>
+          {
+            props.slug === 'live' ?
+            <></>
+            :
+            <Link
+              className={ button_styles.live__menu }
+              href="/live"
+            >
+              <Button
+                type={ 'live' }
+              >live</Button>
+            </Link>
+          }
         </div>
       </div>
       <label htmlFor="menu-overlay-input" className={ menu_overlay_styles.close_area } />

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Parse from '../utils/parser';
 import image_styles from '../styles/ImageWrapper.module.scss';
 
 export default function ImageWrapper({ src, alt, caption, width, height, visible=true }) {
@@ -30,9 +31,9 @@ export function Caption({ text, width="100%", visible=true, type=false }) {
 
     switch (type) {
       case 'figure':
-        return (<figcaption className={ image_styles.caption } style={ styles }>{ text }</figcaption>)
+        return (<figcaption className={ image_styles.caption } style={ styles }>{ Parse(text) }</figcaption>)
       default:
-        return (<span className={ image_styles.caption } style={ styles }>{ text }</span>)
+        return (<span className={ image_styles.caption } style={ styles }>{ Parse(text) }</span>)
     }
   } else {
     return ( <></> )

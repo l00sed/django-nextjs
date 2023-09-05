@@ -6,7 +6,8 @@
   position: sticky;
   justify-content: flex-end;
   padding-left: 4vw;
-  gap: 0.75em;
+  column-gap: 0.5em;
+  row-gap: 0.75em;
   width: calc(100% - 4em);
   margin: 0 2em 3em 2em;
 
@@ -14,7 +15,7 @@
     width: calc(100% - 6em);
     margin: 0 3em 3em 3em;
     padding-left: 0;
-    column-gap: 1em;
+    column-gap: 0.5em;
     row-gap: 1em;
     flex-wrap: wrap;
   }
@@ -25,28 +26,22 @@
     user-select: none;
     backdrop-filter: blur(3px);
     width: fit-content;
-    height: 40px;
-    gap: 0.5em;
+    height: 38px;
+    column-gap: 0.25em;
     color: var(--loosed-black);
     font-size: var(--normal);
     cursor: pointer;
     display: inline-flex;
     flex-direction: row;
-    padding: 0.125em 1em;
-    background-color: var(--toc-header-bg);
+    padding: 0.125em 0.75em;
+    background-color: var(--meta-header-bg);
     border: 1px solid var(--main-box-shadow);
     box-shadow: 0 var(--off-1) 0 0 var(--main-box-shadow);
     border-radius: var(--rad-1);
 
-    @media screen and (min-width: 576px) {
-      height: 50px;
-      font-size: var(--medium);
-      padding: 0.25 1em;
-    }
-
     &::after {
       border-radius: var(--rad-1);
-      background-color: var(--loosed-white);
+      background-color: transparent;
       z-index: -1;
       content: "";
       position: absolute;
@@ -58,6 +53,7 @@
 
     span {
       padding-top: 2px;
+      line-height: 32px;
 
       &.likes__count {
         cursor: pointer;
@@ -71,11 +67,6 @@
     svg {
       width: 18px;
       height: 18px;
-
-      @media screen and (min-width: 576px) {
-        width: 22px;
-        height: 22px;
-      }
     }
 
     &:hover {
@@ -83,11 +74,16 @@
     }
   }
 
-  .article__likes,
-  .article__comments {
+  .article__likes {
     svg {
       position: relative;
       top: 1px;
+    }
+  }
+  .article__comments {
+    svg {
+      position: relative;
+      top: 0;
     }
   }
 

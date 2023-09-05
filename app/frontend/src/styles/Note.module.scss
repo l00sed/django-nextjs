@@ -22,11 +22,11 @@
 
   p {
     line-height: 150%;
-    padding: 0 1em 1em 1em;
+    padding: 0 1em;
+  }
 
-    &:last-child {
-      margin-bottom: 0;
-    }
+  div:not(.note__row) {
+    margin: 0 1em 1em 1em;
   }
 }
 .note__default {

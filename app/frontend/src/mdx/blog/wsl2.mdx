@@ -1,0 +1,238 @@
+---
+title: WSL2
+author: Daniel Tompkins
+description: "In 2001, Microsoft's former CEO&mdash; Steve Ballmer&mdash; was quoted by the online tech news publication, <em>The Register</em>, saying: <em>Linux is a</em>"
+slug: wsl2
+created_at: 11/21/2020 23:30:00
+updated_at: 11/21/2020 23:30:00
+featured_image: regolith_screenshot.jpg
+image_alt: "Screenshot of the \"Regolith\" Linux distro running graphically through the X windowing system on WSL2 on Windows 10."
+content_type: blog
+tags: Linux, code
+---
+<ProseWrapper>
+## Microsoft 💔 Linux
+
+In 2001, Microsoft's former CEO— Steve Ballmer— was [quoted](https://www.theregister.com/2001/06/02/ballmer_linux_is_a_cancer/) by the online tech news publication, The Register, saying:
+
+> Linux is a cancer that attaches itself in an intellectual property sense to everything it touches
+
+Fast-forward 15 years into the future— at Microsoft's developer conference, _Build 2016_— and Gates' tech behemoth reveals a sudden volte-face. The current CEO, Satya Nadella, announces Windows Subsystem for Linux. With WSL, Microsoft is taking some of the most popular Linux distributions and making them available within Windows through the Microsoft Store.
+
+According to a [W<sup>3</sup>Techs survey](https://w3techs.com/technologies/overview/operating_system), Unix operating systems (the under-pinning OS of Linux, as well as MacOS) make up 71% of the Web, the remaining 29% being Windows. Additionally, every Android phone, tablet and smart TV runs on a modified version of the Linux kernel. So, I guess if you can't beat 'em, join 'em?
+
+<OneColumn>
+  <ImageWrapper
+    alt="Bar graph with two data points, Unix (71%) and Windows (29%). These are the percentages of wabsites using these operating systems (based on the October 2020 survey."
+    caption="Stats taken from W<sup>3</sup>Techs"
+    src="/assets/img/blog/wsl2/w3techs_webservers.jpg"
+    width={ 457 }
+    height={ 212 }
+  />
+</OneColumn>
+
+Whether or not its because of Microsoft's good graces or some ulterior motive, I know having an easily accessible Unix-type environment available on Windows has been a godsend for me and for so many other developers.
+
+## What's so great about WSL?
+
+Before WSL, developers running Windows had two options: 1) a virtual machine (VM), or 2) dual-booting. Running a virtual machine uses up more resources than WSL. It can also be difficult to integrate hardware and files between the host machine and the VM. Dual-booting allows for a full-fledged install on a separate disk partition; but it requires a restart any time you want to switch between OS's.
+
+Windows Subsystem on Linux doesn't integrate with the host's hardware perfectly— for example, NVIDIA is still working on [CUDA drivers](https://developer.nvidia.com/cuda/wsl) that will take advantage of GPU resources from within WSL. However, for Linux developers who are frequently running CAD software or Adobe Suite (which are [difficult-to-impossible](https://appdb.winehq.org/objectManager.php?iId=17&sClass=application) to install on Linux), WSL can be a fantastic partner.
+
+## WSL1 vs WSL2
+
+More recently, Microsoft announced WSL2— an update that allows for a more complete Linux kernel to run on a Windows machine. This made it much easier to install a variety of software that had been difficult to run on the previous, WSL1. WSL2 is very similar to running a virtual machine (in fact it uses Microsoft's hyperV virtual machines).
+
+However, using WSL2 (as opposed to installing a Linux distro through VirtualBox, or another VM manager) provides some minor performance benefits since Microsoft has optimized it to integrate with Windows' services. If you want, I recommend reading Microsoft's own WSL1-vs-WSL2 [feature comparison](https://docs.microsoft.com/en-us/windows/wsl/compare-versions) docs.
+
+## Alright, so how do I install WSL2?
+
+Microsoft has clean, straight-forward [installation documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10) for WSL and WSL2. You can refer to that tutorial if you get stuck, or just follow the steps outlined below. Before starting, make sure you update your Windows 10 installation with the most recent build.
+
+I'll also be going one-step further, and showing you how to run a Linux GUI using WSL2 and VcXsrv (display forwarding). If you're more of a visual-learner, I've also included an installation speedrun [video](https://www.youtube.com/embed/gtXIzVM5wZE) that follows the same steps outlined below (_edit: I forgot step 11 in the video, and it's a critical one! Make sure you do that!_).
+
+### 1. Enable WSL Feature
+
+First you need to enable the Windows Subsystem on Linux feature by right-clicking on Powershell from the start menu and clicking "Run as Administrator".
+
+Then, paste the following command and hit "Enter"— don't close the Powershell!
+
+<Pre>
+```powershell
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+```
+</Pre>
+
+### 2. Enable WSL2 Virtual Machine Feature
+
+After the last command is finished, paste the following command in the same Administrator-level shell, and hit "Enter" to enable the WSL2 VM. Again, keep this shell open.
+
+<Pre>
+```powershell
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+</Pre>
+
+### 3. Download and Install the WSL2 Linux Kernel Update
+
+Click [here](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi) to download the Microsoft executable for installing the WSL2 Linux Kernel update. Once it's finished downloading, double-click the executable and follow the installation steps. This part's pretty straightforward
+
+### 4. Set WSL2 as Default Version
+
+Copy and paste the following command in Powershell to set WSL2 to be the default version:
+
+<Pre>
+```powershell
+wsl --set-default-version 2
+```
+</Pre>
+
+### 5. Install Ubuntu 20.04 from the Microsoft Store
+
+Click the start menu and open the Microsoft Store. Search for "Ubuntu 20.04" and install this Linux distro. If you want to use another distro, that's fine; but Ubuntu 20.04 is compatible with the Regolith Linux desktop GUI we'll be installing in just a bit.
+
+### 6. Ubuntu 20.04 Initial Setup
+
+Once Ubuntu is done installing, click "Launch" to initiate first-time installation setup. You'll be prompted to put in a username and password.
+
+### 7. Make sure You're Using WSL2
+
+At this point, it might be a good idea to double-check that WSL is using version 2 by default. Open a command prompt (or use Powershell if it's still open) to paste in the following command:
+
+<Pre>
+```powershell
+wsl --list --verbose
+```
+</Pre>
+
+### 8. Download and Install VcXsrv
+
+VcXsrv is an X Server that we'll use to view the GUI from WSL2.
+
+There are a few other display-forwarding servers available (like [Xming](https://sourceforge.net/projects/xming/)), but I've found VcXsrv works the best. Download the executable [here](https://sourceforge.net/projects/vcxsrv/) and click through the installation steps.
+
+### 9. Install Regolith Desktop
+
+I have [Regolith Desktop](/regolith) installed on one of my PCs, and it's fantastic. It's preconfigured to use the i3 window manager which I find incredibly efficient for its tiling and hotkey features.
+
+A _loosed_ reader, Rodrigo, asked me use Regolith for the tutorial; but if you want to install a different GUI you can! To install Regolith Desktop, open your fresh Ubuntu install, and paste in the following lines:
+
+<Pre>
+```bash
+sudo add-apt-repository ppa:regolith-linux/release
+```
+</Pre>
+
+<Pre>
+```bash
+sudo apt install regolith-desktop i3xrocks-net-traffic i3xrocks-cpu-usage i3xrocks-time
+```
+</Pre>
+
+It's a lot of packages, so it'll take some time.
+
+### 10. Change the "Mod" Key
+
+Regolith, or rather i3-wm, uses the Super (Windows) key as the hotkey prefix by default. Since you're running this GUI within Windows, you'll run into a lot of overlap between Windows' and i3-wm's preconfigured shortcuts.
+
+For this reason, I recommend swapping the Super key for the Alt key. To change the Mod key mapping use the Vim or Nano text editors to open the configuration file located at:
+
+<Pre>
+```bash
+vim /etc/regolith/i3/config
+```
+</Pre>
+
+On lines 42 and 43, you should find the Mod key assignment. Switch "Mod1" and "Mod4" and you'll be good to go! Your edited lines should look like this:
+
+<Pre>
+```bash
+set_from_resource $mod i3-wm.mod Mod1
+```
+</Pre>
+
+<Pre>
+```bash
+set_from_resource $alt i3-wm.alt Mod4
+```
+</Pre>
+
+If you're using Vim, hit "Escape" and type ":wq", then hit "Enter" to write and quit the file. You can check out the [official Regolith tutorial](https://regolith-linux.org/docs/getting-started/configuration/#keybindings) on making these changes if you get stuck.
+
+### 11. Export DISPLAY parameter
+
+Another critical edit (that I forgot to put in the video— oops 🙃) is to export the DISPLAY variable. Since WSL2 is a VM, it has it's own IP address (which can change at each startup). As a result, you'll need to add a couple lines to your bash profile for VcXsrv to connect to WSL2.
+
+To open your ".bashrc" with Vim:
+
+<Pre>
+```bash
+vim ~/.bashrc
+```
+</Pre>
+
+Press and hold Shift then press "G" to jump to the bottom of the file. On two new lines, paste in the following code:
+
+<Pre>
+```bash
+export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+export LIBGL_ALWAYS_INDIRECT=1
+```
+</Pre>
+
+### 12. Open and Configure VcXsrv
+
+Click the start menu and type in "Xlaunch" then hit "Enter" to run VcXsrv. Click the "One window without titlebar" option (you can explore the others later, if you want) and click next. Leave it on "Start no client" and click next. Then, in the "Additional parameters" input, add "-ac" and click next. I recommend clicking "Save configuration" for ease of use.
+
+At this point, you should have a black screen waiting to accept a display input.
+
+### 13. Run Regolith Desktop
+
+The last thing to do is run the magic line:
+
+<Pre>
+```bash
+i3-gnome-flashback-session
+```
+</Pre>
+
+You should then see a graphical Regolith Desktop appear in the VcXsrv window! Huzzah! Feel free to play around with your new graphical WSL2 setup. To see an overview of the available shortcuts, use "Alt+Shift+?" to bring up the help menu. You can find more help in Regolith's official documentation.
+
+<Note title="update: 11/21/2020">
+This tutorial was made using Regolith Desktop v1.4, but they've since updated to v1.5. Reddit user [\_waywardone\_](https://www.reddit.com/r/bashonubuntuonwindows/comments/hrwutx/regolith_linux_i3ubuntu_on_wsl2_waudio/gcv2p89?utm_source=share&utm_medium=web2x&context=3) was having issues with the final `i3-gnome-flashback-session` command.
+
+If you're getting "command not found", try running the new init script provided in v1.5:
+
+<Pre>
+```bash
+regolith-session-init
+```
+</Pre>
+
+This new init will start the regolith desktop and i3-wm just like the old script; but it doesn't seem to start the `compton` background service automatically anymore. So, until I figure out a better solution, run:
+
+<Pre>
+```bash
+compton
+```
+</Pre>
+
+...just after Regolith appears in your VcXsrv window and i3 loads. You can thank _\_waywardone\__ for helping me catch the change!
+</Note>
+
+<OneColumn>
+  <ImageWrapper
+    alt="Regolith Desktop with Windows 10 Taskbar and i3 tiling running on WSL2."
+    caption="Regolith desktop environment with Windows 10 taskbar and the i3 tiling window manger running on WSL2."
+    src="/assets/img/blog/wsl2/regolith_screenshot.jpg"
+    width={ 960 }
+    height={ 540 }
+  />
+</OneColumn>
+
+## Wrapping Up
+
+Hopefully you finished this tutorial with a working Regolith Desktop GUI running off WSL2. If you run into any issue, or have questions, feel free to leave a comment. If you'd like to know how to forward audio from WSL2 (a feature not yet available by default), let me know and I'll put together another tutorial.
+
+Until next time, happy coding!
+</ProseWrapper>

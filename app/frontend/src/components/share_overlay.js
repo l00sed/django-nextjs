@@ -4,7 +4,7 @@ import ShareButton from './share_button';
 export default function ShareOverlay(props) {
   return (
     <MessageOverlay overlayId="share-overlay">
-      <ShareButton slug={ props.slug } type="copy" />
+      <ShareButton slug={ props.slug } type="link" />
       <ShareButton slug={ props.slug } type="email" />
       <ShareButton slug={ props.slug } type="discord" />
       <ShareButton slug={ props.slug } type="facebook" />

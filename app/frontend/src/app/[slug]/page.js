@@ -34,7 +34,7 @@ export default function BlogPage({ params }) {
 
   return (
     <div className={ page_styles.next_wrapper }>
-      <MenuOverlay />
+      <MenuOverlay slug={ params.slug } />
       <MenuToggle />
       <div id="main_wrapper" className={ page_styles.main_wrapper }>
         <Title />
