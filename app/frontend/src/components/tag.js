@@ -28,14 +28,21 @@ export function Tag (props) {
         return "tag-bg-11"
     }
   }
+  const tagBgColor = tagBg(props.slug);
+  const classes = [
+    tag_styles.tag,
+    tagBgColor
+  ].join(' ');
+  const href = `/tags/${props.slug}`;
+  const tag = props.tag?.toString();
 
   return (
     <Link
       key={ props.key }
-      className={ `${ tag_styles.tag } ${ tagBg(props.slug) }` }
-      href={ `/tags/${ props.slug }` }
+      href={ href }
+      className={ classes }
     >
-      <span className={ tag_styles.pound }>
+      <span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="14"
@@ -50,28 +57,31 @@ export function Tag (props) {
           />
         </svg>
       </span>
-      <span>{ props.tag }</span>
+      <span>{ tag }</span>
     </Link>
   )
 }
 
 export function Tags({ tags }) {
   if (tags) {
+    tags = tags.map((t, i) => {
+      let key = `${ t.slug }-${ t.id }`;
+      return (
+        <Tag
+          key={ key }
+          tag={ t.name }
+          slug={ t.slug }
+          index={ i }
+        />
+      )
+    })
+
     return (
       <div id="tags" className={ tag_styles.tags }>
-        {
-          tags.map((t, i) => {
-            return (
-              <Tag
-                key={ `${ t.slug }-${ t.id }` }
-                tag={ t.name }
-                slug={ t.slug }
-                index={ i }
-              />
-            )
-          })
-        }
+        { tags }
       </div>
     )
+  } else {
+    return <></>;
   }
 }

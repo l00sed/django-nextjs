@@ -6,6 +6,8 @@ import Title from '../components/title';
 import Donate from '../components/donate';
 import MenuOverlay from '../components/menu_overlay';
 import MenuToggle from '../components/menu_toggle';
+import SearchOverlay from '../components/search_overlay';
+import SearchToggle from '../components/search_toggle';
 import Footer from '../components/footer';
 import Card from '../components/card';
 /* Lib */
@@ -17,9 +19,11 @@ export default async function Home() {
   return (
     <div className={ `${page_styles.next_wrapper} ${styles.homepage}` }>
       <MenuOverlay />
+      <SearchOverlay />
       <MenuToggle />
       <div id="main_wrapper" className={ page_styles.main_wrapper }>
         <Title />
+        <SearchToggle />
         <Donate />
         <div id="homepage__content" className={ styles.homepage__content }>
           {

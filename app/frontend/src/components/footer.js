@@ -134,27 +134,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className={ footer_styles.webring }>
-          <div className={ footer_styles.webring_icon }>
-            <Link href="https://webring.xxiivv.com/#loosed" target="_blank" rel="noreferrer">
-              <svg
-                fill="none"
-                width="100%"
-                height="90px"
-                strokeLinecap="square"
-                viewBox="0 0 300 300"
-                strokeWidth="28"
-                xmlns="http://www.w3.org/2000/svg"
-                className={ footer_styles.icon }
-                alt="XXIIVV webring"
-              >
-                <path d="M201.962 210a60 60 0 10-103.924-60l-50 86.603"/>
-                <path d="M98.038 210a60 60 0 10103.924-60l-50-86.603"/>
-                <path d="M150 120a60 60 0 100 120h100"/>
-              </svg>
-            </Link>
-          </div>
-        </div>
       </div>
     </footer>
   )

@@ -529,9 +529,6 @@ $d-tag-bg-14: #717171;
   --success: rgb(7,203,100);
   --error: rgb(163,7,10);
 /* ## Notes */
-  --note-default-icon: rgba(30,100,220,0.75);
-  --note-success-icon: rgba(7,203,100,0.75);
-  --note-error-icon: rgba(163,7,10,0.75);
   --note-default-border: rgba(30,100,220,0.5);
   --note-success-border: rgba(7,203,100,0.5);
   --note-error-border: rgba(163,7,10,0.5);
@@ -809,11 +806,10 @@ body,
   margin: 0;
   font-size: 100%;
   min-height: 100vh;
-  font-family: 'JetBrains Mono', monospace;
 }
 
 ::placeholder {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'inherit', monospace;
 }
 
 :focus {

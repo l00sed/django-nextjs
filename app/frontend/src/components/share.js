@@ -1,13 +1,10 @@
-"use client";
-
 import article_styles from '../styles/ArticleMeta.module.scss';
-import { toggleOverlay } from './message_overlay';
 
 export default function Share() {
   return (
-    <div
+    <label
       className={ article_styles.article__share }
-      onClick={ () => { toggleOverlay('share-overlay') } }
+      htmlFor="share-overlay-input"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -30,6 +27,6 @@ export default function Share() {
           />
         </g>
       </svg>
-    </div>
+    </label>
   )
 }

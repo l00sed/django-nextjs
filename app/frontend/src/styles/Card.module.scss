@@ -31,7 +31,13 @@
   box-shadow: 0 0 1px 1px var(--card-shadow);
   color: var(--loosed-black);
 
-  &::before {
+  &.has__tags {
+    .card__description {
+      padding-bottom: 4.75em;
+    }
+  }
+
+  & > a::before {
     width: 100%;
     height: 100%;
     top: 0;
@@ -48,26 +54,28 @@
   }
 }
 
-.card:hover::after,
-a:focus-visible .card::after {
-  opacity: 0.5;
+.card a:focus-visible::before,
+.card:hover a::before,
+.card:focus a::before {
+  opacity: 0.75;
   box-shadow: 0 0 10px 1px var(--card-shadow);
 }
-.card:active::after {
-  box-shadow: 0 0 20px 1px var(--card-active);
+.card a:active::before,
+.card:active a::before {
   opacity: 1;
+  box-shadow: 0 0 20px 1px var(--card-active);
 }
 
-.card:hover .card__thumbnail_wrapper,
-a:focus-visible .card .card__thumbnail_wrapper {
-  transform: scale(1);
-}
 .card__thumbnail_wrapper {
   transition: all var(--loosed-transition-medm) ease;
   border-radius: calc(var(--card-radius) - 2px) calc(var(--card-radius) - 2px) 0 0;
   position: relative;
   height: 200px;
   transform: scale(0.98);
+}
+.card a:focus-visible .card__thumbnail_wrapper,
+.card:hover .card__thumbnail_wrapper {
+  transform: scale(1);
 }
 
 .card__thumbnail {
@@ -77,8 +85,8 @@ a:focus-visible .card .card__thumbnail_wrapper {
   filter: saturate(0.5);
   backdrop-filter: brightness(0.8);
 }
-.card:hover .card__thumbnail,
-a:focus-visible .card .card__thumbnail {
+.card a:focus-visible .card__thumbnail,
+.card:hover .card__thumbnail {
   filter: saturate(1);
 }
 
@@ -150,7 +158,8 @@ a:focus-visible .card .card__thumbnail {
 
 .card__tags {
   padding: 0 1.25em;
-  margin-bottom: 1.5em;
+  height: 0;
+  top: -3.25em;
   position: relative;
   z-index: 1;
 }

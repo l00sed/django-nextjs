@@ -7,24 +7,39 @@ import styles from '../styles/Card.module.scss';
 import dateformat from 'dateformat';
 
 export default function Card({ element, truncate, index }) {
+  const key = element.id;
+  const alt = element.image_alt;
+  const src = element.featured_image;
+  const author = element.author;
+  const title = parseTitle(element);
+
   const above_the_fold = 3;
 
-  const loading = (index) => {
+  const tags = element.tags ?
+    <div className={ styles.card__tags }>
+      <Tags tags={ element.tags } />
+    </div>
+    :
+    <></>
+
+  const loadingLazy = (index) => {
     if (index > above_the_fold) {
       return "lazy";
     } else {
       return undefined;
     }
   }
+  const loading = loadingLazy(index);
 
-  const priority = (index) => {
+  const priorityFold = (index) => {
     if (index < above_the_fold) {
       return true;
     }
     return false;
   }
+  const priority = priorityFold(index);
 
-  const parseUrl = (slug) => {
+  const parseHref = (slug) => {
     const re = new RegExp("^https?://");
     const found = re.exec(slug);
     if (found) {
@@ -33,6 +48,7 @@ export default function Card({ element, truncate, index }) {
       return `/${slug}`;
     }
   }
+  const href = parseHref(element.slug);
 
   const newWindow = (slug) => {
     const re = new RegExp("^https?://");
@@ -43,6 +59,7 @@ export default function Card({ element, truncate, index }) {
       return "";
     }
   }
+  const target = newWindow(element.slug);
 
   const parseDate = (date) => {
     let d = new Date(date);
@@ -56,6 +73,7 @@ export default function Card({ element, truncate, index }) {
       return date;
     }
   }
+  const date = parseDate(element.updated_at) ;
 
   const parseDescription = (element) => {
     let classes = styles.card__description;
@@ -72,22 +90,29 @@ export default function Card({ element, truncate, index }) {
       </div>
     )
   }
+  const desc = parseDescription(element);
+
+  const cardClasses = element.tags?.length > 0
+    ?
+    [styles.card, styles.has__tags].join(' ')
+    :
+    styles.card;
 
   return (
-    (<div className={ styles.card }>
+    <div className={ cardClasses }>
       <Link
-        key={ element.id }
-        href={ parseUrl(element.slug) }
-        target={ newWindow(element.slug) }
+        key={ key }
+        href={ href }
+        target={ target }
       >
         <div className={ styles.card__thumbnail_wrapper }>
           <Image
-            alt={ element.image_alt }
-            src={ element.featured_image }
-            className={ styles.card__thumbnail }
-            loading={ loading(index) }
-            priority={ priority(index) }
             fill
+            alt={ alt }
+            src={ src }
+            className={ styles.card__thumbnail }
+            loading={ loading }
+            priority={ priority  }
             sizes="(max-width: 576px)  100vw,
                    (max-width: 768px)  50vw,
                    (max-width: 1200px) 33vw,
@@ -95,23 +120,17 @@ export default function Card({ element, truncate, index }) {
           />
         </div>
         <div className={ styles.card__head }>
-          <h2 className={ styles.card__title }>{ parseTitle(element) }</h2>
+          <h2 className={ styles.card__title }>{ title }</h2>
           <div className={ styles.card__meta }>
-            <span className={ styles.card__date }>{ parseDate(element.updated_at) }</span>
-            <span className={ styles.card__author }>{ element.author }</span>
+            <span className={ styles.card__date }>{ date }</span>
+            <span className={ styles.card__author }>{ author }</span>
           </div>
         </div>
         <div className={ styles.card__body }>
-          { parseDescription(element) }
+          { desc }
         </div>
       </Link>
-      {
-        element?.tags?.length ?
-          <div className={ styles.card__tags }>
-            <Tags tags={ element.tags } />
-          </div>
-        : <></>
-      }
-    </div>)
+      { tags }
+    </div>
   );
 }

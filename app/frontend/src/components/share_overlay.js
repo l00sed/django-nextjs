@@ -1,3 +1,5 @@
+"use client";
+
 import MessageOverlay from './message_overlay';
 import ShareButton from './share_button';
 

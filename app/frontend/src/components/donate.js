@@ -23,15 +23,14 @@ function copyBTC() {
 export default function Donate() {
   return (
     <>
-      <button
+      <label
         id="donate"
-        type="button"
+        htmlFor="donate-overlay-input"
         className={ donate_styles.donate }
-        onClick={ () => { toggleOverlay('donate-overlay') } }
         title="Click to copy my Ethereum wallet address!"
       >
         DONATE
-      </button>
+      </label>
       <MessageOverlay overlayId="donate-overlay">
         <div className={ donate_styles.menu_text }>
           <svg className={ donate_styles.ethereum } width="226" height="328" viewBox="0 0 226 328" fill="none" xmlns="http://www.w3.org/2000/svg">

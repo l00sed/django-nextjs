@@ -4,10 +4,17 @@
   margin: 2em auto;
 
   ::-webkit-scrollbar,
+  pre::-webkit-scrollbar {
+    background-color: var(--scrollbar-pre-color);
+  }
+  ::-webkit-scrollbar-track,
+  pre::-webkit-scrollbar-track {
+    margin: 0 1em;
+  }
+  ::-webkit-scrollbar,
   ::-webkit-scrollbar-track,
   pre::-webkit-scrollbar,
   pre::-webkit-scrollbar-track {
-    background-color: var(--scrollbar-pre-color);
     border-radius: 0 0 7.5px 7.5px;
     height: 5px;
   }

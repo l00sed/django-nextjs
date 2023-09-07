@@ -60,9 +60,16 @@
 }
 
 .live__menu {
+  margin-top: auto;
+
   .live__link {
     width: 100%;
-    margin: 2em 0 1em 0;
+    margin: 0 0 1em 0;
+  }
+
+  &:focus .live__link {
+    --off-1: 0;
+    background-position-x: -500px;
   }
 }
 
