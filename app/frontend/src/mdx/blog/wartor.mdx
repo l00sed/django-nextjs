@@ -1,0 +1,114 @@
+---
+title: warTOR
+author: Daniel Tompkins
+description: "Oddly, I don't remember when or how I got my hands on the Toshiba FlashAir card. These WiFi-enabled SD cards are made to transfer photos from a digital camera to a"
+slug: wartor
+created_at: 05/06/2020 14:16:00
+updated_at: 05/06/2020 14:16:00
+featured_image: wartor-screenshots.jpg
+image_alt: Screenshots of the warTOR app on a mobile device, all running from the Toshiba FlashAir WiFi SD card.
+content_type: blog
+tags: media art, DIY, electronics
+---
+<ProseWrapper>
+Oddly enough, I don't remember when or how I first got my hands on the [Toshiba <em>FlashAir</em>](https://www.toshiba-memory.com/products/toshiba-wireless-sd-cards-flashair-w-04/) card. These WiFi-enabled SD cards are made to transfer photos from a digital camera to a computer.
+
+<OneColumn>
+<ImageWrapper
+  caption="The Toshiba-made <em>FlashAir</em>, WiFi-enabled SD card."
+  src="/assets/img/blog/wartor/flashair.png"
+  width="424"
+  height="274"
+/>
+</OneColumn>
+
+Imagining that someone would use a 4MBps wireless connection to transfer photos when the hardware transfer is closer to 70MBps seems ridiculous.
+
+However, it could come in handy if you're in a situation where you don't have access to an SD card reader, or want to easily preview photos on a phone or tablet.
+
+## Digging into the FlashAir
+
+What's far more interesting about these Toshiba cards is the fact that they are essentially programmed to act as a [wireless access point (WAP)](https://en.wikipedia.org/wiki/Wireless_access_point). You can setup a custom SSID and password— connecting directly to the card over 2.4GHz.
+
+After peeking at the filesystem, I realized that the main photo gallery application hosted on the card is essentially a static website— served as basic HTML, CSS and JavaScript.
+
+<OneColumn>
+<ImageWrapper
+  src="/assets/img/blog/wartor/flashair-filesystem.png"
+  width="583"
+  height="180"
+  caption="Screen-grab of the FlashAir filesystem shows the basic components of a web server— HTML, JavaScript, CSS and other Web assets."
+/>
+</OneColumn>
+
+My excitement with this bit of tech was the possibility of building a totally discrete microserver that would be capable of hosting a few pages and services.
+
+## Project Inspiration
+
+My fourth-year undergraduate architecture studio, entitled Dark Rooms, was taught by [Mona Mahall](https://m-a-u-s-e-r.net/). The studio was split into three exhibitions: _Pyramid, Server and Backstage_. These exhibitions were meant to explore the "spaces between visibility and invisibility".
+
+In the second exhibition, _Server_, we were asked to consider the design of an anti-human space— a dark, cold, electronic archive built exclusively for machines. In my preliminary research, I was particularly interested in artists like [Adam Bartholl](https://arambartholl.com/dead-drops/).
+
+His project, a USB "[dead drop](http://deaddrops.com/)", drew inspiration from an information-sharing tactic used by spies. A predetermined secret location— such as a hollowed-out rock, brick, log or other object— would be used to discreetly stash an important item.
+
+<OneColumn>
+<ImageWrapper
+  src="/assets/img/blog/wartor/USB-dead-drop.png"
+  caption="Adam Bartholl's <em>Dead Drop</em> USB stick, embedded in the mortar of a brick wall."
+  width="1024"
+  height="768"
+/>
+</OneColumn>
+
+Once the item— perhaps a slip of paper or a key— is "dropped", a second party could then retrieve it without interacting directly with the other person or being detected in the exchange.
+
+## Wireless Anonymous Repository
+
+While a USB is already a much more "invisible" way of storing and exchanging information, I wanted to take this concept a step further. Using the _FlashAir_ cards, I proposed a new wireless dead drop that could be just as affordable and simple as the USB, but with a myriad of superior qualities.
+
+Writing directly to the card requires an SD card slot; however, the wireless functionality can be powered without a desktop or laptop. A typical SD card takes 2.4-3.6V at about 30mA. I found that by using an SD-to-USB adapter, one could power the wireless module from a standard 5V USB outlet.
+
+<OneColumn>
+<ImageWrapper
+  src="/assets/img/blog/wartor/wartor-AC.png"
+  alt="The FlashAir SD card (which I code-named, warTOR) powered up inside an AC electrical housing."
+  caption="The FlashAir SD card is powered up by a 120VAC-to-5VDC converter <em>bug</em> inside a false outlet box"
+  height="1219"
+  width="1015"
+/>
+</OneColumn>
+
+Depending on the location of the dead drop, this could be concealed within a false junction box that would be plugged in over the top of a standard 2-outlet 120V AC. If— in the spirit of the original USB dead drop— you wanted to embed the card in a brick wall, then the device could be powered from a USB powerbank.
+
+<OneColumn>
+<ImageWrapper
+  src="/assets/img/blog/wartor/wartor-outlet.png"
+  caption="The outlet sits out noticeably from from the wall; but it can be easily placed over an existing outlet while completely hiding the contained SD card server."
+  alt="The outlet shown from the front, showing how the WiFi SD card is completely hidden"
+  width="548"
+  height="743"
+/>
+</OneColumn>
+
+I named the project warTOR for "wireless anonymous repo" + [TOR](https://en.wikipedia.org/wiki/Tor_(anonymity_network)). Though it's not connected to the Tor network in any way, I thought this title captured the spirit of anonymity (plus I wanted to use some Pokémon sprites). If someone would like to try it, the Toshiba cards can be setup as a wireless bridge... from a Tor gateway?
+
+## Future Plans
+
+Something else that I'd like to try is powering the card via a small solar cell, but I haven't gotten there yet... The greatest benefit of the wireless dead drop is that one could log into the WAP from their cellphone, upload or download a file, and no one could discern that any sort of exchange was happening. However, I'm also working on a clientside chat application that could be hosted on the cards.
+
+With this implemented, then two people could sit down in a café and send messages back and forth over the private network; or, someone could login to the network and type out a message for the other person to see at a later date.
+
+<OneColumn>
+<ImageWrapper
+  src="/assets/img/blog/wartor/wartor-screenshots.jpg"
+  width="1844"
+  height="750"
+  alt="Screenshots of the warTOR server on a mobile device, with upload/download instructions and chat"
+  caption="Screenshots from the warTOR server on a mobile device. I used Toshiba's provided documentation to setup file upload/download, and started building a chat service that anyone in the vicinity can use to <em>drop</em> and read messages."
+/>
+</OneColumn>
+
+Here are some screenshots from the application 👆. I'll be doing a follow-up post with a GitHub link to the _FlashAir_ CONFIG file that I'm using on my card. I'll also upload the source code for the original _warTOR_ server with instructions on how you can deploy your own _warTOR_ in the wild!
+
+Hope you enjoyed this project. If you'd like, please subscribe for updates (livestreams, new posts) or follow me on Twitter or leave a note below! Thanks for reading _loosed_.
+</ProseWrapper>

@@ -26,6 +26,14 @@ export function Tag (props) {
         return "tag-bg-10"
       case 'fabrication':
         return "tag-bg-11"
+      case 'internet':
+        return "tag-bg-12"
+      case 'politics':
+        return "tag-bg-13"
+      case 'media-art':
+        return "tag-bg-14"
+      case 'sysadmin':
+        return "tag-bg-15"
     }
   }
   const tagBgColor = tagBg(props.slug);

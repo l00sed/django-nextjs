@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import MessageOverlay, { toggleOverlay } from './message_overlay';
+import MessageOverlay, { hideOverlay } from './message_overlay';
 import { copyToClipboard } from '../utils/copyToClipboard';
 import donate_styles from '../styles/Donate.module.scss';
 
@@ -10,14 +10,14 @@ function copyETH() {
   let link = "0xfa9e8496c28317b1774eF53DDC1C96c06F364DaD";
   copyToClipboard(link);
   alert("The ETH donation address for l-o-o-s-e-d.net has been copied to your clipboard. Thank you for your support.");
-  toggleOverlay('donate-overlay')
+  hideOverlay('donate-overlay-input')
 }
 
 function copyBTC() {
   let link = "1FemHzDD6cDoc19gg99cscyx5eDSe1vBdS";
   copyToClipboard(link);
   alert("The BTC donation address for l-o-o-s-e-d.net has been copied to your clipboard. Thank you for your support.");
-  toggleOverlay('donate-overlay')
+  hideOverlay('donate-overlay-input')
 }
 
 export default function Donate() {

@@ -15,6 +15,7 @@ import TableWrapper              from './table_wrapper';
 import HorizontalScroller        from './horizontal_scroller';
 import Card                      from './card';
 import Note                      from './note';
+import List                      from './list';
 
 
 export default function Mdx ({ content }) {
@@ -31,6 +32,7 @@ export default function Mdx ({ content }) {
     Caption,
     Card,
     Note,
+    List,
   }
 
   return <MDXRemote { ...content } components={ components } />

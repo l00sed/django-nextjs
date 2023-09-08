@@ -5,15 +5,15 @@ import page_styles from '../styles/Page.module.scss';
 import overlay_styles from '../styles/MessageOverlay.module.scss';
 import { waitForElem, waitForElems } from '../lib/wait_for_elem';
 
+export const hideOverlay = (id='message-overlay-input:checked') => {
+  waitForElem(`#${id}:checked`).then(elem => {
+    elem.checked = false;
+  });
+}
+
 export default function MessageOverlay(props) {
   /* Use "Escape" key to hide any overlay */
   useEffect(() => {
-    const hideOverlay = (id='message-overlay-input:checked') => {
-      waitForElem(`#${id}:checked`).then(elem => {
-          elem.checked = false;
-      });
-    }
-
     const hideOverlays = (e) => {
       if (e.key === 'Escape') {
         waitForElems('[id$="-overlay-input"]').then(overlays =>{

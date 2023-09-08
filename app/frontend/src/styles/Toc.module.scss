@@ -131,7 +131,7 @@ nav.toc__block {
   transition: opacity var(--loosed-transition-fast) ease, max-height var(--loosed-transition-fast) ease;
   background-color: var(--meta-header-bg);
   border: 1px solid var(--main-box-shadow);
-  overflow-y: scroll;
+  overflow-y: auto;
 
   &::-webkit-scrollbar-track {
     background: transparent;

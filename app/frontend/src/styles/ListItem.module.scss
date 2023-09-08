@@ -1,0 +1,13 @@
+li.book {
+  list-style: none;
+
+  div.checklist {
+    svg {
+      min-width: 24px;
+      position: relative;
+      top: 3px;
+    }
+    display: inline-flex;
+    gap: 1em;
+  }
+}

@@ -1,0 +1,246 @@
+---
+title: The Hug of Death
+author: Daniel Tompkins
+description: "When people are actually reading your blog, it might crash! I got 8000+ unique visitors to [Signs of Life](/signs-of-life) over the span of a couple days when I shared it on Hacker News."
+slug: hug-of-death
+created_at: 08/27/2020 14:30:00
+updated_at: 08/27/2020 14:30:00
+featured_image: isthismeme.jpg
+image_alt: "Meme of anime character asking if something is something which it is not. Loosed blog: people reading it: is this justification for spending way too much time working on a personal website?"
+content_type: blog
+tags: sysadmin, Linux, code
+---
+<ProseWrapper>
+## If a server crashes in the woods, does it make a sound?
+
+This blog recently received some high traffic on the [Signs of Life](/signs-of-life) post after I shared the project on [Hacker News](https://news.ycombinator.com/item?id=23465837). After everything was said and done, my analytics reported something like 8000+ unique visitors over a couple of days.
+
+[Urban Dictionary](https://www.urbandictionary.com/define.php?term=hug%20of%20death) defines the hug of death as:
+
+> An accidental DDoS-like effect caused when a website suddenly gains popularity (usually via reddit), causing a huge amount of traffic.
+
+There are a few other names for this network phenomenon. Generically, or in network science, it's known as a "flash crowd". In the 90's and early 2000s, it was often referred to as "slashdotting", or the [Slashdot effect](https://en.wikipedia.org/wiki/Slashdot_effect)— after slashdot.org, a once-popular tech news forum.
+
+In the same etymological vein, other early social sites— forums and aggregators— took on the "hug of death" verbage. New and small bloggers were "Farked", "Drudged", and "BoingBoing'd"— their sites crushed to death by the thousands of concurrent requests pouring in from these high-traffic nodes.
+
+<OneColumn>
+  <ImageWrapper
+    width="700"
+    height="420"
+    src="/assets/img/blog/hug-of-death/isthismeme.jpg"
+  />
+</OneColumn>
+
+Most people trying to access my project were likely getting 503 Service Unavailable as an error response. Apparently the number of requests was beyond what my [DigitalOcean](https://digitalocean.com/) server was capable of handling.
+
+I'm on the second cheapest DigitalOcean "Droplet" plan, which provides a server with 2GB RAM and 1 virtual CPU. That's already $10/month for something that doesn't necessarily give me any ROI, so I wouldn't be thrilled to upgrade to a higher plan.
+
+What other options do I have using FOSS to combat the hug of death?
+
+## Content Optimization
+
+The decision to use LAMP (Linux, Apache, MySQL, PHP) for loosed was nothing less than arbitrary. So, I think it's high-time to evaluate this decision and find out more about how different servers handle traffic.
+
+There are a few key methods to cutting down response time (that I know of):
+
+* Compressing, bundling and caching static assets,
+* minifying css and javascript (or negating to use client-side JS altogether),
+* distributing static content and caches through a content-delivery network (CDN),
+* upgrading a server's RAM or CPU,
+* using secondary servers, or load-balancers, to distribute requests
+
+These options are all well and good. I minify JS. I compress, lazyload and cache images. I do my best to use fewer third-party scripts (I could do a lot better). For someone who's hosting a site without ads or revenue, though, I'm not really prepared to pay for a CDN provider (maybe a free one?), additional server resources, or additional servers...
+
+My website isn't a complete mess, but there must be a course of action to prevent further server overload without paying an additional $20-50/month.
+
+## Basic Security
+
+First, I'll share a little list of "Anti-overload techniques" from [Wikipedia](https://en.wikipedia.org/wiki/Web_server)...
+
+<blockquote>
+  <span>To partially overcome above average load limits and to prevent overload, most popular web sites use common techniques like:</span>
+  <br/>
+  <br/>
+  <span>Managing network traffic, by using:</span>
+  <br/>
+  <ul>
+    <li>Firewalls to block unwanted traffic coming from bad IP sources or having bad patterns</li>
+    <li>HTTP traffic managers to drop, redirect or rewrite requests having bad HTTP patterns</li>
+    <li>Bandwidth management and traffic shaping, in order to smooth down peaks in network usage</li>
+  </ul>
+</blockquote>
+
+In the past, I've had some issues with Tor-gateway bots submitting subscription requests. When you subscribe to my blog, you receive a confirmation email— which I pay for!
+
+Luckily, the [Mailgun](https://mailgun.com/) plan I'm on has a minimum number of sent emails per month before I'm charged; so I was able to blacklist the offending IPs and fix the issue before it really hurt.
+
+Not all traffic coming through a Tor gateway is harmful, and I encourage people to use tools to protect your anonymity online. However, if you run a website that's receiving spam traffic from IPs leading back to a Tor gateway, I recommend having a look at [dan.me.uk](https://www.dan.me.uk/tornodes).
+
+This is a website run by "Dan" (not me) and has many useful tools dedicated to preventing malicious traffic from infamously offending IPs.
+
+Another (more difficult) option is to analyze requests in realtime and sever connections that appear to deviate from the mean. This, of course, can consume additional server resources and requires some thought to prevent cutting off actual, honest patrons.
+
+If you don't have the practical knowledge to implement something like that, but you're running an Apache server (like me), there's [mod_qos](http://mod-qos.sourceforge.net/). It's a "Quality of Service" Apache mod which essentially does what I just described. Not sure how it might affect benevolent load testing...
+
+## Caching
+
+More advice from our Wikipedia lesson:
+
+<blockquote>
+  <ul>
+    <li>Deploying web cache techniques</li>
+    <li>Using different domain names or IP addresses to serve different (static and dynamic) content by separate web servers, e.g.:</li>
+    <ul>
+      <li>images.example.com</li>
+      <li>example.com</li>
+    </ul>
+  </ul>
+</blockquote>
+
+Right now I have the most basic caching possible— just a header spec for images, css, js, and fonts in my .htaccess file:
+
+<Pre>
+```xml:.htaccess showLineNumbers
+<filesMatch ".(css|webm|jpg|jpeg|png|gif|js|ico|svg|woff|woff2|ttf|otf|js)$">
+  Header set Cache-Control "max-age=31536000, public"
+</filesMatch>
+```
+</Pre>
+
+Using a CDN for a most of these assets might help me a lot. Instead of requesting a dozen _.gif_ files from my server, it would free up bandwidth and potentially cut down round-trip time by using a server closer to the client.
+
+On the other hand, if DigitalOcean is up— but Cloudflare's services are down, it could be just as bad. However, my current setup clearly has room for improvement in this department.
+
+## Load-Balancing and Hardware
+
+<blockquote>
+  <ul>
+    <li>Using different domain names or computers to separate big files from small and medium-sized files; the idea is to be able to fully cache small and medium-sized files and to efficiently serve big or huge (over 10 – 1000 MB) files by using different settings</li>
+    <li>Using many internet servers (programs) per computer, each one bound to its own network card and IP address</li>
+    <li>Using many internet servers (computers) that are grouped together behind a load balancer so that they act or are seen as one big web server</li>
+    <li>Adding more hardware resources (i.e. RAM, disks) to each computer</li>
+  </ul>
+</blockquote>
+
+I have a pretty wimpy server. I'm curious as to whether or not a container cluster of mirrored servers / distributed services would perform better than a single server. If each container has a unique subaddress would that free up requests? Would the amount of RAM and processing it takes make up the difference?
+
+My technical knowledge with Docker swarms and Kubernetes clusters is pretty infantile; but I think you're still bottlenecked by whichever container is managing the requests among the remainder. So if you're running on a single VPS it's not worth it. I'll do some extra research on this to be sure I'm not missing out; or if you know better, please leave a comment.
+
+As for additional hardware resources, the goal of this deep-dive is to make improvements while keeping costs at a minimum. The next section is really where I'm hoping to find some answers.
+
+## Server Software
+
+<blockquote>
+  <ul>
+    <li>Tuning OS parameters for hardware capabilities and usage</li>
+    <li>Using more efficient computer programs for web servers, etc.</li>
+    <li>Using other workarounds, especially if dynamic content is involved"</li>
+  </ul>
+</blockquote>
+
+So, pretending we didn't see that last vague and unhelpful tip... let's take a look at some popular Web servers and how they handle requests.
+
+### Apache2
+
+In development since 1995, _Apache2_ is the old man in the family of Web servers. Development of the original HTTP Web server, [HTTPd](https://en.wikipedia.org/wiki/CERN_httpd), had begun only 5 years earlier by Tim Berners-Lee at CERN and was later taken up by the WorldWideWeb Consortium (w3c).
+
+Perhaps as a result of its age and maturity, _Apache2_ is a stable and secure Web server option— and is the most widely used server software (followed closely by _Nginx_, as of today).
+
+<OneColumn>
+  <ImageWrapper
+    src="/assets/img/blog/hug-of-death/web-server-stats.jpg"
+    width="654"
+    height="844"
+    caption='Statistics taken from <a href="https://w3techs.com/technologies/overview/web_server" target="_blank" rel="noopener nofollow noreferrer">W<sup>3</sup>Techs</a> | Aug 24, 2020'
+  />
+</OneColumn>
+
+It's interesting to note another statistic from W<sup>3</sup>Techs (below) which shows that _Node.js_ is used by more _high traffic_ sites— followed by Nginx, then Apache.
+
+<OneColumn>
+  <ImageWrapper
+    src="/assets/img/blog/hug-of-death/web-server-traffic-stats.jpg"
+    width="588"
+    height="599"
+  />
+</OneColumn>
+
+Hmmm... So more websites are using _Apache_— but, more **high traffic sites** are using _Node_. What's up with that? Are developers just too stubborn to switch to _Node_? Are high-traffic sites using _Node_ because it's actually better at handling high-traffic, or is this a chicken-and-egg situation...?
+
+To be frank, I don't have a software engineering degree. Most of my programming and sysadmin knowledge comes from [Team Treehouse](https://teamtreehouse.com/), learning from friends and from my own hobby projects; but I'm going to go ahead and try to shed some light on this. Why not.
+
+One thing I found is the [Apache Benchmark](https://httpd.apache.org/docs/2.4/programs/ab.html) (ab) tool which is useful for load-testing. There's a good write-up by Pete Freitag on his [blog](https://www.petefreitag.com/item/689.cfm).
+
+The basic usage is as follows:
+
+<Pre>
+```bash
+ab -n 100 -c 10 http://www.yahoo.com/
+```
+</Pre>
+
+Where the "-n" argument is the number of requests and "-c" is the number of concurrent requests. This can be tweaked with other flags to produce the most accurate results, which will look something like this (hopefully, less abysmal):
+
+<Pre>
+```plaintext showLineNumbers
+Concurrency Level:      1000
+Time taken for tests:   69.959 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      30738000 bytes
+HTML transferred:       30557000 bytes
+Requests per second:    14.29 [#/sec] (mean)
+Time per request:       69959.429 [ms] (mean)
+Time per request:       69.959 [ms] (mean, across all concurrent requests)
+Transfer rate:          429.07 [Kbytes/sec] received
+```
+</Pre>
+
+The other main tweak I've found for Apache is configuring the [multi-processing module](https://httpd.apache.org/docs/2.4/mpm.html) (MPM). Apache provides three main MPMs: prefork, worker, and event.
+
+I found that DigitalOcean defaults to "prefork" with it's LAMP-stack base server image. After reviewing a lot of information and suggestions online, this seems like a poor choice. I ended up using this [StackExchange thread](https://askubuntu.com/questions/378734/how-to-configure-apache-to-run-php-as-fastcgi-on-ubuntu-12-04-via-terminal) to switch to mpm_event (with php-fpm).
+
+Once I made the switch, I went in to fuss around with the config file— which, for me, was at:
+
+<Pre>
+```bash
+/etc/apache2/mods-enabled/mpm_event.conf
+```
+</Pre>
+
+I was hard-pressed to find some dumbed-down documentation for setting these config values; but I used the Apache Benchmark tool as I was adjusting them to get the best RPS score.
+
+So, not great, but at least that's some improvement! I managed to speed it up to ~100 RPS at 5000 requests with 20 concurrent requests.
+
+### Nginx and Node
+
+Another factor that could be significantly skewing the above-mentioned Web server stats is the fact that Node uses HTTP by default and is often paired with a reverse proxy in order to securely serve HTTPS. I see a lot of Node devs using _Nginx_ for this purpose. However, there are pure JavaScript alternatives like [Redbird](https://github.com/OptimalBits/redbird).
+
+<HorizontalScroller
+  caption='The table above shows some results from an <a href="https://www.nginx.com/blog/testing-the-performance-of-nginx-and-nginx-plus-web-servers/" target="_blank" rel="noreferrer noopener nofollow">official Nginx performance test</a>. It shows the requests per second (RPS) on an NGINX server with up to 100KB per request.'
+>
+<TableWrapper width="1000">
+| CPUs | 0 KB      | 1 KB      | 10 KB   | 100 KB |
+| :--- | :---      | :---      | :---    | :---   |
+| 1    | 145,551   | 74,091    | 54,684  | 33,125 |
+| 2    | 249,293   | 131,466   | 102,069 | 62,554 |
+| 4    | 543,061   | 261,269   | 207,848 | 88,691 |
+| 8    | 1,048,421 | 524,745   | 392,151 | 91,640 |
+| 16   | 2,001,846 | 972,382   | 663,921 | 91,623 |
+| 32   | 3,019,182 | 1,316,362 | 774,567 | 91,640 |
+| 36   | 3,298,511 | 1,309,358 | 764,744 | 91,655 |
+</TableWrapper>
+</HorizontalScroller>
+
+Out of the box, Nginx produces some incredible RPS speeds. Another lesson this demonstrates is that the best solution to preventing server overload is always **keeping your requests to a minimum**. The falloff from 0KB-100KB is an astronomical 110,000+ requests.
+
+I'm sure anyone reading this must be loving the hypocrisy since this page alone has something like 40+ requests, equaling about 500KB of data. Do I really need comments on every page? Extraneous _.svg_'s and _.gif_'s... ? No. But I must have some kind of compulsion disorder, because I really can't stop myself.
+
+If you're looking for a similar tool to Apache Benchmark, I found a post on [yld.io/blog](yld.io/blog) that walks through using [wrk2](https://github.com/giltene/wrk2)— another load-testing application written in C.
+
+## Conclusion
+
+This is honestly a whole new world to me as someone who's started off mainly doing front-end and other surface-level programming. I'm stoked to be learning about the different tools for load-testing and ways to avoid having the server shit the bed. If you think I'm way out of my league and I have no idea what I'm talking about, you win the prize.
+
+This was all I could come up with right now, but I'll definitely be doing more research and (slowly) trying to figure out how to keep my posts soaked in rich media. Let me know if you have any tips or experience that's useful to people dipping their toes in sysadmin and devops!
+</ProseWrapper>

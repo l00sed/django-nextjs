@@ -1,0 +1,180 @@
+{
+  "reading": [
+    {
+      "title": "Dune",
+      "href": "https://en.wikipedia.org/wiki/Dune_(novel)",
+      "author": "Frank Herbert"
+    },
+    {
+      "title": "The Revolution Will Not Be Televised: Democracy, the Internet, and the Overthrow of Everything",
+      "href": "https://en.wikipedia.org/wiki/The_Revolution_Will_Not_Be_Televised_(book)",
+      "author": "Joe Trippi"
+    },
+    {
+      "title": "Creating Things that Matter: The Art & Science of Innovations that Last",
+      "href": "https://us.macmillan.com/books/9781250147189",
+      "author": "David Edwards"
+    }
+  ],
+  "toRead": [
+    {
+      "title": "Steal This Book",
+      "href": "https://archive.org/stream/pdfy-TNlDHryRIk4DXKAU/Steal%20This%20Book_djvu.txt",
+      "author": "Abbie Hoffman"
+    },
+    {
+      "title": "Technologies of Freedom",
+      "href": "https://conservancy.umn.edu/bitstream/handle/11299/164498/01_02_BR_Robinson.pdf;jsessionid=5D68C564C650F9755E7456E36AE1CE14?sequence=1",
+      "author": "Ithiel de Sola Pool"
+    },
+    {
+      "title": "SMART CITIES: Big Data, Civic Hackers, and the Quest for a New Utopia",
+      "href": "https://ssir.org/articles/entry/smart_cities_big_data_civic_hackers_and_the_quest_for_a_new_utopia",
+      "author": "Anthony M. Townsend"
+    },
+    {
+      "title": "The Information: A History, a Theory, a Flood",
+      "href": "https://en.wikipedia.org/wiki/The_Information:_A_History,_a_Theory,_a_Flood",
+      "author": "James Gleick"
+    },
+    {
+      "title": "Thinking in Systems: A Primer",
+      "href": "https://wtf.tw/ref/meadows.pdf",
+      "author": "Donella H. Meadows"
+    },
+    {
+      "title": "The Age of Surveillance Capitalism: The Fight for a Human Future at the New Frontier of Power",
+      "href": "https://www.publicaffairsbooks.com/titles/shoshana-zuboff/the-age-of-surveillance-capitalism/9781610395694/",
+      "author": "Shoshana Zuboff"
+    },
+    {
+      "title": "The Landmarks of Tomorrow",
+      "href": "https://en.wikipedia.org/wiki/The_Landmarks_of_Tomorrow",
+      "author": "Peter Drucker"
+    },
+    {
+      "title": "Beyond Transparency: Open Data and the Future of Civic Innovation",
+      "href": "https://beyondtransparency.org/",
+      "author": "Brett Goldstein et al."
+    },
+    {
+      "title": "Digital Ground: Architecture, Pervasive Computing, and Environmental Knowing",
+      "href": "https://mitpress.mit.edu/9780262633277/",
+      "author": "Malcolm McCullough"
+    }
+  ],
+  "finished": [
+    {
+      "title": "Zucked: Waking Up to the Facebook Catastrophe",
+      "href": "https://www.zuckedbook.com/",
+      "author": "Roger McNamee"
+    },
+    {
+      "title": "Digital Countercultures and the Struggle for Community",
+      "href": "https://mitpress.mit.edu/books/digital-countercultures-and-struggle-community",
+      "author": "Jessa Lingel"
+    },
+    {
+      "title": "Analytic Activism: Digital Listening and the New Political Strategy",
+      "href": "https://global.oup.com/academic/product/analytic-activism-9780190266134?cc=us&lang=en&",
+      "author": "David Karpf"
+    },
+    {
+      "title": "The Big Nine: How the Tech Titans and Their Thinking Machines Could Warp Humanity",
+      "href": "https://amywebb.io/book/the-big-nine/",
+      "author": "Amy Webb"
+    },
+    {
+      "title": "The Boy Who Could Change the World: The Writings of Aaron Swartz",
+      "href": "https://www.eff.org/deeplinks/2016/01/boy-who-could-change-world",
+      "author": "Aaron Swartz et al."
+    },
+    {
+      "title": "The Pathology of Communicative Capitalism",
+      "href": "https://www.palgrave.com/gp/book/9781137394774",
+      "author": "David W. Hill"
+    },
+    {
+      "title": "The Hard Thing About Hard Things: Building a Business When There Are No Easy Answers",
+      "href": "https://techcrunch.com/2014/03/03/the-hard-thing-about-hard-things-ben-horowitzs-honest-and-real-take-on-entrepreneurship/",
+      "author": "Ben Horowitz"
+    },
+    {
+      "title": "Hyperobjects: Philosophy and Ecology",
+      "href": "https://www.upress.umn.edu/book-division/books/hyperobjects",
+      "author": "Timothy Morton"
+    },
+    {
+      "title": "The Victory Lab: The Secret Science of Winning Campaigns",
+      "href": "https://www.thevictorylab.com/",
+      "author": "Sasha Issenberg"
+    },
+    {
+      "title": "Steve Jobs",
+      "href": "https://www.goodreads.com/book/show/11084145-steve-jobs",
+      "author": "Walter Isaacson"
+    },
+    {
+      "title": "Zen and the Art of Motorcycle Maintenance",
+      "href": "https://www.npr.org/sections/thetwo-way/2017/04/24/525443040/-zen-and-the-art-of-motorcycle-maintenance-author-robert-m-pirsig-dies-at-88",
+      "author": "Robert M. Pirsig"
+    },
+    {
+      "title": "The Doors of Perception",
+      "href": "https://psypressuk.com/2009/03/18/literary-review-the-doors-of-perception-heaven-and-hell-by-aldous-huxley/",
+      "author": "Aldous Huxley"
+    },
+    {
+      "title": "World Without Mind: The Existential Threat of Big Tech",
+      "href": "https://www.theguardian.com/books/2017/oct/25/world-without-mind-by-franklin-foer-review",
+      "author": "Franklin Foer"
+    },
+    {
+      "title": "Homo Deus: A Brief History of Tomorrow",
+      "href": "https://www.ynharari.com/book/homo-deus/",
+      "author": "Yuval Noah Harari"
+    },
+    {
+      "title": "#Republic: Divided Democracy in the Age of Social Media",
+      "href": "https://press.princeton.edu/titles/10935.html",
+      "author": "Cass Sunstein"
+    },
+    {
+      "title": "The Political Spectrum: The Tumultuous Liberation of Wireless Technology",
+      "href": "https://www.researchgate.net/publication/317974891_The_political_spectrum_The_tumultuous_liberation_of_wireless_technology_from_herbert_hoover_to_the_smartphone",
+      "author": "Thomas Hazlett"
+    },
+    {
+      "title": "Behind the Blip: Essays on the Culture of Software",
+      "href": "https://www.multimedialab.be/doc/citations/matthew_fuller_blip.pdf",
+      "author": "Matthew Fuller et al."
+    },
+    {
+      "title": "NODE vol 01",
+      "href": "https://n-o-d-e.net/nodevol01.html",
+      "author": "Mike Dank et al."
+    },
+    {
+      "title": "Broad Band: The Untold Story of the Women Who Made the Internet",
+      "href": "https://clairelevans.com/",
+      "author": "Claire L. Evans"
+    },
+    {
+      "title": "Prototype Politics: Technology-Intensive Campaigning and the Data of Democracy",
+      "href": "https://danielkreiss.com/prototype-politics-2/",
+      "author": "Daniel Kreiss"
+    },
+    {
+      "title": "The End of Protest: A New Playbook for Revolution",
+      "href": "https://endofprotest.com/",
+      "author": "Michah White"
+    }
+  ],
+  "neverFinished": [
+    {
+      "title": "The Twenty-Six Words that Created the Internet",
+      "href": "https://www.cato.org/events/twenty-six-words-created-internet",
+      "author": "Jeff Kosseff"
+    }
+  ]
+}

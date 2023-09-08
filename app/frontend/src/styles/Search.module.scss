@@ -1,8 +1,9 @@
 .search {
   position: absolute;
-  right: 3.25em;
-  top: 3.25em;
+  right: 6vw;
+  top: 2.75em;
   cursor: pointer;
+  padding: 0.5em;
 
   &:hover svg {
     color: var(--loosed-highlight-1);

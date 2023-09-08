@@ -62,10 +62,10 @@
   }
   section {
     & > ul {
-      margin: 0 0 0 2em;
+      margin: 0 0 2em 2em;
     }
     & > ol {
-      margin: 0 0 0 2.5em;
+      margin: 0 0 2em 2.5em;
     }
     & > hr {
       margin: 2em;
@@ -76,10 +76,10 @@
 
     @media screen and (min-width: 576px) {
       & > ul {
-        margin: 0 0 0 3em;
+        margin: 0 0 2em 3em;
       }
       & > ol {
-        margin: 0 0 0 3.5em;
+        margin: 0 0 2em 3.5em;
       }
       & > hr {
         margin: 3em;
