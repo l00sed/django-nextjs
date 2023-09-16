@@ -1,18 +1,7 @@
 .bookmark {
-  .show {
-  }
-  &.hidden {
-    display: none;
-  }
-  .depth {
-    cursor: pointer;
-  }
-  .depth-1 {
-  }
-  .depth-2 {
-  }
-  .depth-3 {
-  }
-  .depth-4 {
-  }
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }

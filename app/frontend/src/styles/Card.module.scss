@@ -70,7 +70,7 @@
 
 .card__thumbnail_wrapper {
   transition: all var(--loosed-transition-medm) ease;
-  border-radius: var(--card-radius) var(--card-radius) 0 0;
+  border-radius: calc(var(--card-radius) - 4px) calc(var(--card-radius) - 4px) 0 0;
   position: relative;
   height: 200px;
   top: 1px;
@@ -82,13 +82,14 @@
 }
 .card a:focus-visible .card__thumbnail_wrapper,
 .card:hover .card__thumbnail_wrapper {
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
   top: 0;
   left: 0;
   transform: scale(1);
 }
 
 .card__thumbnail {
-  border-radius: calc(var(--card-radius) - 3px) calc(var(--card-radius) - 3px) 0 0;
+  border-radius: calc(var(--card-radius) - 4px) calc(var(--card-radius) - 4px) 0 0;
   height: auto;
   object-fit: cover;
   filter: saturate(0.5);
