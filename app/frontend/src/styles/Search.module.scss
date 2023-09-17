@@ -9,3 +9,11 @@
     color: var(--loosed-highlight-1);
   }
 }
+
+.searchInput {
+  border-radius: 4px;
+  height: 40px;
+  width: min(400px, 100%);
+  margin: 0 2em;
+  padding: 0.5em 1em;
+}

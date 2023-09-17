@@ -11,7 +11,7 @@ function convertTime(UNIX) {
 }
 
 export default function Bookmarks() {
-  let depthHistory = [];
+  let depthHistory = []; // Used to detect jumps back up to the top layer
   let bmIndex = 0;       // Loop index, used for key attribute
   let bmLinks = [];      // Only child elements, most-often links
   let bmLayer = [];      // Holds multiple groups in a child layer
@@ -23,14 +23,27 @@ export default function Bookmarks() {
     const target = e.currentTarget;
     e.stopPropagation(); // only execute the click event on currentTarget
     if (target.getElementsByTagName('ul')) {
+      // Hide the child list
       target.querySelectorAll('ul')[0].classList.toggle(styles.hidden);
+    }
+    if (target.getElementsByTagName('svg')) {
+      // Rotate caret
+      target.querySelectorAll('svg')[0].classList.toggle(styles.closed);
     }
   }
 
-  // Loop through the first layer of bookmarks
-  bookmarks?.forEach(bookmark => {
-    genBookmark(bookmark, 0);
-  });
+  if (bookmarks?.length) {
+    /* Push a dummy object to the end to iterate through the last
+     * actual bookmark object. */
+    bookmarks.push({
+      title: "dummy",
+      typeCode: 2,
+    });
+    // Loop through the top layer of bookmarks (depth == 0)
+    bookmarks.forEach(bookmark => {
+      genBookmark(bookmark, 0);
+    });
+  }
 
   /* Generate the Bookmark markup in JSX. */
   function genBookmark(data, depth) {
@@ -57,11 +70,15 @@ export default function Bookmarks() {
       //console.log(`Title: ${data.title}, Type: ${data.typeCode}, Depth: ${depth}, prevDepth: ${prevDepth}`);
       depthHistory.push({ type: 1, depth: depth })
       bmLinks.push(
-        <li className={ classes } key={ `${bmIndex}-${depth}` }>
-          <a href={ uri ?? '' }>
-            <span>{ data.title }</span><br/>
-            { dateAdded ? <span>{ dateAdded }</span> : <></> }
+        <li className={ `${classes} ${styles.bookmarkLink}` } key={ `${bmIndex}-${depth}` }>
+          <a
+            href={ uri ?? '' }
+            target="_blank" rel="noopener nofollow noreferrer"
+            className={ styles.bookmarkTitle }
+          >
+            <span>{ data.title }</span>
           </a>
+          { dateAdded ? <span className={ styles.bookmarkDate }>{ dateAdded }</span> : <></> }
         </li>
       );
     }
@@ -78,25 +95,47 @@ export default function Bookmarks() {
 
       if (typeof prevDepth === "number") { // Not the first iteration
         let children = false;
+        const caret =
+          <svg
+            className={ `${styles.caret} ${styles.closed}` }
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7 4L13 10L7 16"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+          </svg>
 
+        /* If jumping up 2 layers, that means we're wrapping up children
+         * (links) as well as child folders (with their own links) */
         if (prevDepth > (depth + 1) && bmLayer.length) {
           children = bmLinks;
           bmLinks = [];
           category =
-            <li
-              onClick={ e => { revealChildren(e) } }
-              className={ classes }
-              key={ `${bmIndex}-${depth}` }
-            >
-              <span>{ bmCats.pop() }</span>
-              <ul className={ styles.hidden }>
-                { children }
-              </ul>
-            </li>
+            <>
+              <li
+                onClick={ e => { revealChildren(e) } }
+                className={ classes }
+                key={ `${bmIndex}-${depth}` }
+              >
+                <a
+                  href={ `#${ encodeURIComponent(bmCats[0]) }` }
+                  className={ styles.anchor }
+                >#</a>
+                <span id={ encodeURIComponent(bmCats[0]) }>{ bmCats.shift() }{ caret }</span>
+                <ul className={ `${styles.childList} ${styles.hidden}` }>
+                  { children }
+                </ul>
+              </li>
+            </>
           bmLayer.push(category);
           children = bmLayer;
           bmLayer = [];
         } else if (prevDepth > depth && bmLinks.length) {
+          // Otherwise, it's just a list of links
           children = bmLinks;
           bmLinks = [];
         }
@@ -105,31 +144,40 @@ export default function Bookmarks() {
           // 1. Grab the last element of the bmCats list (with .pop())
           // 2. Wrap this category around the bmLinks
           category =
-            <li
-              onClick={ e => { revealChildren(e) } }
-              className={ classes }
-              key={ `${bmIndex}-${depth}` }
-            >
-              <span>{ bmCats.pop() }</span>
-              <ul className={ styles.hidden }>
-                { children }
-              </ul>
-            </li>
+            <>
+              <li
+                onClick={ e => { revealChildren(e) } }
+                className={ classes }
+                key={ `${bmIndex}-${depth}` }
+              >
+                <a
+                  href={ `#${ encodeURIComponent(bmCats.at(-1)) }` }
+                  className={ styles.anchor }
+                >#</a>
+                <span id={ encodeURIComponent(bmCats.at(-1)) }>{ bmCats.pop() }{ caret }</span>
+                <ul className={ `${styles.childList} ${styles.hidden}` }>
+                  { children }
+                </ul>
+              </li>
+            </>
         }
 
         if (category) {
           if (depth === 0) {
+            // Back at the top-level layer. Push to final JSX.
             bmFinal.push(category);
           } else {
+            // Still compiling at this layer.
             bmLayer.push(category);
           }
         }
       }
 
+      // Generate bookmarks for all children
       genChildren(data, depth);
-      bmCats.push(data.title); // Just save the category title for now...
+      // Just saving the category title for now...
+      bmCats.push(data.title);
     }
-
     bmIndex++;
   }
 
@@ -146,28 +194,9 @@ export default function Bookmarks() {
     }
   }
 
-  // Add final category and links
-  if (bmCats.length && bmLinks.length) {
-    let depth = 0;
-    let classes = [`depth-${depth}`, styles.bookmark];
-    classes = classes.join(' ');
-
-    let category =
-      <li
-        onClick={ e => { revealChildren(e) } }
-        className={ classes }
-        key={ `${bmIndex}-${depth}` }
-      >
-        <span>{ bmCats.pop() }</span>
-        <ul className={ styles.hidden }>
-          { bmLinks }
-        </ul>
-      </li>
-    bmFinal.push(category);
-  }
-
   /* Finally, return the compiled JSX */
   if (bmFinal.length) {
-    return <ul>{ bmFinal }</ul>;
+    bmCats = []; // Remove last dummy object
+    return <ul className={ styles.bookmarksList }>{ bmFinal }</ul>;
   }
 }

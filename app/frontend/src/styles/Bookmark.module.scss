@@ -1,7 +1,70 @@
+.bookmarksList {
+  padding-inline-start: 0;
+  padding-left: 0;
+}
+
 .bookmark {
   cursor: pointer;
+  list-style: none;
+
+  &::marker {
+    content: '';
+  }
+
+  span {
+    line-height: 1;
+  }
+
+  &.bookmarkLink {
+    margin: 1em 0 0.5em 0;
+  }
+
+  .anchor {
+    margin-right: 0.5em;
+    text-decoration: none;
+    height: 14px;
+    width: 14px;
+    position: relative;
+    top: 1px;
+    opacity: 0.5;
+    content: var(--anchor-icon);
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .bookmarkTitle {
+    line-height: 1.25;
+    display: block;
+  }
+
+  .bookmarkDate {
+    font-size: var(--small);
+    position: relative;
+    top: -5px;
+  }
 }
 
 .hidden {
   display: none;
+}
+
+.childList {
+  margin: 0.5em 0;
+}
+
+.caret {
+  position: relative;
+  top: 1px;
+  height: 14px;
+  width: 14px;
+  transition: transform var(--loosed-transition-fast) ease;
+  margin-left: 0.5em;
+  stroke: currentColor;
+  transform: rotate(90deg);
+
+  &.closed {
+    transform: rotate(0deg);
+  }
 }

@@ -1,9 +1,15 @@
+import styles from '../styles/Search.module.scss';
+
 import MessageOverlay from './message_overlay';
 
 export default function SearchOverlay() {
   return (
     <MessageOverlay overlayId="search-overlay">
-      <input type="text" />
+      <input
+        className={ styles.searchInput }
+        type="text"
+        placeholder="Search"
+      />
     </MessageOverlay>
   )
 }
