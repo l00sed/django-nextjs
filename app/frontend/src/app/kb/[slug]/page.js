@@ -1,17 +1,17 @@
 /* React */
 import React from 'react';
 /* Styles */
-import page_styles from '../../styles/Page.module.scss';
+import page_styles from 'styles/Page.module.scss';
 /* Local Components */
-import MenuOverlay from '../../components/menu_overlay';
-import MenuToggle from '../../components/menu_toggle';
-import Title from '../../components/title';
-import Donate from '../../components/donate';
-import Article from '../../components/article';
-import Footer from '../../components/footer';
-import ShareOverlay from '../../components/share_overlay';
-import SearchOverlay from '../../components/search_overlay';
-import SearchToggle from '../../components/search_toggle';
+import MenuOverlay from 'components/menu_overlay';
+import MenuToggle from 'components/menu_toggle';
+import Title from 'components/title';
+import Donate from 'components/donate';
+import Article from 'components/article';
+import Footer from 'components/footer';
+import ShareOverlay from 'components/share_overlay';
+import SearchOverlay from 'components/search_overlay';
+import SearchToggle from 'components/search_toggle';
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL),
@@ -38,13 +38,13 @@ export const metadata = {
 
 /* Default /kb page is a "Knowledge Base" page */
 export default function KnowledgeBasePage({ params }) {
-  /* Different page settings for "live" page */
+  /* Different page settings for "knowledge base" pages */
   let article =
     <Article
       slug={ params.slug }
       head={ false }
       meta={ true }
-      show={ ['likes', 'comments', 'share'] }
+      show={ ['likes', 'comments', 'share', 'toc'] }
       style={{ marginBottom: 0, paddingBottom: 0 }}
       metaPosition='after'
       disableLiveButton

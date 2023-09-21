@@ -1,4 +1,6 @@
 from rest_framework import generics, response, status
+from taggit.models import Tag
+
 from .models import Article, Subscriber
 from .serializers import (
     ArticleSerializer,
@@ -16,6 +18,28 @@ class ArticleListAPIView(generics.ListAPIView):
     def get_queryset(self):
         """get_queryset."""
         return Article.objects.filter(content_type='blog')
+
+
+class ArticlesByTagAPIView(generics.ListAPIView):
+    """Articles by Tag (using tag slug)."""
+
+    serializer_class = ArticleSerializer
+
+    queryset = Article.objects.all()
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(tags__slug=self.kwargs['slug'])
+
+
+# class ArticlesBySearchTermAPIView(generics.ListAPIView):
+#     """Articles by search term."""
+#
+#     serializer_class = ArticleSerializer
+#
+#     def get_queryset(self, request, search):
+#         """get_queryset."""
+#         return Article.objects.filter(title__in=[search])
 
 
 class ArticleDetailAPIView(generics.GenericAPIView):

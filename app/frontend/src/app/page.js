@@ -1,17 +1,17 @@
 /* Styles */
-import styles from '../styles/Home.module.scss';
-import page_styles from '../styles/Page.module.scss';
+import styles from 'styles/Home.module.scss';
+import page_styles from 'styles/Page.module.scss';
 /* Components */
-import Title from '../components/title';
-import Donate from '../components/donate';
-import MenuOverlay from '../components/menu_overlay';
-import MenuToggle from '../components/menu_toggle';
-import SearchOverlay from '../components/search_overlay';
-import SearchToggle from '../components/search_toggle';
-import Footer from '../components/footer';
-import Card from '../components/card';
+import Title from 'components/title';
+import Donate from 'components/donate';
+import MenuOverlay from 'components/menu_overlay';
+import MenuToggle from 'components/menu_toggle';
+import SearchOverlay from 'components/search_overlay';
+import SearchToggle from 'components/search_toggle';
+import Footer from 'components/footer';
+import Card from 'components/card';
 /* Lib */
-import articles from '../lib/articles';
+import articles from 'lib/articles';
 
 export default async function Home() {
   const data = await articles();

@@ -1,7 +1,7 @@
 import ResponseError from '../utils/error_handling.js';
 import HOST_URL from '../utils/api_server.js';
 
-export default async function articles() {
+export default async function articles(props) {
   const options_get = {
     method: "GET",
     supportHeaderParams: true,
@@ -11,7 +11,21 @@ export default async function articles() {
     }
   }
 
-  const articles_promise = await fetch(`${HOST_URL()}/api/articles`, options_get );
+  let api_url = `${HOST_URL()}/api/articles`;
+
+  if (props?.hasOwnProperty('search')) { // Return filtered articles by search string
+    if (props.search) {
+      api_url = `${HOST_URL()}/api/articles/search/${ props.search }`
+    }
+  } else
+
+  if (props?.hasOwnProperty('tag')) { // Return filtered articles by tag
+    if (props.tag) {
+      api_url = `${HOST_URL()}/api/articles/tagged/${ props.tag }`
+    }
+  }
+
+  const articles_promise = await fetch(api_url, options_get);
 
   let articles_json = {};
 

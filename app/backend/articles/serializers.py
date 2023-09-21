@@ -24,7 +24,6 @@ class ArticleLikesSerializer(serializers.ModelSerializer):
 
 
 class SubscriberSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Subscriber
         fields = "__all__"
