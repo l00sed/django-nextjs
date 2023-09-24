@@ -70,18 +70,24 @@ export function Tag (props) {
   )
 }
 
-export function Tags({ tags }) {
-  if (tags) {
-    tags = tags.map((t, i) => {
-      let key = `${ t.slug }-${ t.id }`;
-      return (
-        <Tag
-          key={ key }
-          tag={ t.name }
-          slug={ t.slug }
-          index={ i }
-        />
-      )
+export function Tags(props) {
+  if (props.tags) {
+    let tags = props.tags.map((t, i) => {
+      let limit = props.tags.length;
+      if (props.hasOwnProperty('max')) {
+        limit = props.max;
+      }
+      if (i < limit) {
+        let key = `${ t.slug }-${ t.id }`;
+        return (
+          <Tag
+            key={ key }
+            tag={ t.name }
+            slug={ t.slug }
+            index={ i }
+          />
+        )
+      }
     })
 
     return (

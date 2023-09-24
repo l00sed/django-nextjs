@@ -11,9 +11,27 @@
 }
 
 .searchInput {
-  border-radius: 4px;
-  height: 40px;
-  width: min(400px, 100%);
-  margin: 0 2em;
-  padding: 0.5em 1em;
+  font-size: var(--medium);
+  border-radius: 8px;
+  border: none;
+  height: 50px;
+  width: 100%;
+  padding: 0.3em 1em 0.25em 1em;
+  background: linear-gradient(135deg, var(--loosed-white), var(--loosed-white), var(--main-box-shadow));
+  box-shadow: inset 0 0 1px 1px var(--main-box-shadow), 0 0 1px 1px var(--loosed-black);
+}
+
+.searchWrapper {
+  width: 400px;
+  max-width: 80%;
+  margin: 0 auto;
+  display: flex;
+  position: relative;
+
+  svg {
+    position: absolute;
+    fill: var(--search-icon);
+    right: 1em;
+    top: 10px;
+  }
 }

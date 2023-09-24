@@ -15,15 +15,33 @@
   box-shadow: 0 0 0 1px var(--menu-box-shadow);
 
   a {
+    &.contact {
+      svg {
+        margin-top: 3px;
+        margin-right: 0;
+      }
+    }
+
     p {
       color: var(--loosed-black);
       display: flex;
-      text-align: left;
+      justify-content: space-between;
       border-radius: 5px;
       margin: 0.25em 0;
       padding: 0.25em 0.75em;
       font-size: var(--medium);
       cursor: pointer;
+
+      span {
+        margin-top: 1px;
+      }
+
+      svg {
+        fill: var(--loosed-black);
+        opacity: 1;
+        align-self: center;
+        margin-bottom: 1px;
+      }
     }
 
     &:hover,
@@ -31,6 +49,10 @@
       p {
         background-color: var(--loosed-black);
         color: var(--loosed-white);
+
+        svg {
+          filter: invert(1);
+        }
       }
     }
   }

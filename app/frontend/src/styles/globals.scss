@@ -77,6 +77,8 @@ $l-anchor-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
 
 $l-main-text-color: #333;
 
+$l-search-icon: rgba(0,0,0,0.4);
+
 $l-comment-heading: rgba(0,0,0,0.025);
 $l-comment-content: rgba(255,255,255,0.5);
 $l-comment-shadow: rgba(0,0,0,0.15);
@@ -84,6 +86,7 @@ $l-comment-form-bg: rgba(255,255,255,0.5);
 $l-comment-input-bg: rgba(0,0,0,0.05);
 $l-reply-shadow: rgba(0,0,0,0.075);
 $l-input-outline: rgba(0,0,0,0.5);
+
 $l-indent-1: rgba(0,0,0,0.1);
 $l-indent-2: rgba(0,0,0,0.2);
 $l-indent-3: rgba(0,0,0,0.3);
@@ -189,6 +192,8 @@ $d-toc-hr: rgba(255,255,255,0.05);
 $d-anchor-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='%23f93e17' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M8 4v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4V8h-4V4h-2v4h-4V4H8Zm6 10v-4h-4v4h4Z' clip-rule='evenodd'/%3E%3C/svg%3E");
 
 $d-main-text-color: #e0e0e0;
+
+$d-search-icon: rgba(255,255,255,0.5);
 
 $d-comment-heading: rgba(255,255,255,0.05);
 $d-comment-content: rgba(0,0,0,0.05);
@@ -303,6 +308,8 @@ $d-tag-bg-15: #217171;
     --anchor-icon: #{$l-anchor-icon};
 
     --main-text-color: #{$l-main-text-color};
+
+    --search-icon: #{$l-search-icon};
 
     --comment-heading: #{$l-comment-heading};
     --comment-content: #{$l-comment-content};
@@ -419,6 +426,8 @@ $d-tag-bg-15: #217171;
     --anchor-icon: #{$d-anchor-icon};
 
     --main-text-color: #{$d-main-text-color};
+
+    --search-icon: #{$d-search-icon};
 
     --comment-heading: #{$d-comment-heading};
     --comment-content: #{$d-comment-content};
@@ -572,6 +581,8 @@ $d-tag-bg-15: #217171;
 
   --main-text-color: #{$l-main-text-color} !important;
 
+  --search-icon: #{$l-search-icon} !important;
+
   /* ## comment.js */
   --comment-heading: #{$l-comment-heading} !important;
   --comment-content: #{$l-comment-content} !important;
@@ -701,6 +712,8 @@ $d-tag-bg-15: #217171;
   --anchor-icon: #{$d-anchor-icon} !important;
 
   --main-text-color: #{$d-main-text-color} !important;
+
+  --search-icon: #{$d-search-icon} !important;
 
   /* ## comments.js */
   --comment-heading: #{$d-comment-heading} !important;

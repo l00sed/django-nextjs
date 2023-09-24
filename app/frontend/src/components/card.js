@@ -17,7 +17,7 @@ export default function Card({ element, truncate, index }) {
 
   const tags = element.tags ?
     <div className={ styles.card__tags }>
-      <Tags tags={ element.tags } />
+      <Tags tags={ element.tags } max={ 2 } />
     </div>
     :
     <></>

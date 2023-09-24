@@ -21,7 +21,7 @@
 
 .card {
   --card-radius: 10px;
-  --card-width: 400px;
+  --card-width: 300px;
   border-radius: var(--card-radius);
   min-width: min(var(--card-width), 100%);
   width: min(var(--card-width), 100%);
@@ -82,7 +82,8 @@
 }
 .card a:focus-visible .card__thumbnail_wrapper,
 .card:hover .card__thumbnail_wrapper {
-  border-radius: var(--card-radius) var(--card-radius) 0 0;
+  /* Use card-radius - 1 to account for the border */
+  border-radius: calc(var(--card-radius) - 1px) calc(var(--card-radius) - 1px) 0 0;
   top: 0;
   left: 0;
   transform: scale(1);

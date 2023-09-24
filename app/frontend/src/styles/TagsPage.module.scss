@@ -1,11 +1,18 @@
 .title {
   text-align: left;
-  min-width: min(300px, 100%);
+  width: fit-content;
+
+  p {
+    min-width: 200px;
+  }
 }
+
 .results {
   display: block;
   width: 100%;
-}
-.scroller {
-  margin-bottom: 0;
+  margin: auto;
+
+  .scroller {
+    margin: 1.5em 0 0 0;
+  }
 }
