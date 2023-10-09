@@ -1,5 +1,10 @@
 from rest_framework import generics, response, status
-from taggit.models import Tag
+from django.contrib.postgres.search import SearchVector
+from django.contrib.postgres.aggregates import ArrayAgg
+from django.db.models import Q
+from urllib.parse import quote
+from rest_framework.filters import SearchFilter
+import coreapi
 
 from .models import Article, Subscriber
 from .serializers import (
@@ -32,14 +37,38 @@ class ArticlesByTagAPIView(generics.ListAPIView):
         return queryset.filter(tags__slug=self.kwargs['slug'])
 
 
-# class ArticlesBySearchTermAPIView(generics.ListAPIView):
-#     """Articles by search term."""
-#
-#     serializer_class = ArticleSerializer
-#
-#     def get_queryset(self, request, search):
-#         """get_queryset."""
-#         return Article.objects.filter(title__in=[search])
+class ArticlesBySearchAPIView(generics.ListAPIView):
+    """Articles by search term."""
+
+    serializer_class = ArticleSerializer
+
+    queryset = Article.objects.all()
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.annotate(
+            tags_names=ArrayAgg('tags__name', distinct=True),
+            search=SearchVector(
+                'title',
+                'author',
+                'description',
+                'tags_names'
+            ),
+        ) \
+            .filter(
+                Q(
+                    search=quote(
+                        str(self.kwargs['search']),
+                        safe='/'
+                    )
+                ) |
+                Q(
+                    search__icontains=quote(
+                        str(self.kwargs['search']),
+                        safe='/'
+                    )
+                )
+            )
 
 
 class ArticleDetailAPIView(generics.GenericAPIView):

@@ -168,6 +168,7 @@ $l-tag-bg-12: #EFCAE3;
 $l-tag-bg-13: #D0D5DC;
 $l-tag-bg-14: #D5D5D5;
 $l-tag-bg-15: #C7C5C6;
+$l-tag-bg-16: #A7C5C6;
 
 /* DARK */
 $d-black: #f3f3f3;
@@ -283,6 +284,7 @@ $d-tag-bg-12: #A747BF;
 $d-tag-bg-13: #C13995;
 $d-tag-bg-14: #617388;
 $d-tag-bg-15: #217171;
+$d-tag-bg-16: #1f9050;
 
 @media (prefers-color-scheme: light) {
   .default {
@@ -399,6 +401,7 @@ $d-tag-bg-15: #217171;
     --tag-bg-13: #{$l-tag-bg-13};
     --tag-bg-14: #{$l-tag-bg-14};
     --tag-bg-15: #{$l-tag-bg-15};
+    --tag-bg-16: #{$l-tag-bg-16};
   }
 }
 
@@ -517,6 +520,7 @@ $d-tag-bg-15: #217171;
     --tag-bg-13: #{$d-tag-bg-13};
     --tag-bg-14: #{$d-tag-bg-14};
     --tag-bg-15: #{$d-tag-bg-15};
+    --tag-bg-16: #{$d-tag-bg-16};
   }
 }
 
@@ -683,6 +687,7 @@ $d-tag-bg-15: #217171;
   --tag-bg-13: #{$l-tag-bg-13} !important;
   --tag-bg-14: #{$l-tag-bg-14} !important;
   --tag-bg-15: #{$l-tag-bg-15} !important;
+  --tag-bg-16: #{$l-tag-bg-16} !important;
 }
 
 /* # Dark Theme
@@ -815,6 +820,7 @@ $d-tag-bg-15: #217171;
   --tag-bg-13: #{$d-tag-bg-13} !important;
   --tag-bg-14: #{$d-tag-bg-14} !important;
   --tag-bg-15: #{$d-tag-bg-15} !important;
+  --tag-bg-16: #{$d-tag-bg-16} !important;
 }
 
 /* # HTML + body tags */
@@ -1086,6 +1092,9 @@ a[data-footnote-ref="true"]:hover {
 }
 .tag-bg-15 {
   background-color: var(--tag-bg-15);
+}
+.tag-bg-16 {
+  background-color: var(--tag-bg-16);
 }
 
 #loosed-tv {

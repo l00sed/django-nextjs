@@ -34,6 +34,8 @@ export function Tag (props) {
         return "tag-bg-14"
       case 'sysadmin':
         return "tag-bg-15"
+      case 'robotics':
+        return "tag-bg-16"
     }
   }
   const tagBgColor = tagBg(props.slug);

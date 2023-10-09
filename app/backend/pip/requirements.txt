@@ -1,6 +1,7 @@
 Django
 Pillow
 Pygments
+coreapi
 django-cors-headers
 django-filter
 django-taggit
@@ -15,3 +16,4 @@ gunicorn
 markdown
 psycopg2-binary
 python-frontmatter
+pyyaml

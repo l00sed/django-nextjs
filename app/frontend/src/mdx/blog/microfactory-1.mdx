@@ -1,0 +1,111 @@
+---
+title: Microfactory 01
+author: Daniel Tompkins
+description: In high school, there was no shop class. Sometimes I'd work on a project in the garage with my dad. Most of his tools are older, corded, and often uncooperative. I remember using saw-horses that wobbled&mdash; and a slightly rusted Skilsaw&mdash; to cut down ply for a Boy Scouts derby car. It had a hand-brake and a rope for steering. My dad seemed to stub his fingers and rake all the splinters into his hands anytime we worked with wood or tools. There was always a lot of cursing and frustration; and sometimes I hated being out there with him. Now, more or less, I look on those memories fondly...
+slug: microfactory-1
+created_at: 06/16/2020 16:40:00
+updated_at: 06/16/2020 16:40:00
+featured_image: robot-mech-sim.gif
+image_alt: Screenshot of grasshopper
+content_type: blog
+tags: DIY, robotics, fabrication
+---
+<ProseWrapper>
+In high school, there was no shop class. Sometimes I'd work on a project in the garage with my dad. Most of his tools are older, corded, and often uncooperative.
+
+I remember using saw-horses that wobbled&mdash; and a slightly rusted [Skilsaw](https://i.redd.it/9q1tp6zfml001.png)&mdash; to cut down ply for a Boy Scouts derby car. It had a hand-brake and a rope for steering.
+
+My dad seemed to stub his fingers and rake all the splinters into his hands anytime we worked with wood or tools. There was always a lot of cursing and frustration; and sometimes I hated being out there with him. Now, more or less, I look on those memories fondly...
+
+## Wood, Metal and Modeling
+
+Eventually, I left McHenry, Illinois to study architecture at college. I finally had the opportunity to use a full-fledged shop. For the first time, I had access to the same power-tools professional contractors might use&mdash; saws, drills, welders and more.
+
+Over the summer, I started working at [Bridgewater Studio](https://bridgewaterstudio.net) in Chicago. Beginning mostly as a finisher (sanding and painting), and eventually coming back with more carpentry and [computer-aided manufacturing](https://en.wikipedia.org/wiki/Computer-aided_manufacturing) (CAM) experience.
+
+In my third and fourth years of undergrad, I started using modeling tools to produce [GCODE](https://en.wikipedia.org/wiki/G-code) and other machine-readable codes. This language, used for [computer numerical control](https://en.wikipedia.org/wiki/Numerical_control) (CNC) is a standard for 3D printers, laser-cutters, and mills.
+
+I also learned to use parametric modeling (also referred to as algorithmic modeling) in the popular plug-in, [Grasshopper3D](https://www.grasshopper3d.com/), for [Rhinoceros](https://www.rhino3d.com/gallery).
+
+Grasshopper is essentially a visual-programming framework that uses graphical nodes (components) and wires to connect variables. It is a powerful digital tool and extraordinarily extensible.
+
+<OneColumn>
+  <ImageWrapper
+    alt='Screenshot of the Grasshopper3D interface, showing nodes and connecting "wires".'
+    src="/assets/img/blog/microfactory-1/grasshopper-interface.png"
+    height="1578"
+    width="675"
+  />
+</OneColumn>
+
+## Industrial Manufacturing Robotics
+
+Under professor [Jenny Sabin](https://www.jennysabin.com/), I used the Grasshopper plug-in, [HAL](https://hal-robotics.com/), to model and simulate toolpaths for a popular [ABB robot](https://new.abb.com/products/robotics/industrial-robots/irb-4600).
+
+Together with my partner, [Thanh Nyugen](https://www.linkedin.com/in/thanh-nguyen-5b72b051/), we designed a green facade system. The stringy, nest-like structure was achieved by depositing a starch-based bio-plastic with a custom pneumatic extruder.
+
+<OneColumn>
+  <iframe
+    style={{ backgroundColor: 'black', marginBottom: 0 }}
+    src="https://player.vimeo.com/video/170103352"
+    width="100%"
+    height="auto"
+    frameborder="0"
+    allow="autoplay; fullscreen"
+    allowfullscreen
+  ></iframe>
+</OneColumn>
+
+Additionally, in Jenny's <em>Digital Ceramics</em> elective, I also CNC'd plaster molds for [slipcasting](https://en.wikipedia.org/wiki/Slipcasting) high-accuracy, repeatable ceramics.
+
+<OneColumn>
+  <ImageWrapper
+    alt='Colorfully glazed "bricks", the folded trapezoid shapes are interlocked in a miniature wall.'
+    src="/assets/img/blog/microfactory-1/digital_ceramics.jpg"
+    height="1368"
+    width="1368"
+  />
+</OneColumn>
+
+## Continuing with Digital Design & Fab
+
+Now, as a professional designer and digital fabricator at [Iontank](https://iontank.com) (at the time of writing), I help take models from computer screens out into the world.
+
+<OneColumn>
+  <ImageWrapper
+    alt="Image of the hanging dual-helix light sculpture in the atrium of Allegheny General Hospital's new atrium addition, the Academic Cancer Center."
+    src="/assets/img/blog/microfactory-1/chandelier-ACC.jpg"
+    height="1224"
+    width="1224"
+  />
+</OneColumn>
+
+In this recent project&mdash; a chandelier-like sculpture residing in a forty-foot-tall hospital atrium&mdash; I used Grasshopper to array and analyze each of the 150 individual hanging elements. The parametric modeling plugin allowed me to filter, predict, and output the relative wire lengths and hanging location of each part.
+
+The line-work from the 3D model is also used for exporting GCODE in [RhinoCAM](https://mecsoft.com/rhinocam-mill/)&mdash; by far the most user-friendly CAM plugin for Rhino3D. The GCODE provides a collection of XYZ coordinates, tool changes, router RPMs, and travel speeds.
+
+## Designing a Microfactory
+
+As DIY fabrication tools become more affordable and capable, I've become engaged with the idea of building my own home [microfactory](https://en.wikipedia.org/wiki/Microfactory). The concept behind a microfactory is that it minimizes the need for holding inventory.
+
+Instead of stocking a supply of diverse products&mdash; without knowing exactly which will be purchased&mdash; the microfactory can deliver a set range of products that are rapidly and autonomously produced from a stock of raw materials (filament, sheet goods, etc.).
+
+The success of a microfactory therefore depends on optimizing for the most diverse and desirable set of products from a minimal amount of raw materials and manual labor. The microfactory itself is then re-produced at scale, slashing the cost of stocking and delivering to hard-to-reach locales.
+
+To achieve high degrees of automation, I'm interested in designing and constructing a mid-scale 6-axis robotic arm. I'd like this machine to be capable of high-degrees of manipulation (pick-and-place) as well as rigid enough to mill hardwoods&mdash; potentially soft metals.
+
+<OneColumn>
+  <ImageWrapper
+    alt="Simulation (built with Grasshopper3D) of a 6-axis robotic arm's range-of-motion"
+    src="/assets/img/blog/microfactory-1/robot-mech-sim.gif"
+    height="174"
+    width="400"
+  />
+</OneColumn>
+
+## Conclusion
+
+For electronic products, it makes sense that I could stock a narrow set of programmable components (like single-board computers, or SBCs). I'll also likely need a high-resolution 3D printer. SLA printers, like those made by [Formlabs](https://formlabs.com/) provide an incredible finish with little post-processing.
+
+This will be a slow project, but I'm optimistic. The ultimate goal is to have a few highly extensible tools (robot, 3D printer, and a mill), while stock-piling only a few electronics, filaments, sheet goods, resins, and other "raw" materials.
+</ProseWrapper>

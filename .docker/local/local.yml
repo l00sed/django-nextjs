@@ -24,12 +24,26 @@ services:
         condition: on-failure
         max_attempts: 3
 
+  # PostgreSQL Service
+  db:
+    restart: always
+    build:
+      context: .
+      dockerfile: db.Dockerfile
+    expose:
+      - 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   # Python/Django Service
   backend:
+    restart: always
     build:
       context: .
       dockerfile: backend.Dockerfile
-    command: "/./loosed run_backend"
+    depends_on:
+      - db
+    command: "/./loosed start_backend"
     expose:
       - 8000
     volumes:
@@ -50,27 +64,8 @@ services:
       - 3000
     volumes:
       - ./app/frontend:/home/node
-    # depends_on:
-    #   mysql:
-    #     condition: service_healthy
-
-  # MySQL Service
-  # mysql:
-    # image: mysql/mysql-server:8.0
-    #    environment:
-    #      MYSQL_DATABASE: ${LOCAL_DATABASE}
-    #      MYSQL_ROOT_USER: ${LOCAL_USER}
-    #      MYSQL_ROOT_PASSWORD: ${LOCAL_PASSWORD}
-    #      MYSQL_ROOT_HOST: "%"
-    # volumes:
-    #   - ../.docker/local/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-    #   - ../.docker/local/mysql:/docker-entrypoint-initdb.d
-    #   - mysqldata:/var/lib/mysql
-    # healthcheck:
-    #      test: mysqladmin ping -h 127.0.0.1 -u ${LOCAL_USER} --password=${LOCAL_PASSWORD}
-    #      interval: 5s
-    #      retries: 10
 
 # Volumes
 volumes:
   app:
+  postgres_data:

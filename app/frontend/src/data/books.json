@@ -1,11 +1,6 @@
 {
   "reading": [
     {
-      "title": "Dune",
-      "href": "https://en.wikipedia.org/wiki/Dune_(novel)",
-      "author": "Frank Herbert"
-    },
-    {
       "title": "The Revolution Will Not Be Televised: Democracy, the Internet, and the Overthrow of Everything",
       "href": "https://en.wikipedia.org/wiki/The_Revolution_Will_Not_Be_Televised_(book)",
       "author": "Joe Trippi"
@@ -168,6 +163,11 @@
       "title": "The End of Protest: A New Playbook for Revolution",
       "href": "https://endofprotest.com/",
       "author": "Michah White"
+    },
+    {
+      "title": "Dune",
+      "href": "https://en.wikipedia.org/wiki/Dune_(novel)",
+      "author": "Frank Herbert"
     }
   ],
   "neverFinished": [

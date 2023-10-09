@@ -49,6 +49,10 @@ clean() {
       echo "Removing nginx Dockerfile."
       rm nginx.Dockerfile
     fi
+    if [ -f "./db.Dockerfile" ]; then
+      echo "Removing db Dockerfile."
+      rm db.Dockerfile
+    fi
   )
 }
 
@@ -115,13 +119,35 @@ restart() {
   )
 }
 
-# Backend Docker container's command script
+# Start the containers
 run_backend() {
+  (
+    # Always clean first to make sure we're starting with the right Dockerfile
+    clean
+    # Pull the local backend Dockerfile into the project root
+    cp ".docker/$ENV/backend/backend.Dockerfile" .
+    cp ".docker/$ENV/db/db.Dockerfile" .
+    cp ".docker/$ENV/.dockerignore" .
+    cp ".docker/$ENV/$ENV.yml" .
+
+    docker compose -p "loosed" \
+      -f "$ENV.yml" \
+      --verbose run backend /bin/bash
+  )
+}
+
+# Backend Docker container's command script
+start_backend() {
   (
     # Activate the virtual environment (where Django is installed)
     . ./bin/activate
     # Run Django app prep
     python manage.py collectstatic --no-input
+    # Migrate database tables
+    python manage.py makemigrations
+    python manage.py migrate
+    # Import pages
+    python manage.py sync_mdx
     # Run Gunicorn WSGI client
     # WARN: (`--reload` argument not recommended for production)
     gunicorn backend.wsgi:application --bind :8000 --reload
@@ -161,7 +187,7 @@ stop() {
     echo "Copying docker compose file to the current directory."
     cp ".docker/$ENV/$ENV.yml" .
     echo "Killing and removing project containers."
-    docker compose -f "$ENV.yml" down
+    docker compose -f "$ENV.yml" down --remove-orphans
     echo "Again, cleaning up build files."
     clean
   )
@@ -179,17 +205,30 @@ build() {
     cp ".docker/$ENV/frontend/frontend.Dockerfile" .
     # Pull the local nginx Dockerfile into the project root
     cp ".docker/$ENV/nginx/nginx.Dockerfile" .
+    ## Pull the local db Dockerfile into the project root
+    cp ".docker/$ENV/db/db.Dockerfile" .
     # Grab the local.yml and .dockerignore
     cp ".docker/$ENV/.dockerignore" .
     cp ".docker/$ENV/$ENV.yml" .
+
+    if [ -z "$2" ]; then
+      if [[ "$2" -eq "no-cache" ]]; then
+        # Run docker compose to build the image with either local/production Dockerfiles
+        docker compose -p "loosed" \
+          -f "$ENV.yml" build \
+          --progress plain \
+          --build-arg USER_ID=${USER_ID} \
+          --build-arg GROUP_ID=${GROUP_ID} \
+          --no-cache
+      fi
+    fi
 
     # Run docker compose to build the image with either local/production Dockerfiles
     docker compose -p "loosed" \
       -f "$ENV.yml" build \
       --progress plain \
       --build-arg USER_ID=${USER_ID} \
-      --build-arg GROUP_ID=${GROUP_ID} \
-      --no-cache
+      --build-arg GROUP_ID=${GROUP_ID}
 
     clean
   )
@@ -234,6 +273,9 @@ case "$1" in
   start)
     start
     ;;
+  start_backend)
+    start_backend
+    ;;
   stop)
     stop
     ;;
@@ -249,14 +291,14 @@ Usage:
   loosed <command> [options] [env]
 
 Available commands:
-  build ..................................... Build the containers' images
+  build ..................................... Build the containers' images (can use "--no-cache" option)
   clean ..................................... Remove build artifacts
   cli_backend ............................... Start a command prompt for the backend image
   cli_frontend .............................. Start a command prompt for the frontend image
   generate_cert ............................. Generate an SSL certificate (local only, env ignored)
   install_cert .............................. Install cert on host machine (local only, env ignored)
   restart ................................... Restart the containers
-  run_backend ............................... Run backend (Django) in container
+  start_backend ............................. Run backend (Django) in container
   start ..................................... Start the containers
   stop ...................................... Stop the containers
   sync_mdx .................................. Sync the MDX files

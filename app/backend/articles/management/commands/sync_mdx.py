@@ -79,9 +79,12 @@ class Command(BaseCommand):
 
                     if article:
                         if 'tags' in file:
-                            tags = [t.strip() for t in file['tags'].split(",")]
-                            # print(f"Tags: { tags }")
-                            article.tags.set(tags, clear=True)
+                            if file['tags']:
+                                tags = [
+                                    t.strip() for t in file['tags'].split(",")
+                                ]
+                                # print(f"Tags: { tags }")
+                                article.tags.set(tags, clear=True)
 
                     message = f"Successfully updated { file['slug'] }"
 

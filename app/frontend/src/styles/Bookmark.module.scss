@@ -36,13 +36,16 @@
 
   .bookmarkTitle {
     line-height: 1.25;
-    display: block;
+    width: 100%;
+    display:block;
   }
 
   .bookmarkDate {
     font-size: var(--small);
+    color: var(--loosed-black);
     position: relative;
     top: -5px;
+    text-decoration: none;
   }
 }
 
@@ -59,9 +62,9 @@
   top: 1px;
   height: 14px;
   width: 14px;
-  transition: transform var(--loosed-transition-fast) ease;
   margin-left: 0.5em;
   stroke: currentColor;
+  transition: transform var(--loosed-transition-medm) ease;
   transform: rotate(90deg);
 
   &.closed {
