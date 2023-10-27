@@ -2,7 +2,7 @@
   margin-top: 0;
 }
 
-@media (min-width: 1200px) {
+@media screen and (min-width: 1200px) {
   .prose__wrapper > hr:not([class*=full__width]) {
     width: calc(100% - 4em);
   }

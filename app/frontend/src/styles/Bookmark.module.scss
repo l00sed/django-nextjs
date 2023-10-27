@@ -47,6 +47,25 @@
     top: -5px;
     text-decoration: none;
   }
+
+  span:hover > .caret {
+    margin-left: 1em;
+  }
+
+  .caret {
+    position: relative;
+    top: 1px;
+    height: 14px;
+    width: 14px;
+    margin-left: 0.5em;
+    stroke: currentColor;
+    transition: all var(--loosed-transition-fast) ease;
+    transform: rotate(90deg);
+
+    &.closed {
+      transform: rotate(0deg);
+    }
+  }
 }
 
 .hidden {
@@ -55,19 +74,4 @@
 
 .childList {
   margin: 0.5em 0;
-}
-
-.caret {
-  position: relative;
-  top: 1px;
-  height: 14px;
-  width: 14px;
-  margin-left: 0.5em;
-  stroke: currentColor;
-  transition: transform var(--loosed-transition-medm) ease;
-  transform: rotate(90deg);
-
-  &.closed {
-    transform: rotate(0deg);
-  }
 }

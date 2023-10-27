@@ -1,0 +1,55 @@
+.youtubeWrapper {
+  height: 300px;
+  width: 100%;
+  display: block;
+  width: calc(100% - 4em);
+  background-color: #000;
+  margin: 2em auto 3em auto;
+}
+
+.caption {
+  margin-bottom: 4em;
+}
+
+.image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #000;
+  cursor: pointer;
+  height: 100%;
+  max-width: 530px;
+  margin: 0 auto;
+}
+
+.playButton {
+  cursor: pointer;
+  position: relative;
+  height: 60px;
+  width: 100px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+}
+
+.playButton:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.playButton:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 16.5px;
+  left: 40px;
+  margin: 0 auto;
+  border-style: solid;
+  border-width: 12.5px 0 12.5px 20px;
+  border-color: transparent transparent transparent rgba(255, 255, 255, 1);
+}
+.image:hover .playButton{
+  background-color: #FF0000;
+}

@@ -2,17 +2,37 @@ import Image from 'next/image';
 import Parse from '../utils/parser';
 import image_styles from '../styles/ImageWrapper.module.scss';
 
-export default function ImageWrapper({ src, alt, caption, width, height, visible=true }) {
+export default function ImageWrapper({ src, alt, caption, width, height, visible=true, align="center" }) {
   return (
     <>
-      <figure className={ image_styles.image__wrapper }>
+      <figure
+        className={ image_styles.image__wrapper }
+        style={
+          align === 'left' ?
+          {
+            width: "fit-content",
+            margin: "0 auto 0 0"
+          } :
+          align === 'right' ?
+          {
+            width: "fit-content",
+            margin: "0 0 0 auto"
+          } :
+          {}
+        }
+      >
         <Image
           src={ src }
           alt={ alt }
           width={ width }
           height={ height }
         />
-        <Caption text={ caption ? caption : alt } width={ width } visible={ visible } type='figure' />
+        <Caption
+          text={ caption ? caption : alt }
+          width={ width }
+          visible={ visible }
+          type='figure'
+        />
       </figure>
     </>
   )

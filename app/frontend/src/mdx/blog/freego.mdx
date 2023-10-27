@@ -1,0 +1,129 @@
+---
+title: Freego
+author: Daniel Tompkins
+description: The Boston Freedom Trail is a major tourist attraction for exploring many of the important monuments and sites of our nation's early history. My collaborators (Alicia Valencia, Hüma Şahin, Mallory Nezam) and I were tasked to address this historical pilgrimage— to observe and reflect on these sites in their past and present contexts.
+slug: freego
+created_at: 01/12/2020 21:30:00
+updated_at: 01/12/2020 21:30:00
+featured_image: freego-emblems.png
+image_alt: Collection of emblems
+content_type: blog
+tags: media art, electronics
+---
+<ProseWrapper>
+## Walking the Freedom Trail
+
+The [Boston Freedom Trail](https://www.thefreedomtrail.org/) is a major tourist attraction for exploring many of the important monuments and sites of our nation's early history. My collaborators ([Alicia Valencia](http://www.aliciavalencia.com/), [Hüma Şahin](https://humasahin.com/), [Mallory Nezam](https://www.mallorynezam.com/)) and I were tasked to address this historical pilgrimage&mdash; to observe and reflect on these sites in their past and present contexts.
+
+First, we purchased tickets and set off on the <em>Trail</em>. One of our immediate observations was a feeling of insincerity&mdash; the tour felt hokey. It also led us to question the role and meaning of <em>Freedom</em> in the context of the Trail, as well as in America.
+
+Tour guides, often in costume&mdash; posing as "ghosts" of 18th-century political figures, lead you through the Boston Common, Faneuil Hall, the house of Paul Revere, the Old North Church... all the way to Bunker Hill (where the trail ends).
+
+<OneColumn>
+  <ImageWrapper
+    alt="Printed ticket from the _Freedom Trail_ tour company"
+    caption="The original purchased ticket (printable version) for our Freedom Trail research."
+    src="/assets/img/blog/freego/ticket.png"
+    width="741"
+    height="844"
+  />
+</OneColumn>
+
+## First Impressions...
+
+This was the birthplace of American patriotism! These battlefields and memorials&mdash; the graves of our country's forefathers&mdash; represent our freedom and prosperity!
+
+The concept of freedom while walking the Trail felt lost, perhaps swallowed by a modern Boston. As tourists, the sites did not evoke a profound sense of respect or solemnity, and the suggestion of patriotism felt noticeably contrived.
+
+Most of our fellow tourists were more interested in their phones, or taking away a nice selfie. At one point, the tourist pointed to a bar across from the graveyard that holds Samuel Adams' remains:
+
+> The only place you can drink a cold Sam Adams while staring at a cold Sam Adams.
+
+Coming from the classroom, we had expected the Trail to offer more tools for introspection&mdash; instilling a sense of gratitude for the sacrifices made in the name of freedom.
+
+In our own intervention, we would stir up some controversy. By forcing tourists to relinquish some of their freedom, perhaps we could stimulate a more critical look at what they have to lose.
+
+<OneColumn>
+  <iframe style={{ background: '#000', marginBottom: '20px' }} title="vimeo-player" src="https://player.vimeo.com/video/288981562" frameborder="0" allowfullscreen />
+</OneColumn>
+
+## Starting Up Freego
+
+After some consideration, we decided to approach our project by pairing our initial reactions with the issue of freedom and privacy in tech.
+
+We surrender our data to industry giants like Facebook, Microsoft, Google, Apple, and Amazon everyday. Without so much as a thought, we trust these companies to keep our data safe, giving them incredible powers of surveillance and control.
+
+In return for the use of their services and products, these companies collect hundreds&mdash; sometimes [thousands](https://www.nytimes.com/2012/06/17/technology/acxiom-the-quiet-giant-of-consumer-database-marketing.html)&mdash; of data points on every customer. This data turns into likes and clicks which translate to sales and even [_votes_](https://www.vox.com/science-and-health/2018/3/23/17152564/cambridge-analytica-psychographic-microtargeting-what).
+
+We would pitch our installation like a hot, new startup. We called our faux company "Freego"&mdash; a cheap combination of "freedom" and "go". Our product was _wireless_ freedom. We would install monolithic WiFi antennas situated at intervals along the length of the Freedom Trail, providing free Internet connectivity to tourists.
+
+<OneColumn>
+  <ImageWrapper
+    alt="A foam-sculpted obelisk with a realistic-looking marble finish and a bright red base"
+    src="/assets/img/blog/freego/freego-obelisk.jpg"
+    caption="Alicia sculpted the obelisk from a rigid foam, and painted the outside in a realistic-looking faux-marble spray paint"
+    width="504"
+    height="284"
+  />
+</OneColumn>
+
+## Building a Monument
+
+Our prototype antenna, a foam "obelisk" painted to look like stone, was outfitted with a Raspberry Pi and a thermal printer (powered through USB by a mobile battery pack).
+
+To connect to the Freego network, the tourist had to first complete a short, but detailed, questionnaire. The network would act as a honeypot&mdash; collecting users' information: carrier, device type, location, etc.&mdash; upon logging-on to the SSID.
+
+<OneColumn>
+  <ImageWrapper
+    alt="Close-up image of the Raspberry Pi and thermal printer embedded in the obelisk."
+    src="/assets/img/blog/freego/pi-printer.jpg"
+    caption="Close-up of the Raspberry Pi, thermal printer, and power bank embedded in the body of the obelisk."
+    width="504"
+    height="284"
+  />
+</OneColumn>
+
+## The Freego App
+
+Our killer "app"&mdash; the questionnaire&mdash; was structured similarly to an official [Myers-Briggs Type Indicator](https://en.wikipedia.org/wiki/Myers%E2%80%93Briggs_Type_Indicator) (MBTI). After answering the questions, the tourist would submit their responses at which time the thermal printer would eject a small slip from the obelisk.
+
+Similar to MBTI, our questionnaire weighed personality traits in several different categories in order to assign a "sigil". However, instead of categories like sensing/feeling or extraversion/introversion (used in MBTI), our test judged more political preconceptions&mdash; such as conservatism vs. liberalism, or nationalism vs. internationalism.
+
+Taken together, the tourist was assigned a Freego "prescription" that dictates their political personality, as well as which unique path through the Freedom Trail they should take.
+
+<OneColumn>
+  <ImageWrapper
+    alt="Image of our Freego poster, displaying our product and motto."
+    src="/assets/img/blog/freego/freego-sign.jpg"
+    caption="A display board for our Freego brand. Includes instructions for how to get connected and take the survey to determine your personalized Freedom Trail tour."
+    width="504"
+    height="284"
+  />
+</OneColumn>
+
+There were eight possible outcomes based on the answers given in the questionnaire:
+
+- Bleeding Heart
+- Calculated Believer
+- Devout American
+- Independent Pragmatist
+- Passionate Skeptic
+- Pragmatic Patriot
+- Reflective Cynic
+- The One That Got Away
+
+Each political personality has a unique emblem, a description of their assigned identity type, a declaration of the sites on the Trail that they should see (possibly with some sites omitted entirely), and a set of instructions on how they should approach the tour.
+
+<OneColumn>
+  <ImageWrapper
+    alt="The &quot;Devout American&quot; prescription example. This prints from the obelisk's thermal printer and includes tour directions (as well as other directions)."
+    src="/assets/img/blog/freego/DevoutAmericanScript.png"
+    width="470"
+    height="1899"
+  />
+</OneColumn>
+
+## Conclusion
+
+Alas, we never had the chance to do a field study with this project. As a template for how we might begin to think about technology and freedom, however, I think it was a successful project. Thanks for taking the time to read, and please share some comments below.
+</ProseWrapper>

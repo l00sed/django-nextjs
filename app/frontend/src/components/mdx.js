@@ -9,6 +9,7 @@ import Link  from 'next/link';
 import Pre                       from './pre';
 import OneColumn                 from './one_column';
 import TwoColumn                 from './two_column';
+import ThreeColumn               from './three_column';
 import ImageWrapper, { Caption } from './image_wrapper';
 import ProseWrapper              from './prose_wrapper';
 import TableWrapper              from './table_wrapper';
@@ -17,6 +18,7 @@ import Card                      from './card';
 import Note                      from './note';
 import ReadingList               from './reading_list';
 import Bookmarks                 from './bookmarks';
+import YouTube                   from './youtube';
 
 
 export default function Mdx ({ content }) {
@@ -26,6 +28,7 @@ export default function Mdx ({ content }) {
     Pre,
     OneColumn,
     TwoColumn,
+    ThreeColumn,
     ImageWrapper,
     ProseWrapper,
     TableWrapper,
@@ -34,7 +37,8 @@ export default function Mdx ({ content }) {
     Card,
     Note,
     ReadingList,
-    Bookmarks
+    Bookmarks,
+    YouTube
   }
 
   return <MDXRemote { ...content } components={ components } />

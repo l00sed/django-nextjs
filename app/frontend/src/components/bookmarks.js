@@ -22,13 +22,15 @@ export default function Bookmarks() {
   function revealChildren(e) {
     const target = e.currentTarget;
     e.stopPropagation(); // only execute the click event on currentTarget
-    if (target.getElementsByTagName('ul')) {
-      // Hide the child list
-      target.querySelectorAll('ul')[0].classList.toggle(styles.hidden);
-    }
-    if (target.getElementsByTagName('svg')) {
-      // Rotate caret
-      target.querySelectorAll('svg')[0].classList.toggle(styles.closed);
+    if (e.target.nodeName !== 'A') {
+      if (target.getElementsByTagName('ul')) {
+        // Hide the child list
+        target.querySelectorAll('ul')[0].classList.toggle(styles.hidden);
+      }
+      if (target.getElementsByTagName('svg')) {
+        // Rotate caret
+        target.querySelectorAll('svg')[0].classList.toggle(styles.closed);
+      }
     }
   }
 
@@ -76,7 +78,7 @@ export default function Bookmarks() {
             target="_blank" rel="noopener nofollow noreferrer"
             className={ styles.bookmarkTitle }
           >
-            <span>{ data.title }</span>
+            { data.title }
           </a>
           { dateAdded ? <span className={ styles.bookmarkDate }>{ dateAdded }</span> : <></> }
         </li>

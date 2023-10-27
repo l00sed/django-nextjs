@@ -29,7 +29,7 @@ class Article(models.Model):
         height_field=None,
         width_field=None
     )
-    image_alt = models.CharField(max_length=200)
+    image_alt = models.CharField(max_length=1024)
     content = models.TextField()
     content_type = models.CharField(
         max_length=12,

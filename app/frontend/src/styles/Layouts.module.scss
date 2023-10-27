@@ -10,7 +10,8 @@
 }
 
 /* # Two Column */
-.two_column {
+.two_column,
+.three_column {
   column-gap: 2em;
   row-gap: 2em;
   box-sizing: content-box;
@@ -22,13 +23,15 @@
 }
 
 @media screen and (max-width: 1199px) {
-  .two_column {
+  .two_column,
+  .three_column {
     flex-direction: column;
   }
 }
 
 /* # One + Two Column */
 .one_column,
-.two_column {
+.two_column,
+.three_column {
   margin: 3em auto;
 }

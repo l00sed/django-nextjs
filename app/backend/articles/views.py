@@ -52,6 +52,7 @@ class ArticlesBySearchAPIView(generics.ListAPIView):
                 'title',
                 'author',
                 'description',
+                'content',
                 'tags_names'
             ),
         ) \
