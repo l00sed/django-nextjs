@@ -53,6 +53,7 @@ services:
 
   # Node/Next.js Service
   frontend:
+    restart: always
     build:
       context: .
       dockerfile: frontend.Dockerfile
