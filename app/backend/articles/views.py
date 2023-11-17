@@ -3,8 +3,6 @@ from django.contrib.postgres.search import SearchVector
 from django.contrib.postgres.aggregates import ArrayAgg
 from django.db.models import Q
 from urllib.parse import quote
-from rest_framework.filters import SearchFilter
-import coreapi
 
 from .models import Article, Subscriber
 from .serializers import (

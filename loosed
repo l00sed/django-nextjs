@@ -84,6 +84,13 @@ cli_frontend() {
   )
 }
 
+# Generate LQIPs
+gen_lqip() {
+  (
+    docker exec loosed-backend-1 /bin/bash -c "python manage.py gen_lqip"
+  )
+}
+
 # Generate a self-signed certificate
 generate_cert () {
   (
@@ -258,6 +265,9 @@ case "$1" in
   cli_frontend)
     cli_frontend
     ;;
+  gen_lqip)
+    gen_lqip
+    ;;
   generate_cert)
     generate_cert
     ;;
@@ -295,6 +305,7 @@ Available commands:
   clean ..................................... Remove build artifacts
   cli_backend ............................... Start a command prompt for the backend image
   cli_frontend .............................. Start a command prompt for the frontend image
+  gen_lqip .................................. Generate LQIPs in the backend
   generate_cert ............................. Generate an SSL certificate (local only, env ignored)
   install_cert .............................. Install cert on host machine (local only, env ignored)
   restart ................................... Restart the containers

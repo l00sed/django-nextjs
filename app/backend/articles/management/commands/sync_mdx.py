@@ -17,8 +17,7 @@ class Command(BaseCommand):
             # Import from either the articles or pages dir
             MDX_DIRECTORY = join(
                 abspath(dirname(__name__)),
-                '..',
-                f'frontend/src/mdx/{t}'
+                f'mdx/{t}'
             )
 
             self.stdout.write(
@@ -66,7 +65,8 @@ class Command(BaseCommand):
                             )
                         ),
                         "featured_image":
-                        f"uploads/{t}/{file['slug']}/{file['featured_image']}",
+                        "static/assets/img/"
+                        f"{t}/{file['slug']}/{file['featured_image']}",
                         "image_alt": file['image_alt'],
                         "content": file,
                         "content_type": file['content_type'],

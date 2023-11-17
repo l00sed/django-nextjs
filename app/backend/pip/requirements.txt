@@ -12,6 +12,8 @@ django-widget-tweaks
 djangorestframework
 drf-yasg
 easy-thumbnails
+blurhash
+numpy
 gunicorn
 markdown
 psycopg2-binary

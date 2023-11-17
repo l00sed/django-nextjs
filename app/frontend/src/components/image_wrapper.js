@@ -1,12 +1,43 @@
 import Image from 'next/image';
-import Parse from '../utils/parser';
-import image_styles from '../styles/ImageWrapper.module.scss';
+import Parse from 'utils/parser';
+import image_styles from 'styles/ImageWrapper.module.scss';
+import card_styles from 'styles/Card.module.scss';
+import { getBase64 } from 'lib/get_base64';
 
-export default function ImageWrapper({ src, alt, caption, width, height, visible=true, align="center" }) {
+const srcRouter = (src) => {
+  if (src.includes('backend:8000')) {
+    //console.log(src);
+    const url_parts = src.split('/')
+    src = `/${url_parts.slice(7).join('/')}`;
+  }
+  //console.log(src);
+  return src;
+}
+
+const canBlur = (src) => {
+  return ['svg'].includes(src.slice(-3)) ? false : true;
+}
+
+const base64 = async (src) => {
+  if (canBlur(src)) {
+    try {
+      return await getBase64(src);
+    } catch {
+      return false;
+    }
+  }
+}
+
+export default async function ImageWrapper({ src, alt, caption, width, height, visible=true, align="center", type }) {
+  const srcP = srcRouter(src);
+  const cB = canBlur(srcP);
+  const b64 = await base64(srcP);
+
+  const classes = type === "card" ? card_styles.image__wrapper : image_styles.image__wrapper;
   return (
     <>
       <figure
-        className={ image_styles.image__wrapper }
+        className={ classes }
         style={
           align === 'left' ?
           {
@@ -21,12 +52,24 @@ export default function ImageWrapper({ src, alt, caption, width, height, visible
           {}
         }
       >
-        <Image
-          src={ src }
-          alt={ alt }
-          width={ width }
-          height={ height }
-        />
+        {
+          (cB && b64) ?
+            <Image
+              src={ srcP }
+              alt={ alt }
+              width={ width }
+              height={ height }
+              placeholder="blur"
+              blurDataURL={ b64 }
+            />
+          :
+            <Image
+              src={ srcP }
+              alt={ alt }
+              width={ width }
+              height={ height }
+            />
+        }
         <Caption
           text={ caption ? caption : alt }
           width={ width }

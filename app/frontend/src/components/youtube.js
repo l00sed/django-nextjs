@@ -6,7 +6,7 @@ export default function YouTube (props) {
   const { videoId, width, height, imgSize } = props
   const [showVideo, setShowVideo] = useState(false)
   return (
-    <div class={ `${styles.youtubeWrapper} ${props.caption ? styles.caption : ''}` }>
+    <div className={ `${styles.youtubeWrapper} ${props.caption ? styles.caption : ''}` }>
       {
         showVideo ?
           (

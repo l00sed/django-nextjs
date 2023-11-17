@@ -1,5 +1,6 @@
-import ResponseError from '../utils/error_handling.js';
-import HOST_URL from '../utils/api_server.js';
+//import ResponseError from 'utils/error_handling.js';
+import HOST_URL from 'utils/api_server.js';
+import notFoundWrapper from 'lib/not_found';
 
 export default async function articles(props) {
   const options_get = {
@@ -32,7 +33,11 @@ export default async function articles(props) {
   if (articles_promise.ok) {
     articles_json = await articles_promise.json();
   } else {
-    throw new ResponseError('Could not retrieve articles data from the API', res);
+    notFoundWrapper({
+      message: 'Could not retrieve articles data from API',
+      level: 'warning'
+    });
+    //throw new ResponseError('Could not retrieve articles data from the API', res);
   }
 
   return articles_json;

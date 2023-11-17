@@ -16,9 +16,10 @@ import { toString } from "hast-util-to-string"
 import { visit } from "unist-util-visit"
 
 /* Local Utils */
-import remarkCodeTitles           from '../utils/code_titles';
-import ResponseError              from '../utils/error_handling';
-import HOST_URL                   from '../utils/api_server';
+import remarkCodeTitles           from 'utils/code_titles';
+//import ResponseError              from 'utils/error_handling';
+import HOST_URL                   from 'utils/api_server';
+import notFoundWrapper            from 'lib/not_found';
 
 import Mdx from './mdx';
 import Comments from './comments';
@@ -44,7 +45,11 @@ const getData = async (slug) => {
   if (data_promise.ok) {
     data_json = await data_promise.json();
   } else {
-    throw new ResponseError('Could not fetch article content from the API.', data_promise);
+    notFoundWrapper({
+      message: 'Could not retrieve articles data from API',
+      level: 'warning'
+    });
+    //throw new ResponseError('Could not fetch article content from the API.', data_promise);
   }
 
   // Organize meta info into a separate object

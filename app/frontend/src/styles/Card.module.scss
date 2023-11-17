@@ -70,27 +70,44 @@
 
 .card__thumbnail_wrapper {
   transition: all var(--loosed-transition-medm) ease;
-  border-radius: calc(var(--card-radius) - 4px) calc(var(--card-radius) - 4px) 0 0;
+  border-radius: calc(var(--card-radius) - 2px) calc(var(--card-radius) - 2px) 0 0;
   position: relative;
-  height: 200px;
-  top: 1px;
-  left: 0;
-  width: 100%;
-  transform-origin: center;
-  transform: scale(0.98);
   overflow: hidden;
+  top: -1px;
+  left: -1px;
+  width: calc(100% + 2px);
+  transform-origin: center;
 }
-.card a:focus-visible .card__thumbnail_wrapper,
-.card:hover .card__thumbnail_wrapper {
+
+.image__wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+}
+
+.image__wrapper img {
+  border-radius: calc(var(--card-radius) - 2px) calc(var(--card-radius) - 2px) 0 0;
+}
+
+.image__wrapper img,
+.image__wrapper iframe {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  display: flex;
+}
+
+.card a:focus-visible .card__thumbnail_wrapper img,
+.card:hover .card__thumbnail_wrapper img {
   /* Use card-radius - 1 to account for the border */
   border-radius: calc(var(--card-radius) - 1px) calc(var(--card-radius) - 1px) 0 0;
   top: 0;
   left: 0;
-  transform: scale(1);
+  transform: scale(1.25);
 }
 
 .card__thumbnail {
-  border-radius: calc(var(--card-radius) - 4px) calc(var(--card-radius) - 4px) 0 0;
+  border-radius: calc(var(--card-radius) - 2px) calc(var(--card-radius) - 2px) 0 0;
   height: auto;
   object-fit: cover;
   filter: saturate(0.5);

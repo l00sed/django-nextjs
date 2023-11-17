@@ -92,6 +92,7 @@ PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 INSTALLED_APPS = [
     'articles',
     'comments',
+    'lqip',
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',

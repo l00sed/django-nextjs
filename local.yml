@@ -47,12 +47,14 @@ services:
     expose:
       - 8000
     volumes:
-      - ./app/frontend/src/mdx:/app/frontend/src/mdx
       - ./app/backend:/app/backend
+      - ./app/mdx:/app/backend/mdx
+      - ./app/media:/app/backend/static
       - ./loosed:/loosed
 
   # Node/Next.js Service
   frontend:
+    restart: always
     build:
       context: .
       dockerfile: frontend.Dockerfile
@@ -64,6 +66,8 @@ services:
       - 3000
     volumes:
       - ./app/frontend:/home/node
+      - ./app/mdx:/home/node/src/mdx
+      - ./app/media:/home/node/public
 
 # Volumes
 volumes:

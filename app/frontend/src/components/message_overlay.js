@@ -49,6 +49,7 @@ export default function MessageOverlay(props) {
         id={ `${ overlayId }-input` }
         className={ overlay_styles.checkbox }
         onChange={ props.onChangeCallback ? props.onChangeCallback : () => { return } }
+        checked={ props.visibleOnLoad }
         hidden
       />
       <div

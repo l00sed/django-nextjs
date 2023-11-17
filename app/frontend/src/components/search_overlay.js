@@ -4,7 +4,7 @@ import styles from 'styles/Search.module.scss';
 import { useRef } from 'react';
 import MessageOverlay from './message_overlay';
 
-export default function SearchOverlay() {
+export default function SearchOverlay(props) {
   const searchInput = useRef(null);
 
   const handleKeyDown = (e) => {
@@ -28,6 +28,7 @@ export default function SearchOverlay() {
     <MessageOverlay
       overlayId="search-overlay"
       onChangeCallback={ focusInput }
+      visibleOnLoad={ props.visibleOnLoad }
     >
       <div className={ styles.searchWrapper }>
         <input

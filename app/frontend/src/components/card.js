@@ -1,10 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import Parse, { parseTitle } from '../utils/parser';
-import { Tags } from '../components/tag';
-import styles from '../styles/Card.module.scss';
+import ImageWrapper from 'components/image_wrapper';
+import Parse, { parseTitle } from 'utils/parser';
+import { Tags } from 'components/tag';
+import styles from 'styles/Card.module.scss';
 import dateformat from 'dateformat';
+
 
 export default function Card({ element, truncate, index }) {
   const key = element.id;
@@ -106,10 +107,14 @@ export default function Card({ element, truncate, index }) {
         target={ target }
       >
         <div className={ styles.card__thumbnail_wrapper }>
-          <Image
-            fill
+          <ImageWrapper
             alt={ alt }
             src={ src }
+            width={ 300 }
+            height={ 300 }
+            type="card"
+            objectFit="contain"
+            visible={ false }
             className={ styles.card__thumbnail }
             loading={ loading }
             priority={ priority  }

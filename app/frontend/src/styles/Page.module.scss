@@ -28,3 +28,14 @@
   display: flex;
   flex-direction: column;
 }
+
+.not_found {
+  left: 6vw;
+  right: 6vw;
+  position: relative;
+  padding: 3em 0;
+
+  img {
+    padding-bottom: 2em;
+  }
+}
