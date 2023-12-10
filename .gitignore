@@ -30,6 +30,7 @@ app/media/admin
 app/media/drf-yasg
 
 # Build files in main dir
-./local.yml
-./prod.yml
+.dockerignore
+local.yml
+prod.yml
 *.Dockerfile
