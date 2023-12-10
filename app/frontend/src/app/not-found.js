@@ -29,7 +29,7 @@ export default function NotFound() {
             width={ 390 }
             height={ 376 }
             align="left"
-            src="/assets/img/not_found/jt.gif"
+            src="/assets/img/page/not-found/jt.gif"
           />
           <p>Go back to the <Link href="/">homepage</Link>?</p>
         </div>

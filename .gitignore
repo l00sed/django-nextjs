@@ -21,6 +21,13 @@ app/frontend/node_modules/*
 
 # Python Pip Packages
 app/backend/lib
+app/backend/bin
+app/backend/get-pip.py
+
+# Django-generated media
+app/media/admin
+# DRF, yet another swagger GUI
+app/media/drf-yasg
 
 # Build files in main dir
 ./local.yml

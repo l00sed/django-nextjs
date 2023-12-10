@@ -15,7 +15,7 @@ class LQIPAPIView(generics.GenericAPIView):
         """
 
         filepath = quote(filepath)
-        print(filepath)
+        # print(filepath)
 
         exists = LQIP.objects.filter(
             image_filepath=f'/app/backend/static{filepath}'

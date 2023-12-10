@@ -50,7 +50,7 @@
     border: 1px solid var(--loosed-black);
     border-radius: var(--card-radius);
     background-color: var(--card-hover-background);
-    box-shadow: 0 0 8px 1px var(--card-shadow);
+    box-shadow: inset 1px 1px 1px 0 #fff, -1px -1px 1px 0 #000, 0 0 8px 1px var(--card-shadow);
     transition: all var(--loosed-transition-medm) ease;
     opacity: 0.25;
   }
@@ -69,6 +69,7 @@
 }
 
 .card__thumbnail_wrapper {
+  --thumbnail-height: 260px;
   transition: all var(--loosed-transition-medm) ease;
   border-radius: calc(var(--card-radius) - 2px) calc(var(--card-radius) - 2px) 0 0;
   position: relative;
@@ -76,6 +77,7 @@
   top: -1px;
   left: -1px;
   width: calc(100% + 2px);
+  height: var(--thumbnail-height);
   transform-origin: center;
 }
 
@@ -92,9 +94,10 @@
 .image__wrapper img,
 .image__wrapper iframe {
   max-width: 100%;
-  height: auto;
+  height: var(--thumbnail-height);
   margin: 0 auto;
   display: flex;
+  object-fit: cover;
 }
 
 .card a:focus-visible .card__thumbnail_wrapper img,
