@@ -4,14 +4,21 @@ tags*
 **/__pycache__
 **/**/__pycache__
 
+# Conda
+environment.yml
+
+# Venv
+app/backend/pyvenv.cfg
+
 # Environment-specific configs
+# Production
 .docker/prod/certbot/conf
 .docker/prod/certbot/conf/*
 .docker/prod/certbot/www
 .docker/prod/certbot/www/*
 .docker/prod/keys/*
 .docker/prod/keys
-
+# Local
 .docker/local/nginx/certs/*
 
 # Node modules

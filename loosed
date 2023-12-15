@@ -220,6 +220,9 @@ build() {
 
     if [ -z "$2" ]; then
       if [[ "$2" -eq "no-cache" ]]; then
+        # Remove existing build cache
+        docker buildx prune -af
+        docker builder prune -af
         # Run docker compose to build the image with either local/production Dockerfiles
         docker compose -p "loosed" \
           -f "$ENV.yml" build \
@@ -228,14 +231,14 @@ build() {
           --build-arg GROUP_ID=${GROUP_ID} \
           --no-cache
       fi
+    else
+      # Run docker compose to build the image with either local/production Dockerfiles
+      docker compose -p "loosed" \
+        -f "$ENV.yml" build \
+        --progress plain \
+        --build-arg USER_ID=${USER_ID} \
+        --build-arg GROUP_ID=${GROUP_ID}
     fi
-
-    # Run docker compose to build the image with either local/production Dockerfiles
-    docker compose -p "loosed" \
-      -f "$ENV.yml" build \
-      --progress plain \
-      --build-arg USER_ID=${USER_ID} \
-      --build-arg GROUP_ID=${GROUP_ID}
 
     clean
   )
