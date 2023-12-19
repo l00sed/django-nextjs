@@ -20,7 +20,8 @@ export default function Button(props) {
           />
         </svg>
       break;
-
+    case 'standard':
+      styles = button_styles.standard
   }
   return (
     <div className={ `${styles} ${button_styles.button__main}` }>

@@ -13,7 +13,7 @@ import Card from 'components/card';
 /* Lib */
 import articles from 'lib/articles';
 
-export default async function Home() {
+export default async function HomePageWithSearch() {
   const data = await articles();
 
   return (

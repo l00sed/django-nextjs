@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import ImageWrapper from 'components/image_wrapper';
-import Parse, { parseTitle } from 'utils/parser';
+import { parseTitle, parseDescription } from 'utils/parser';
 import { Tags } from 'components/tag';
 import styles from 'styles/Card.module.scss';
 import dateformat from 'dateformat';
@@ -76,22 +76,11 @@ export default function Card({ element, truncate, index }) {
   }
   const date = parseDate(element.updated_at) ;
 
-  const parseDescription = (element) => {
-    let classes = styles.card__description;
-    if (element.unbound) {
-      classes += ` ${styles.card__cropped}`;
-    }
-    let truncateDesc = false;
-    if (truncate) {
-      truncateDesc = truncate;
-    }
-    return (
-      <div className={ classes }>
-        { Parse(element.description, truncateDesc) }
-      </div>
-    )
+  let classes = styles.card__description;
+  if (element.unbound) {
+    classes += ` ${styles.card__cropped}`;
   }
-  const desc = parseDescription(element);
+  const desc = parseDescription(element, classes, truncate);
 
   const cardClasses = element.tags?.length > 0
     ?

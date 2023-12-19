@@ -3,6 +3,7 @@ import React from 'react';
 import '../styles/globals.scss';
 import Head from './head';
 
+import localFont from '@next/font/local'
 import { JetBrains_Mono } from 'next/font/google';
 
 const jbm = JetBrains_Mono({
@@ -10,9 +11,14 @@ const jbm = JetBrains_Mono({
   display: 'swap'
 })
 
+const ms = localFont({
+  src: [{ path: '../../src/fonts/Mona_Sans/MonaSansExpanded-Black.woff2' }],
+  variable: '--mona-sans'
+})
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={ jbm.className }>
+    <html lang="en" className={ `${ jbm.className } ${ ms.variable }` }>
       <Head />
       <body>
         <div id="theme-root" className="default">

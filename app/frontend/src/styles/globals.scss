@@ -79,6 +79,8 @@ $l-main-text-color: #333;
 
 $l-search-icon: rgba(0,0,0,0.4);
 
+$l-featured-bg: #fff;
+
 $l-comment-heading: rgba(0,0,0,0.025);
 $l-comment-content: rgba(255,255,255,0.5);
 $l-comment-shadow: rgba(0,0,0,0.15);
@@ -196,6 +198,8 @@ $d-main-text-color: #e0e0e0;
 
 $d-search-icon: rgba(255,255,255,0.5);
 
+$d-featured-bg: #000;
+
 $d-comment-heading: rgba(255,255,255,0.05);
 $d-comment-content: rgba(0,0,0,0.05);
 $d-comment-shadow: rgba(0,0,0,1);
@@ -312,6 +316,8 @@ $d-tag-bg-16: #1f9050;
     --main-text-color: #{$l-main-text-color};
 
     --search-icon: #{$l-search-icon};
+
+    --featured-bg: #{$l-featured-bg};
 
     --comment-heading: #{$l-comment-heading};
     --comment-content: #{$l-comment-content};
@@ -431,6 +437,8 @@ $d-tag-bg-16: #1f9050;
     --main-text-color: #{$d-main-text-color};
 
     --search-icon: #{$d-search-icon};
+
+    --featured-bg: #{$d-featured-bg};
 
     --comment-heading: #{$d-comment-heading};
     --comment-content: #{$d-comment-content};
@@ -587,6 +595,8 @@ $d-tag-bg-16: #1f9050;
 
   --search-icon: #{$l-search-icon} !important;
 
+  --featured-bg: #{$l-featured-bg} !important;
+
   /* ## comment.js */
   --comment-heading: #{$l-comment-heading} !important;
   --comment-content: #{$l-comment-content} !important;
@@ -719,6 +729,8 @@ $d-tag-bg-16: #1f9050;
   --main-text-color: #{$d-main-text-color} !important;
 
   --search-icon: #{$d-search-icon} !important;
+
+  --featured-bg: #{$d-featured-bg} !important;
 
   /* ## comments.js */
   --comment-heading: #{$d-comment-heading} !important;
@@ -858,12 +870,14 @@ h6 {
 
 h1 {
   margin: 0 auto 0.25em -3px;
-  font-weight: 900;
-  font-size: 2.5em;
-  letter-spacing: -1px;
-  word-spacing: -10px;
+  font-size: 3em;
+  font-family: var(--mona-sans);
   line-height: 0.9;
   text-transform: uppercase;
+}
+
+h2 {
+  font-family: var(--mona-sans);
 }
 
 h2::after {
@@ -974,7 +988,7 @@ figure {
 
 @media (min-width: 1200px) {
   h1 {
-    font-size: 3.5em;
+    font-size: 5em;
   }
 }
 

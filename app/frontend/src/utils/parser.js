@@ -20,6 +20,7 @@ export const parseTitle = (element) => {
   // This is a nightmare...
   let long_titles = {
     "abstract": <>Abstract&shy;ions II</>,
+    "microfactory-1": <>Micro&shy;fact&shy;ory 01</>,
     "microfactory-2": <>Micro&shy;fact&shy;ory 02</>
   }
   if (Object.keys(long_titles).includes(element.slug)) {
@@ -27,4 +28,16 @@ export const parseTitle = (element) => {
   } else {
     return element.title
   }
+}
+
+export const parseDescription = (element, classes, truncate=false) => {
+  let truncateDesc = false;
+  if (truncate) {
+    truncateDesc = truncate;
+  }
+  return (
+    <div className={ classes }>
+      { Parse(element.description, truncateDesc) }
+    </div>
+  )
 }
