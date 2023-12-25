@@ -1,7 +1,8 @@
 .tags {
+  font-family: var(--jetbrains-mono);
   display: inline-flex;
   position: relative;
-  z-index: 10;
+  z-index: 20;
   flex-wrap: nowrap;
   width: 100%;
   overflow-x: auto;

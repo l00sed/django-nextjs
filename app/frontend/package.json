@@ -15,7 +15,6 @@
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
-    "@next/font": "^14.0.4",
     "@next/mdx": "^13.4.0",
     "@stefanprobst/rehype-extract-toc": "^2.2.0",
     "builtin-modules": "^3.3.0",
@@ -67,8 +66,11 @@
     "@types/node": "^18.18.7",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
+    "autoprefixer": "^10.4.16",
     "eslint": "8.16.0",
     "eslint-config-next": "^13.5.6",
-    "sass": "^1.69.5"
+    "postcss": "^8.4.32",
+    "sass": "^1.69.5",
+    "tailwindcss": "^3.4.0"
   }
 }

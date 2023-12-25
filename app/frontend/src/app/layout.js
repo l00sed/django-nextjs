@@ -3,12 +3,13 @@ import React from 'react';
 import '../styles/globals.scss';
 import Head from './head';
 
-import localFont from '@next/font/local'
+import localFont from 'next/font/local'
 import { JetBrains_Mono } from 'next/font/google';
 
 const jbm = JetBrains_Mono({
   subsets: ['latin'],
-  display: 'swap'
+  display: 'swap',
+  variable: '--jetbrains-mono'
 })
 
 const ms = localFont({
@@ -18,7 +19,7 @@ const ms = localFont({
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={ `${ jbm.className } ${ ms.variable }` }>
+    <html lang="en" className={ `${ jbm.variable } ${ ms.variable }` }>
       <Head />
       <body>
         <div id="theme-root" className="default">

@@ -8,57 +8,97 @@ import dateformat from 'dateformat';
 
 
 export default function Card({ element, truncate, index }) {
+  const bodyClass = [
+    'px-5',
+    'pt-0',
+    'pb-5',
+    'font-mono',
+    'text-sm',
+    'relative',
+    'z-10',
+  ].join(' ');
+
+  const dateAuthorClass = [
+    'flex',
+    'text-sm',
+    'text-center',
+    'font-mono',
+    'uppercase',
+    'font-bold',
+    'text-white',
+    'bg-black',
+    'py-1',
+    'px-3',
+    'rounded',
+    'text-nowrap',
+    'w-fit'
+  ].join(' ');
+
+  let descClass = [
+    'text-black',
+    'dark:text-white',
+    'leading-5',
+    'pb-5'
+  ].join(' ');
+
+  const truncClass = [
+    'max-h-none',
+    'mb-2',
+    'before:hidden'
+  ].join(' ');
+
+  const tagsClass = [
+    'py-0',
+    'px-5',
+    'h-0',
+    '-top-14',
+    'relative',
+    'z-20'
+  ].join(' ');
+
   const key = element.id;
   const alt = element.image_alt;
   const src = element.featured_image;
-  const author = element.author;
+  //const author = element.author;
   const title = parseTitle(element);
 
   const above_the_fold = 3;
 
-  const tags = element.tags ?
-    <div className={ styles.card__tags }>
+  const tags = element.tags
+    ?
+    <div className={ tagsClass }>
       <Tags tags={ element.tags } max={ 2 } />
     </div>
     :
     <></>
 
   const loadingLazy = (index) => {
-    if (index > above_the_fold) {
+    if (index > above_the_fold)
       return "lazy";
-    } else {
-      return undefined;
-    }
+    return undefined;
   }
   const loading = loadingLazy(index);
 
   const priorityFold = (index) => {
-    if (index < above_the_fold) {
+    if (index < above_the_fold)
       return true;
-    }
     return false;
   }
   const priority = priorityFold(index);
 
   const parseHref = (slug) => {
     const re = new RegExp("^https?://");
-    const found = re.exec(slug);
-    if (found) {
+    if(re.exec(slug))
       return slug;
-    } else {
-      return `/${slug}`;
-    }
+    return `/${slug}`;
   }
   const href = parseHref(element.slug);
 
   const newWindow = (slug) => {
     const re = new RegExp("^https?://");
-    const found = re.exec(slug);
-    if (found) {
+    if (re.exec(slug))
       return "_blank";
-    } else {
-      return "";
-    }
+    return "";
   }
   const target = newWindow(element.slug);
 
@@ -76,20 +116,14 @@ export default function Card({ element, truncate, index }) {
   }
   const date = parseDate(element.updated_at) ;
 
-  let classes = styles.card__description;
-  if (element.unbound) {
-    classes += ` ${styles.card__cropped}`;
-  }
-  const desc = parseDescription(element, classes, truncate);
-
-  const cardClasses = element.tags?.length > 0
-    ?
-    [styles.card, styles.has__tags].join(' ')
-    :
-    styles.card;
+  if (element.unbound)
+    descClass += ` ${truncClass}`;
+  if (element.tags?.length)
+    descClass = descClass.replace('pb-5', 'pb-12');
+  const desc = parseDescription(element, descClass, truncate);
 
   return (
-    <div className={ cardClasses }>
+    <div className={ styles.card }>
       <Link
         key={ key }
         href={ href }
@@ -116,11 +150,11 @@ export default function Card({ element, truncate, index }) {
         <div className={ styles.card__head }>
           <h2 className={ styles.card__title }>{ title }</h2>
           <div className={ styles.card__meta }>
-            <span className={ styles.card__date }>{ date }</span>
-            <span className={ styles.card__author }>{ author }</span>
+            <span className={ dateAuthorClass }>{ date }</span>
+            {/*<span className={ dateAuthorClass }>{ author }</span>*/}
           </div>
         </div>
-        <div className={ styles.card__body }>
+        <div className={ bodyClass }>
           { desc }
         </div>
       </Link>

@@ -29,7 +29,7 @@ pre[class*="language-"] {
 }
 code[class*="language-"],
 pre[class*="language-"] {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--jetbrains-mono);
   font-size: 14px;
   line-height: 1.375;
   direction: ltr;

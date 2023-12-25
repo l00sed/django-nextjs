@@ -3,9 +3,6 @@ pre {
   border-radius: 7.5px;
   padding: 1em 2em !important;
 }
-.relative {
-  margin: 3em 0;
-}
 .remark-code-title + pre {
   border-radius: 0 0 7.5px 7.5px;
   margin-top: 0 !important;
