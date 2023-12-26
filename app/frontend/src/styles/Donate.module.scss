@@ -10,25 +10,6 @@
   box-shadow: 0 0 0 1px var(--menu-box-shadow);
 }
 
-.donate {
-  position: absolute;
-  top: 0.5em;
-  right: 1.5em;
-  cursor: pointer;
-  padding: 0;
-  font-size: 100%;
-  font-family: inherit;
-  background: transparent;
-  color: var(--loosed-black);
-  font-style: oblique;
-  border: none;
-}
-
-.donate:hover,
-.donate:focus {
-  border-bottom: 1px solid var(--loosed-black);
-}
-
 .donate_button {
   position: relative;
   background-color: var(--loosed-black);

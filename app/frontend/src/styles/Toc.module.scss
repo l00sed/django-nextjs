@@ -94,6 +94,7 @@ label.toc__header {
 h4.toc__label {
   width: 100%;
   content: "Table of Contents";
+  font-family: var(--jetbrains-mono);
   line-height: 32px;
   display: inline-flex;
   user-select: none;
@@ -209,6 +210,7 @@ nav.toc__block {
 
 .toc__sub_heading {
   color: var(--main-text-color);
+  font-family: var(--jetbrains-mono);
 
   &:hover li {
     color: var(--loosed-highlight-1);

@@ -30,23 +30,6 @@
   padding-bottom: 5px;
   hyphens: auto;
 }
-.article__meta {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  column-gap: 0.5em;
-  align-self: center;
-
-  span {
-    width: fit-content;
-    display: block;
-    font-size: 90%;
-  }
-
-  span:last-child {
-    width: 100%;
-  }
-}
 
 .tags__wrapper {
   display: flex;

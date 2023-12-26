@@ -38,7 +38,9 @@ export default function Intro () {
     'flex',
     'justify-between',
     'w-full',
-    'text-left',
+    'text-center',
+    'first:text-left',
+    'last:text-right',
     'mb-0'
   ].join(' ');
 
@@ -53,89 +55,37 @@ export default function Intro () {
     'after:hidden'
   ].join(' ');
 
-  let rightPlaceClass = ifYouClass;
-  rightPlaceClass += ' opacity-0 transition-opacity z-10 relative';
+  let bwwClass = [
+    'opacity-0',
+    'flex',
+    'flex-row',
+    'w-full',
+    'transition-opacity',
+    'duration-200',
+    'justify-between'
+  ].join(' ');
 
-  const tags = [
-    'art',
-    'design',
-    'technology',
-    'politics',
-    'freedom',
-    'privacy',
-    'media',
-    'code',
-    'robotics',
-    'architecture',
-    'fabrication',
-    'Linux',
-    'Vim',
-    'blogging',
-    'DIY',
-    'blockchain',
-    'electronics',
-  ]
+  let rightPlaceClass = ifYouClass;
+  rightPlaceClass += ' opacity-0 transition-opacity duration-1000 z-10 relative';
 
   useEffect(() => {
     let i = 0;
-    let interval = 1000;
+    let interval = 250;
+
     const timer = () => {
-      if (i < tags.length) {
-        let interpunct = false;
-        let word = tags[i];
-
-        if ((word.length + tags[i+1]?.length) < 12) {
-          if (i === 0 || document.getElementById('bws').lastChild?.innerHTML !== '·') {
-            interpunct = true;
-          }
-        }
-
-        buildIntro(word, interpunct)
-
+      const bws = document.getElementById('bws').children;
+      if (i < bws.length) {
+        bws[i].classList.replace('opacity-0', 'opacity-1');
         i++
-        interval -= 100;
+        interval -= 25;
         setTimeout(timer, interval);
-      }
-    }
-
-    const buildIntro = (w, ip) => {
-      const wrap = document.createElement('span');
-      wrap.classList.add('flex');
-      wrap.classList.add('justify-between');
-
-      if (!ip) {
-        if (document.getElementById('bws').lastChild?.innerHTML !== '·') {
-          wrap.classList.add('w-full');
-        } else {
-          wrap.classList.add('flex-grow');
-        }
-      } else {
-        wrap.classList.add('flex-grow');
-      }
-
-      for (let l=0; l < w.length; l++) {
-        const letterSpan = document.createElement('span');
-        letterSpan.innerHTML = w[l];
-        letterSpan.classList.add('mx-auto');
-        letterSpan.classList.add('first:ml-0');
-        letterSpan.classList.add('last:mr-0');
-        wrap.appendChild(letterSpan);
-      }
-
-      document.getElementById('bws').appendChild(wrap);
-
-      if (ip) {
-        const punctSpan = document.createElement('span');
-        punctSpan.innerHTML = '·';
-        punctSpan.classList.add('mx-4');
-        document.getElementById('bws').appendChild(punctSpan);
       }
     }
 
     timer();
     setTimeout(() => {
       document.getElementById('yitrp').classList.replace('opacity-0', 'opacity-1');
-    }, 2000);
+    }, 1500);
   });
 
   return (
@@ -149,7 +99,159 @@ export default function Intro () {
           <span>passion</span>
           <span>for</span>
         </p>
-        <h2 id="bws" className={ buzzwordClass }></h2>
+        <h2 id="bws" className={ buzzwordClass }>
+          <span className={ bwwClass }>
+            <span>a</span>
+            <span>r</span>
+            <span>t</span>
+            <span>·</span>
+            <span>d</span>
+            <span>e</span>
+            <span>s</span>
+            <span>i</span>
+            <span>g</span>
+            <span>n</span>
+          </span>
+          <span className={ bwwClass }>
+            <span>t</span>
+            <span>e</span>
+            <span>c</span>
+            <span>h</span>
+            <span>n</span>
+            <span>o</span>
+            <span>l</span>
+            <span>o</span>
+            <span>g</span>
+            <span>y</span>
+          </span>
+          <span className={ bwwClass }>
+            <span>p</span>
+            <span>o</span>
+            <span>l</span>
+            <span>i</span>
+            <span>t</span>
+            <span>i</span>
+            <span>c</span>
+            <span>s</span>
+          </span>
+          <span className={ bwwClass }>
+            <span>f</span>
+            <span>r</span>
+            <span>e</span>
+            <span>e</span>
+            <span>d</span>
+            <span>o</span>
+            <span>m</span>
+          </span>
+          <span className={ bwwClass }>
+            <span>p</span>
+            <span>r</span>
+            <span>i</span>
+            <span>v</span>
+            <span>a</span>
+            <span>c</span>
+            <span>y</span>
+          </span>
+          <span className={ bwwClass }>
+            <span>m</span>
+            <span>e</span>
+            <span>d</span>
+            <span>i</span>
+            <span>a</span>
+            <span>·</span>
+            <span>c</span>
+            <span>o</span>
+            <span>d</span>
+            <span>e</span>
+          </span>
+          <span className={ bwwClass }>
+            <span>r</span>
+            <span>o</span>
+            <span>b</span>
+            <span>o</span>
+            <span>t</span>
+            <span>i</span>
+            <span>c</span>
+            <span>s</span>
+          </span>
+          <span className={ bwwClass }>
+            <span>a</span>
+            <span>r</span>
+            <span>c</span>
+            <span>h</span>
+            <span>i</span>
+            <span>t</span>
+            <span>e</span>
+            <span>c</span>
+            <span>t</span>
+            <span>u</span>
+            <span>r</span>
+            <span>e</span>
+          </span>
+          <span className={ bwwClass }>
+            <span>f</span>
+            <span>a</span>
+            <span>b</span>
+            <span>r</span>
+            <span>i</span>
+            <span>c</span>
+            <span>a</span>
+            <span>t</span>
+            <span>i</span>
+            <span>o</span>
+            <span>n</span>
+          </span>
+          <span className={ bwwClass }>
+            <span>L</span>
+            <span>i</span>
+            <span>n</span>
+            <span>u</span>
+            <span>x</span>
+            <span>·</span>
+            <span>V</span>
+            <span>i</span>
+            <span>m</span>
+          </span>
+          <span className={ bwwClass }>
+            <span>b</span>
+            <span>l</span>
+            <span>o</span>
+            <span>g</span>
+            <span>g</span>
+            <span>i</span>
+            <span>n</span>
+            <span>g</span>
+            <span>·</span>
+            <span>D</span>
+            <span>I</span>
+            <span>Y</span>
+          </span>
+          <span className={ bwwClass }>
+            <span>b</span>
+            <span>l</span>
+            <span>o</span>
+            <span>c</span>
+            <span>k</span>
+            <span>c</span>
+            <span>h</span>
+            <span>a</span>
+            <span>i</span>
+            <span>n</span>
+          </span>
+          <span className={ bwwClass }>
+            <span>e</span>
+            <span>l</span>
+            <span>e</span>
+            <span>c</span>
+            <span>t</span>
+            <span>r</span>
+            <span>o</span>
+            <span>n</span>
+            <span>i</span>
+            <span>c</span>
+            <span>s</span>
+          </span>
+        </h2>
         <p id="yitrp" className={ rightPlaceClass }>
           <span>You&apos;re</span>
           <span>in</span>

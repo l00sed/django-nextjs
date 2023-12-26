@@ -25,15 +25,6 @@
   }
 }
 
-.comments_header {
-  margin: 0;
-  font-size: var(--small);
-  margin-bottom: 0.5em;
-  text-align: left;
-  width: 100%;
-  text-transform: uppercase;
-}
-
 .comments_section img {
   margin: 5px 0;
   border-radius: 4px;
@@ -79,6 +70,7 @@
 .comment_form_wrapper,
 .main_wrapper {
   font-size: 0.8em;
+  font-family: var(--jetbrains-mono);
   width: 100%;
   border-radius: var(--rad-1);
 }
@@ -322,6 +314,7 @@
 .comment_date {
   width: 100%;
   display: block;
+  font-family: var(--jetbrains-mono);
 }
 
 .comment_date {
@@ -346,6 +339,7 @@
 .downvote_button {
   display: flex;
   align-items: center;
+  font-family: var(--jetbrains-mono);
   width: 100%;
   height: 25px;
   margin: 0 auto;
@@ -356,13 +350,16 @@
   transition: all var(--loosed-transition-fast) ease;
   cursor: pointer;
   color: var(--loosed-highlight-1);
+
   svg {
+    margin: 0 auto;
     transition: height width ease var(--loosed-transition-slow);
   }
 }
 .upvote_button:hover,
 .downvote_button:hover {
   color: red;
+
   svg {
     width: 18px;
     height: 18px;
@@ -376,6 +373,7 @@
 .count_text,
 .upvote_button span,
 .downvote_button span {
+  font-family: var(--jetbrains-mono);
   text-align: center;
   align-content: stretch;
   width: 100%;
