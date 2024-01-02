@@ -19,3 +19,6 @@ markdown
 psycopg2-binary
 python-frontmatter
 pyyaml
+uvicorn[standard]
+channels
+channels-redis

@@ -109,6 +109,7 @@ INSTALLED_APPS = [
     'tinymce',
     'webmention',
     'widget_tweaks',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -157,6 +158,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
+ASGI_APPLICATION = 'backend.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -172,6 +174,15 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'password'
+    }
+}
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('redis', 6379)],
+        }
     }
 }
 

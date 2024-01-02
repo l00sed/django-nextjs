@@ -35,6 +35,13 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  # Redis Service
+  redis:
+    restart: always
+    image: redis:latest
+    ports:
+      - 8000:8000
+
   # Python/Django Service
   backend:
     restart: always
@@ -43,6 +50,7 @@ services:
       dockerfile: backend.Dockerfile
     depends_on:
       - db
+      - redis
     command: "/./loosed start_backend"
     expose:
       - 8000

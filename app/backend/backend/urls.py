@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
@@ -26,6 +27,7 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
 from .sitemap import sitemaps
+from comments import consumers
 # import articles
 # import comments
 
@@ -50,8 +52,8 @@ urlpatterns = [
     path('tinymce/', include('tinymce.urls')),
     path('admin/', admin.site.urls),
     path('api/', include('articles.urls')),
-    path('api/', include('comments.urls')),
     path('api/', include('lqip.urls')),
+    path('api/', include('comments.urls')),
     path('webmention/', include('webmention.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
@@ -59,6 +61,10 @@ urlpatterns = [
 
 # Needed to serve static files through Gunicorn
 urlpatterns += staticfiles_urlpatterns()
+
+websocket_urlpatterns = [
+    path('ws/comment/<slug:slug>', consumers.CommentConsumer.as_asgi()),
+]
 
 if settings.DEBUG:
     urlpatterns += static(

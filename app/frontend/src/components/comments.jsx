@@ -18,18 +18,13 @@ export default function Comments(props) {
   /* Comments Data */
   const [commentsData, setCommentsData] = useState([]);
   const [commentsLoading, setLoadingComments] = useState(false);
+
   /* Comment Form Data */
   const [commentFormData, setCommentFormData] = useState("");
   const [commentFormLoading, setLoadingCommentForm] = useState(false);
 
-  useEffect(() => {
-    /* Fetch comments */
-    setLoadingComments(true);
-    commentsFetch();
-    /* Fetch the comment form */
-    setLoadingCommentForm(true);
-    commentsFormFetch();
-  }, []);
+  /* Connect to Django's WebSockets server */
+  const ws = new WebSocket(`${HOST_URL(true)}/ws/comment/${props.slug}`);
 
   function commentsFetch() {
     /** FETCH: comments */
@@ -176,6 +171,29 @@ export default function Comments(props) {
     }
   }
 
+  useEffect(() => {
+    /* Fetch comments */
+    setLoadingComments(true);
+    commentsFetch();
+
+    /* Fetch the comment form */
+    setLoadingCommentForm(true);
+    commentsFormFetch();
+
+    ws.onopen = () => {
+      console.log("WebSocket Client Connected");
+    }
+
+    ws.onmessage = message => {
+      const dataFromServer = JSON.parse(message.data);
+      if (dataFromServer) {
+        console.log(dataFromServer);
+        //setCommentsData([ ...commentsData, dataFromServer ]);
+      }
+    }
+  }, []);
+
+
   if (commentsLoading || commentFormLoading) {
     return <></>;
   }
@@ -204,7 +222,7 @@ export default function Comments(props) {
           }
         }
       >
-        <CommentForm slug={ props.slug } />
+        <CommentForm ws={ ws } slug={ props.slug } />
         <div>
           {
             commentsData?.map((comment, index) => {

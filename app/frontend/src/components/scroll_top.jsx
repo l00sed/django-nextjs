@@ -22,7 +22,7 @@ export default function ScrollTop() {
     'rounded-full',
     'backdrop-blur-sm',
     'hover:shadow-y-inset',
-    'hover:animate-none',
+    'hover:pause',
     'hover:bg-loosed-400',
     'hover:dark:bg-loosed-600',
     'dark:bg-black',

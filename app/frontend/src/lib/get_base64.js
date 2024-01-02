@@ -11,7 +11,7 @@ export async function getBase64(input) {
     }
   }
 
-  let api_url = `${HOST_URL()}/api/lqip/${input}`;
+  let api_url = `${HOST_URL()}/api/lqip${input}`;
 
   const lqip_promise = await fetch(api_url, options_get);
 
