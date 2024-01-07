@@ -1,5 +1,4 @@
 /* Styles */
-import styles from 'styles/Home.module.scss';
 import page_styles from 'styles/Page.module.scss';
 /* Components */
 import Title              from 'components/title.jsx';
@@ -39,7 +38,7 @@ export default async function HomePage() {
   ].join(' ');
 
   return (
-    <div className={ `${page_styles.next_wrapper} ${styles.homepage}` }>
+    <div className={ `${page_styles.next_wrapper} w-full min-h-screen flex flex-col` }>
       <MenuOverlay />
       <SearchOverlay />
       <MenuToggle />
@@ -48,29 +47,27 @@ export default async function HomePage() {
         <SearchToggle />
         <Donate />
         <Intro />
-        <div className={ styles.featured_post }>
+        <div className="mt-8 px-4 sm:px-8">
           { data ? <Featured element={ data[0] } /> : <></> }
         </div>
-        <div className={ styles.previous_posts }>
-          <HorizontalScroller className={ styles.scroller }>
-            <h2 className={ archiveClass }>
-              <span className={ letterClass }>e</span>
-              <span className={ letterClass }>v</span>
-              <span className={ letterClass }>i</span>
-              <span className={ letterClass }>h</span>
-              <span className={ letterClass }>c</span>
-              <span className={ letterClass }>r</span>
-              <span className={ letterClass }>A</span>
-            </h2>
-            {
-              data?.map((element, index) => {
-                if (index > 0) {
-                  return <Card key={ element.id } element={ element } truncate={ true } index={ index } />
-                }
-              })
-            }
-          </HorizontalScroller>
-        </div>
+        <HorizontalScroller className="max-w-full mx-auto">
+          <h2 className={ archiveClass }>
+            <span className={ letterClass }>e</span>
+            <span className={ letterClass }>v</span>
+            <span className={ letterClass }>i</span>
+            <span className={ letterClass }>h</span>
+            <span className={ letterClass }>c</span>
+            <span className={ letterClass }>r</span>
+            <span className={ letterClass }>A</span>
+          </h2>
+          {
+            data?.map((element, index) => {
+              if (index > 0) {
+                return <Card key={ element.id } element={ element } truncate={ true } index={ index } />
+              }
+            })
+          }
+        </HorizontalScroller>
         <Footer />
       </div>
     </div>

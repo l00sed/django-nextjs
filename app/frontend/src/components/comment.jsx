@@ -137,8 +137,8 @@ export default function Comment(props) {
   const handleReply = e => {
     e.preventDefault();
     // Get the comment root node when clicking the reply button
-    let this_comment_row = e.target.closest(`.${comment_styles.row_wrapper}`);
-    let this_comment = e.target.closest(`.${comment_styles.main_wrapper}`);
+    let this_comment_row = e.target.closest('[data-type="row"]');
+    let this_comment = e.target.closest('[data-type="main"]');
     // Get the reply level
     let this_reply_level = this_comment_row?.querySelectorAll(`.${comment_styles.indent_block}`)?.length + 1;
     // Set the comment form's parent ID
@@ -152,7 +152,7 @@ export default function Comment(props) {
   // Upvote button event handler
   const handleUpvote = async e => {
     e.preventDefault();
-    let id = e.target.closest(`.${comment_styles.main_wrapper}`)?.id;
+    let id = e.target.closest('[data-type="main"]')?.id;
     const header_upvote = {
       method: "PUT",
       supportHeaderParams: true,
@@ -184,7 +184,7 @@ export default function Comment(props) {
   // Downvote button event handler
   const handleDownvote = async e => {
     e.preventDefault();
-    let id = e.target.closest(`.${comment_styles.main_wrapper}`)?.id;
+    let id = e.target.closest('[data-type="main"]')?.id;
     const header_downvote = {
       method: "PUT",
       supportHeaderParams: true,
@@ -216,81 +216,83 @@ export default function Comment(props) {
   }
 
   return <>
-    <div className={ comment_styles.row_wrapper }>
+    <div data-type="row" className="flex flex-row">
       { indent() }
-      <div id={ props.comment.cid } className={ comment_styles.main_wrapper }>
-        <div className={ comment_styles.body_wrapper }>
-          <div className={ comment_styles.body_row_1 }>
-            <div className={ comment_styles.body_col_1 }>
-              <span className={ comment_styles.comment_author }>{ props.comment.author }</span>
-              <span className={ comment_styles.comment_date }>{ timeSince(new Date(props.comment.created_at)) }</span>
+      <div id={ props.comment.cid } data-type="main" className="outer-sheen w-full my-2">
+        <div className="inner-sheen items-stretch flex flex-row w-full relative font-mono text-sm">
+          <div className="w-full rounded-l">
+            <div className="px-4 py-2 backdrop-brightness-125 rounded-tl flex flex-row justify-between">
+              <div>
+                <span className={ comment_styles.comment_author }>{ props.comment.author }</span>
+                <span className={ comment_styles.comment_date }>{ timeSince(new Date(props.comment.created_at)) }</span>
+              </div>
+              <div className="w-10 flex flex-col justify-center">
+                <button
+                  name="reply"
+                  className={ comment_styles.reply_button }
+                  onClick={ (e) => { handleReply(e) } }
+                  onKeyDown={ (e) => { handleReply(e) } }
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24">
+                    <path
+                      fill="currentColor"
+                      d="M20 19q-.425 0-.713-.288T19 18v-3q0-1.25-.875-2.125T16 12H6.8l2.925 2.925Q10 15.2 10 15.6t-.3.7q-.275.275-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.213-.325T3.426 11q0-.2.063-.375T3.7 10.3l4.625-4.625Q8.6 5.4 9 5.4t.7.3q.275.275.275.7t-.275.7L6.8 10H16q2.075 0 3.538 1.463T21 15v3q0 .425-.288.713T20 19Z" />
+                  </svg>
+                </button>
+              </div>
             </div>
-            <div className={ comment_styles.body_col_2 }>
-              <button
-                name="reply"
-                className={ comment_styles.reply_button }
-                onClick={ (e) => { handleReply(e) } }
-                onKeyDown={ (e) => { handleReply(e) } }
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24">
+            <div className={ comment_styles.body_row_2 }>
+              <div className={ comment_styles.comment_wrapper }>
+                <div
+                  className={ comment_styles.comment_content }
+                >{ props.comment.content ? Parse(autoLinkText(sanitize(props.comment.content))) : '' }</div>
+              </div>
+            </div>
+          </div>
+          <div className="py-3 relative rounded-r border-l border-l-solid border-l-neutral-800 brightness-75 flex flex-col w-12">
+            <div className={ comment_styles.vote_count }>
+              <span
+                className={ comment_styles.count_text }
+                data-vote-count={ props.comment.upvotes - props.comment.downvotes }
+              >{ parseVotes(props.comment.upvotes - props.comment.downvotes) }</span>
+            </div>
+            <div
+              className={ comment_styles.upvote_button }
+              onClick={ (e) => { handleUpvote(e) } }
+              onKeyDown={ (e) => { handleUpvote(e) } }
+            >
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
                   <path
                     fill="currentColor"
-                    d="M20 19q-.425 0-.713-.288T19 18v-3q0-1.25-.875-2.125T16 12H6.8l2.925 2.925Q10 15.2 10 15.6t-.3.7q-.275.275-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.213-.325T3.426 11q0-.2.063-.375T3.7 10.3l4.625-4.625Q8.6 5.4 9 5.4t.7.3q.275.275.275.7t-.275.7L6.8 10H16q2.075 0 3.538 1.463T21 15v3q0 .425-.288.713T20 19Z" />
+                    d="M6.786 1.459a.903.903 0 0 0-1.572 0L1.122 8.628C.774 9.238 1.211 10 1.91 10h8.18c.698 0 1.135-.762.787-1.372l-4.092-7.17Z"
+                  />
                 </svg>
-              </button>
+              </span>
             </div>
-          </div>
-          <div className={ comment_styles.body_row_2 }>
-            <div className={ comment_styles.comment_wrapper }>
-              <div
-                className={ comment_styles.comment_content }
-              >{ props.comment.content ? Parse(autoLinkText(sanitize(props.comment.content))) : '' }</div>
+            <div
+              className={ comment_styles.downvote_button }
+              onClick={ (e) => { handleDownvote(e) } }
+              onKeyDown={ (e) => { handleDownvote(e) } }
+            >
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M5.214 10.541a.903.903 0 0 0 1.572 0l4.092-7.169C11.226 2.762 10.789 2 10.09 2H1.91c-.698 0-1.135.762-.787 1.372l4.092 7.17Z"
+                  />
+                </svg>
+              </span>
             </div>
-          </div>
-        </div>
-        <div className={ comment_styles.vote_wrapper }>
-          <div className={ comment_styles.vote_count }>
-          <span
-            className={ comment_styles.count_text }
-            data-vote-count={ props.comment.upvotes - props.comment.downvotes }
-          >{ parseVotes(props.comment.upvotes - props.comment.downvotes) }</span>
-          </div>
-          <div
-            className={ comment_styles.upvote_button }
-            onClick={ (e) => { handleUpvote(e) } }
-            onKeyDown={ (e) => { handleUpvote(e) } }
-          >
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
-                <path
-                  fill="currentColor"
-                  d="M6.786 1.459a.903.903 0 0 0-1.572 0L1.122 8.628C.774 9.238 1.211 10 1.91 10h8.18c.698 0 1.135-.762.787-1.372l-4.092-7.17Z"
-                />
-              </svg>
-            </span>
-          </div>
-          <div
-            className={ comment_styles.downvote_button }
-            onClick={ (e) => { handleDownvote(e) } }
-            onKeyDown={ (e) => { handleDownvote(e) } }
-          >
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-              >
-                <path
-                  fill="currentColor"
-                  d="M5.214 10.541a.903.903 0 0 0 1.572 0l4.092-7.169C11.226 2.762 10.789 2 10.09 2H1.91c-.698 0-1.135.762-.787 1.372l4.092 7.17Z"
-                />
-              </svg>
-            </span>
           </div>
         </div>
       </div>

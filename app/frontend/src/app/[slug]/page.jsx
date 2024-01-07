@@ -1,17 +1,16 @@
-/* React */
-import React from 'react';
 /* Styles */
 import page_styles from 'styles/Page.module.scss';
 /* Local Components */
-import MenuOverlay from 'components/menu_overlay.jsx';
-import MenuToggle from 'components/menu_toggle.jsx';
-import Title from 'components/title.jsx';
-import Donate from 'components/donate.jsx';
-import Article from 'components/article.jsx';
-import Footer from 'components/footer.jsx';
-import ShareOverlay from 'components/share_overlay.jsx';
+import MenuOverlay   from 'components/menu_overlay.jsx';
+import MenuToggle    from 'components/menu_toggle.jsx';
+import Title         from 'components/title.jsx';
+import Donate        from 'components/donate.jsx';
+import Article       from 'components/article.jsx';
+import Footer        from 'components/footer.jsx';
+import ShareOverlay  from 'components/share_overlay.jsx';
 import SearchOverlay from 'components/search_overlay.jsx';
-import SearchToggle from 'components/search_toggle.jsx';
+import SearchToggle  from 'components/search_toggle.jsx';
+
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL),
@@ -34,7 +33,6 @@ export const metadata = {
   creator: 'Dan Tompkins',
   publisher: 'Dan Tompkins',
 }
-
 
 /* Default /[slug] page is a "Blog" page */
 export default function BlogPage({ params }) {

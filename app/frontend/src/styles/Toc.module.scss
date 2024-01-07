@@ -10,30 +10,10 @@
 }
 .toc__inner {
   width: var(--toc-width);
-  backdrop-filter: blur(3px);
   text-align: left;
   margin: 0 0 0 auto;
   display: inline-block;
-  border: 1px solid var(--main-box-shadow);
-  box-shadow: 0 var(--off-1) 0 0 var(--main-box-shadow);
-  border-radius: var(--rad-1);
-  background-color: var(--meta-header-bg);
-  height: 38px;
-
-  &::after {
-    z-index: -1;
-    border-radius: var(--rad-1);
-    content: "";
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-  }
-
-  &:hover {
-    --off-1: 0;
-  }
+  height: 40px;
 }
 
 /* Hidden input checkbox */
@@ -45,10 +25,6 @@ input.toc__hidden {
 input.toc__hidden:checked ~ .toc__wrapper {
   .toc__inner {
     border-radius: var(--rad-1) var(--rad-1) 0 0;
-    box-shadow: none;
-    &::after {
-      border-radius: var(--rad-1) var(--rad-1) 0 0;
-    }
   }
 
   label.toc__header svg.toc__caret {
@@ -70,6 +46,7 @@ input.toc__hidden:not(:checked) ~ .toc__wrapper {
   nav.toc__block {
     max-height: 0;
     opacity: 0;
+
     & > ol {
       padding: 0;
       max-height: inherit;
@@ -127,11 +104,9 @@ nav.toc__block {
   z-index: -10;
   position: relative;
   top: -1px;
-  left: -1px;
-  width: var(--toc-width);
+  left: -2px;
+  width: calc(var(--toc-width) + 4px);
   transition: opacity var(--loosed-transition-fast) ease, max-height var(--loosed-transition-fast) ease;
-  background-color: var(--meta-header-bg);
-  border: 1px solid var(--main-box-shadow);
   overflow-y: auto;
 
   &::-webkit-scrollbar-track {
@@ -157,7 +132,9 @@ nav.toc__block {
     line-height: 125%;
     margin: 0;
     padding: 0.5em 1em;
-    background-color: inherit;
+    position: relative;
+    z-index: 2;
+    border-radius: 0 0 var(--rad-1) var(--rad-1);
 
     li.toc__h3 {
       border-left: 1px solid var(--indent-1);
@@ -192,19 +169,6 @@ nav.toc__block {
         color: var(--loosed-highlight-1);
       }
     }
-  }
-
-  &::after {
-    z-index: -1;
-    top: 0;
-    left: 0;
-    position: absolute;
-    content: "";
-    height: 100%;
-    width: 100%;
-    display: block;
-    background-color: var(--meta-header-bg);
-    border-radius: 0 0 var(--rad-1) var(--rad-1);
   }
 }
 

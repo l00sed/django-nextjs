@@ -1,5 +1,4 @@
 /* Styles */
-import styles from 'styles/Home.module.scss';
 import page_styles from 'styles/Page.module.scss';
 
 import Link from 'next/link';
@@ -15,7 +14,7 @@ import Footer        from 'components/footer.jsx';
 
 export default function NotFound() {
   return (
-    <div className={ `${page_styles.next_wrapper} ${styles.homepage}` }>
+    <div className={ `${page_styles.next_wrapper} w-full min-h-screen flex flex-col` }>
       <MenuOverlay />
       <SearchOverlay />
       <MenuToggle />

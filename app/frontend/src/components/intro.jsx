@@ -6,7 +6,10 @@ export default function Intro () {
   let outerWrapperClass = [
     'flex',
     'flex-col',
-    'h-192',
+    'p-4',
+    'h-144',
+    'sm:h-192',
+    'lg:h-240',
     'w-full'
   ].join(' ');
 
@@ -14,7 +17,13 @@ export default function Intro () {
     'border',
     'border-black',
     'p-4',
-    'max-w-sm',
+    'max-w-full',
+    'sm:max-w-sm',
+    'md:max-w-md',
+    'lg:max-w-lg',
+    'xl:max-w-xl',
+    '2xl:max-w-2xl',
+    '3xl:max-w-3xl',
     'm-auto',
     'bg-white',
     'dark:bg-black',
@@ -34,7 +43,9 @@ export default function Intro () {
 
   let ifYouClass = [
     'uppercase',
-    'text-xl',
+    'text-lg',
+    'sm:text-xl',
+    'md:text-2xl',
     'flex',
     'justify-between',
     'w-full',
@@ -46,7 +57,11 @@ export default function Intro () {
 
   let buzzwordClass = [
     'uppercase',
-    'text-4xl',
+    'text-2xl',
+    'sm:text-4xl',
+    'xl:text-5xl',
+    '2xl:text-6xl',
+    '3xl:text-8xl',
     'text-left',
     'flex',
     'flex-wrap',
@@ -253,8 +268,10 @@ export default function Intro () {
           </span>
         </h2>
         <p id="yitrp" className={ rightPlaceClass }>
-          <span>You&apos;re</span>
-          <span>in</span>
+          <span>You</span>
+          <span>made</span>
+          <span>it</span>
+          <span>to</span>
           <span>the</span>
           <span>right</span>
           <span>place</span>

@@ -15,11 +15,16 @@ class LQIPAPIView(generics.GenericAPIView):
         """
 
         filepath = quote(filepath)
+        if filepath.__contains__('http://backend'):
+            filepath = filepath[46:]
+        if filepath.__contains__('http%3A//backend'):
+            filepath = filepath[50:]
         # print(filepath)
 
         exists = LQIP.objects.filter(
             image_filepath=f'/app/backend/static{filepath}'
         ).exists()
+        # print(exists)
 
         if exists:
             query_set = LQIP.objects.filter(

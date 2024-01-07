@@ -1,5 +1,5 @@
 //import ResponseError from 'utils/error_handling.js';
-import HOST_URL from 'utils/api_server.js';
+import HOST_URL from 'utils/api_server';
 import notFoundWrapper from 'lib/not_found';
 
 export default async function articles(props) {

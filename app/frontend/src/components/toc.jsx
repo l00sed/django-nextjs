@@ -5,8 +5,8 @@ export default function Toc (props) {
     return (
       <>
         <input id="toc" type="checkbox" className={ toc_styles.toc__hidden } />
-        <div className={ toc_styles.toc__wrapper }>
-          <div className={ toc_styles.toc__inner }>
+        <div className={ `outer-sheen ${toc_styles.toc__wrapper}` }>
+          <div className={ `inner-sheen ${toc_styles.toc__inner}` }>
             <label htmlFor="toc" className={ toc_styles.toc__header }>
               <h4 className={ toc_styles.toc__label }>Table of Contents</h4>
               <svg
@@ -22,8 +22,8 @@ export default function Toc (props) {
                 />
               </svg>
             </label>
-            <nav className={ toc_styles.toc__block }>
-              <ol className="toc-level toc-level-1">
+            <nav className={ `outer-sheen !pt-0 ${toc_styles.toc__block}` }>
+              <ol className="toc-level toc-level-1 inner-sheen">
                 {
                   props.headings.map((heading, index) => {
                     let styles = toc_styles.toc__h2;

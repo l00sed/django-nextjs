@@ -29,8 +29,7 @@ export default function Pre (props) {
 
   return (
     <div ref={textInput} onMouseEnter={onEnter} onMouseLeave={onExit} className={ styles.code_wrapper }>
-      {/*hovered && (*/
-        (
+      {(
         <button
           aria-label="Copy code"
           type="button"

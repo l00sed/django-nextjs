@@ -1,10 +1,17 @@
+'use client';
+
 import { useState } from 'react';
 import { Caption } from 'components/image_wrapper.jsx';
 import styles from 'styles/YouTube.module.scss';
 
-export default function YouTube (props) {
-  const { videoId, width, height, imgSize } = props
-  const [showVideo, setShowVideo] = useState(false)
+export default function YouTube(props) {
+  const { videoId, width, height, imgSize } = props;
+  const [showVideo, setShowVideo] = useState(false);
+
+  const onShowVideo = () => {
+    setShowVideo(true);
+  }
+
   return (
     <div className={ `${styles.youtubeWrapper} ${props.caption ? styles.caption : ''}` }>
       {
@@ -27,7 +34,7 @@ export default function YouTube (props) {
                 width,
                 height
               }}
-              onClick={() => setShowVideo(true)}
+              onClick={onShowVideo}
             >
               <div className={ styles.playButton } />
             </figure>

@@ -223,13 +223,11 @@ export default function Comments(props) {
         }
       >
         <CommentForm ws={ ws } slug={ props.slug } />
-        <div>
-          {
-            commentsData?.map((comment, index) => {
-              return <Comment key={ comment.cid } comment={ comment } index={ index } />
-            })
-          }
-        </div>
+        {
+          commentsData?.map((comment, index) => {
+            return <Comment key={ comment.cid } comment={ comment } index={ index } />
+          })
+        }
       </CommentsContext.Provider>
     </div>
   )

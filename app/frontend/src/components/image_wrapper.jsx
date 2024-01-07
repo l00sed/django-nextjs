@@ -4,40 +4,31 @@ import image_styles from 'styles/ImageWrapper.module.scss';
 import card_styles from 'styles/Card.module.scss';
 import { getBase64 } from 'lib/get_base64';
 
-const srcRouter = (src) => {
-  if (src.includes('backend:8000')) {
-    //console.log(src);
-    const url_parts = src.split('/')
-    src = `/${url_parts.slice(7).join('/')}`;
-  }
-  //console.log(src);
-  return src;
-}
 
-const canBlur = (src) => {
-  return ['svg'].includes(src.slice(-3)) ? false : true;
-}
-
-const base64 = async (src) => {
-  if (canBlur(src)) {
-    try {
-      return await getBase64(src);
-    } catch {
-      return false;
+export default async function ImageWrapper({ src, alt, caption, width, height, visible=true, align="center", type, imgClass }) {
+  const srcP = src.includes('8000') ? `/${src.split('/').slice(7).join('/')}` : src;
+  const cB = ['svg'].includes(src.slice(-3)) ? false : true;
+  const base64 = async src => {
+    if (cB) {
+      const b = await getBase64(src);
+      return b
     }
   }
-}
 
-export default async function ImageWrapper({ src, alt, caption, width, height, visible=true, align="center", type }) {
-  const srcP = srcRouter(src);
-  const cB = canBlur(srcP);
-  const b64 = await base64(srcP);
+  const b64 = await base64(src);
+  const figureClasses = (type) => {
+    switch(type) {
+      default:
+          return image_styles.image__wrapper;
+      case "card":
+        return card_styles.image__wrapper;
+    }
+  }
 
-  const classes = type === "card" ? card_styles.image__wrapper : image_styles.image__wrapper;
   return (
     <>
       <figure
-        className={ classes }
+        className={ type === 'featured' ? '' : figureClasses(type) }
         style={
           align === 'left' ?
           {
@@ -55,6 +46,7 @@ export default async function ImageWrapper({ src, alt, caption, width, height, v
         {
           (cB && b64) ?
             <Image
+              className={ imgClass ? imgClass : '' }
               src={ srcP }
               alt={ alt }
               width={ width }
@@ -64,6 +56,7 @@ export default async function ImageWrapper({ src, alt, caption, width, height, v
             />
           :
             <Image
+              className={ imgClass ? imgClass : '' }
               src={ srcP }
               alt={ alt }
               width={ width }

@@ -1,5 +1,5 @@
-import ResponseError from '../utils/error_handling.js';
-import HOST_URL from '../utils/api_server.js';
+import ResponseError from 'utils/error_handling';
+import HOST_URL from 'utils/api_server';
 
 export async function getBase64(input) {
   const options_get = {
@@ -11,7 +11,7 @@ export async function getBase64(input) {
     }
   }
 
-  let api_url = `${HOST_URL()}/api/lqip${input}`;
+  let api_url = `${HOST_URL()}/api/lqip/${input}`;
 
   const lqip_promise = await fetch(api_url, options_get);
 

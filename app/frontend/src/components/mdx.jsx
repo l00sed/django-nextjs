@@ -1,7 +1,13 @@
-'use client';
+/* MDX / Remark / Rehype */
+import { MDXRemote } from 'next-mdx-remote/rsc';
 
 /* MDX / Remark / Rehype */
-import { MDXRemote } from 'next-mdx-remote';
+import remarkCodeTitles           from 'utils/code_titles';
+import remarkGfm                  from 'remark-gfm';
+import rehypeSlug                 from 'rehype-slug';
+import rehypeAutolinkHeadings     from 'rehype-autolink-headings';
+import rehypeExternalLinks        from 'rehype-external-links';
+import rehypePrism                from 'rehype-prism-plus';
 
 /* Next Components */
 import Link  from 'next/link';
@@ -21,7 +27,7 @@ import Bookmarks                 from 'components/bookmarks.jsx';
 import YouTube                   from 'components/youtube.jsx';
 
 
-export default function Mdx ({ content }) {
+export default function Mdx(props) {
   /* Grab components for MDX */
   const components = {
     Link,
@@ -41,5 +47,44 @@ export default function Mdx ({ content }) {
     YouTube
   }
 
-  return <MDXRemote { ...content } components={ components } />
+  // Process blog content (parse and add features)
+  const options = {
+    mdxOptions: {
+      remarkPlugins: [
+        remarkCodeTitles, // Give code blocks a title
+        remarkGfm
+      ],
+      rehypePlugins: [
+        rehypeSlug,
+        [rehypeAutolinkHeadings, {
+          behavior: "wrap"
+        }],
+        [rehypeExternalLinks, {
+          // Set external links to open in a new window
+          target: '_blank',
+          rel: ['noopener', 'nofollow', 'noreferrer']
+        }],
+        [rehypePrism, {
+          /* Show line numbers in
+           * syntax-highlighted code blocks
+           * with "showLineNumbers" */
+          showLineNumbers: false,
+          ignoreMissing: true,
+          // ```bash:filename.txt {1,4-5} showLineNumbers
+          // ```
+        }]
+      ],
+      format: 'mdx', // MarkdownX
+      development: process.env.NODE_ENV !== 'production'
+    },
+    parseFrontmatter: false
+  }
+
+  return (
+    <MDXRemote
+      source={ props.mdx }
+      components={ components }
+      options={ options }
+    />
+  )
 }

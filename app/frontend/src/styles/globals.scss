@@ -47,12 +47,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-   .pause {
-     animation-play-state: paused;
-   }
-}
-
 /* Import <code> tag theme for hljs */
 @import './code_themes/prism-base16-brewer.dark.css';
 @import './code_themes/prism-extras.css';
@@ -76,10 +70,10 @@ $l-main-box-shadow: rgba(0,0,0,0.3);
 $l-meta-header-bg: rgba(225,225,225,0.8);
 $l-meta-header-shadow: rgba(0,0,0,0.15);
 
-$l-bg-gradient-1: rgba(12,3,5,0.05);
-$l-bg-gradient-2: rgba(11,0,10,0.05);
-$l-bg-gradient-3: rgba(2,10,10,0.05);
-$l-bg-gradient-4: rgba(10,10,8,0.05);
+$l-bg-gradient-1: #24804E;
+$l-bg-gradient-2: #217171;
+$l-bg-gradient-3: #6167C9;
+$l-bg-gradient-4: #B85143;
 
 $l-toc-nav-bg: rgba(255,255,255,0.75);
 $l-toc-shadow: rgba(0,0,0,0.5);
@@ -193,10 +187,10 @@ $d-highlight-1-rgb: rgba($d-highlight-1,0.95);
 $d-meta-header-bg: rgba(50,50,50,0.8);
 $d-meta-header-shadow: rgba(0,0,0,1);
 
-$d-bg-gradient-1: rgba(202,193,195,0.05);
-$d-bg-gradient-2: rgba(211,200,210,0.05);
-$d-bg-gradient-3: rgba(202,210,210,0.05);
-$d-bg-gradient-4: rgba(210,210,208,0.05);
+$d-bg-gradient-1: #24804E;
+$d-bg-gradient-2: #217171;
+$d-bg-gradient-3: #6167C9;
+$d-bg-gradient-4: #B85143;
 
 $d-toc-nav-bg: rgba(0,0,0,0.3);
 $d-toc-shadow: rgba(255,255,255,0.5);
@@ -903,12 +897,124 @@ hr {
   margin: 3em 0;
 }
 
+/* ## Comment Form */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 0.25em;
+
+  label {
+    &[for="id_subscribe"] {
+      display: inline-block;
+      height: 34px;
+      line-height: 36.666px;
+      padding-right: 1em;
+    }
+
+    font-size: var(--small);
+    font-weight: bold;
+  }
+
+  div {
+    width: 100%;
+  }
+
+  input,
+  textarea {
+    border-radius: 4px;
+    width: 100%;
+    padding: 0.75em;
+    font-size: 1em;
+    border: 1px solid transparent;
+
+    &:focus,
+    &:active,
+    &:hover {
+      border-color: var(--loosed-highlight-1);
+    }
+  }
+
+  textarea {
+    outline: none;
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 4px;
+  }
+
+  input {
+    &[name="subscribe"] {
+      width: 1em;
+      height: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+      outline: 1px solid transparent;
+      margin: auto 0;
+      vertical-align: middle;
+
+      &:focus,
+      &:hover {
+        outline-color: var(--loosed-highlight-1);
+      }
+
+      &:checked {
+        + input[name="email"] {
+          display: block !important;
+          + div {
+            display: block !important;
+            + button[type="submit"] {
+              bottom: 3em;
+            }
+          }
+        }
+      }
+    }
+    &[name="email"] {
+      width: calc(100% - 4em);
+      display: none;
+      + div {
+        width: calc(100% - 4em);
+        display: none;
+      }
+    }
+    &[name="subscribe"] {
+      display: inline-block;
+    }
+  }
+
+  button[type="submit"] {
+    background: transparent;
+    border: none;
+    height: 0;
+    width: 2.75em;
+    position: relative;
+    cursor: pointer;
+    margin: 0 0 0 auto;
+    bottom: 0;
+    right: 0;
+    color: var(--loosed-black);
+
+    &::after {
+      background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M4.4 19.425q-.5.2-.95-.088T3 18.5v-3.725q0-.35.2-.625t.55-.35L11 12l-7.25-1.8q-.35-.075-.55-.35T3 9.225V5.5q0-.55.45-.838t.95-.087l15.4 6.5q.625.275.625.925t-.625.925l-15.4 6.5Z'/%3E%3C/svg%3E%0A");
+      width: 2.75em;
+      height: 2.75em;
+      cursor: pointer;
+    }
+
+    &:hover,
+    &:focus {
+      color: var(--loosed-highlight-1);
+    }
+  }
+}
+
 /* # Paragraph Styles */
 p {
   margin: 0 auto 1.25em auto;
   font-size: 1em;
   font-family: var(--jetbrains-mono);
 }
+
 blockquote {
   font-size: 90%;
   line-height: 1.75;
@@ -1137,4 +1243,111 @@ a[data-footnote-ref="true"]:hover {
 /* # Box-Sizing */
 * {
   box-sizing: border-box;
+}
+
+@layer utilities {
+  .pause {
+    animation-play-state: paused;
+  }
+  .gradient-bg {
+    animation: gradient 10s ease infinite;
+    background: linear-gradient(60deg, var(--bg-gradient-1), var(--bg-gradient-2), var(--bg-gradient-3), var(--bg-gradient-4));
+    background-size: 400% 400%;
+    position: relative;
+    z-index: 2;
+
+    @keyframes gradient {
+      0% {
+        background-position: 0% 10%;
+      }
+      25% {
+        background-position: 100% 20%;
+      }
+      50% {
+        background-position: 20% 50%;
+      }
+      75% {
+        background-position: 100% 0%;
+      }
+      100% {
+        background-position: 0% 100%;
+      }
+    }
+  }
+  .gradient-shadow {
+    &:before {
+      @apply
+        -z-10;
+    }
+
+    &:before, &:after {
+      animation: steam 5s linear infinite;
+      animation-direction: alternate;
+      background: linear-gradient(45deg, var(--bg-gradient-1), var(--bg-gradient-2), var(--bg-gradient-3), var(--bg-gradient-4));
+
+      @apply
+        content-['']
+        absolute
+        left-0
+        top-0
+        rounded-lg
+        bg-no-repeat
+        bg-400
+        w-full
+        h-full;
+    }
+
+    &:after {
+      @apply z-0 blur-6xl;
+    }
+
+    @keyframes steam {
+      0% {
+        background-position: 0% 0%;
+        transform: rotate(0deg);
+        border-radius: 200px 180px 190px 150px;
+      }
+      25% {
+        background-position: 80% 60%;
+        transform: rotate(10deg);
+        border-radius: 100px 180px 180px 100px;
+      }
+      50% {
+        background-position: 100% 90%;
+        transform: rotate(5deg);
+        border-radius: 120px 140px 180px 190px;
+      }
+      75% {
+        background-position: 40% 60%;
+        transform: rotate(-7deg);
+        border-radius: 120px 190px 200px 180px;
+      }
+      100% {
+        background-position: 15% 15%;
+        transform: rotate(-10deg);
+        border-radius: 190px 120px 200px 120px;
+      }
+    }
+  }
+  .outer-sheen {
+    @apply
+      p-0.5
+      rounded-lg
+      bg-gradient-to-br
+      from-[rgba(229,229,229,0.5)]
+      to-[rgba(163,163,163,0.5)]
+      backdrop-blur-sm
+      dark:from-[rgba(163,163,163,0.35)]
+      dark:to-[rgba(38,38,38,0.35)];
+  }
+  .inner-sheen {
+    @apply
+      shadow-[inset_0_0_6px_0_rgba(0,0,0,0.05)]
+      dark:shadow-[inset_0_0_6px_0_rgba(0,0,0,0.25)]
+      rounded-md
+      backdrop-brightness-200
+      dark:backdrop-brightness-75
+      bg-[rgba(212,212,212,0.1)]
+      dark:bg-[rgba(23,23,23,0.1)];
+  }
 }

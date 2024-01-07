@@ -38,14 +38,16 @@ export default function ArticleHead(props) {
 
   return (
     <>
-      <header className={ article_styles.article__head }>
-        <h1 className={ article_styles.article__title }>{ parseTitle(props.meta) }</h1>
-        <div className={ article_styles.tags__wrapper }>
-          <div className={ metaClass }>
-            <span className={ spanClass }>{ timePublished(props.meta) } | { datePublished(props.meta) }</span>
-            <span className={ `${spanClass} w-full` }>{ props.meta.author }</span>
+      <header className="mx-8 mt-0 mb-4 outer-sheen sm:mx-12">
+        <div className="p-6 inner-sheen">
+          <h1 className="pb-1 hyphens-auto">{ parseTitle(props.meta) }</h1>
+          <div className={ article_styles.tags__wrapper }>
+            <div className={ metaClass }>
+              <span className={ spanClass }>{ timePublished(props.meta) } | { datePublished(props.meta) }</span>
+              <span className={ `${spanClass} w-full` }>{ props.meta.author }</span>
+            </div>
+            <Tags tags={ props.meta.tags } />
           </div>
-          <Tags tags={ props.meta.tags } />
         </div>
       </header>
     </>
