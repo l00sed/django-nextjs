@@ -15,6 +15,46 @@ import Card               from 'components/card.jsx';
 /* Lib */
 import articles from 'lib/articles';
 
+function Star(props) {
+  return (
+    <svg
+      width={ props.size }
+      height={ props.size }
+      className={ props.extraClass }
+      viewBox="0 0 150 150"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M75.5 13C75.5 55 95 75.4999 138 75.4999C95 75.4999 75.5 95 75.5 138C75.5 95 55 75.5001 13 75.5001C55 75.5001 75.5 55 75.5 13ZM79.2463 71.5312C82.8052 75 89.7451 75 103.278 75C75.5 75 75.5 75.0001 75.5 105C75.5 75.0001 75.5 75 47.7222 75C75.5 75 75.5 75 75.5 45C75.5 60.3847 75.5 67.8798 79.2463 71.5312Z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}
+
+function WideStar(props) {
+  return (
+    <svg
+      className={ props.extraClass }
+      width="450"
+      height="100"
+      viewBox="0 0 500 150"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M475 75C300 75 250 40 250 10C250 40 200 75 25 75C200 75 250 110 250 140C250 110 300 75 475 75ZM302 75C261.556 75 250 66.9231 250 60C250 66.9231 238.444 75 198 75C238.444 75 250 83.0769 250 90C250 83.0769 261.556 75 302 75Z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}
+
 export default async function HomePage() {
   const data = await articles();
 
@@ -47,18 +87,23 @@ export default async function HomePage() {
         <SearchToggle />
         <Donate />
         <Intro />
-        <div className="mt-8 px-4 sm:px-8">
+        <div className="px-4 sm:px-8 max-w-full overflow-x-hidden">
+          <WideStar extraClass="my-8 lg:my-14 mx-auto max-w-44 lg:max-w-full" />
           { data ? <Featured element={ data[0] } /> : <></> }
+          <WideStar extraClass="mt-4 mb-8 lg:mt-8 lg:mb-14 mx-auto max-w-44 lg:max-w-full" />
         </div>
-        <HorizontalScroller className="max-w-full mx-auto">
+        <HorizontalScroller className="max-w-full mx-auto !my-0">
           <h2 className={ archiveClass }>
             <span className={ letterClass }>e</span>
             <span className={ letterClass }>v</span>
-            <span className={ letterClass }>i</span>
+            <span className={ `${letterClass} -my-3` }>i</span>
             <span className={ letterClass }>h</span>
             <span className={ letterClass }>c</span>
             <span className={ letterClass }>r</span>
             <span className={ letterClass }>A</span>
+            <Star size={ 60 } extraClass="mx-auto my-1 text-loosed-400 dark:text-loosed-600" />
+            <Star size={ 60 } extraClass="mx-auto my-1 text-loosed-400 dark:text-loosed-600" />
+            <Star size={ 60 } extraClass="mx-auto my-1 text-loosed-400 dark:text-loosed-600" />
           </h2>
           {
             data?.map((element, index) => {

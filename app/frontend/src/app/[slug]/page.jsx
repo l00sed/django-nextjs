@@ -23,15 +23,27 @@ export const metadata = {
   generator: 'Next.js',
   applicationName: 'Loosed Blog',
   referrer: 'origin-when-cross-origin',
-  keywords: ['Next.js', 'React', 'JavaScript'],
-  authors: [
-    { name: 'Dan', url: 'https://dato.work' }
+  keywords: [
+    'blog',
+    'programming',
+    'technology',
+    'art',
+    'design',
+    'architecture',
+    'code',
+    'robotics',
+    'fabrication',
+    'politics',
+    'linux',
+    'vim',
+    'electronics'
   ],
-  colorScheme: 'dark',
-  description: 'test',
-  themeColor: '#ffffff',
-  creator: 'Dan Tompkins',
-  publisher: 'Dan Tompkins',
+  authors: [
+    { name: 'Daniel Tompkins', url: 'https://dato.work' }
+  ],
+  description: 'A lifestyle blog by creative technologist Dan Tompkins, focusing on media art, design, and programming.',
+  creator: 'Daniel Tompkins',
+  publisher: 'Daniel Tompkins',
 }
 
 /* Default /[slug] page is a "Blog" page */

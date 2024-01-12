@@ -1,5 +1,5 @@
 /* Styles */
-import article_styles from '../styles/Article.module.scss';
+import article_styles from 'styles/Article.module.scss';
 /* Used for ToC */
 import { compileMDX }  from 'next-mdx-remote/rsc';
 import { hasProperty } from "hast-util-has-property"
@@ -9,7 +9,6 @@ import { visit }       from "unist-util-visit"
 /* Rehype */
 import rehypeSlug      from 'rehype-slug';
 /* Local Utils */
-import remarkCodeTitles from 'utils/code_titles';
 import HOST_URL         from 'utils/api_server';
 import notFoundWrapper  from 'lib/not_found';
 /* Next components */

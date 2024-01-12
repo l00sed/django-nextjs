@@ -55,15 +55,15 @@ export default function Likes({ meta }) {
       onClick={ (e) => { handleLike(e) } }
       onKeyDown={ (e) => { handleLike(e) } }
     >
-      <div className="inner-sheen h-10 bg-opacity-50 px-3 py-1 gap-x-1 font-mono cursor-pointer flex flex-row">
+      <div className="inner-sheen h-9 bg-opacity-50 px-3 py-1 gap-x-1 font-mono cursor-pointer flex flex-row">
         <span
           id="likes_count"
-          className="my-auto"
+          className="my-auto leading-none"
           data-like-count={ parseInt(meta.likes).toString() }
         >{ parseInt(meta.likes).toString() }</span>
         <svg
           id="heart"
-          className="relative my-auto pb-0.5"
+          className="relative my-auto"
           xmlns="http://www.w3.org/2000/svg"
           width="18"
           height="18"

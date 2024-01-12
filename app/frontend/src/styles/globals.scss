@@ -59,7 +59,7 @@
 }
 
 /* LIGHT */
-$l-black: #1b1b1b;
+$l-black: #0f0f0f;
 $l-white: #f3f3f3;
 
 $l-highlight-1: #b61115;
@@ -1038,6 +1038,10 @@ blockquote {
 }
 
 /* # Lists */
+ul {
+  @apply list-disc;
+}
+
 ol,
 ul {
   padding-inline-start: 1.25em;
@@ -1141,6 +1145,10 @@ figure {
     visibility: visible;
   }
 }
+[data-footnotes="true"] ol {
+  @apply list-decimal;
+}
+
 a[data-footnote-ref="true"] {
   top: -5px;
   padding: 2px 5px;
@@ -1298,7 +1306,7 @@ a[data-footnote-ref="true"]:hover {
     }
 
     &:after {
-      @apply z-0 blur-6xl;
+      @apply z-0 blur-3xl;
     }
 
     @keyframes steam {

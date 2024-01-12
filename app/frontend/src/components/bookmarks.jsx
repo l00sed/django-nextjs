@@ -1,3 +1,5 @@
+"use client";
+
 import styles from 'styles/Bookmark.module.scss';
 
 import bookmarks from 'data/bookmarks.json';
@@ -127,7 +129,7 @@ export default function Bookmarks() {
                   href={ `#${ encodeURIComponent(bmCats[0]) }` }
                   className={ styles.anchor }
                 >#</a>
-                <span id={ encodeURIComponent(bmCats[0]) }>{ bmCats.shift() }{ caret }</span>
+                <span id={ encodeURIComponent(bmCats[0]) } className="inline-flex">{ bmCats.shift() }{ caret }</span>
                 <ul className={ `${styles.childList} ${styles.hidden}` }>
                   { children }
                 </ul>
@@ -156,7 +158,7 @@ export default function Bookmarks() {
                   href={ `#${ encodeURIComponent(bmCats.at(-1)) }` }
                   className={ styles.anchor }
                 >#</a>
-                <span id={ encodeURIComponent(bmCats.at(-1)) }>{ bmCats.pop() }{ caret }</span>
+                <span id={ encodeURIComponent(bmCats.at(-1)) } className="inline-flex">{ bmCats.pop() }{ caret }</span>
                 <ul className={ `${styles.childList} ${styles.hidden}` }>
                   { children }
                 </ul>

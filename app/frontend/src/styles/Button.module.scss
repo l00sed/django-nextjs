@@ -1,7 +1,6 @@
 .button__main {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   font-weight: bold;
   text-transform: uppercase;
   border: 1px solid transparent;
@@ -29,6 +28,7 @@
   background-repeat: no-repeat;
   background-position-x: 0;
   background-size: calc(100vw * 2) 100px;
+  justify-content: space-between;
   color: #ffffff;
   border: 1px solid var(--loosed-black);
   box-shadow: 0 var(--off-1) 0 0 var(--loosed-black);
@@ -51,18 +51,6 @@
   &:hover {
     --off-1: 0;
     background-position-x: -500px;
-  }
-}
-
-.standard {
-  border: 1px solid var(--loosed-black);
-  box-shadow: inset 1px 1px 1px 0 rgba(255,255,255,0.5);
-  width: fit-content;
-
-  &:hover {
-    border-color: var(--loosed-black);
-    background-color: var(--loosed-black);
-    color: var(--loosed-white);
   }
 }
 

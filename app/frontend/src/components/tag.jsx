@@ -48,7 +48,7 @@ export function Tag (props) {
 
   return (
     <Link
-      key={ props.key }
+      key={ props.uid }
       href={ href }
       className={ classes }
     >
@@ -84,6 +84,7 @@ export function Tags(props) {
         return (
           <Tag
             key={ key }
+            uid={ key }
             tag={ t.name }
             slug={ t.slug }
             index={ i }

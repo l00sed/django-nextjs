@@ -1,6 +1,21 @@
 import button_styles from 'styles/Button.module.scss';
 
 export default function Button(props) {
+  let standardClass = [
+    'border',
+    'border-solid',
+    'border-black',
+    'dark:border-white',
+    'inner-sheen',
+    'w-full',
+    'sm:w-fit',
+    'flex',
+    'flex-row',
+    'justify-center',
+    'sm:justify-start',
+    'hover:invert'
+  ].join(' ');
+
   let styles = ''
   let svg = <></>
 
@@ -21,12 +36,26 @@ export default function Button(props) {
         </svg>
       break;
     case 'standard':
-      styles = button_styles.standard
+      styles = standardClass;
   }
+
   return (
-    <div className={ `${styles} ${button_styles.button__main}` }>
-      { props.children }
-      { svg }
-    </div>
+    <>
+      {
+        props.type === 'standard'
+        ?
+          <div className="outer-sheen w-full sm:w-fit">
+            <div className={ `${styles} ${button_styles.button__main}` }>
+              { props.children }
+              { svg }
+            </div>
+          </div>
+        :
+          <div className={ `${styles} ${button_styles.button__main}` }>
+            { props.children }
+            { svg }
+          </div>
+      }
+    </>
   );
 }

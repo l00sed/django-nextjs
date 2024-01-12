@@ -22,13 +22,15 @@ export default async function ImageWrapper({ src, alt, caption, width, height, v
           return image_styles.image__wrapper;
       case "card":
         return card_styles.image__wrapper;
+      case "featured":
+        return "h-full w-auto";
     }
   }
 
   return (
     <>
       <figure
-        className={ type === 'featured' ? '' : figureClasses(type) }
+        className={ figureClasses(type) }
         style={
           align === 'left' ?
           {

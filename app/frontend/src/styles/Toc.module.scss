@@ -2,6 +2,7 @@
 .toc__wrapper {
   --toc-width: 220px;
   width: fit-content;
+  height: fit-content;
   display: inline-flex;
 
   @media screen and (min-width: 576px) {
@@ -13,7 +14,7 @@
   text-align: left;
   margin: 0 0 0 auto;
   display: inline-block;
-  height: 40px;
+  height: 36px;
 }
 
 /* Hidden input checkbox */
@@ -103,7 +104,7 @@ nav.toc__block {
   opacity: 0;
   z-index: -10;
   position: relative;
-  top: -1px;
+  top: -3px;
   left: -2px;
   width: calc(var(--toc-width) + 4px);
   transition: opacity var(--loosed-transition-fast) ease, max-height var(--loosed-transition-fast) ease;

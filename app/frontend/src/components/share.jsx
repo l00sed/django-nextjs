@@ -4,7 +4,7 @@ export default function Share() {
       className="select-none bg-opacity-50 backdrop-blur-sm w-fit h-fit py-0.5 px-3 outer-sheen"
       htmlFor="share-overlay-input"
     >
-      <div className="inner-sheen h-10 bg-opacity-50 px-3 py-1 gap-x-1 font-mono cursor-pointer flex flex-row">
+      <div className="inner-sheen h-9 bg-opacity-50 px-3 py-1 gap-x-1 font-mono cursor-pointer flex flex-row">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="my-auto"

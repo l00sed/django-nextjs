@@ -17,6 +17,18 @@ const ms = localFont({
   variable: '--mona-sans'
 })
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: 1,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' },
+  ],
+  colorScheme: 'dark light'
+}
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={ `${ jbm.variable } ${ ms.variable }` }>

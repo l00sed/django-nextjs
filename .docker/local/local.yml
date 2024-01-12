@@ -51,7 +51,7 @@ services:
     depends_on:
       - db
       - redis
-    command: "/./loosed start_backend"
+    command: "/./loosed ${BACKEND_ACTION}"
     expose:
       - 8000
     volumes:
@@ -67,7 +67,7 @@ services:
       context: .
       dockerfile: frontend.Dockerfile
       target: runner
-    command: "npm run dev"
+    command: "/./loosed ${FRONTEND_ACTION}"
     depends_on:
       - backend
     expose:
@@ -76,6 +76,7 @@ services:
       - ./app/frontend:/home/node
       - ./app/mdx:/home/node/src/mdx
       - ./app/media:/home/node/public
+      - ./loosed:/loosed
 
 # Volumes
 volumes:

@@ -46,7 +46,17 @@ export default function ArticleHead(props) {
               <span className={ spanClass }>{ timePublished(props.meta) } | { datePublished(props.meta) }</span>
               <span className={ `${spanClass} w-full` }>{ props.meta.author }</span>
             </div>
-            <Tags tags={ props.meta.tags } />
+            {
+              props.meta.tags
+              ?
+                props.meta.tags.length
+                ?
+                  <Tags tags={ props.meta.tags } />
+                :
+                  <></>
+              :
+                <></>
+            }
           </div>
         </div>
       </header>

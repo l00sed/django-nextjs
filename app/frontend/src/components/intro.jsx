@@ -6,17 +6,17 @@ export default function Intro () {
   let outerWrapperClass = [
     'flex',
     'flex-col',
-    'p-4',
-    'h-144',
-    'sm:h-192',
-    'lg:h-240',
+    'px-4',
+    'pt-4',
+    'mt-4',
     'w-full'
   ].join(' ');
 
   let innerWrapperClass = [
     'border',
     'border-black',
-    'p-4',
+    'py-3',
+    'px-4',
     'max-w-full',
     'sm:max-w-sm',
     'md:max-w-md',
@@ -109,7 +109,7 @@ export default function Intro () {
         <p className={ ifYouClass }>
           <span>If</span>
           <span>you</span>
-          <span>share</span>
+          <span>have</span>
           <span>a</span>
           <span>passion</span>
           <span>for</span>
@@ -268,13 +268,11 @@ export default function Intro () {
           </span>
         </h2>
         <p id="yitrp" className={ rightPlaceClass }>
-          <span>You</span>
-          <span>made</span>
-          <span>it</span>
-          <span>to</span>
-          <span>the</span>
-          <span>right</span>
-          <span>place</span>
+          <span>We</span>
+          <span>have</span>
+          <span>something</span>
+          <span>in</span>
+          <span>common</span>
         </p>
       </div>
     </div>

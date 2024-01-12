@@ -6,23 +6,157 @@
 export PROJECT_NAME="loosed"
 # Use "local" or "prod" for ENV
 export ENV="local"
-# Use "development" or "production" for NODE_ENV
-if [[ "$ENV" == "local" ]]; then
-    export NODE_ENV="development"
-else
-    export NODE_ENV="production"
-fi
 # Set environment variables to speed up build
 export COMPOSE_DOCKER_CLI_BUILD=1
 export DOCKER_BUILDKIT=1
 
 # Get current user id/group
-export USER_ID=$(id -u)
-export GROUP_ID=$(id -g)
+UID_CMD=$(id -u)
+export USER_ID=$UID_CMD
+GID_CMD=$(id -g)
+export GROUP_ID=$GID_CMD
 
 #######################################
 # FUNCTIONS
 #######################################
+
+backend_cli() {
+  (
+    clean
+
+    # Pull the local backend Dockerfile into the project root
+    cp ".docker/$ENV/backend/backend.Dockerfile" .
+    # Grab the local.yml and .dockerignore
+    cp ".docker/$ENV/.dockerignore" .
+    cp ".docker/$ENV/$ENV.yml" .
+
+    docker compose -f "$ENV.yml" run -it backend /bin/bash
+  )
+}
+
+# Backend Docker container's command script
+backend_dev() {
+  backend_prepare "dev"
+}
+
+backend_export() {
+  python manage.py dumpdata | jq > "db_$(date +%N).json"
+}
+
+backend_import() {
+  python manage.py loaddata "$2"
+}
+
+backend_prepare() {
+  (
+    # Activate the virtual environment (where Django is installed)
+    . ./bin/activate
+    # Run Django app prep
+    python manage.py collectstatic --no-input
+    # Migrate database tables
+    python manage.py makemigrations
+    python manage.py migrate
+    # Import pages
+    python manage.py sync_mdx
+    # Run Gunicorn WSGI client
+    # gunicorn backend.wsgi:application --bind :8000 --reload
+    # Run Gunicorn ASGI client
+    if [ "$#" == 1 ]; then
+      if [[ "$1" == "dev" ]]; then
+        # WARN: (`--reload` argument not recommended for production)
+        gunicorn backend.asgi:application --bind :8000 --reload -k uvicorn.workers.UvicornWorker
+      fi
+    else
+      gunicorn backend.asgi:application --bind :8000 -k uvicorn.workers.UvicornWorker
+    fi
+  )
+}
+
+# Start the containers
+backend_run() {
+  (
+    # Always clean first to make sure we're starting with the right Dockerfile
+    clean
+    # Pull the local backend Dockerfile into the project root
+    cp ".docker/$ENV/backend/backend.Dockerfile" .
+    cp ".docker/$ENV/db/db.Dockerfile" .
+    cp ".docker/$ENV/.dockerignore" .
+    cp ".docker/$ENV/$ENV.yml" .
+
+    docker compose -p "loosed" \
+      -f "$ENV.yml" \
+      --verbose run backend /bin/bash
+  )
+}
+
+# Backend Docker container's command script
+backend_start() {
+  backend_prepare
+}
+
+# Build the Docker images
+build() {
+  (
+    # Always clean first to make sure we're starting with the right Dockerfile
+    clean
+
+    # Pull the local backend Dockerfile into the project root
+    cp ".docker/$ENV/backend/backend.Dockerfile" .
+    # Pull the local frontend Dockerfile into the project root
+    cp ".docker/$ENV/frontend/frontend.Dockerfile" .
+    # Pull the local nginx Dockerfile into the project root
+    cp ".docker/$ENV/nginx/nginx.Dockerfile" .
+    ## Pull the local db Dockerfile into the project root
+    cp ".docker/$ENV/db/db.Dockerfile" .
+    # Grab the local.yml and .dockerignore
+    cp ".docker/$ENV/.dockerignore" .
+    cp ".docker/$ENV/$ENV.yml" .
+
+    if [ $# -eq 1 ]; then
+      # Run docker compose to build the image with either local/production Dockerfiles
+      docker compose -p "loosed" \
+        -f "$ENV.yml" build \
+        --progress plain \
+        --build-arg USER_ID="$USER_ID" \
+        --build-arg GROUP_ID="$GROUP_ID"
+    fi
+
+    if [ $# -eq 2 ]; then
+      if [[ "$2" == "no-cache" ]]; then
+        # Remove existing build cache
+        docker buildx prune -af
+        docker builder prune -af
+        # Run docker compose to build the image with either local/production Dockerfiles
+        docker compose -p "loosed" \
+          -f "$ENV.yml" build \
+          --progress plain \
+          --build-arg USER_ID="$USER_ID" \
+          --build-arg GROUP_ID="$GROUP_ID" \
+          --no-cache
+      fi
+    fi
+
+    clean
+  )
+}
+
+# Use OpenSSL to generate an SSL certificate
+build_cert() {
+  (
+    cd /etc/nginx/certs || exit
+    # Build OpenSSL configuration file
+    touch openssl.cnf
+    cat /etc/ssl/openssl.cnf > openssl.cnf
+    {
+      echo \"\"; \
+      echo \"[ SAN ]\"; \
+      echo \"subjectAltName=DNS.1:loosed.local,DNS.2:*.loosed.local\";
+    } >> openssl.cnf
+    # Generate OpenSSL keys
+    openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout loosed.local.key -out loosed.local.crt -days 3650 -subj \"/CN=*.loosed.local\" -config openssl.cnf -extensions SAN
+    rm openssl.cnf
+  )
+}
 
 # Remove build artifacts from project root
 clean() {
@@ -56,21 +190,7 @@ clean() {
   )
 }
 
-cli_backend() {
-  (
-    clean
-
-    # Pull the local backend Dockerfile into the project root
-    cp ".docker/$ENV/backend/backend.Dockerfile" .
-    # Grab the local.yml and .dockerignore
-    cp ".docker/$ENV/.dockerignore" .
-    cp ".docker/$ENV/$ENV.yml" .
-
-    docker compose -f "$ENV.yml" run -it backend /bin/bash
-  )
-}
-
-cli_frontend() {
+frontend_cli() {
   (
     clean
 
@@ -84,34 +204,45 @@ cli_frontend() {
   )
 }
 
+# Frontend Docker container's dev command script
+frontend_dev() {
+  export NODE_ENV="development"; \
+  npm run dev
+}
+
+# Frontend Docker container's command script
+frontend_start() {
+  export NODE_ENV="production"; \
+  npm run build; \
+  npm run start
+}
+
 # Generate LQIPs
 gen_lqip() {
-  (
-    docker exec loosed-backend-1 /bin/bash -c "python manage.py gen_lqip"
-  )
+  docker exec loosed-backend-1 /bin/bash -c "python manage.py gen_lqip"
 }
 
 # Generate a self-signed certificate
 generate_cert () {
   (
     echo "Removing existing certificates."
-    rm -Rf .docker/local/nginx/certs/loosed.test.*
+    rm -Rf .docker/local/nginx/certs/loosed.local.*
     echo "Cleaning build files..."
     clean
     echo "Copying local docker compose file to current directory."
     cp .docker/local/local.yml .
     echo "Generating a certificate with OpenSSL."
     docker compose -f local.yml \
-      run --rm nginx sh -c "cd /etc/nginx/certs && touch openssl.cnf && cat /etc/ssl/openssl.cnf > openssl.cnf && echo \"\" >> openssl.cnf && echo \"[ SAN ]\" >> openssl.cnf && echo \"subjectAltName=DNS.1:loosed.test,DNS.2:*.loosed.test\" >> openssl.cnf && openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout loosed.test.key -out loosed.test.crt -days 3650 -subj \"/CN=*.loosed.test\" -config openssl.cnf -extensions SAN && rm openssl.cnf"
+      run --rm nginx sh -c "/./loosed build_cert"
   )
 }
 
 # Install certificate
 install_cert () {
   if [[ "$OSTYPE" == "darwin"* ]]; then
-    sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain .docker/local/nginx/certs/loosed.test.crt
+    sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain .docker/local/nginx/certs/loosed.local.crt
   elif [[ "$OSTYPE" == "linux-gnu" ]]; then
-    sudo ln -s "$(pwd)/.docker/local/nginx/certs/loosed.test.crt" /usr/local/share/ca-certificates/loosed.test.crt
+    sudo ln -s "$(pwd)/.docker/local/nginx/certs/loosed.local.crt" /usr/local/share/ca-certificates/loosed.local.crt
     sudo update-ca-certificates
   else
     echo "Could not install the certificate on the host machine, please do it manually"
@@ -122,44 +253,11 @@ install_cert () {
 restart() {
   (
     stop
-    start
-  )
-}
-
-# Start the containers
-run_backend() {
-  (
-    # Always clean first to make sure we're starting with the right Dockerfile
-    clean
-    # Pull the local backend Dockerfile into the project root
-    cp ".docker/$ENV/backend/backend.Dockerfile" .
-    cp ".docker/$ENV/db/db.Dockerfile" .
-    cp ".docker/$ENV/.dockerignore" .
-    cp ".docker/$ENV/$ENV.yml" .
-
-    docker compose -p "loosed" \
-      -f "$ENV.yml" \
-      --verbose run backend /bin/bash
-  )
-}
-
-# Backend Docker container's command script
-start_backend() {
-  (
-    # Activate the virtual environment (where Django is installed)
-    . ./bin/activate
-    # Run Django app prep
-    python manage.py collectstatic --no-input
-    # Migrate database tables
-    python manage.py makemigrations
-    python manage.py migrate
-    # Import pages
-    python manage.py sync_mdx
-    # Run Gunicorn WSGI client
-    # gunicorn backend.wsgi:application --bind :8000 --reload
-    # Run Gunicorn ASGI client
-    gunicorn backend.asgi:application --bind :8000 --reload -k uvicorn.workers.UvicornWorker
-    # WARN: (`--reload` argument not recommended for production)
+    if [[ "$NODE_ENV" == "development" ]]; then
+      start "dev"
+    else
+      start
+    fi
   )
 }
 
@@ -180,11 +278,24 @@ start() {
 
     # Sync MDX before starting up
     sync_mdx
-
-    docker compose -p "loosed" \
-      -f "$ENV.yml" \
-      --verbose up
   )
+
+  if [ "$#" == 2 ]; then
+    if [[ "$2" = "dev" ]]; then
+      echo "Running in development mode."; \
+      export FRONTEND_ACTION="frontend_dev"; \
+      export BACKEND_ACTION="backend_dev";
+    fi
+  else
+    echo "Running production application."; \
+    export FRONTEND_ACTION="frontend_start"; \
+    export BACKEND_ACTION="backend_start";
+  fi
+
+  # Run docker compose to build the image with either local/production Dockerfiles
+  docker compose -p "loosed" \
+    -f "$ENV.yml" \
+    --verbose up
 }
 
 # Stop the containers
@@ -202,55 +313,9 @@ stop() {
   )
 }
 
-# Build the containers
-build() {
-  (
-    # Always clean first to make sure we're starting with the right Dockerfile
-    clean
-
-    # Pull the local backend Dockerfile into the project root
-    cp ".docker/$ENV/backend/backend.Dockerfile" .
-    # Pull the local frontend Dockerfile into the project root
-    cp ".docker/$ENV/frontend/frontend.Dockerfile" .
-    # Pull the local nginx Dockerfile into the project root
-    cp ".docker/$ENV/nginx/nginx.Dockerfile" .
-    ## Pull the local db Dockerfile into the project root
-    cp ".docker/$ENV/db/db.Dockerfile" .
-    # Grab the local.yml and .dockerignore
-    cp ".docker/$ENV/.dockerignore" .
-    cp ".docker/$ENV/$ENV.yml" .
-
-    if [ -z "$2" ]; then
-      if [[ "$2" -eq "no-cache" ]]; then
-        # Remove existing build cache
-        docker buildx prune -af
-        docker builder prune -af
-        # Run docker compose to build the image with either local/production Dockerfiles
-        docker compose -p "loosed" \
-          -f "$ENV.yml" build \
-          --progress plain \
-          --build-arg USER_ID=${USER_ID} \
-          --build-arg GROUP_ID=${GROUP_ID} \
-          --no-cache
-      fi
-    else
-      # Run docker compose to build the image with either local/production Dockerfiles
-      docker compose -p "loosed" \
-        -f "$ENV.yml" build \
-        --progress plain \
-        --build-arg USER_ID=${USER_ID} \
-        --build-arg GROUP_ID=${GROUP_ID}
-    fi
-
-    clean
-  )
-}
-
 # Sync MDX
 sync_mdx() {
-  (
-    docker exec loosed-backend-1 /bin/bash -c "python manage.py sync_mdx"
-  )
+  docker exec loosed-backend-1 /bin/bash -c "python manage.py sync_mdx"
 }
 
 #######################################
@@ -258,17 +323,44 @@ sync_mdx() {
 #######################################
 
 case "$1" in
+  backend_cli)
+    backend_cli
+    ;;
+  backend_dev)
+    backend_dev
+    ;;
+  backend_export)
+    backend_export
+    ;;
+  backend_import)
+    backend_import "$@"
+    ;;
+  backend_prepare)
+    backend_prepare
+    ;;
+  backend_run)
+    backend_run
+    ;;
+  backend_start)
+    backend_start
+    ;;
   build)
-    build
+    build "$@"
+    ;;
+  build_cert)
+    build_cert
     ;;
   clean)
     clean
     ;;
-  cli_backend)
-    cli_backend
+  frontend_cli)
+    frontend_cli
     ;;
-  cli_frontend)
-    cli_frontend
+  frontend_dev)
+    frontend_dev
+    ;;
+  frontend_start)
+    frontend_start
     ;;
   gen_lqip)
     gen_lqip
@@ -282,14 +374,8 @@ case "$1" in
   restart)
     restart
     ;;
-  run_backend)
-    run_backend
-    ;;
   start)
-    start
-    ;;
-  start_backend)
-    start_backend
+    start "$@"
     ;;
   stop)
     stop
@@ -306,16 +392,24 @@ Usage:
   loosed <command> [options] [env]
 
 Available commands:
+  backend_cli ............................... Start a command prompt for the backend image
+  backend_dev ............................... Start Django backend with "--reload" flag
+  backend_export ............................ Use Django "dumpdata" to export database
+  backend_import ............................ Use Django "loaddata" to import json
+  backend_prepare ........................... Internal, use "dev" (backend_prepare "dev") to run backend_dev
+  backend_run ............................... Run only the backend container
+  backend_start ............................. Start Django backend without "--reload" flag (production mode)
+  build_cert ................................ Generate an OpenSSL certificate
   build ..................................... Build the containers' images (can use "--no-cache" option)
   clean ..................................... Remove build artifacts
-  cli_backend ............................... Start a command prompt for the backend image
-  cli_frontend .............................. Start a command prompt for the frontend image
+  frontend_cli .............................. Start a command prompt for the frontend image
+  frontend_dev .............................. Start Next application in development mode
+  frontend_start ............................ Start Next application in production mode
   gen_lqip .................................. Generate LQIPs in the backend
   generate_cert ............................. Generate an SSL certificate (local only, env ignored)
   install_cert .............................. Install cert on host machine (local only, env ignored)
   restart ................................... Restart the containers
-  start_backend ............................. Run backend (Django) in container
-  start ..................................... Start the containers
+  start [dev] ............................... Start the containers, use "dev" argument to run in development
   stop ...................................... Stop the containers
   sync_mdx .................................. Sync the MDX files
 
