@@ -48,8 +48,8 @@
 @tailwind utilities;
 
 /* Import <code> tag theme for hljs */
-@import './code_themes/prism-base16-brewer.dark.css';
-@import './code_themes/prism-extras.css';
+@import './code_themes/prism-base16-brewer.dark.scss';
+@import './code_themes/prism-extras.scss';
 
 /* Used for paragraph link underline offset */
 @property --offset {

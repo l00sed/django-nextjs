@@ -103,12 +103,13 @@
   }
 
   h3 {
-    margin-left: 1.75em;
-    margin-right: 1.75em;
+    margin-left: 2em;
+    margin-right: 2em;
 
     @media screen and (min-width: 576px) {
-      margin-left: 2.75em;
-      margin-right: 2.75em;
+      font-size: 1.5em;
+      margin-left: 2em;
+      margin-right: 2em;
     }
   }
 

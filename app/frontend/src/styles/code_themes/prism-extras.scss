@@ -13,6 +13,8 @@ pre {
   border-radius: 7.5px 7.5px 0 0;
   padding: 10px 1em 10px 1em;
   line-height: 30px;
+  font-family: var(--jetbrains-mono);
+  font-weight: 1000;
 }
 .remark-code-title,
 pre {
@@ -40,7 +42,7 @@ pre {
 }
 
 .code-line.line-number {
-  padding-left: 2em;
+  padding-left: 1em;
 }
 
 .relative {
@@ -49,10 +51,10 @@ pre {
 
 .line-number::before {
   display: inline-block;
-  width: 1rem;
+  width: 3rem;
   text-align: right;
   margin-right: 1em;
-  margin-left: -1em;
+  margin-left: -0.5em;
   color: rgb(156, 163, 175); /* Line number color */
   padding-right: 1em;
   content: attr(line);

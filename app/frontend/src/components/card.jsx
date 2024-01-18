@@ -40,7 +40,7 @@ export default function Card({ element, truncate, index }) {
     'text-black',
     'dark:text-white',
     'leading-5',
-    'pb-5'
+    'pb-0'
   ].join(' ');
 
   const truncClass = [
@@ -121,7 +121,7 @@ export default function Card({ element, truncate, index }) {
   if (element.unbound)
     descClass += ` ${truncClass}`;
   if (element.tags?.length)
-    descClass = descClass.replace('pb-5', 'pb-12');
+    descClass = descClass.replace('pb-0', 'pb-12');
   const desc = parseDescription(element, descClass, truncate);
 
   return (

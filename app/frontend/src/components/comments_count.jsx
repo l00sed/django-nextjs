@@ -4,16 +4,16 @@ export default function CommentsCount() {
       className="select-none w-fit h-fit py-0.5 px-3 outer-sheen"
       href="#id_author"
     >
-      <div className="inner-sheen h-9 px-3 py-1 gap-x-1 font-mono cursor-pointer flex flex-row text-black dark:text-white">
+      <div className="inner-sheen h-9 px-3 gap-x-1 font-mono cursor-pointer flex flex-row text-black dark:text-white">
         <span
           id="comment_count"
-          className="my-auto leading-none"
+          className="my-auto leading-none pt-0.5"
         >0</span>
         <svg
-          className="my-auto"
+          className="my-auto pb-1"
           xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
+          width="22"
+          height="22"
           viewBox="0 0 24 24"
         >
           <path
