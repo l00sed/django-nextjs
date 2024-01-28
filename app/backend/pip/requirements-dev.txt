@@ -1,3 +1,4 @@
+curlylint
 django-stubs
 django-stubs-ext
 flake8

@@ -15,7 +15,7 @@
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
-    "@next/mdx": "^14.0.1",
+    "@next/mdx": "^14.1.0",
     "@stefanprobst/rehype-extract-toc": "^2.2.0",
     "builtin-modules": "^3.3.0",
     "dateformat": "^5.0.3",
@@ -32,7 +32,7 @@
     "mdast-util-to-hast": "^12.3.0",
     "mdx-bundler": "^9.2.1",
     "net": "^1.0.2",
-    "next": "^14.0.3",
+    "next": "^14.1.0",
     "next-mdx-remote": "^4.4.1",
     "next-seo": "^5.15.0",
     "react": "^18.2.0",
@@ -56,22 +56,22 @@
     "remark-parse": "^10.0.2",
     "remark-prism": "^1.3.6",
     "remark-rehype": "^10.1.0",
-    "sharp": "^0.33.1",
+    "sharp": "^0.33.2",
     "tls": "^0.0.1",
     "unified": "^10.1.2",
     "unified-stream": "^2.0.0",
     "xdm": "^3.4.0"
   },
   "devDependencies": {
-    "@types/js-cookie": "^3.0.5",
-    "@types/node": "^18.18.7",
+    "@types/js-cookie": "^3.0.6",
+    "@types/node": "^18.19.8",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
-    "autoprefixer": "^10.4.16",
+    "autoprefixer": "^10.4.17",
     "eslint": "8.16.0",
     "eslint-config-next": "^13.5.6",
-    "postcss": "^8.4.32",
-    "sass": "^1.69.5",
-    "tailwindcss": "^3.4.0"
+    "postcss": "^8.4.33",
+    "sass": "^1.70.0",
+    "tailwindcss": "^3.4.1"
   }
 }

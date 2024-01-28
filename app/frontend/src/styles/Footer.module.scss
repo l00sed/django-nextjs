@@ -68,6 +68,10 @@
   display: block;
   text-align: left;
 
+  &:last-child {
+    margin-bottom: 0;
+  }
+
   p,
   svg {
     display: inline-flex;

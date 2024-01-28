@@ -533,7 +533,7 @@ $d-tag-bg-16: #1f9050;
 /* # Themes -------------------------------- */
 /* # Other Variables ----------------------- */
 /* ## Page max width */
-  --page-max-width: 1920px;
+  --page-max-width: 1600px;
 /* ## Transition Speeds */
   --loosed-transition-fast: 50ms;
   --loosed-transition-medm: 200ms;
@@ -1339,23 +1339,23 @@ a[data-footnote-ref="true"]:hover {
   }
   .outer-sheen {
     @apply
-      p-0.5
-      rounded-lg
+      p-[1px]
+      rounded-xl
       bg-gradient-to-br
       from-[rgba(229,229,229,0.5)]
-      to-[rgba(163,163,163,0.5)]
+      to-[rgba(96,96,96,0.25)]
       backdrop-blur-sm
-      dark:from-[rgba(163,163,163,0.35)]
+      dark:from-[rgba(255,255,255,0.5)]
       dark:to-[rgba(38,38,38,0.35)];
   }
   .inner-sheen {
     @apply
       shadow-[inset_0_0_6px_0_rgba(0,0,0,0.05)]
       dark:shadow-[inset_0_0_6px_0_rgba(0,0,0,0.25)]
-      rounded-md
+      rounded-xl
       backdrop-brightness-200
       dark:backdrop-brightness-75
       bg-[rgba(212,212,212,0.1)]
-      dark:bg-[rgba(23,23,23,0.1)];
+      dark:bg-[rgba(0,0,0,0.5)];
   }
 }

@@ -1,10 +1,10 @@
 .button__main {
+  @apply rounded-xl;
   display: flex;
   flex-direction: row;
   font-weight: bold;
   text-transform: uppercase;
   border: 1px solid transparent;
-  border-radius: var(--rad-1);
   color: var(--loosed-black);
   padding: 0.5em 1em;
   cursor: pointer;

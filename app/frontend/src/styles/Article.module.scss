@@ -13,8 +13,8 @@
   justify-content: center;
   column-gap: 0;
   margin: 0 auto;
-  min-width: 100%;
-  max-width: min(var(--page-max-width), 100%);
+  width: 100%;
+  max-width: var(--page-max-width);
 }
 .main_wrapper li a,
 .main_wrapper span a,
@@ -177,12 +177,7 @@
 }
 
 .aside {
-  width: 33.333%;
-  min-width: 33.333%;
-  max-width: 33.333%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  @apply w-0 h-full flex flex-col transition-all duration-1000 ease-in-out;
 
   .sticky {
     position: sticky;

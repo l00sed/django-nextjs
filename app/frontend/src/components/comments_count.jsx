@@ -1,8 +1,21 @@
+'use client';
+
 export default function CommentsCount() {
+  const toggleComments = e => {
+    e.preventDefault();
+    const aside = document.getElementsByTagName('aside')[0];
+    if (aside.style.width === '0px') {
+      aside.style.width = '33.333%'
+      document.getElementById('id_author')?.focus();
+    } else {
+      aside.style.width = '0px'
+    }
+  }
+
   return (
-    <a
+    <div
       className="select-none w-fit h-fit py-0.5 px-3 outer-sheen"
-      href="#id_author"
+      onClick={ toggleComments }
     >
       <div className="inner-sheen h-9 px-3 gap-x-1 font-mono cursor-pointer flex flex-row text-black dark:text-white">
         <span
@@ -27,6 +40,6 @@ export default function CommentsCount() {
           />
         </svg>
       </div>
-    </a>
+    </div>
   )
 }

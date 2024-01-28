@@ -51,7 +51,7 @@ export default function Likes({ meta }) {
 
   return (
     <div
-      className="select-none bg-opacity-50 backdrop-blur-sm py-0.5 w-fit h-10 px-3 outer-sheen"
+      className="select-none bg-opacity-50 backdrop-blur-sm py-0.5 w-fit h-fit px-3 outer-sheen"
       onClick={ (e) => { handleLike(e) } }
       onKeyDown={ (e) => { handleLike(e) } }
     >
@@ -65,8 +65,8 @@ export default function Likes({ meta }) {
           id="heart"
           className="relative my-auto"
           xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
+          width="18"
+          height="18"
           viewBox="0 0 256 256"
         >
           <g

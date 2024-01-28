@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 export default function ScrollTop() {
   let scrollTopStyles = [
     'group',
-    'animate-bounce',
     'hidden',
     'border-none',
     'shadow-neutral-300',
