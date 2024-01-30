@@ -28,8 +28,31 @@ export default function ArticleMeta({
     toc = <></>;
   }
 
+  let metaClass = [
+    'inline-flex',
+    'flex-wrap-reverse',
+    'top-8',
+    'z-20',
+    'sticky',
+    'justify-end',
+    'pl-[4vw]',
+    'gap-x-2',
+    'gap-y-3',
+    'w-[calc(100%-4em)]',
+    'mx-8',
+    'mb-12',
+    'sm:w-[calc(100%-6em)]',
+    'sm:mx-12',
+    'sm:pl-0',
+    'sm:gap-x-2',
+    'sm:gap-y-4',
+    'sm:flex-wrap',
+    '2xl:-mx-6',
+    '2xl:w-full',
+  ].join(' ')
+
   return (
-    <div className="inline-flex flex-wrap-reverse top-8 z-20 sticky justify-end pl-[4vw] gap-x-2 gap-y-3 w-[calc(100%-4em)] mx-8 mb-12 sm:w-[calc(100%-6em)] sm:mx-12 sm:pl-0 sm:gap-x-2 sm:gap-y-4 sm:flex-wrap">
+    <div className={ metaClass }>
       { likes }
       { comment_count }
       { share }

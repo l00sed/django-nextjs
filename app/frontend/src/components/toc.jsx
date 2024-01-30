@@ -1,16 +1,59 @@
-import toc_styles     from 'styles/Toc.module.scss';
+import toc_styles from 'styles/Toc.module.scss';
 
 export default function Toc (props) {
+  let tocCaretClasses = [
+    'inline-flex',
+    'relative',
+    'rotate-0',
+    'stroke-black',
+    'h-full',
+    'w-[18px]',
+    'm-auto',
+    'dark:stroke-white',
+    'sm:w-5',
+    'right-[5px]'
+  ].join(' ')
+
+  let tocLabelClasses = [
+    'relative',
+    'flex',
+    'cursor-pointer',
+    'max-w-full',
+    'justify-between',
+    'rounded-xl',
+    'pt-0.5',
+    'pr-2',
+    'pb-1',
+    'pl-4'
+  ].join(' ')
+
+  let tocLabelHeadingClasses = [
+    'w-full',
+    'content-["Table_of_Contents"]',
+    'font-mono',
+    'leading-8',
+    'inline-flex',
+    'select-none',
+    'mt-0',
+    'pt-[1px]',
+    'text-left',
+    'font-bold',
+    'mb-0'
+  ].join(' ')
+
   if (props?.headings) {
     return (
       <>
         <input id="toc" type="checkbox" className={ toc_styles.toc__hidden } />
         <div className={ `outer-sheen ${toc_styles.toc__wrapper}` }>
           <div className={ `inner-sheen ${toc_styles.toc__inner}` }>
-            <label htmlFor="toc" className={ toc_styles.toc__header }>
-              <h4 className={ toc_styles.toc__label }>Table of Contents</h4>
+            <label
+              htmlFor="toc"
+              className={ tocLabelClasses }
+            >
+              <h4 className={ tocLabelHeadingClasses }>Table of Contents</h4>
               <svg
-                className={ toc_styles.toc__caret }
+                className={ `${toc_styles.toc__caret} ${tocCaretClasses}` }
                 viewBox="0 0 20 20"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

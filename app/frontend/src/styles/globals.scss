@@ -1016,12 +1016,19 @@ p {
 }
 
 blockquote {
-  font-size: 90%;
-  line-height: 1.75;
-  font-style: italic;
-  margin: 4em auto 4em 3.5em;
-  padding: 0 2vw;
-  border-left: 1px solid var(--loosed-highlight-1);
+  @apply
+    font-mono
+    text-sm
+    leading-[1.75]
+    italic
+    m-12
+    py-0
+    px-[2vw]
+    border-l
+    border-solid
+    border-loosed-400
+    dark:border-loosed-600;
+
   width: min(768px, 100%);
 
   i, em {
