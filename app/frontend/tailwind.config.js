@@ -3,6 +3,7 @@ module.exports = {
   darkMode: 'class',
   content: [
     "./src/**/*.{js,jsx,mdx,scss,ts,tsx}",
+    "./src/**/**/*.{js,jsx,mdx,scss,ts,tsx}", // grab "styles/code_themes/*.scss"
   ],
   theme: {
     extend: {

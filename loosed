@@ -63,8 +63,13 @@ backend_prepare() {
     # Run Gunicorn ASGI client
     if [ "$#" == 1 ]; then
       if [[ "$1" == "dev" ]]; then
-        # WARN: (`--reload` argument not recommended for production)
-        gunicorn backend.asgi:application --bind :8000 --reload -k uvicorn.workers.UvicornWorker
+        # WARN: `--reload` argument should not be used in production
+        # Gunicorn's hot-reload will not work with Uvicorn workers (using ASGI),
+        # but you can switch to WSGI tempomrarily for hot-reload behavior to work.
+        # Just make sure to run ASGI in production (or in development).
+        # In order to use or test Python async functionality, switch back to ASGI.
+        #   gunicorn backend.wsgi:application --bind :8000 --reload
+        gunicorn backend.asgi:application --bind :8000 -k uvicorn.workers.UvicornWorker
       fi
     else
       gunicorn backend.asgi:application --bind :8000 -k uvicorn.workers.UvicornWorker
@@ -148,12 +153,12 @@ build_cert() {
     touch openssl.cnf
     cat /etc/ssl/openssl.cnf > openssl.cnf
     {
-      echo \"\"; \
-      echo \"[ SAN ]\"; \
-      echo \"subjectAltName=DNS.1:loosed.local,DNS.2:*.loosed.local\";
+      printf "\n"; \
+      printf "[SAN]\n"; \
+      printf "subjectAltName=DNS.1:loosed.local,DNS.2:*.loosed.local";
     } >> openssl.cnf
     # Generate OpenSSL keys
-    openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout loosed.local.key -out loosed.local.crt -days 3650 -subj \"/CN=*.loosed.local\" -config openssl.cnf -extensions SAN
+    openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout loosed.local.key -out loosed.local.crt -days 3650 -subj "/CN=*.loosed.local" -config openssl.cnf -extensions SAN
     rm openssl.cnf
   )
 }
@@ -231,9 +236,13 @@ generate_cert () {
     clean
     echo "Copying local docker compose file to current directory."
     cp .docker/local/local.yml .
+    cp .docker/local/nginx/nginx.Dockerfile .
+    # Isolate nginx service, and remove dependency services
+    yq -y '.services.nginx |= del(.depends_on)' < local.yml
+    yq -y '.services |= del(.db, .backend, .frontend, .redis)' < local.yml
     echo "Generating a certificate with OpenSSL."
     docker compose -f local.yml \
-      run --rm nginx sh -c "/./loosed build_cert"
+      run --rm nginx sh -c "/etc/nginx/./loosed build_cert"
   )
 }
 

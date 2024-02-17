@@ -12,7 +12,6 @@ const nextConfig = {
   },
   /* TODO: Include logic here to detect application environment.
    * Switch between development and production domain. */
-  assetPrefix: 'https://loosed.local',
   //output: 'standalone',
   images: {
     remotePatterns: [
