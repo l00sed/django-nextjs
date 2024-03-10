@@ -100,7 +100,7 @@ More advice from our Wikipedia lesson:
 Right now I have the most basic caching possible— just a header spec for images, css, js, and fonts in my .htaccess file:
 
 <Pre>
-```xml:.htaccess showLineNumbers
+```xml title=".htaccess" showLineNumbers
 <filesMatch ".(css|webm|jpg|jpeg|png|gif|js|ico|svg|woff|woff2|ttf|otf|js)$">
   Header set Cache-Control "max-age=31536000, public"
 </filesMatch>
@@ -181,8 +181,8 @@ ab -n 100 -c 10 http://www.yahoo.com/
 
 Where the "-n" argument is the number of requests and "-c" is the number of concurrent requests. This can be tweaked with other flags to produce the most accurate results, which will look something like this (hopefully, less abysmal):
 
-<Pre>
-```plaintext showLineNumbers
+<Pre copyButton={ false }>
+```plaintext
 Concurrency Level:      1000
 Time taken for tests:   69.959 seconds
 Complete requests:      1000

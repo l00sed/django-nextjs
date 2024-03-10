@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   darkMode: 'class',
   content: [
     "./src/**/*.{js,jsx,mdx,scss,ts,tsx}",
@@ -9,6 +9,9 @@ module.exports = {
     extend: {
       boxShadow: {
         'y-inset': 'inset 0 -1px 5px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.5)'
+      },
+      backdropBrightness: {
+        '25': '25%',
       },
       backgroundSize: {
         '150': '150%',
@@ -45,6 +48,11 @@ module.exports = {
       },
       lineHeight: {
         'extra-tight': '0.75'
+      },
+      strokeWidth: {
+        3: '3px',
+        4: '4px',
+        5: '5px'
       }
     }
   },

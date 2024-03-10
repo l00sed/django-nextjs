@@ -2,12 +2,11 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 
 /* MDX / Remark / Rehype */
-import remarkCodeTitles           from 'utils/code_titles';
 import remarkGfm                  from 'remark-gfm';
 import rehypeSlug                 from 'rehype-slug';
 import rehypeAutolinkHeadings     from 'rehype-autolink-headings';
 import rehypeExternalLinks        from 'rehype-external-links';
-import rehypePrism                from 'rehype-prism-plus';
+import rehypePrettyCode           from 'rehype-pretty-code';
 
 /* Next Components */
 import Link  from 'next/link';
@@ -51,7 +50,6 @@ export default function Mdx(props) {
   const options = {
     mdxOptions: {
       remarkPlugins: [
-        remarkCodeTitles, // Give code blocks a title
         remarkGfm
       ],
       rehypePlugins: [
@@ -64,13 +62,16 @@ export default function Mdx(props) {
           target: '_blank',
           rel: ['noopener', 'nofollow', 'noreferrer']
         }],
-        [rehypePrism, {
+        [rehypePrettyCode, {
           /* Show line numbers in
            * syntax-highlighted code blocks
            * with "showLineNumbers" */
-          showLineNumbers: false,
-          ignoreMissing: true,
-          // ```bash:filename.txt {1,4-5} showLineNumbers
+          keepBackground: false,
+          theme: {
+            dark: "vitesse-dark",
+            light: "github-light",
+          },
+          // ```bash title="filename.txt" {1,4-5} showLineNumbers
           // ```
         }]
       ],

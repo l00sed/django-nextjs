@@ -47,10 +47,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import <code> tag theme for hljs */
-@import './code_themes/prism-base16-brewer.dark.scss';
-@import './code_themes/prism-extras.scss';
-
 /* Used for paragraph link underline offset */
 @property --offset {
   syntax: '<length>';
@@ -103,7 +99,7 @@ $l-card-hover-background: rgba(0,0,0,0.15);
 $l-card-active: rgba(0,0,0,0.35);
 
 $l-menu-toggle-background: rgba(0,0,0,0.2);
-$l-menu-toggle-box-shadow: rgba(0,0,0,0.4);
+$l-menu-toggle-box-shadow: rgba(0,0,0,0.9);
 $l-menu-border: rgba(0,0,0,0.7);
 $l-menu-hover-border: rgba(0,0,0,0.8);
 
@@ -131,6 +127,7 @@ $l-link-section-bg: rgba(255,255,255,1);
 $l-donate-menu-background-color: rgba(255,255,255,0.9);
 $l-donate-button-box-shadow: rgba(255,255,255,0.8);
 
+$l-code-inline-border: rgba(0,0,0,0.075);
 $l-code-filter: invert(0.95);
 $l-code-highlight: rgba(225,155,35,1);
 $l-code-highlight-bg: rgba(225,155,35,0.25);
@@ -147,8 +144,6 @@ $l-caption-leader: rgba(0,0,0,0.75);
 
 $l-scrollbar-color: rgba(0,0,0,0.05);
 $l-scrollbar-thumb: rgba(0,0,0,0.3);
-$l-scrollbar-pre-color: rgba(255,255,255,0.05);
-$l-scrollbar-pre-thumb: rgba(255,255,255,0.35);
 $l-scroll-area-border: rgba(0,0,0,0.1);
 $l-scroll-area-background: rgba(255,255,255,0.65);
 
@@ -219,7 +214,7 @@ $d-card-hover-background: rgba(255,255,255,0.15);
 $d-card-active: rgba(0,0,0,1);
 
 $d-menu-toggle-background: rgba(255,255,255,0.2);
-$d-menu-toggle-box-shadow: rgba(200,30,40,0.35);
+$d-menu-toggle-box-shadow: rgba(255,255,255,0.9);
 $d-menu-border: rgba(255,255,255,0.7);
 $d-menu-hover-border: rgba(255,255,255,0.8);
 
@@ -247,6 +242,7 @@ $d-link-section-bg: rgba(0,0,0,0.25);
 $d-donate-menu-background-color: rgba(0,0,0,0.85);
 $d-donate-button-box-shadow: rgba(0,0,0,1);
 
+$d-code-inline-border: rgba(255,255,255,0.05);
 $d-code-filter: none;
 $d-code-highlight: rgb(30,100,220);
 $d-code-highlight-bg: rgba(30,100,220,0.25);
@@ -263,8 +259,6 @@ $d-caption-leader: rgba(255,255,255,0.75);
 
 $d-scrollbar-color: rgba(255,255,255,0.05);
 $d-scrollbar-thumb: rgba(255,255,255,0.35);
-$d-scrollbar-pre-color: rgba(255,255,255,0.05);
-$d-scrollbar-pre-thumb: rgba(255,255,255,0.35);
 $d-scroll-area-border: rgba(255,255,255,0.15);
 $d-scroll-area-background: rgba(0,0,0,0.25);
 
@@ -364,6 +358,7 @@ $d-tag-bg-16: #1f9050;
     --donate-menu-background-color: #{$l-donate-menu-background-color};
     --donate-button-box-shadow: #{$l-donate-button-box-shadow};
 
+    --code-inline-border: #{$l-code-inline-border};
     --code-filter: #{$l-code-filter};
     --code-highlight: #{$l-code-highlight};
     --code-highlight-bg: #{$l-code-highlight-bg};
@@ -380,8 +375,6 @@ $d-tag-bg-16: #1f9050;
 
     --scrollbar-color: #{$l-scrollbar-color};
     --scrollbar-thumb: #{$l-scrollbar-thumb};
-    --scrollbar-pre-color: #{$l-scrollbar-pre-color};
-    --scrollbar-pre-thumb: #{$l-scrollbar-pre-thumb};
     --scroll-area-border: #{$l-scroll-area-border};
     --scroll-area-background: #{$l-scroll-area-background};
 
@@ -483,6 +476,7 @@ $d-tag-bg-16: #1f9050;
     --donate-menu-background-color: #{$d-donate-menu-background-color};
     --donate-button-box-shadow: #{$d-donate-button-box-shadow};
 
+    --code-inline-border: #{$d-code-inline-border};
     --code-filter: #{$d-code-filter};
     --code-highlight: #{$d-code-highlight};
     --code-highlight-bg: #{$d-code-highlight-bg};
@@ -499,8 +493,6 @@ $d-tag-bg-16: #1f9050;
 
     --scrollbar-color: #{$d-scrollbar-color};
     --scrollbar-thumb: #{$d-scrollbar-thumb};
-    --scrollbar-pre-color: #{$d-scrollbar-pre-color};
-    --scrollbar-pre-thumb: #{$d-scrollbar-pre-thumb};
     --scroll-area-border: #{$d-scroll-area-border};
     --scroll-area-background: #{$d-scroll-area-background};
 
@@ -540,6 +532,7 @@ $d-tag-bg-16: #1f9050;
   --loosed-transition-slow: 500ms;
   --loosed-transition-slower: 800ms;
 /* ## Fonts */
+  --x-small: 0.75em;
   --small: 0.9em;
   --normal: 1em;
   --medium: 1.25em;
@@ -554,9 +547,11 @@ $d-tag-bg-16: #1f9050;
   --note-default-border: rgba(30,100,220,0.5);
   --note-success-border: rgba(7,203,100,0.5);
   --note-error-border: rgba(163,7,10,0.5);
+  --note-warning-border: rgba(170,127,20,0.5);
   --note-default: rgba(30,100,220,0.15);
   --note-success: rgba(7,203,100,0.15);
   --note-error: rgba(163,7,10,0.15);
+  --note-warning: rgba(170,127,20,0.15);
 /* ## Parametric Components */
   --rad-1: 7.5px;
   --off-1: 3px;
@@ -646,6 +641,7 @@ $d-tag-bg-16: #1f9050;
   --donate-button-box-shadow: #{$l-donate-button-box-shadow} !important;
 
   /* ## pre.js */
+  --code-inline-border: #{$l-code-inline-border} !important;
   --code-filter: #{$l-code-filter} !important;
   --code-highlight: #{$l-code-highlight} !important;
   --code-highlight-bg: #{$l-code-highlight-bg} !important;
@@ -664,8 +660,6 @@ $d-tag-bg-16: #1f9050;
   /* ## horizontal_scroller.js */
   --scrollbar-color: #{$l-scrollbar-color} !important;
   --scrollbar-thumb: #{$l-scrollbar-thumb} !important;
-  --scrollbar-pre-color: #{$l-scrollbar-pre-color} !important;
-  --scrollbar-pre-thumb: #{$l-scrollbar-pre-thumb} !important;
   --scroll-area-border: #{$l-scroll-area-border} !important;
   --scroll-area-background: #{$l-scroll-area-background} !important;
 
@@ -779,6 +773,7 @@ $d-tag-bg-16: #1f9050;
   --donate-button-box-shadow: #{$d-donate-button-box-shadow} !important;
 
   /* ## pre.js */
+  --code-inline-border: #{$d-code-inline-border} !important;
 	--code-filter: #{$d-code-filter} !important;
   --code-highlight: #{$d-code-highlight} !important;
   --code-highlight-bg: #{$d-code-highlight-bg} !important;
@@ -797,8 +792,6 @@ $d-tag-bg-16: #1f9050;
   /* ## horizontal_scroller.js */
   --scrollbar-color: #{$d-scrollbar-color} !important;
   --scrollbar-thumb: #{$d-scrollbar-thumb} !important;
-  --scrollbar-pre-color: #{$d-scrollbar-pre-color} !important;
-  --scrollbar-pre-thumb: #{$d-scrollbar-pre-thumb} !important;
   --scroll-area-border: #{$d-scroll-area-border} !important;
   --scroll-area-background: #{$d-scroll-area-background} !important;
 
@@ -897,117 +890,6 @@ hr {
   margin: 3em 0;
 }
 
-/* ## Comment Form */
-form {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  row-gap: 0.25em;
-
-  label {
-    &[for="id_subscribe"] {
-      display: inline-block;
-      height: 34px;
-      line-height: 36.666px;
-      padding-right: 1em;
-    }
-
-    font-size: var(--small);
-    font-weight: bold;
-  }
-
-  div {
-    width: 100%;
-  }
-
-  input,
-  textarea {
-    border-radius: 4px;
-    width: 100%;
-    padding: 0.75em;
-    font-size: 1em;
-    border: 1px solid transparent;
-
-    &:focus,
-    &:active,
-    &:hover {
-      border-color: var(--loosed-highlight-1);
-    }
-  }
-
-  textarea {
-    outline: none;
-    font-family: 'JetBrains Mono', monospace;
-    margin-bottom: 4px;
-  }
-
-  input {
-    &[name="subscribe"] {
-      width: 1em;
-      height: 1em;
-      border-radius: 5px;
-      cursor: pointer;
-      outline: 1px solid transparent;
-      margin: auto 0;
-      vertical-align: middle;
-
-      &:focus,
-      &:hover {
-        outline-color: var(--loosed-highlight-1);
-      }
-
-      &:checked {
-        + input[name="email"] {
-          display: block !important;
-          + div {
-            display: block !important;
-            + button[type="submit"] {
-              bottom: 3em;
-            }
-          }
-        }
-      }
-    }
-    &[name="email"] {
-      width: calc(100% - 4em);
-      display: none;
-      + div {
-        width: calc(100% - 4em);
-        display: none;
-      }
-    }
-    &[name="subscribe"] {
-      display: inline-block;
-    }
-  }
-
-  button[type="submit"] {
-    background: transparent;
-    border: none;
-    height: 0;
-    width: 2.75em;
-    position: relative;
-    cursor: pointer;
-    margin: 0 0 0 auto;
-    bottom: 0;
-    right: 0;
-    color: var(--loosed-black);
-
-    &::after {
-      background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M4.4 19.425q-.5.2-.95-.088T3 18.5v-3.725q0-.35.2-.625t.55-.35L11 12l-7.25-1.8q-.35-.075-.55-.35T3 9.225V5.5q0-.55.45-.838t.95-.087l15.4 6.5q.625.275.625.925t-.625.925l-15.4 6.5Z'/%3E%3C/svg%3E%0A");
-      width: 2.75em;
-      height: 2.75em;
-      cursor: pointer;
-    }
-
-    &:hover,
-    &:focus {
-      color: var(--loosed-highlight-1);
-    }
-  }
-}
-
 /* # Paragraph Styles */
 p {
   margin: 0 auto 1.25em auto;
@@ -1064,7 +946,87 @@ a {
 
 /* # Code */
 pre {
-  max-width: 100%;
+  @apply overflow-x-auto px-4 py-3.5 max-w-full;
+
+  code {
+    @apply text-sm;
+  }
+
+  code[data-theme*=" "],
+  code[data-theme*=" "] span {
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg);
+  }
+}
+
+.dark {
+  pre {
+    code[data-theme*=" "],
+    code[data-theme*=" "] span {
+      color: var(--shiki-dark);
+      background-color: var(--shiki-dark-bg);
+    }
+  }
+}
+
+/* # Code Copy Button */
+.code-copy-button {
+  z-index: 1;
+  cursor: pointer;
+  position: absolute;
+  top: 9px;
+  right: 10px;
+  margin-bottom: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--copy-button-background);
+  backdrop-filter: blur(3px);
+  transition: all var(--loosed-transition-medm) ease;
+  padding: 5px;
+  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+}
+.code-copy-button svg {
+  color: var(--copy-button-svg);
+}
+
+.code-copy-button:hover {
+  background-color: var(--copy-button-hover);
+  box-shadow: 0 0 2px rgba(0,0,0,0.5), inset 1px 1px 1px rgba(255,255,255,0.2), inset -1px -1px 1px rgba(0,0,0,0.05);
+}
+.code-copy-button:hover svg {
+  color: var(--copy-button-hover-color);
+}
+.code-copied {
+  background-color: black;
+  background-color: rgba(155,240,155,0.5) !important;
+  opacity: 1;
+}
+.code-copied svg {
+  color: rgba(0,105,45,1) !important;
+}
+.code-copied::before {
+  mix-blend-mode: multiply;
+  border-radius: 5px;
+  position: absolute;
+  content: "";
+  z-index: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  box-shadow: inset 1px 1px 2px rgba(255,255,255,0.2), inset -1px -1px 1px rgba(0,0,0,0.2), 0 0 8px rgba(0,205,45,0.4) !important;
+  background-color: rgba(155,240,155,0.5) !important;
+}
+
+:not(pre) > code {
+  font-weight: lighter;
+  background: var(--code-inline-border);
+  padding: 1px 4px;
 }
 
 input,
@@ -1362,7 +1324,7 @@ a[data-footnote-ref="true"]:hover {
       rounded-xl
       backdrop-brightness-200
       dark:backdrop-brightness-75
-      bg-[rgba(212,212,212,0.1)]
-      dark:bg-[rgba(0,0,0,0.5)];
+      bg-[rgba(252,252,252,0.8)]
+      dark:bg-[rgba(0,0,0,0.7)];
   }
 }

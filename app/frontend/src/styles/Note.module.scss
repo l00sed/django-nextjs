@@ -18,11 +18,6 @@
 .note__base {
   border-radius: var(--rad-1);
 
-  h4 {
-    width: 100%;
-    margin: 0;
-  }
-
   p {
     line-height: 150%;
     padding: 0 1em;
@@ -61,4 +56,12 @@
   background-color: var(--note-error);
   box-shadow: 0 var(--off-1) 0 0 var(--note-error-border);
   border: 1px solid var(--note-error-border);
+}
+.note__warning {
+  .note__row {
+    background-color: var(--note-warning);
+  }
+  background-color: var(--note-warning);
+  box-shadow: 0 var(--off-1) 0 0 var(--note-warning-border);
+  border: 1px solid var(--note-warning-border);
 }

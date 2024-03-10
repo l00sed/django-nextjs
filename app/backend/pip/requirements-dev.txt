@@ -6,3 +6,4 @@ pylint
 pylint-django
 pylint-plugin-utils
 pyright
+yq

@@ -10,7 +10,6 @@ import SearchToggle       from 'components/search_toggle.jsx';
 import HorizontalScroller from 'components/horizontal_scroller.jsx';
 import Footer             from 'components/footer.jsx';
 import Intro              from 'components/intro.jsx';
-import Featured           from 'components/featured.jsx';
 import Card               from 'components/card.jsx';
 /* Lib */
 import articles from 'lib/articles';
@@ -69,7 +68,7 @@ export default async function HomePage() {
     'leading-none',
     'uppercase',
     'text-center',
-    'px-1'
+    'px-1',
   ].join(' ');
 
   let letterClass = [
@@ -87,9 +86,9 @@ export default async function HomePage() {
         <SearchToggle />
         <Donate />
         <Intro />
-        <div className="px-4 sm:px-8 max-w-full overflow-x-hidden">
+        <div className="px-8 sm:px-16 max-w-full overflow-x-hidden">
           <WideStar extraClass="my-8 lg:my-14 mx-auto max-w-44 lg:max-w-full" />
-          { data ? <Featured element={ data[0] } /> : <></> }
+          { data ? <Card key={ data[0].id } element={ data[0] } featured={ true } index={ 0 } /> : <></> }
           <WideStar extraClass="mt-4 mb-8 lg:mt-8 lg:mb-14 mx-auto max-w-44 lg:max-w-full" />
         </div>
         <HorizontalScroller className="max-w-full mx-auto !my-0">

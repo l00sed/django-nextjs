@@ -49,7 +49,14 @@ export const metadata = {
 /* Default /[slug] page is a "Blog" page */
 export default function BlogPage({ params }) {
   /* Default article */
-  let article = <Article slug={ params.slug } head={ true } meta={ true } />
+  let article = (
+    <Article
+      slug={ params.slug }
+      head={ true }
+      meta={ true }
+      disclaimer={ true }
+    />
+  )
   /* Different page settings for "live" page */
   if (params.slug === 'live') {
     article =
@@ -60,7 +67,21 @@ export default function BlogPage({ params }) {
         show={ ['likes', 'comments', 'share'] }
         style={{ marginBottom: 0, paddingBottom: 0 }}
         metaPosition='after'
+        disclaimer={ false }
         disableLiveButton
+      />
+  }
+
+  if (['privacy-policy', 'terms-and-conditions'].includes(params.slug)) {
+    article =
+      <Article
+        slug={ params.slug }
+        head={ true }
+        meta={ true }
+        show={ ['toc'] }
+        disclaimer={ false }
+        disableLiveButton
+        disableComments
       />
   }
 
@@ -68,7 +89,7 @@ export default function BlogPage({ params }) {
     <div className={ page_styles.next_wrapper }>
       <MenuOverlay slug={ params.slug } />
       <SearchOverlay />
-      <MenuToggle />
+      <MenuToggle progress={ true } />
       <div id="main_wrapper" className={ page_styles.main_wrapper }>
         <Title />
         <SearchToggle />

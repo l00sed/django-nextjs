@@ -40,8 +40,18 @@
   line-height: 200%;
 
   h4 {
-    margin: 0 auto 0.75em auto;
+    margin: 0 auto 2em auto;
+    font-size: var(--x-small);
     width: 100%;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 30px;
+      height: 2px;
+      background: var(--loosed-highlight-1)
+    }
   }
 
   p {

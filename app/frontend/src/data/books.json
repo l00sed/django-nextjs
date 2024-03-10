@@ -1,6 +1,11 @@
 {
   "reading": [
     {
+      "title": "The Lord of the Rings",
+      "href": "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings",
+      "author": "J. R. R. Tolkien"
+    },
+    {
       "title": "The Revolution Will Not Be Televised: Democracy, the Internet, and the Overthrow of Everything",
       "href": "https://en.wikipedia.org/wiki/The_Revolution_Will_Not_Be_Televised_(book)",
       "author": "Joe Trippi"

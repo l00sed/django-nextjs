@@ -1,0 +1,109 @@
+/* ## Comment Form */
+form[name="comment-form"].form {
+  @apply
+    w-full
+    flex
+    flex-row
+    flex-wrap
+    gap-y-1;
+
+  label {
+    @apply
+      font-bold
+      text-sm;
+
+    &[for="id_subscribe"] {
+      @apply
+        inline-block
+        h-8
+        mt-auto
+        leading-8
+        pr-4;
+    }
+  }
+
+  input,
+  textarea {
+    @apply
+      rounded
+      w-full
+      p-3
+      border
+      border-solid
+      border-transparent;
+
+    &:focus,
+    &:active,
+    &:hover {
+      @apply
+        border-loosed-400
+        dark:border-loosed-600;
+    }
+  }
+
+  textarea {
+    @apply
+      outline-none
+      font-mono
+      mb-1;
+  }
+
+  button[type="submit"] {
+    @apply
+      bg-transparent
+      bg-no-repeat
+      border-none
+      relative
+      cursor-pointer
+      mt-0
+      mr-0
+      mb-auto
+      ml-auto
+      bottom-0
+      right-0
+      size-9;
+  }
+
+  input {
+    &[name="subscribe"] {
+      @apply
+       size-4
+       rounded
+       cursor-pointer
+       outline
+       outline-1
+       outline-transparent
+       inline-block
+       my-auto
+       mx-0
+       align-middle;
+
+      &:focus,
+      &:hover {
+        @apply
+          outline-loosed-400
+          dark:outline-loosed-600;
+      }
+
+      &:not(:checked) {
+        + input[name="email"] {
+          @apply hidden;
+        }
+      }
+
+      &:checked {
+        + input[name="email"] {
+          @apply block;
+
+          + button[type="submit"] {
+            @apply -bottom-1;
+          }
+        }
+      }
+    }
+
+    &[name="email"] {
+      @apply w-[calc(100%-4em)];
+    }
+  }
+}

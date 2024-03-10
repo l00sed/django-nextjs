@@ -5,18 +5,18 @@ import dark_mode_toggle_styles from 'styles/DarkModeToggle.module.scss'
 /* Cookies */
 import Cookies from 'js-cookie';
 /* React */
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { waitForElem } from 'lib/wait_for_elem';
 
 export default function DarkModeToggle() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     /* Set initial theme (in cookie)
      * or retrieve theme if set in cookies */
     const getTheme = () => {
       let currentTheme = Cookies.get('theme');
       if (currentTheme === undefined) {
         Cookies.set('theme', 'default', { expires: 365, secure: true, sameSite: 'strict' });
-        return 'default';
+        currentTheme = 'default';
       } else {
         if (document.getElementById('theme-root')) {
           document.getElementById('theme-root').classList = [currentTheme];
@@ -24,26 +24,43 @@ export default function DarkModeToggle() {
       }
       return currentTheme;
     }
-    // Run once on component load to get the current theme from cookies
-    getTheme();
 
     /* Set the theme.
      * Determine if user has dark mode enabled.
      * Swap to the opposite of what was last enabled. */
-    const setTheme = (_event) => {
+    const setTheme = (_event, toggle=false) => {
       let currentTheme = getTheme();
+
+      const setLight = () => {
+        Cookies.set('theme', 'light', { path: '/' });
+        toggleTheme('light');
+        return
+      }
+
+      const setDark = () => {
+        Cookies.set('theme', 'dark', { path: '/' });
+        toggleTheme('dark');
+        return
+      }
+
       if (( window?.matchMedia('(prefers-color-scheme: dark)')?.matches &&
             currentTheme === 'default') ||
             currentTheme === 'dark') {
-        Cookies.set('theme', 'light', { path: '/' });
-        toggleTheme('light');
+        if (toggle) {
+          setLight();
+        } else {
+          setDark();
+        }
       }
 
       if (( window?.matchMedia('(prefers-color-scheme: light)')?.matches &&
             currentTheme === 'default' ) ||
             currentTheme === 'light' ) {
-        Cookies.set('theme', 'dark', { path: '/' });
-        toggleTheme('dark');
+        if (toggle) {
+          setDark();
+        } else {
+          setLight();
+        }
       }
     }
 
@@ -52,9 +69,12 @@ export default function DarkModeToggle() {
       document.getElementById('theme-root').classList = [theme];
     }
 
+    // Run once on component load to get the current theme from cookies
+    setTheme();
+
     // Setup event listener
     waitForElem('#dark-mode-toggle').then(darkModeToggle => {
-      darkModeToggle.onclick = setTheme;
+      darkModeToggle.onclick = (_e) => { setTheme(_e, true) };
     });
 
     return () => {

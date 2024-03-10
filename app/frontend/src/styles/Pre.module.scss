@@ -1,33 +1,66 @@
 /* # Scrollbar ----------------------------- */
 .code_wrapper {
-  position: relative;
-  margin: 2em auto;
-
   ::-webkit-scrollbar,
   pre::-webkit-scrollbar {
-    background-color: var(--scrollbar-pre-color);
+    @apply bg-white bg-opacity-5;
   }
   ::-webkit-scrollbar-track,
   pre::-webkit-scrollbar-track {
-    margin: 0 1em;
+    @apply my-0 mx-4;
   }
   ::-webkit-scrollbar,
   ::-webkit-scrollbar-track,
   pre::-webkit-scrollbar,
   pre::-webkit-scrollbar-track {
-    border-radius: 0 0 7.5px 7.5px;
-    height: 5px;
+    @apply h-[5px];
   }
   ::-webkit-scrollbar-thumb,
   pre::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-pre-thumb);
-    border-radius: 7.5px;
+    @apply bg-white bg-opacity-35;
   }
 
-  code[class*=language-],
-  pre[class*=language-] {
-    display: block;
-    width: 100%;
-    min-height: 20px;
+  figure {
+    @apply block w-full min-h-5;
+  }
+
+  figcaption {
+    @apply
+      font-mono
+      py-2
+      px-4
+      font-bold
+      border-b
+      border-b-black/10
+      dark:border-b-white/10;
+  }
+
+  code[data-line-numbers] {
+    counter-reset: line;
+
+    & > [data-line]::before {
+      counter-increment: line;
+      content: counter(line);
+
+      @apply
+        inline-block
+        text-right
+        text-black/50
+        dark:text-white/50
+        border-r
+        border-solid
+        border-r-black/10
+        dark:border-r-white/10
+        w-6
+        mr-4
+        pr-4
+    }
+  }
+
+  code[data-line-numbers-max-digits="2"] > [data-line]::before {
+    @apply w-10;
+  }
+
+  code[data-line-numbers-max-digits="3"] > [data-line]::before {
+    @apply w-14;
   }
 }

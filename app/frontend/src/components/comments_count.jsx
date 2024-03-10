@@ -4,7 +4,7 @@ export default function CommentsCount() {
   const toggleComments = e => {
     e.preventDefault();
     const aside = document.getElementsByTagName('aside')[0];
-    if (aside.style.width === '0px') {
+    if (['0px', ''].includes(aside.style.width)) {
       aside.style.width = '33.333%'
       document.getElementById('id_author')?.focus();
     } else {

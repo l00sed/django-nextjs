@@ -6,7 +6,7 @@ export default function Intro () {
   let outerWrapperClass = [
     'flex',
     'flex-col',
-    'px-4',
+    'px-8',
     'pt-4',
     'mt-4',
     'w-full'

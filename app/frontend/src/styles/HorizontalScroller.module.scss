@@ -1,6 +1,7 @@
 .wrapper {
   margin: 3em auto;
 }
+
 .horizontal_scroller {
   display: inline-flex;
   justify-content: center;
@@ -11,6 +12,9 @@
   width: 100%;
 
   .scroller_container {
+    scroll-snap-type: x proximity;
+    scroll-padding-left: 2em;
+    scroll-padding-right: 2em;
     display: inline-flex;
     overflow-x: auto;
     padding: 2em;

@@ -11,26 +11,34 @@
 /* ## Card
  * ------------------------- */
 
-.card__wrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-bottom: 2em;
-}
-
 .card {
   --card-radius: 10px;
-  --card-width: 300px;
   border-radius: var(--card-radius);
-  min-width: min(var(--card-width), 100%);
-  width: min(var(--card-width), 100%);
   height: fit-content;
   position: relative;
-  display: inline-block;
+  display: flex;
   transition: all var(--loosed-transition-fast) ease;
   box-shadow: 0 0 1px 1px var(--card-shadow);
   color: var(--loosed-black);
+
+  .card__thumbnail_wrapper {
+    --thumbnail-height: 260px;
+    transition: all var(--loosed-transition-medm) ease;
+    position: relative;
+    overflow: hidden;
+    transform-origin: center;
+  }
+
+  &.featured {
+    z-index: 1;
+  }
+
+  &:not(.featured) {
+    .card__thumbnail_wrapper {
+      width: calc(100% + 2px);
+      height: var(--thumbnail-height);
+    }
+  }
 
   & > a::before {
     width: calc(100% + 2px);
@@ -62,34 +70,16 @@
   box-shadow: 0 0 20px 1px var(--card-active);
 }
 
-.card__thumbnail_wrapper {
-  --thumbnail-height: 260px;
-  transition: all var(--loosed-transition-medm) ease;
-  border-radius: calc(var(--card-radius) - 2px) calc(var(--card-radius) - 2px) 0 0;
-  position: relative;
-  overflow: hidden;
-  top: -1px;
-  left: -1px;
-  width: calc(100% + 2px);
-  height: var(--thumbnail-height);
-  transform-origin: center;
-}
-
 .image__wrapper {
   display: flex;
   flex-direction: column;
   max-width: 100%;
 }
 
-.image__wrapper img {
-  border-radius: calc(var(--card-radius) - 2px) calc(var(--card-radius) - 2px) 0 0;
-}
-
 .image__wrapper img,
 .image__wrapper iframe {
-  max-width: 100%;
-  height: var(--thumbnail-height);
-  margin: 0 auto;
+  width: 100%;
+  height: 100%;
   display: flex;
   object-fit: cover;
 }
@@ -105,7 +95,6 @@
 
 .card__thumbnail {
   border-radius: calc(var(--card-radius) - 2px) calc(var(--card-radius) - 2px) 0 0;
-  height: auto;
   object-fit: cover;
   filter: saturate(0.5);
   backdrop-filter: brightness(0.8);
@@ -115,30 +104,4 @@
   border-radius: var(--card-radius) var(--card-radius) 0 0;
   filter: saturate(1);
   transform: scale(1.25);
-}
-
-.card__meta {
-  font-size: var(--small);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 0.75em;
-  line-height: 1.25em;
-  max-width: fit-content;
-}
-
-.card__head {
-  padding: 1.25em 1.25em 1em 1.25em;
-  position: relative;
-  z-index: 1;
-}
-.card__head h2 {
-  margin: 0 0 0.5em 0 !important;
-  text-transform: uppercase;
-  font-size: var(--large);
-  line-height: 1em;
-  hyphens: auto;
-}
-.card__head h2::after {
-  display: none;
 }

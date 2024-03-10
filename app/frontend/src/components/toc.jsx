@@ -51,7 +51,7 @@ export default function Toc (props) {
               htmlFor="toc"
               className={ tocLabelClasses }
             >
-              <h4 className={ tocLabelHeadingClasses }>Table of Contents</h4>
+              <p className={ tocLabelHeadingClasses }>Table of Contents</p>
               <svg
                 className={ `${toc_styles.toc__caret} ${tocCaretClasses}` }
                 viewBox="0 0 20 20"

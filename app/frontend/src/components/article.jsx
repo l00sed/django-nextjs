@@ -19,6 +19,7 @@ import Comments    from 'components/comments.jsx';
 import Button      from 'components/button.jsx';
 import ArticleHead from 'components/article_head.jsx';
 import ArticleMeta from 'components/article_meta.jsx';
+import Note from './note';
 
 const getData = async (slug) => {
   const options_get = {
@@ -131,6 +132,15 @@ export default async function Article(props) {
     live_button = <></>;
   }
 
+  let disclaimer = <></>;
+  if (props.disclaimer) {
+    disclaimer =  (
+      <Note title="Notice" type="warning">
+        <p>The writing on <em>l-o-o-s-e-d.net</em> expresses my own opinions, values, and ideas&mdash; not those of my employers (current or past).</p>
+      </Note>
+    );
+  }
+
   let comments = <Comments slug={ props.slug } />;
   if (props.disableComments) {
     comments = <></>;
@@ -144,6 +154,7 @@ export default async function Article(props) {
           { metaPosition === 'before' ? article_meta : <></> }
           <Mdx slug={ props.slug } meta={ meta } headings={ headings } mdx={ mdx } />
           { metaPosition === 'after'  ? article_meta : <></> }
+          { disclaimer }
         </article>
       </main>
       <aside className={ article_styles.aside }>

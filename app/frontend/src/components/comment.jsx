@@ -218,10 +218,10 @@ export default function Comment(props) {
   return <>
     <div data-type="row" className="flex flex-row">
       { indent() }
-      <div id={ props.comment.cid } data-type="main" className="outer-sheen w-full my-2">
+      <div id={ props.comment.cid } data-type="main" className="outer-sheen w-full my-2 overflow-x-hidden">
         <div className="inner-sheen items-stretch flex flex-row w-full relative font-mono text-sm">
           <div className="w-full rounded-l">
-            <div className="px-4 py-2 backdrop-brightness-125 rounded-tl flex flex-row justify-between">
+            <div className="px-4 py-2 backdrop-brightness-95 dark:backdrop-brightness-125 rounded-tl flex flex-row justify-between">
               <div>
                 <span className={ comment_styles.comment_author }>{ props.comment.author }</span>
                 <span className={ comment_styles.comment_date }>{ timeSince(new Date(props.comment.created_at)) }</span>
@@ -253,7 +253,7 @@ export default function Comment(props) {
               </div>
             </div>
           </div>
-          <div className="py-3 relative rounded-r border-l border-l-solid border-l-neutral-800 brightness-75 flex flex-col w-12">
+          <div className="py-3 relative rounded-r border-l border-l-solid border-l-neutral-50 dark:border-l-neutral-800 brightness-75 flex flex-col w-12">
             <div className={ comment_styles.vote_count }>
               <span
                 className={ comment_styles.count_text }

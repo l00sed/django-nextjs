@@ -3,6 +3,7 @@
 /* React */
 import { useEffect, useState, createContext } from 'react';
 /* Local Components */
+import AutoForm from 'components/autoform.jsx';
 import Comment from 'components/comment.jsx';
 import CommentForm from 'components/comment_form.jsx';
 /* Styles */
@@ -114,16 +115,41 @@ export default function Comments(props) {
     try {
       console.log('props.slug');
       console.log(props.slug);
+
+      const htmlFromJson = (json) => {
+        console.log(json);
+        let submit = (
+          <button type="submit">
+            <svg
+              className="fill-black dark:fill-white hover:fill-loosed-400 hover:dark:fill-loosed-600"
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M4.4 19.425q-.5.2-.95-.088T3 18.5v-3.725q0-.35.2-.625t.55-.35L11 12l-7.25-1.8q-.35-.075-.55-.35T3 9.225V5.5q0-.55.45-.838t.95-.087l15.4 6.5q.625.275.625.925t-.625.925l-15.4 6.5Z"
+              />
+            </svg>
+          </button>
+        )
+        return (
+          <AutoForm
+            data={ json }
+            submit={ submit }
+          />
+        )
+      }
+
       const header_comment_form = {
-        method: "GET",
+        method: "POST",
         supportHeaderParams: true,
         headers: {
-          'Accept': 'text/html;encoding=utf-8',
-          'Content-Type': 'text/html;encoding=utf-8',
+          'Accept': 'application/json;encoding=utf-8',
+          'Content-Type': 'application/html;encoding=utf-8',
         }
       }
 
-      console.log(`${HOST_URL()}`);
       fetch(
         `${HOST_URL()}/api/comment/${props.slug}/form`,  // Endpoint URL
         header_comment_form  // Header Options
@@ -137,9 +163,13 @@ export default function Comments(props) {
         })
         .then(data => {
           let comment_form = "";
+          console.log(typeof data);
           /* Wrangle/clean-up some of the comment data. */
           if (typeof data === 'string' && data.length > 0) {
-            comment_form = data;
+            let comment_json = JSON.parse(data);
+            console.log('comment_json');
+            console.log(comment_json);
+            comment_form = htmlFromJson(comment_json);
             setCommentFormData(comment_form);
             setLoadingCommentForm(false);
           } else {

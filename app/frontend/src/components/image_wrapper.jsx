@@ -5,9 +5,9 @@ import card_styles from 'styles/Card.module.scss';
 import { getBase64 } from 'lib/get_base64';
 
 
-export default async function ImageWrapper({ src, alt, caption, width, height, visible=true, align="center", type, imgClass }) {
-  const srcP = src.includes('8000') ? `/${src.split('/').slice(7).join('/')}` : src;
-  const cB = ['svg'].includes(src.slice(-3)) ? false : true;
+export default async function ImageWrapper(props) {
+  const srcP = props.src.includes('8000') ? `/${props.src.split('/').slice(7).join('/')}` : props.src;
+  const cB = ['svg'].includes(props.src.slice(-3)) ? false : true;
   const base64 = async src => {
     if (cB) {
       const b = await getBase64(src);
@@ -15,29 +15,29 @@ export default async function ImageWrapper({ src, alt, caption, width, height, v
     }
   }
 
-  const b64 = await base64(src);
+  const b64 = await base64(props.src);
   const figureClasses = (type) => {
     switch(type) {
       default:
-          return image_styles.image__wrapper;
+        return props.className ? `${props.className} ${image_styles.image__wrapper}` : image_styles.image__wrapper;
       case "card":
-        return card_styles.image__wrapper;
+        return props.className ? `${props.className} ${card_styles.image__wrapper}` : card_styles.image__wrapper;
       case "featured":
-        return "h-full w-auto";
+        return props.className ? `${props.className} h-full w-auto` : 'h-full w-auto';
     }
   }
 
   return (
     <>
       <figure
-        className={ figureClasses(type) }
+        className={ figureClasses(props.type) }
         style={
-          align === 'left' ?
+          props.align === 'left' ?
           {
             width: "fit-content",
             margin: "0 auto 0 0"
           } :
-          align === 'right' ?
+          props.align === 'right' ?
           {
             width: "fit-content",
             margin: "0 0 0 auto"
@@ -48,27 +48,27 @@ export default async function ImageWrapper({ src, alt, caption, width, height, v
         {
           (cB && b64) ?
             <Image
-              className={ imgClass ? imgClass : '' }
+              className={ props.imgClass ? props.imgClass : '' }
               src={ srcP }
-              alt={ alt }
-              width={ width }
-              height={ height }
+              alt={ props.alt }
+              width={ props.width }
+              height={ props.height }
               placeholder="blur"
               blurDataURL={ b64 }
             />
           :
             <Image
-              className={ imgClass ? imgClass : '' }
+              className={ props.imgClass ? props.imgClass : '' }
               src={ srcP }
-              alt={ alt }
-              width={ width }
-              height={ height }
+              alt={ props.alt }
+              width={ props.width }
+              height={ props.height }
             />
         }
         <Caption
-          text={ caption ? caption : alt }
-          width={ width }
-          visible={ visible }
+          text={ props.caption ? props.caption : props.alt }
+          width={ props.width }
+          visible={ props.visible }
           type='figure'
         />
       </figure>

@@ -9,11 +9,7 @@ import { CommentsContext } from 'components/comments.jsx';
 /* Utils */
 //import { renderComments, processComments } from '../utils/comment_helpers'
 import { waitForElem } from 'lib/wait_for_elem';
-import csrfToken from 'utils/csrf_token';
 import sanitize from 'utils/sanitize';
-import ResponseError from 'utils/error_handling';
-import HOST_URL from 'utils/api_server';
-import Parse from 'utils/parser';
 
 
 export default function CommentForm(props) {
@@ -38,6 +34,7 @@ export default function CommentForm(props) {
     commentFormLoading,
     setLoadingCommentForm
   } = useContext(CommentsContext)
+  console.log(commentFormData);
 
   async function handleCommentSubmit(e) {
     e.preventDefault();
@@ -97,7 +94,7 @@ export default function CommentForm(props) {
 
   return (
     <div className="outer-sheen text-sm font-mono w-full block mb-2">
-      <div className="p-4 inner-sheen">
+      <div className="p-4 inner-sheen overflow-x-hidden">
         <div className={ comment_styles.title_row }>
           <h3 className={ headerClass }>Discussion</h3>
           <svg
@@ -112,7 +109,7 @@ export default function CommentForm(props) {
           </svg>
           <span>{ commentsData?.length ?? 0 }</span>
         </div>
-        { Parse(commentFormData ?? "") }
+        { commentFormData ?? <></> }
       </div>
     </div>
   )

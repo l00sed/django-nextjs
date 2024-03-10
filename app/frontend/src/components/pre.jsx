@@ -4,9 +4,20 @@ import { useState, useRef } from 'react'
 import styles from 'styles/Pre.module.scss';
 
 export default function Pre (props) {
+  const wrapperClasses = [
+    'relative',
+    'my-8',
+    'mx-auto',
+    'border',
+    'border-neutral-300',
+    'dark:border-neutral-700'
+  ].join(' ');
+
   const textInput = useRef(null);
+
   const [hovered, setHovered] = useState(false);
   const [copied, setCopied] = useState(false);
+
   let copyButton = true;
   if (props.copyButton === false) {
     copyButton = false;
@@ -15,20 +26,27 @@ export default function Pre (props) {
   const onEnter = () => {
     setHovered(true)
   }
+
   const onExit = () => {
     setHovered(false)
     setCopied(false)
   }
+
   const onCopy = () => {
     setCopied(true)
-    navigator.clipboard.writeText(textInput.current.getElementsByClassName('code-highlight')[0].textContent)
+    navigator.clipboard.writeText(textInput.current.querySelector('figure[data-rehype-pretty-code-figure]').textContent)
     setTimeout(() => {
       setCopied(false)
     }, 2000)
   }
 
   return (
-    <div ref={textInput} onMouseEnter={onEnter} onMouseLeave={onExit} className={ styles.code_wrapper }>
+    <div
+      ref={textInput}
+      onMouseEnter={onEnter}
+      onMouseLeave={onExit}
+      className={ `${styles.code_wrapper} ${wrapperClasses}` }
+    >
       {(
         <button
           aria-label="Copy code"

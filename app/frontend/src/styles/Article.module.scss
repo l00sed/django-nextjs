@@ -113,13 +113,25 @@
     }
   }
 
+  h4 {
+    margin-left: 2em;
+    margin-right: 2em;
+
+    @media screen and (min-width: 576px) {
+      font-size: 1.1em;
+      margin-left: 2.75em;
+      margin-right: 2.75em;
+    }
+  }
+
   h2 a {
     min-width: 250px;
     display: block;
   }
 
   h2 a,
-  h3 a {
+  h3 a,
+  h4 a{
     color: var(--loosed-black) !important;
   }
 

@@ -115,64 +115,62 @@ export default function ShareButton (props) {
   let href = "";
   let svg = <></>;
 
-  useEffect(() => {
-    switch (props.type) {
-      case 'link':
-        href = "#";
-        svg = linkSvg;
-        break;
-      case 'email':
-        let title = waitForElem('title').then(elem => { return elem.innerHTML });
-        let description = waitForElem('meta[name="description"]').then(elem => { return elem.value });
-        href = `mailto:?subject=${ title }&amp;body=${ description }`
-        svg = emailSvg;
-        break;
-      case 'discord':
-        href = 'https://discord.com';
-        svg = discordSvg;
-        break;
-      case 'facebook':
-        href = 'https://facebook.com';
-        svg = facebookSvg;
-        break;
-      case 'linkedin':
-        href = 'https://linkedin.com';
-        svg = linkedinSvg;
-        break;
-      case 'mastodon':
-        href = 'https://mastodon.com';
-        svg = mastodonSvg;
-        break;
-      case 'reddit':
-        href = 'https://reddit.com';
-        svg = redditSvg;
-        break;
-      case 'twitter':
-        href = 'https://twitter.com';
-        svg = twitterSvg;
-        break;
-    }
+  switch (props.type) {
+    case 'link':
+      href = "#";
+      svg = linkSvg;
+      break;
+    case 'email':
+      let title = waitForElem('title').then(elem => { return elem.innerHTML });
+      let description = waitForElem('meta[name="description"]').then(elem => { return elem.value });
+      href = `mailto:?subject=${ title }&amp;body=${ description }`
+      svg = emailSvg;
+      break;
+    case 'discord':
+      href = 'https://discord.com';
+      svg = discordSvg;
+      break;
+    case 'facebook':
+      href = 'https://facebook.com';
+      svg = facebookSvg;
+      break;
+    case 'linkedin':
+      href = 'https://linkedin.com';
+      svg = linkedinSvg;
+      break;
+    case 'mastodon':
+      href = 'https://mastodon.com';
+      svg = mastodonSvg;
+      break;
+    case 'reddit':
+      href = 'https://reddit.com';
+      svg = redditSvg;
+      break;
+    case 'twitter':
+      href = 'https://twitter.com';
+      svg = twitterSvg;
+      break;
+  }
 
-    const handleShare = (e, type, slug) => {
-      const exclude = ['email'];
-      if (!exclude.includes(type)) {
-        switch (type) {
-          default: break;
-          case 'link':
-            e.preventDefault();
-            copyToClipboard(`${ process.env.NEXT_PUBLIC_BASE_URL }/${ slug }`)
-            break;
-        }
+  const handleShare = (e) => {
+    const exclude = ['email'];
+    if (!exclude.includes(props.type)) {
+      switch (props.type) {
+        default: break;
+        case 'link':
+          e.preventDefault();
+          copyToClipboard(`${ process.env.NEXT_PUBLIC_BASE_URL }/${ props.slug }`)
+          break;
       }
     }
-  }, [href, svg]);
+  }
 
   return (
     <Link
       className={ button.share__button }
       href={ href }
-      onClick={ (e) => { handleShare(e, props.type, props.slug) } }
-      onKeyDown={ (e) => { handleShare(e, props.type, props.slug) } }
+      onClick={ handleShare }
+      onKeyDown={ handleShare }
     >
       <Button>{ svg }</Button>
     </Link>

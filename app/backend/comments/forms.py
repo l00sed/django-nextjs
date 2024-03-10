@@ -12,6 +12,7 @@ class CommentForm(forms.Form):
         widget=forms.HiddenInput()
     )
     parent = forms.IntegerField(
+        initial=0,
         required=False,
         widget=forms.HiddenInput()
     )
@@ -19,6 +20,8 @@ class CommentForm(forms.Form):
         widget=forms.HiddenInput()
     )
     reply_level = forms.IntegerField(
+        initial=0,
+        max_value=9,
         widget=forms.HiddenInput()
     )
 
@@ -59,14 +62,11 @@ class CommentForm(forms.Form):
         required=False,
         widget=forms.EmailInput(
             attrs={
-                "style": "display:none;",
                 "placeholder": "Email"
             }
         ),
         validators=[validators.validate_email]
     )
-
-    template = "backend/form.html"
 
     # Additional setup on initialization
     def __init__(self, *args, **kwargs):
@@ -79,11 +79,16 @@ class CommentForm(forms.Form):
         data = self.cleaned_data
         print(data)
 
-        if data.get('subscribe', True) and data.get('email', None):
-            raise forms.ValidationError(
-                "An email address is required in order to receive "
-                "notifications when new comments are added to the discussion."
-            )
+        if data.get('subscribe', True):
+            if data.get('email', None):
+                raise forms.ValidationError(
+                    "An email address is required in order to receive "
+                    "notifications when new comments are added to the "
+                    "discussion."
+                )
+            else:
+                # print(data)
+                return data
         else:
             # print(data)
             return data

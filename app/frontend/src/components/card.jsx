@@ -3,21 +3,56 @@ import React from 'react';
 import Link from 'next/link';
 
 import ImageWrapper from 'components/image_wrapper.jsx';
-import { Tags } from 'components/tag';
+import { Tags } from 'components/tag.jsx';
 import { parseTitle, parseDescription } from 'utils/parser';
 import styles from 'styles/Card.module.scss';
 import dateformat from 'dateformat';
 
 
-export default function Card({ element, truncate, index }) {
-  const bodyClass = [
-    'px-5',
-    'pt-0',
-    'pb-5',
+export default function Card({ element, featured, stretch, truncate, index }) {
+  const width = 300;
+  const widthClass = featured ? 'w-full' : `w-[300px] max-w-full`;
+
+  const featuredClass = [
+    'flex',
+    'flex-row',
+    'mx-auto',
+    'rounded-lg',
+    'max-w-2xl',
+    'h-fit',
+    'relative',
+    'gradient-shadow',
+  ].join(' ');
+
+  const cardWrapperClass = [
+    'flex',
+    'flex-col',
+    (stretch || featured) ? 'sm:flex-row-reverse' : '',
+    widthClass
+  ].join(' ');
+
+  const cardClass = [
+    'mx-auto',
+    widthClass,
+    featured ? [
+      'backdrop-brightness-200 dark:backdrop-brightness-25',
+      'backdrop-blur-4xl',
+      'backdrop-saturate-50',
+    ].join(' ') : ''
+  ].join(' ');
+
+  const cardBodyClass = [
+    'p-5',
+    'flex',
+    'flex-col',
+    'gap-2',
     'font-mono',
     'text-sm',
     'relative',
+    'h-fit',
+    'my-auto',
     'z-10',
+    (stretch || featured) ? 'sm:w-fit' : '',
   ].join(' ');
 
   const dateAuthorClass = [
@@ -50,12 +85,46 @@ export default function Card({ element, truncate, index }) {
   ].join(' ');
 
   const tagsClass = [
-    'py-0',
-    'px-5',
+    'p-0',
     'h-0',
-    '-top-14',
-    'relative',
+    'bottom-12',
+    'left-4',
+    'absolute',
     'z-20'
+  ].join(' ');
+
+  const cardTitleClass = [
+    'm-0',
+    'uppercase',
+    'text-3xl',
+    featured ? 'sm:text-4xl' : '',
+    'text-black',
+    'dark:text-white',
+    'font-sans',
+    'leading-none',
+    'hyphens-auto',
+    'after:hidden',
+  ].join(' ');
+
+  const cardMetaClass = [
+    'text-sm',
+    'flex',
+    'flex-wrap',
+    'items-center',
+    'gap-3',
+    'leading-5',
+    'max-w-fit',
+  ].join(' ');
+
+  const thumbWrapperClass = [
+    '-top-[1px]',
+    '-left-[1px]',
+    'rounded-t-lg',
+    (stretch || featured) ? 'sm:left-0 sm:top-0 sm:rounded-l-none sm:rounded-r-lg sm:max-h-full sm:min-w-[300px]' : 'max-h-[300px]',
+  ].join(' ');
+
+  const thumbClass = [
+    'h-full',
   ].join(' ');
 
   const key = element.id;
@@ -121,46 +190,57 @@ export default function Card({ element, truncate, index }) {
   if (element.unbound)
     descClass += ` ${truncClass}`;
   if (element.tags?.length)
-    descClass = descClass.replace('pb-0', 'pb-12');
+    descClass = descClass.replace('pb-0', 'pb-10');
   const desc = parseDescription(element, descClass, truncate);
 
-  return (
-    <div className={ styles.card }>
+  const card = (
+    <div className={ featured ? `${styles.card} ${cardClass} ${styles.featured}` : `${styles.card} ${cardClass}` }>
       <Link
         key={ key }
         href={ href }
         target={ target }
       >
-        <div className={ styles.card__thumbnail_wrapper }>
-          <ImageWrapper
-            alt={ alt }
-            src={ src }
-            width={ 300 }
-            height={ 300 }
-            type="card"
-            objectFit="contain"
-            visible={ false }
-            className={ styles.card__thumbnail }
-            loading={ loading }
-            priority={ priority  }
-            sizes="(max-width: 576px)  100vw,
-                   (max-width: 768px)  50vw,
-                   (max-width: 1200px) 33vw,
-                   15vw"
-          />
-        </div>
-        <div className={ styles.card__head }>
-          <h2 className={ styles.card__title }>{ title }</h2>
-          <div className={ styles.card__meta }>
-            <span className={ dateAuthorClass }>{ date }</span>
-            {/*<span className={ dateAuthorClass }>{ author }</span>*/}
+        <div className={ cardWrapperClass }>
+          <div className={ `${styles.card__thumbnail_wrapper} ${thumbWrapperClass}` }>
+            <ImageWrapper
+              alt={ alt }
+              src={ src }
+              width={ width }
+              height={ width }
+              type="card"
+              objectFit="contain"
+              visible={ false }
+              className={ `${styles.card__thumbnail} ${thumbClass}` }
+              loading={ loading }
+              priority={ priority  }
+              sizes="(max-width: 576px)  100vw,
+                     (max-width: 768px)  50vw,
+                     (max-width: 1200px) 33vw,
+                     15vw"
+            />
           </div>
-        </div>
-        <div className={ bodyClass }>
-          { desc }
+          <div className={ cardBodyClass }>
+            <span className={ cardTitleClass }>{ title }</span>
+            <div className={ cardMetaClass }>
+              <span className={ dateAuthorClass }>{ date }</span>
+              {/*<span className={ dateAuthorClass }>{ author }</span>*/}
+            </div>
+            { desc }
+          </div>
         </div>
       </Link>
       { tags }
     </div>
   );
+
+  if (featured) {
+    return (
+      <div className={ featuredClass }>
+        { card }
+        <h3 className="absolute -bottom-10 right-2 pt-0.5 px-2 rounded-sm bg-loosed-400 dark:bg-loosed-600 text-neutral-100 dark:text-neutral-900">FEATURED</h3>
+      </div>
+    )
+  } else {
+    return card;
+  }
 }

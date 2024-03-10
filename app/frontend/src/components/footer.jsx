@@ -139,6 +139,16 @@ function FooterLink(props) {
 
 export default function Footer() {
   /* LEARN --------------- */
+  const svgBookmarks = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+    >
+      <path d="M4 2h16a1 1 0 0 1 1 1v19.276a.5.5 0 0 1-.704.457L12 19.03l-8.296 3.702A.5.5 0 0 1 3 22.276V3a1 1 0 0 1 1-1Zm8 11.5l2.939 1.545l-.561-3.272l2.377-2.318l-3.285-.478L12 6l-1.47 2.977l-3.285.478l2.377 2.318l-.56 3.272L12 13.5Z" />
+    </svg>
+  )
   const svgLearn = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -161,17 +171,17 @@ export default function Footer() {
       />
     </svg>
   )
-  const svgBookmarks = (
+  /* META ---------------- */
+  const svgPrivacy = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
-      viewBox="0 0 24 24"
+      viewBox="0 0 576 512"
     >
-      <path d="M4 2h16a1 1 0 0 1 1 1v19.276a.5.5 0 0 1-.704.457L12 19.03l-8.296 3.702A.5.5 0 0 1 3 22.276V3a1 1 0 0 1 1-1Zm8 11.5l2.939 1.545l-.561-3.272l2.377-2.318l-3.285-.478L12 6l-1.47 2.977l-3.285.478l2.377 2.318l-.56 3.272L12 13.5Z" />
+      <path d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256C63 286 89.6 328.5 128 364.3c41.2 38.1 94.8 67.7 160 67.7s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80M95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6M288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80h-2c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2v2c0 44.2 35.8 80 80 80m0-208a128 128 0 1 1 0 256a128 128 0 1 1 0-256" />
     </svg>
   )
-  /* META ---------------- */
   const svgRss = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -190,6 +200,16 @@ export default function Footer() {
       viewBox="0 0 576 512"
     >
       <path d="M208 80c0-26.5 21.5-48 48-48h64c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48h-8v40h152c30.9 0 56 25.1 56 56v32h8c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48h-64c-26.5 0-48-21.5-48-48v-64c0-26.5 21.5-48 48-48h8v-32c0-4.4-3.6-8-8-8H312v40h8c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48h-64c-26.5 0-48-21.5-48-48v-64c0-26.5 21.5-48 48-48h8v-40H112c-4.4 0-8 3.6-8 8v32h8c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48v-64c0-26.5 21.5-48 48-48h8v-32c0-30.9 25.1-56 56-56h152v-40h-8c-26.5 0-48-21.5-48-48V80z"/>
+    </svg>
+  )
+  const svgTerms = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+    >
+      <path d="M8 12h8v-2H8zm0-4h8V6H8zm11.95 12.475L15.9 15.2q-.425-.575-1.05-.887T13.5 14H4V4q0-.825.588-1.412T6 2h12q.825 0 1.413.588T20 4v16q0 .125-.012.238t-.038.237M6 22q-.825 0-1.412-.587T4 20v-4h9.5q.25 0 .463.113t.362.312l4.2 5.5q-.125.05-.262.063T18 22z" />
     </svg>
   )
   /* SOCIAL -------------- */
@@ -297,13 +317,15 @@ export default function Footer() {
       <section className={ footer_styles.link_section }>
         <div className={ footer_styles.link_row }>
           <FooterCol heading="LEARN">
+            <FooterLink url="/bookmarks" svg={ svgBookmarks } text="Bookmarks Dump" />
             <FooterLink url="/kb" svg={ svgLearn } text="Knowledge Base" />
             <FooterLink url="/reading" svg={ svgRead } text="Reading List" />
-            <FooterLink url="/bookmarks" svg={ svgBookmarks } text="Bookmarks Dump" />
           </FooterCol>
           <FooterCol heading="META">
+            <FooterLink url="/privacy-policy" svg={ svgPrivacy } text="Privacy Policy" />
             <FooterLink url="/rss/rss.xml" blank svg={ svgRss } text="RSS" />
             <FooterLink url="/sitemap.xml" blank svg={ svgSitemap } text="Sitemap" />
+            <FooterLink url="/terms-and-conditions" svg={ svgTerms } text="Terms and Conditions" />
           </FooterCol>
           <FooterCol heading="SOCIAL">
             <FooterLink url="https://github.com/l00sed" blank svg={ svgGithub } text="GitHub" />

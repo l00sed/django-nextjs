@@ -1,44 +1,58 @@
-'use client';
-
-import React, { useEffect } from 'react';
 import menu_toggle_styles from 'styles/MenuToggle.module.scss';
 
-export default function MenuToggle() {
-  useEffect(() => {
-    const handleScroll = () => {
-      if ( document.getElementById('menu_toggle') ) {
-        if ( window.scrollY > 100 ) {
-          //console.log(window.scrollY);
-          if ( document.getElementById('menu_toggle').classList.contains(menu_toggle_styles.parked_top) ) {
-            document.getElementById('menu_toggle').classList.remove(menu_toggle_styles.parked_top);
-          }
-        } else {
-          if ( ! document.getElementById('menu_toggle').classList.contains(menu_toggle_styles.parked_top) ) {
-            document.getElementById('menu_toggle').classList.add(menu_toggle_styles.parked_top);
-          }
-        }
-      }
-    }
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', handleScroll);
-    }
-
-    return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('scroll', handleScroll);
-      }
-    }
-  }, []);
-
+export default function MenuToggle(props) {
   return (
     <label
       htmlFor="menu-overlay-input"
       className={ menu_toggle_styles.label_wrapper }
       title="Click the logo to open navigation and settings."
     >
+      {
+        props.progress ?
+          <div
+            className={ menu_toggle_styles.progress }
+          >
+            <svg
+              width="70px"
+              height="70px"
+              viewBox="0 0 70 70"
+              className={ menu_toggle_styles.progress__svg }
+            >
+              <defs>
+                <filter
+                  id="gaussProgress"
+                  x="-0.05"
+                  y="-0.05"
+                  width="40"
+                  height="40"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="1" />
+                </filter>
+              </defs>
+              <circle
+                cx="35"
+                cy="35"
+                r="33"
+                filter="url(#gaussProgress)"
+                strokeOpacity="1"
+                className={
+                  [
+                    `${menu_toggle_styles.progressbar__svg_circle}`,
+                    'stroke-2',
+                    'stroke-neutral-950',
+                    'overflow-visible',
+                    'dark:stroke-neutral-50',
+                  ].join(' ')
+                }
+              ></circle>
+            </svg>
+          </div>
+        :
+        <></>
+      }
       <div
-        className={ `${menu_toggle_styles.header_logo} ${menu_toggle_styles.parked_top}` }
+        className={ menu_toggle_styles.header_logo }
       >
         <svg className={ menu_toggle_styles.logo } width="120" height="120" viewBox="0 0 120 120" stroke="none" xmlns="http://www.w3.org/2000/svg">
           <path className={ menu_toggle_styles.logo_handle3 } d="M55.3439 77.4371C55.4322 77.4245 55.5206 77.4371 55.6216 77.4371L65.3784 77.4371C65.6435 77.4498 65.7444 77.551 65.7318 77.8168C65.7192 78.0825 65.6813 78.3356 65.6561 78.6014C65.391 80.9171 65.1386 83.2202 64.8735 85.5359C64.6337 87.6113 64.4065 89.6739 64.1414 91.7493C63.8764 93.9385 63.5861 96.1277 63.2958 98.3042C63.22 98.8737 63.0938 99.4431 63.0055 100.013C62.955 100.405 62.7278 100.62 62.387 100.759C61.8947 100.949 61.3772 101.038 60.8471 101.05C60.1781 101.063 59.5218 100.987 58.8654 100.81C58.7139 100.772 58.5499 100.709 58.411 100.633C58.0702 100.455 57.8304 100.202 57.7925 99.7721C57.6032 98.0891 57.3887 96.3934 57.1741 94.7104C56.9469 92.8502 56.7071 91.0026 56.4672 89.1424C56.24 87.2822 56.0128 85.4221 55.773 83.5745C55.5458 81.7143 55.306 79.8668 55.0662 78.0066C55.0536 77.9307 55.0409 77.8421 55.0536 77.7662C55.0536 77.5764 55.1545 77.4625 55.3439 77.4371Z" stroke="none"/>

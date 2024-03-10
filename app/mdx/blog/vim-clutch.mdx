@@ -271,7 +271,7 @@ After flashing the SD card, it'll prompt you to eject it. I just pop it out and 
 At the bottom of `config.txt`, add a new line:
 
 <Pre>
-```bash:config.txt
+```bash title="config.txt"
 dtoverlay=dwc2
 ```
 </Pre>
@@ -279,7 +279,7 @@ dtoverlay=dwc2
 Next, you have to edit the `cmdline.txt` file. As Andrew pointed out in his [gist](https://gist.github.com/gbaman/975e2db164b3ca2b51ae11e45e8fd40a#file-howtootgfast-md), each parameter is separated by a single space (no new lines). In here, you will insert the following after "rootwait":
 
 <Pre>
-```bash:cmdline.txt
+```bash title="cmdline.txt"
 modules-load=dwc2,g_ether
 ```
 </Pre>
@@ -299,7 +299,7 @@ sudo vim /etc/wpa_supplicant/wpa_supplicant.conf
 In this file, include the 2-letter ISO code for your country as well as the SSID and password of your network.
 
 <Pre>
-```bash:wp_supplicant.conf
+```bash title="wp_supplicant.conf"
 country=US
 network={
    ssid="Chance the Router"
@@ -332,7 +332,7 @@ You can then use methods like: `pedal.is_pressed`, `pedal.is_held`, `pedal.when_
 Setting a `Button()` lets the script detect that the 5V boolean "high" signal "is_pressed", or "is_released". Now we have to turn that "high" or "low" into keypresses. The script below opens the Pi as a _human interface device_ (HID) that sends emulated keypresses (as structs) to the computer the Pi is plugged into.
 
 <Pre>
-```py:keypress.py showLineNumbers
+```py title="keypress.py" showLineNumbers
 def press(char):
   mod,key=hid_codes[char]
   raw=struct.pack("BBBBL", mod, 0x00, key, 0x00, 0x00000000)
@@ -343,7 +343,7 @@ def press(char):
 ```
 </Pre>
 
-The _struct_ library interprets Python bytes as packed binary data. The weird "BBBBL" pattern is just dictating 4 unsigned chars (BBBB) followed by one unsigned long (L) integer. The code is bummed a little further than some other examples I've found (mostly using Python's `write_report` function. I ripped it from a rather cool presentation, [One Device to PWN Them All](/assets/files/articles/vim-clutch/upenn_philpolstra_1d2PWNta.pdf).
+The _struct_ library interprets Python bytes as packed binary data. The weird "BBBBL" pattern is just dictating 4 unsigned chars (BBBB) followed by one unsigned long (L) integer. The code is bummed a little further than some other examples I've found (mostly using Python's `write_report` function. I ripped it from a rather cool presentation, [One Device to PWN Them All](/assets/files/articles/vim-clutch/upenn_philpolstra_1d2PWNta.pdf)).
 
 The gist of the function above is that we're able to build the unreadable keypress signals (one long string of bytes) by referencing the readable character (i.e., the letter "o" or "i") in a lookup table. The lookup table packs the bytes for that key and its modifier (i.e., "Shift" or "Ctrl") into the longer struct. If there's someone smart reading this article, they can please explain this better.
 
@@ -352,7 +352,7 @@ As far as how those binary bits are actually interpretted as keypresses, I'm not
 Before this script will work, we need the Pi to say, "hello, I am a keyboard", whenever it's plugged into another computer via USB. I put a link to the blog post with the relevant script (as well as a few other useful links) in the footer to this project's [GitHub README](https://github.com/l00sed/vim-clutch.git). Here it is below as well:
 
 <Pre>
-```bash:/usr/bin/vimclutch_usb showLineNumbers
+```bash title="/usr/bin/vimclutch_usb" showLineNumbers
 #!/bin/bash
 cd /sys/kernel/config/usb_gadget/
 mkdir -p vimclutch
@@ -393,7 +393,7 @@ chmod +x /usr/bin/vimclutch_usb
 Then put a line in `/etc/rc.local` (before the `exit 0` line) that will allow the script to be automatically run, setting up the Pi as a USB keyboard:
 
 <Pre  copyButton={ false }>
-```diff:/etc/rc.local
+```diff title="/etc/rc.local"
 ...
 
 + /usr/bin/vimclutch_usb
