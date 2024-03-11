@@ -127,7 +127,7 @@ $l-link-section-bg: rgba(255,255,255,1);
 $l-donate-menu-background-color: rgba(255,255,255,0.9);
 $l-donate-button-box-shadow: rgba(255,255,255,0.8);
 
-$l-code-inline-border: rgba(0,0,0,0.075);
+$l-code-inline-bg: rgba(0,0,0,0.05);
 $l-code-filter: invert(0.95);
 $l-code-highlight: rgba(225,155,35,1);
 $l-code-highlight-bg: rgba(225,155,35,0.25);
@@ -142,8 +142,6 @@ $l-copy-button-hover-color: rgba(0,0,0,0.6);
 
 $l-caption-leader: rgba(0,0,0,0.75);
 
-$l-scrollbar-color: rgba(0,0,0,0.05);
-$l-scrollbar-thumb: rgba(0,0,0,0.3);
 $l-scroll-area-border: rgba(0,0,0,0.1);
 $l-scroll-area-background: rgba(255,255,255,0.65);
 
@@ -242,7 +240,7 @@ $d-link-section-bg: rgba(0,0,0,0.25);
 $d-donate-menu-background-color: rgba(0,0,0,0.85);
 $d-donate-button-box-shadow: rgba(0,0,0,1);
 
-$d-code-inline-border: rgba(255,255,255,0.05);
+$d-code-inline-bg: rgba(255,255,255,0.05);
 $d-code-filter: none;
 $d-code-highlight: rgb(30,100,220);
 $d-code-highlight-bg: rgba(30,100,220,0.25);
@@ -257,8 +255,6 @@ $d-copy-button-hover-color: rgba(255,255,255,0.4);
 
 $d-caption-leader: rgba(255,255,255,0.75);
 
-$d-scrollbar-color: rgba(255,255,255,0.05);
-$d-scrollbar-thumb: rgba(255,255,255,0.35);
 $d-scroll-area-border: rgba(255,255,255,0.15);
 $d-scroll-area-background: rgba(0,0,0,0.25);
 
@@ -358,7 +354,7 @@ $d-tag-bg-16: #1f9050;
     --donate-menu-background-color: #{$l-donate-menu-background-color};
     --donate-button-box-shadow: #{$l-donate-button-box-shadow};
 
-    --code-inline-border: #{$l-code-inline-border};
+    --code-inline-bg: #{$l-code-inline-bg};
     --code-filter: #{$l-code-filter};
     --code-highlight: #{$l-code-highlight};
     --code-highlight-bg: #{$l-code-highlight-bg};
@@ -373,8 +369,6 @@ $d-tag-bg-16: #1f9050;
 
     --caption-leader: #{$l-caption-leader};
 
-    --scrollbar-color: #{$l-scrollbar-color};
-    --scrollbar-thumb: #{$l-scrollbar-thumb};
     --scroll-area-border: #{$l-scroll-area-border};
     --scroll-area-background: #{$l-scroll-area-background};
 
@@ -476,7 +470,7 @@ $d-tag-bg-16: #1f9050;
     --donate-menu-background-color: #{$d-donate-menu-background-color};
     --donate-button-box-shadow: #{$d-donate-button-box-shadow};
 
-    --code-inline-border: #{$d-code-inline-border};
+    --code-inline-bg: #{$d-code-inline-bg};
     --code-filter: #{$d-code-filter};
     --code-highlight: #{$d-code-highlight};
     --code-highlight-bg: #{$d-code-highlight-bg};
@@ -491,8 +485,6 @@ $d-tag-bg-16: #1f9050;
 
     --caption-leader: #{$d-caption-leader};
 
-    --scrollbar-color: #{$d-scrollbar-color};
-    --scrollbar-thumb: #{$d-scrollbar-thumb};
     --scroll-area-border: #{$d-scroll-area-border};
     --scroll-area-background: #{$d-scroll-area-background};
 
@@ -641,7 +633,7 @@ $d-tag-bg-16: #1f9050;
   --donate-button-box-shadow: #{$l-donate-button-box-shadow} !important;
 
   /* ## pre.js */
-  --code-inline-border: #{$l-code-inline-border} !important;
+  --code-inline-bg: #{$l-code-inline-bg} !important;
   --code-filter: #{$l-code-filter} !important;
   --code-highlight: #{$l-code-highlight} !important;
   --code-highlight-bg: #{$l-code-highlight-bg} !important;
@@ -658,8 +650,6 @@ $d-tag-bg-16: #1f9050;
   --caption-leader: #{$l-caption-leader} !important;
 
   /* ## horizontal_scroller.js */
-  --scrollbar-color: #{$l-scrollbar-color} !important;
-  --scrollbar-thumb: #{$l-scrollbar-thumb} !important;
   --scroll-area-border: #{$l-scroll-area-border} !important;
   --scroll-area-background: #{$l-scroll-area-background} !important;
 
@@ -773,7 +763,7 @@ $d-tag-bg-16: #1f9050;
   --donate-button-box-shadow: #{$d-donate-button-box-shadow} !important;
 
   /* ## pre.js */
-  --code-inline-border: #{$d-code-inline-border} !important;
+  --code-inline-bg: #{$d-code-inline-bg} !important;
 	--code-filter: #{$d-code-filter} !important;
   --code-highlight: #{$d-code-highlight} !important;
   --code-highlight-bg: #{$d-code-highlight-bg} !important;
@@ -790,8 +780,6 @@ $d-tag-bg-16: #1f9050;
   --caption-leader: #{$d-caption-leader} !important;
 
   /* ## horizontal_scroller.js */
-  --scrollbar-color: #{$d-scrollbar-color} !important;
-  --scrollbar-thumb: #{$d-scrollbar-thumb} !important;
   --scroll-area-border: #{$d-scroll-area-border} !important;
   --scroll-area-background: #{$d-scroll-area-background} !important;
 
@@ -1025,7 +1013,7 @@ pre {
 
 :not(pre) > code {
   font-weight: lighter;
-  background: var(--code-inline-border);
+  background: var(--code-inline-bg);
   padding: 1px 4px;
 }
 

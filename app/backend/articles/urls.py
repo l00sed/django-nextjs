@@ -5,13 +5,19 @@ from .views import (
     ArticlesBySearchAPIView,
     ArticleDetailAPIView,
     ArticleLikesAPIView,
-    SubscribeToArticleAPIView
+    SubscribeToArticleAPIView,
+    TagsAPIView,
 )
 
 urlpatterns = [
     path(
         'articles',
         ArticleListAPIView.as_view(),
+        name='articles'
+    ),
+    path(
+        'tags/all',
+        TagsAPIView.as_view(),
         name='articles'
     ),
     path(

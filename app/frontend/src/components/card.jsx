@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Link from 'next/link';
 
 import ImageWrapper from 'components/image_wrapper.jsx';
@@ -18,7 +16,7 @@ export default function Card({ element, featured, stretch, truncate, index }) {
     'flex-row',
     'mx-auto',
     'rounded-lg',
-    'max-w-2xl',
+    'max-w-4xl',
     'h-fit',
     'relative',
     'gradient-shadow',
@@ -52,7 +50,7 @@ export default function Card({ element, featured, stretch, truncate, index }) {
     'h-fit',
     'my-auto',
     'z-10',
-    (stretch || featured) ? 'sm:w-fit' : '',
+    (stretch || featured) ? 'sm:p-8 sm:w-fit' : '',
   ].join(' ');
 
   const dateAuthorClass = [
@@ -89,6 +87,7 @@ export default function Card({ element, featured, stretch, truncate, index }) {
     'h-0',
     'bottom-12',
     'left-4',
+    (stretch || featured) ? 'sm:left-8 sm:bottom-16': '',
     'absolute',
     'z-20'
   ].join(' ');
@@ -97,7 +96,7 @@ export default function Card({ element, featured, stretch, truncate, index }) {
     'm-0',
     'uppercase',
     'text-3xl',
-    featured ? 'sm:text-4xl' : '',
+    featured ? 'sm:text-4xl md:text-5xl' : '',
     'text-black',
     'dark:text-white',
     'font-sans',

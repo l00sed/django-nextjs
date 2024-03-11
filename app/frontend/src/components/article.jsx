@@ -158,7 +158,7 @@ export default async function Article(props) {
         </article>
       </main>
       <aside className={ article_styles.aside }>
-        <div className={ article_styles.sticky }>
+        <div className={ article_styles.stick }>
           <div className={ article_styles.scroll__y }>
             { live_button }
             { comments }

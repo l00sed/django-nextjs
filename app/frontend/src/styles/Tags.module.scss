@@ -1,48 +1,49 @@
 .tags {
-  font-family: var(--jetbrains-mono);
-  display: inline-flex;
-  position: relative;
-  z-index: 20;
-  flex-wrap: nowrap;
-  width: 100%;
-  overflow-x: auto;
-  column-gap: 0.5em;
-  row-gap: 0.75em;
-  padding-bottom: 0.25em;
+  @apply
+    font-mono
+    relative
+    inline-flex
+    z-20
+    w-full
+    overflow-x-auto
+    gap-2
+    pb-1;
 
   &::-webkit-scrollbar-track {
-    background: transparent;
-    height: 4px;
+    @apply h-1 bg-transparent;
   }
 
   &::-webkit-scrollbar {
-    background: var(--scrollbar-color);
-    height: 4px;
+    @apply h-1 bg-black/5 dark:bg-white/5;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--scrollbar-thumb);
-    border-radius: 2px;
-    height: 4px;
+    @apply h-1 bg-black/30 dark:bg-white/35 rounded-sm;
   }
 
   a.tag {
     --opy-1: 0.75;
-    position: relative;
-    display: flex;
-    color: var(--loosed-black);
-    border-radius: 4px;
-    text-align: center;
-    cursor: pointer;
-    width: fit-content;
-    align-self: center;
-    white-space: nowrap;
-    padding: 0.25em 1em 0.25em 0.75em;
+    @apply
+      relative
+      flex
+      text-black
+      dark:text-white
+      rounded
+      text-center
+      cursor-pointer
+      w-fit
+      self-center
+      whitespace-nowrap
+      py-1
+      pl-3
+      pr-4
+      border-b-2
+      border-l-2
+      border-solid
+      border-black/75
+      text-sm;
+
     box-shadow: inset -1px 1px 1px 1px rgba(255,255,255,var(--opy-1));
-    border: 1px solid rgba(0,0,0,var(--opy-1));
-    border-left-width: 2px;
-    border-bottom-width: 2px;
-    font-size: var(--small);
     transition: all var(--loosed-transition-fast) ease;
     height: 30px;
 

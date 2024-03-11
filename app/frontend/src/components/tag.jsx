@@ -93,8 +93,10 @@ export function Tags(props) {
       }
     })
 
+    const wrapClass = props.wrap ? 'flex-wrap' : 'flex-nowrap';
+
     return (
-      <div id="tags" className={ tag_styles.tags }>
+      <div id="tags" className={ `${tag_styles.tags} ${wrapClass} ${props.className ? props.className : ''}` }>
         { tags }
       </div>
     )

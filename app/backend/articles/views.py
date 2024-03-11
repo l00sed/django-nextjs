@@ -5,10 +5,12 @@ from django.db.models import Q
 from urllib.parse import quote
 
 from .models import Article, Subscriber
+from taggit.models import Tag
 from .serializers import (
     ArticleSerializer,
     SubscriberSerializer,
-    ArticleLikesSerializer
+    ArticleLikesSerializer,
+    TagSerializer,
 )
 from backend.tools import get_client_ip
 
@@ -134,3 +136,12 @@ class SubscribeToArticleAPIView(generics.CreateAPIView):
 
     def get_queryset(self):
         return Subscriber.objects.all()
+
+
+class TagsAPIView(generics.ListAPIView):
+    """TagsAPIView."""
+
+    serializer_class = TagSerializer
+
+    def get_queryset(self):
+        return Tag.objects.all()
