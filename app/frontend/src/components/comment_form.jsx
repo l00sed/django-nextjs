@@ -67,7 +67,7 @@ export default function CommentForm(props) {
       const dataFromServer = JSON.parse(comment.data);
       if (dataFromServer) {
         console.log(dataFromServer);
-        //setCommentsData([...commentsData, comment.data]);
+        setCommentsData([...commentsData, dataFromServer]);
       }
     }
   }

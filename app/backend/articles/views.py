@@ -8,11 +8,23 @@ from .models import Article, Subscriber
 from taggit.models import Tag
 from .serializers import (
     ArticleSerializer,
+    ArticleSimpleSerializer,
     SubscriberSerializer,
     ArticleLikesSerializer,
     TagSerializer,
 )
 from backend.tools import get_client_ip
+
+
+class ArticleSimpleListAPIView(generics.ListAPIView):
+    """ArticleListAPIView."""
+
+    serializer_class = ArticleSimpleSerializer
+
+    def get_queryset(self):
+        """get_queryset."""
+
+        return Article.objects.filter(content_type='blog').defer('content').order_by('-created_at')
 
 
 class ArticleListAPIView(generics.ListAPIView):

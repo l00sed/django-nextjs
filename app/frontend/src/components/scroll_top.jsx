@@ -7,8 +7,6 @@ export default function ScrollTop() {
     'group',
     'hidden',
     'border-none',
-    'shadow-neutral-300',
-    'shadow-md',
     'h-12',
     'w-12',
     'cursor-pointer',
@@ -17,15 +15,11 @@ export default function ScrollTop() {
     'fixed',
     'z-10',
     'bg-opacity-50',
-    'bg-white',
     'rounded-full',
     'backdrop-blur-sm',
     'hover:shadow-y-inset',
     'hover:pause',
     'hover:bg-loosed-400',
-    'hover:dark:bg-loosed-600',
-    'dark:bg-black',
-    'dark:shadow-neutral-900'
   ].join(' ');
 
   let scrollTopSvgStyles = [

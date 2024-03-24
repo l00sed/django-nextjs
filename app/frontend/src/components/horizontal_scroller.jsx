@@ -10,8 +10,8 @@ export default function HorizontalScroller( props ) {
 
   return (
     <div className={ `${styles.wrapper} ${props.className}` }>
-      <div className={ styles.horizontal_scroller }>
-        <div className={ styles.scroller_container }>
+      <div className={ `${styles.horizontal_scroller} ${props.scrollerClass}` }>
+        <div className={ `${styles.scroller_container} ${props.containerClass}` }>
           { props.children }
         </div>
       </div>

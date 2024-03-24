@@ -30,8 +30,7 @@ export default {
       },
       colors: {
         loosed: {
-          400: '#b61115',
-          600: '#f93e17',
+          400: 'var(--loosed-highlight-1)',
         }
       },
       fontFamily: {
@@ -48,6 +47,13 @@ export default {
       },
       lineHeight: {
         'extra-tight': '0.75'
+      },
+      maxWidth: {
+        '5xl': '1600px',
+        '6xl': '1920px',
+      },
+      padding: {
+        22: '5.5rem',
       },
       strokeWidth: {
         3: '3px',

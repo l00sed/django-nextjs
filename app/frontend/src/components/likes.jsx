@@ -38,7 +38,7 @@ export default function Likes({ meta }) {
           elem.dataset.likeCount = parseInt(like) + 1;
           elem.innerText = parseLikes(parseInt(like) + 1);
           if (! document.getElementById('heart').classList.contains("text-loosed-400")) {
-            document.getElementById('heart').classList.add("text-loosed-400", "dark:text-loosed-600");
+            document.getElementById('heart').classList.add("text-loosed-400");
             document.getElementById('heart_fill').classList.add("opacity-100");
           }
         });

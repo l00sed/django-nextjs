@@ -14,14 +14,14 @@ import notFoundWrapper  from 'lib/not_found';
 /* Next components */
 import Link        from 'next/link';
 /* Local components */
-import Mdx         from 'components/mdx.jsx';
-import Comments    from 'components/comments.jsx';
-import Button      from 'components/button.jsx';
-import ArticleHead from 'components/article_head.jsx';
-import ArticleMeta from 'components/article_meta.jsx';
-import Note from './note';
+import Mdx          from 'components/mdx.jsx';
+import PrevNextPost from 'components/prev_next_post';
+import Comments     from 'components/comments.jsx';
+import Button       from 'components/button.jsx';
+import ArticleHead  from 'components/article_head.jsx';
+import ArticleMeta  from 'components/article_meta.jsx';
 
-const getData = async (slug) => {
+const getArticleDetails = async (slug) => {
   const options_get = {
     method: "GET",
     supportHeaderParams: true,
@@ -42,6 +42,7 @@ const getData = async (slug) => {
       slug: mdx.slug,
       title: mdx.title,
       author: mdx.author,
+      description: mdx.description,
       updated_at: mdx.updated_at,
       likes: mdx.likes,
       tags: mdx.tags
@@ -103,7 +104,7 @@ export default async function Article(props) {
     meta,
     headings,
     mdx
-  } = await getData(props.slug);
+  } = await getArticleDetails(props.slug);
 
   /* Add article_head */
   let article_head = <></>;
@@ -132,39 +133,32 @@ export default async function Article(props) {
     live_button = <></>;
   }
 
-  let disclaimer = <></>;
-  if (props.disclaimer) {
-    disclaimer =  (
-      <Note title="Notice" type="warning">
-        <p>The writing on <em>l-o-o-s-e-d.net</em> expresses my own opinions, values, and ideas&mdash; not those of my employers (current or past).</p>
-      </Note>
-    );
-  }
-
   let comments = <Comments slug={ props.slug } />;
   if (props.disableComments) {
     comments = <></>;
   }
 
   return (
-    <div className={ article_styles.main_wrapper }>
-      <main className={ article_styles.main } style={ props.style }>
-        <article className={ article_styles.article_wrapper }>
-          { article_head }
-          { metaPosition === 'before' ? article_meta : <></> }
-          <Mdx slug={ props.slug } meta={ meta } headings={ headings } mdx={ mdx } />
-          { metaPosition === 'after'  ? article_meta : <></> }
-          { disclaimer }
-        </article>
-      </main>
-      <aside className={ article_styles.aside }>
-        <div className={ article_styles.stick }>
-          <div className={ article_styles.scroll__y }>
-            { live_button }
-            { comments }
+    <>
+      <div className={ article_styles.main_wrapper }>
+        <main className={ article_styles.main } style={ props.style }>
+          <article className={ article_styles.article_wrapper }>
+            { article_head }
+            { metaPosition === 'before' ? article_meta : <></> }
+            <Mdx slug={ props.slug } meta={ meta } headings={ headings } mdx={ mdx } />
+            { metaPosition === 'after'  ? article_meta : <></> }
+          </article>
+        </main>
+        <aside className={ article_styles.aside }>
+          <div className={ article_styles.stick }>
+            <div className={ article_styles.scroll__y }>
+              { live_button }
+              { comments }
+            </div>
           </div>
-        </div>
-      </aside>
-    </div>
+        </aside>
+      </div>
+      <PrevNextPost slug={ props.slug } />
+    </>
   )
 }

@@ -121,7 +121,7 @@ export default function Comments(props) {
         let submit = (
           <button type="submit">
             <svg
-              className="fill-black dark:fill-white hover:fill-loosed-400 hover:dark:fill-loosed-600"
+              className="fill-black dark:fill-white hover:fill-loosed-400"
               xmlns="http://www.w3.org/2000/svg"
               width="32"
               height="32"

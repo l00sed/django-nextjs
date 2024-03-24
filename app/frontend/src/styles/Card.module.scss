@@ -90,7 +90,8 @@
   border-radius: calc(var(--card-radius) - 1px) calc(var(--card-radius) - 1px) 0 0;
   top: 0;
   left: 0;
-  transform: scale(1.25);
+  transition: transform ease 100ms;
+  transform: scale(1.15);
 }
 
 .card__thumbnail {
@@ -103,5 +104,4 @@
 .card:hover .card__thumbnail {
   border-radius: var(--card-radius) var(--card-radius) 0 0;
   filter: saturate(1);
-  transform: scale(1.25);
 }

@@ -14,6 +14,12 @@ export default async function articles(props) {
 
   let api_url = `${HOST_URL()}/api/articles`;
 
+  if (props?.hasOwnProperty('simple')) {
+    if (props.simple) {
+      api_url = `${HOST_URL()}/api/articles/simple`
+    }
+  } else
+
   if (props?.hasOwnProperty('search')) { // Return filtered articles by search string
     if (props.search) {
       api_url = `${HOST_URL()}/api/articles/search/${ props.search }`

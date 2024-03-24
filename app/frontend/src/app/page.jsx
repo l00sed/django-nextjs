@@ -55,7 +55,7 @@ function WideStar(props) {
 }
 
 export default async function HomePage() {
-  const data = await articles();
+  const data = await articles({ simple: true });
 
   let archiveClass = [
     'flex',
@@ -100,9 +100,9 @@ export default async function HomePage() {
             <span className={ letterClass }>c</span>
             <span className={ letterClass }>r</span>
             <span className={ letterClass }>A</span>
-            <Star size={ 60 } extraClass="mx-auto my-1 text-loosed-400 dark:text-loosed-600" />
-            <Star size={ 60 } extraClass="mx-auto my-1 text-loosed-400 dark:text-loosed-600" />
-            <Star size={ 60 } extraClass="mx-auto my-1 text-loosed-400 dark:text-loosed-600" />
+            <Star size={ 60 } extraClass="mx-auto my-1 text-loosed-400" />
+            <Star size={ 60 } extraClass="mx-auto my-1 text-loosed-400" />
+            <Star size={ 60 } extraClass="mx-auto my-1 text-loosed-400" />
           </h2>
           {
             data?.map((element, index) => {

@@ -56,7 +56,9 @@ class CommentConsumer(AsyncWebsocketConsumer):
         content = event['content']
         reply_level = event['reply_level']
 
-        # new_comment = await self.save_comment(parent, author, content, reply_level)
+        new_comment = await self.save_comment(
+            parent, author, content, reply_level
+        )
 
         await self.send(
             text_data=json.dumps({
@@ -68,7 +70,7 @@ class CommentConsumer(AsyncWebsocketConsumer):
         )
 
     @database_sync_to_async
-    def save_comment(self, author, content):
+    def save_comment(self, parent, author, content, reply_level):
         article = self.article
 
         comment = Comment(

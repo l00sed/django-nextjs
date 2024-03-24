@@ -7,6 +7,7 @@ import rehypeSlug                 from 'rehype-slug';
 import rehypeAutolinkHeadings     from 'rehype-autolink-headings';
 import rehypeExternalLinks        from 'rehype-external-links';
 import rehypePrettyCode           from 'rehype-pretty-code';
+import {fromHtmlIsomorphic}       from 'hast-util-from-html-isomorphic'
 
 /* Next Components */
 import Link  from 'next/link';
@@ -55,12 +56,23 @@ export default function Mdx(props) {
       rehypePlugins: [
         rehypeSlug,
         [rehypeAutolinkHeadings, {
-          behavior: "wrap"
+          behavior: "append",
+          content: (fromHtmlIsomorphic(
+            '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M8 4v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4V8h-4V4h-2v4h-4V4zm6 10v-4h-4v4z" clip-rule="evenodd" /></svg>',
+            {fragment: true}
+          ).children)
         }],
         [rehypeExternalLinks, {
           // Set external links to open in a new window
           target: '_blank',
-          rel: ['noopener', 'nofollow', 'noreferrer']
+          rel: ['noopener', 'nofollow', 'noreferrer'],
+          content: (fromHtmlIsomorphic(
+            '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 5H8.2c-1.12 0-1.68 0-2.108.218a1.999 1.999 0 0 0-.874.874C5 6.52 5 7.08 5 8.2v7.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874c.427.218.987.218 2.105.218h7.606c1.118 0 1.677 0 2.104-.218c.377-.192.683-.498.875-.874c.218-.428.218-.987.218-2.105V14m1-5V4m0 0h-5m5 0l-7 7" /></svg>',
+            {fragment: true}
+          ).children),
+          contentProperties: {
+            className: 'external-link'
+          }
         }],
         [rehypePrettyCode, {
           /* Show line numbers in

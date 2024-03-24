@@ -5,10 +5,12 @@ export default function CommentsCount() {
     e.preventDefault();
     const aside = document.getElementsByTagName('aside')[0];
     if (['0px', ''].includes(aside.style.width)) {
-      aside.style.width = '33.333%'
+      aside.style.width = '33.333%';
+      aside.style.opacity = 1;
       document.getElementById('id_author')?.focus();
     } else {
-      aside.style.width = '0px'
+      aside.style.width = 0;
+      aside.style.opacity = 0;
     }
   }
 

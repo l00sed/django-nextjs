@@ -212,7 +212,7 @@ export default function Card({ element, featured, stretch, truncate, index }) {
               className={ `${styles.card__thumbnail} ${thumbClass}` }
               loading={ loading }
               priority={ priority  }
-              sizes="(max-width: 576px)  100vw,
+              sizes="(max-width: 640px)  100vw,
                      (max-width: 768px)  50vw,
                      (max-width: 1200px) 33vw,
                      15vw"
@@ -236,7 +236,7 @@ export default function Card({ element, featured, stretch, truncate, index }) {
     return (
       <div className={ featuredClass }>
         { card }
-        <h3 className="absolute -bottom-10 right-2 pt-0.5 px-2 rounded-sm bg-loosed-400 dark:bg-loosed-600 text-neutral-100 dark:text-neutral-900">FEATURED</h3>
+        <h3 className="absolute -bottom-10 right-2 pt-0.5 px-2 rounded-sm bg-loosed-400 text-neutral-100 dark:text-neutral-900">FEATURED</h3>
       </div>
     )
   } else {

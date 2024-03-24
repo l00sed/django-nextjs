@@ -36,8 +36,7 @@ form[name="comment-form"].form {
     &:active,
     &:hover {
       @apply
-        border-loosed-400
-        dark:border-loosed-600;
+        border-loosed-400;
     }
   }
 
@@ -81,8 +80,7 @@ form[name="comment-form"].form {
       &:focus,
       &:hover {
         @apply
-          outline-loosed-400
-          dark:outline-loosed-600;
+          outline-loosed-400;
       }
 
       &:not(:checked) {

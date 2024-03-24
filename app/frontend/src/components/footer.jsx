@@ -6,7 +6,7 @@ function WebRings() {
   const webringRowClass = [
     "flex",
     "flex-col",
-    "xl:flex-row",
+    "lg:flex-row",
     "justify-center",
     "pt-4",
     "px-8",
@@ -24,7 +24,7 @@ function WebRings() {
 
   const webringClass = [
     "w-full",
-    "xl:w-1/2",
+    "lg:w-1/2",
     "flex",
     "flex-row",
     "justify-center",
@@ -33,7 +33,7 @@ function WebRings() {
 
   const geekringRowClass = [
     "w-full",
-    "xl:max-w-80",
+    "lg:max-w-80",
     "text-center",
     "font-mono"
   ].join(' ');
@@ -73,24 +73,22 @@ function WebRings() {
 function Copyright() {
   const year = new Date().getFullYear();
   const copyrightOuterClass = [
-    "flex",
-    "flex-col",
-    "w-full",
-    "border-t",
-    "border-t-neutral-400",
-    "h-16",
-    "bg-neutral-50",
-    "dark:bg-neutral-950"
+    'flex',
+    'flex-col',
+    'w-full',
+    'border-t',
+    'border-solid',
+    'border-black/5',
+    'dark:border-white/5',
+    'h-16',
   ].join(' ');
 
   const copyrightInnerClass = [
-    "text-center",
-    "font-mono",
-    "flex",
-    "flex-row",
-    "w-fit",
-    "m-auto",
-
+    'font-mono',
+    'flex',
+    'flex-row',
+    'w-fit',
+    'm-auto',
   ].join(' ');
 
   return (
@@ -115,9 +113,32 @@ function Copyright() {
 }
 
 function FooterCol(props) {
+  const headingClass = [
+    'mt-0',
+    'mx-auto',
+    'mb-4',
+    'text-xs',
+    'w-full',
+    'after:content-[""]',
+    'after:block',
+    'after:relative',
+    'after:-bottom-2',
+    'after:w-8',
+    'after:h-0.5',
+    'after:bg-loosed-400',
+  ].join(' ');
+
+  const linkColClass = [
+    'col-span-1',
+    'flex',
+    'flex-col',
+    'justify-start',
+    'min-w-48',
+  ].join(' ');
+
   return (
-    <div className={ footer_styles.link_col }>
-      <h4>{ props.heading }</h4>
+    <div className={ linkColClass }>
+      <h4 className={ headingClass }>{ props.heading }</h4>
       { ...props.children }
     </div>
   )
@@ -311,37 +332,68 @@ export default function Footer() {
     </svg>
   )
 
+  const linkSectionClass = [
+    'w-full',
+    'border-t',
+    'border-solid',
+    'border-black/5',
+    'dark:border-white/5',
+  ].join(' ');
+
+  const linkRowWrapper = [
+    'mx-auto',
+    'max-w-5xl',
+  ].join(' ');
+
+  const linkRowClass = [
+    'grid',
+    'sm:grid-cols-2',
+    'md:grid-cols-4',
+    'gap-16',
+    'flex-row',
+    'flex-wrap',
+    'justify-between',
+    'xl:w-2/3',
+    'mx-auto',
+    'py-12',
+    'px-8',
+    'sm:px-12',
+    'leading-loose',
+  ].join(' ');
+
   return (
     <footer className={ footer_styles.footer }>
       <ScrollTop />
-      <section className={ footer_styles.link_section }>
-        <div className={ footer_styles.link_row }>
-          <FooterCol heading="LEARN">
-            <FooterLink url="/bookmarks" svg={ svgBookmarks } text="Bookmarks Dump" />
-            <FooterLink url="/kb" svg={ svgLearn } text="Knowledge Base" />
-            <FooterLink url="/reading" svg={ svgRead } text="Reading List" />
-          </FooterCol>
-          <FooterCol heading="META">
-            <FooterLink url="/privacy-policy" svg={ svgPrivacy } text="Privacy Policy" />
-            <FooterLink url="/rss/rss.xml" blank svg={ svgRss } text="RSS" />
-            <FooterLink url="/sitemap.xml" blank svg={ svgSitemap } text="Sitemap" />
-            <FooterLink url="/terms-and-conditions" svg={ svgTerms } text="Terms and Conditions" />
-          </FooterCol>
-          <FooterCol heading="SOCIAL">
-            <FooterLink url="https://github.com/l00sed" blank svg={ svgGithub } text="GitHub" />
-            <FooterLink url="https://linkedin.com/in/dwtompkins" blank svg={ svgLinkedin } text="LinkedIn" />
-            <FooterLink url="https://twitter.com/l00sed" blank svg={ svgTwitter } text="Twitter" />
-          </FooterCol>
-          <FooterCol heading="WHOAMI">
-            <FooterLink url="/about" svg={ svgAbout } text="About" />
-            <FooterLink url="mailto:dan@l-o-o-s-e-d.net" svg={ svgMail } text="Email" />
-            <FooterLink url="/equipment" svg={ svgEquipment } text="Equipment" />
-            <FooterLink url="https://keybase.io/l00sed" blank svg={ svgKeybase } text="Keybase" />
-            <FooterLink url="https://dato.work/" blank svg={ svgDato } text="Portfolio" />
-          </FooterCol>
+      <section className={ linkSectionClass }>
+        <div className={ linkRowWrapper }>
+          <div className={ linkRowClass }>
+            <FooterCol heading="LEARN">
+              <FooterLink url="/bookmarks" svg={ svgBookmarks } text="Bookmarks Dump" />
+              <FooterLink url="/kb" svg={ svgLearn } text="Knowledge Base" />
+              <FooterLink url="/reading" svg={ svgRead } text="Reading List" />
+            </FooterCol>
+            <FooterCol heading="META">
+              <FooterLink url="/privacy-policy" svg={ svgPrivacy } text="Privacy Policy" />
+              <FooterLink url="/rss/rss.xml" blank svg={ svgRss } text="RSS" />
+              <FooterLink url="/sitemap.xml" blank svg={ svgSitemap } text="Sitemap" />
+              <FooterLink url="/terms-and-conditions" svg={ svgTerms } text="Terms & Conditions" />
+            </FooterCol>
+            <FooterCol heading="SOCIAL">
+              <FooterLink url="https://github.com/l00sed" blank svg={ svgGithub } text="GitHub" />
+              <FooterLink url="https://linkedin.com/in/dwtompkins" blank svg={ svgLinkedin } text="LinkedIn" />
+              <FooterLink url="https://twitter.com/l00sed" blank svg={ svgTwitter } text="Twitter" />
+            </FooterCol>
+            <FooterCol heading="WHOAMI">
+              <FooterLink url="/about" svg={ svgAbout } text="About" />
+              <FooterLink url="mailto:dan@l-o-o-s-e-d.net" svg={ svgMail } text="Email" />
+              <FooterLink url="/equipment" svg={ svgEquipment } text="Equipment" />
+              <FooterLink url="https://keybase.io/l00sed" blank svg={ svgKeybase } text="Keybase" />
+              <FooterLink url="https://dato.work/" blank svg={ svgDato } text="Portfolio" />
+            </FooterCol>
+          </div>
         </div>
       </section>
-      <WebRings />
+      { /* <WebRings /> */ }
       <Copyright />
     </footer>
   )

@@ -17,6 +17,25 @@ class ArticleSerializer(TagSerializer, serializers.ModelSerializer):
         fields = "__all__"
 
 
+class ArticleSimpleSerializer(TagSerializer, serializers.ModelSerializer):
+    tags = TagSerializer(many=True)
+
+    class Meta:
+        model = Article
+        fields = [
+            'title',
+            'author',
+            'description',
+            'slug',
+            'created_at',
+            'updated_at',
+            'featured_image',
+            'image_alt',
+            'content_type',
+            'tags'
+        ]
+
+
 class ArticleLikesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article

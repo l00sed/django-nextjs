@@ -18,7 +18,7 @@ export default function ArticleMeta({
     comment_count = <></>;
   }
 
-  let share = <Share />;
+  let share = <Share meta={ meta } />;
   if (show.indexOf('share') < 0) {
     share = <></>;
   }
@@ -41,8 +41,8 @@ export default function ArticleMeta({
     'w-[calc(100%-4em)]',
     'mx-8',
     'mb-12',
-    'sm:w-[calc(100%-6em)]',
-    'sm:mx-12',
+    'sm:w-[calc(100%-5em)]',
+    'sm:mx-10',
     'sm:pl-0',
     'sm:gap-x-2',
     'sm:gap-y-4',

@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import (
+    ArticleSimpleListAPIView,
     ArticleListAPIView,
     ArticlesByTagAPIView,
     ArticlesBySearchAPIView,
@@ -13,6 +14,11 @@ urlpatterns = [
     path(
         'articles',
         ArticleListAPIView.as_view(),
+        name='articles'
+    ),
+    path(
+        'articles/simple',
+        ArticleSimpleListAPIView.as_view(),
         name='articles'
     ),
     path(

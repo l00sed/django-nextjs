@@ -7,7 +7,6 @@ import Title         from 'components/title.jsx';
 import Donate        from 'components/donate.jsx';
 import Article       from 'components/article.jsx';
 import Footer        from 'components/footer.jsx';
-import ShareOverlay  from 'components/share_overlay.jsx';
 import SearchOverlay from 'components/search_overlay.jsx';
 import SearchToggle  from 'components/search_toggle.jsx';
 
@@ -94,7 +93,6 @@ export default function BlogPage({ params }) {
         <Title />
         <SearchToggle />
         <Donate />
-        <ShareOverlay slug={ params.slug } />
         { article }
         <Footer />
       </div>

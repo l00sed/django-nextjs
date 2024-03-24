@@ -38,7 +38,7 @@ export default function ArticleHead(props) {
 
   return (
     <>
-      <header className="mx-8 mt-0 mb-4 outer-sheen sm:mx-12 2xl:mx-6">
+      <header className="mx-8 mt-0 mb-4 outer-sheen sm:mx-10 2xl:mx-6">
         <div className="p-6 inner-sheen">
           <h1 className="pb-1 hyphens-auto">{ parseTitle(props.meta) }</h1>
           <div className={ article_styles.tags__wrapper }>
